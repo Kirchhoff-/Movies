@@ -27,7 +27,9 @@ ext.versions = [
         glide              : '4.9.0',
 
         timber             : '4.7.1',
-        stetho             : '1.5.1'
+        stetho             : '1.5.1',
+
+        ktlint             : '0.36.0'
 ]
 
 ext.gradlePlugins = [
@@ -63,4 +65,6 @@ ext.libraries = [
         timber            : "com.jakewharton.timber:timber:$versions.timber",
         stetho            : "com.facebook.stetho:stetho:$versions.stetho",
         stethoOkHttp      : "com.facebook.stetho:stetho-okhttp3:$versions.stetho",
+
+        ktlint            : "com.pinterest:ktlint:$versions.ktlint"
 ]

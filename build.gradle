@@ -16,10 +16,11 @@ buildscript {
 }
 
 allprojects {
+    apply from: rootProject.file("buildsystem/ktlint.gradle")
+
     repositories {
         google()
         jcenter()
-        
     }
 }
 

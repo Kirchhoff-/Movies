@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.ui.screens.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.kirchhoff.movies.R

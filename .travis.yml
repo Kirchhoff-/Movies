@@ -20,3 +20,4 @@ jobs:
     script:
     - chmod +x ./gradlew
     - ./gradlew androidDependencies
+    - ./gradlew ktlint

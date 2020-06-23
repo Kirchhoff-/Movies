@@ -18,6 +18,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/\""
+        buildConfigField "String", "API_KEY", "${getLocalProperty("api_key")}"
     }
 
     compileOptions {
@@ -69,4 +70,19 @@ dependencies {
     implementation libraries.timber
     implementation libraries.stetho
     implementation libraries.stethoOkHttp
+}
+
+def getLocalProperty(String propName) {
+    def propsFile = rootProject.file("local.properties")
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        if (props[propName] != null) {
+            return props[propName]
+        } else {
+            print("No such property " + propName + " in local.properties")
+        }
+    } else {
+        print("local.properties does not exist!")
+    }
 }

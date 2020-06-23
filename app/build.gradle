@@ -16,6 +16,8 @@ android {
         versionCode versions.versionCode
         versionName versions.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/\""
     }
 
     compileOptions {

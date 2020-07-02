@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="movie_item_poster_height">200dp</dimen>
+    <dimen name="movie_item_title_height">40dp</dimen>
+    <dimen name="movie_item_corner_radius">8dp</dimen>
+</resources>

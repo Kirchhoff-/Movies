@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.main.fragments
+package com.kirchhoff.movies.ui.screens.main.movies
 
 import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.R

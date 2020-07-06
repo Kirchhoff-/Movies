@@ -27,7 +27,7 @@ class Paginator(
                 else -> throw IllegalStateException("Not supported LayoutManager type =${layoutManager::class.java}")
             }
 
-            if ((visibleItemCount + threshold) >= totalItemCount) {
+            if (visibleItemCount + threshold >= totalItemCount) {
                 loadMore(++currentPage)
                 isLoading = true
             }

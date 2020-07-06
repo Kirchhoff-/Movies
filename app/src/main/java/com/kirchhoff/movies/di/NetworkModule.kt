@@ -4,6 +4,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.kirchhoff.movies.BuildConfig
 import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
+import com.kirchhoff.movies.network.services.DiscoverService
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -25,4 +26,6 @@ val networkModule = module {
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
+
+    single { get<Retrofit>().create(DiscoverService::class.java) }
 }

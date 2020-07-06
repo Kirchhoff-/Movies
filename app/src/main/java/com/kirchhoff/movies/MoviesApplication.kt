@@ -3,6 +3,8 @@ package com.kirchhoff.movies
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.kirchhoff.movies.di.networkModule
+import com.kirchhoff.movies.di.repositoryModule
+import com.kirchhoff.movies.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -15,6 +17,8 @@ class MoviesApplication : Application() {
         startKoin {
             androidContext(this@MoviesApplication)
             modules(networkModule)
+            modules(repositoryModule)
+            modules(viewModelModule)
         }
 
         initStetho()

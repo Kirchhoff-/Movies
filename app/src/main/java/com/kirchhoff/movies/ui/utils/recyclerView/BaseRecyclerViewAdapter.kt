@@ -26,6 +26,12 @@ abstract class BaseRecyclerAdapter<VH : BaseVH<T>, T>(
 
     override fun getItemCount() = items.size
 
+    fun addItems(newItems: List<T>) {
+        val start = itemCount + 1
+        items.addAll(newItems)
+        notifyItemRangeInserted(start, newItems.size)
+    }
+
     interface OnItemClickListener<T> {
         fun onItemClick(item: T)
     }

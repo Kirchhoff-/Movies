@@ -4,7 +4,7 @@ import android.view.View
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerAdapter<VH : BaseVH<T>, T>(
+abstract class BaseRecyclerViewAdapter<VH : BaseVH<T>, T>(
     private val items: MutableList<T> = mutableListOf(),
     private val itemClickListener: OnItemClickListener<T>? = null
 ) : RecyclerView.Adapter<VH>() {

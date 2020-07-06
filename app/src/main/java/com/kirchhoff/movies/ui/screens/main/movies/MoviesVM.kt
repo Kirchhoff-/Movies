@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.data.Movie
+import com.kirchhoff.movies.data.DiscoverMoviesResponse
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.discover.IDiscoverRepository
 import kotlinx.coroutines.launch
@@ -20,8 +20,8 @@ class MoviesVM(private val discoverRepository: IDiscoverRepository) : ViewModel(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> = _movies
+    private val _moviesResponse = MutableLiveData<DiscoverMoviesResponse>()
+    val moviesResponse: LiveData<DiscoverMoviesResponse> = _moviesResponse
 
     fun discoverMovies(page: Int) {
         if (page == 1) {
@@ -40,7 +40,7 @@ class MoviesVM(private val discoverRepository: IDiscoverRepository) : ViewModel(
             }
 
             when (result) {
-                is Result.Success -> _movies.postValue(result.data.results)
+                is Result.Success -> _moviesResponse.postValue(result.data)
                 else -> _error.postValue(result.toString())
             }
         }

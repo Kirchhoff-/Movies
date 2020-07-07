@@ -49,6 +49,7 @@ android {
 dependencies {
     implementation libraries.androidxMaterial
     implementation libraries.constraintLayout
+    implementation libraries.ktx
 
     implementation libraries.kotlin
     implementation libraries.coroutines

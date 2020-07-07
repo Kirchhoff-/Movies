@@ -3,6 +3,7 @@ package com.kirchhoff.movies.ui.screens.main.movies
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,7 +11,6 @@ import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.DiscoverMoviesResponse
 import com.kirchhoff.movies.databinding.FragmentMoviesBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
-import com.kirchhoff.movies.extensions.visible
 import com.kirchhoff.movies.ui.screens.main.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
@@ -48,8 +48,8 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         }
 
         with(vm) {
-            loading.observe(viewLifecycleOwner, Observer { viewBinding.pbMovies.visible = it })
-            paginating.observe(viewLifecycleOwner, Observer { viewBinding.pbPaginate.visible = it })
+            loading.observe(viewLifecycleOwner, Observer { viewBinding.pbMovies.isVisible = it })
+            paginating.observe(viewLifecycleOwner, Observer { viewBinding.pbPaginate.isVisible = it })
             moviesResponse.observe(viewLifecycleOwner, Observer { obtainMoviesResponse(it) })
             error.observe(
                 viewLifecycleOwner,

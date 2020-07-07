@@ -4,20 +4,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.DiscoverMoviesResponse
 import com.kirchhoff.movies.databinding.FragmentMoviesBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
+import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.screens.main.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MoviesFragment : Fragment(R.layout.fragment_movies) {
+class MoviesFragment : BaseFragment(R.layout.fragment_movies) {
 
     private val vm by viewModel<MoviesVM>()
 
@@ -48,12 +47,10 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         }
 
         with(vm) {
-            loading.observe(viewLifecycleOwner, Observer { viewBinding.pbMovies.isVisible = it })
-            paginating.observe(viewLifecycleOwner, Observer { viewBinding.pbPaginate.isVisible = it })
-            moviesResponse.observe(viewLifecycleOwner, Observer { obtainMoviesResponse(it) })
-            error.observe(
-                viewLifecycleOwner,
-                Observer { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() })
+            loading.subscribe { viewBinding.pbMovies.isVisible = it }
+            paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
+            moviesResponse.subscribe(::obtainMoviesResponse)
+            error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
         }
     }
 

@@ -6,4 +6,10 @@
     <dimen name="movie_item_top_margin">16dp</dimen>
     <dimen name="movie_item_bottom_margin">8dp</dimen>
     <dimen name="movie_item_edges_margin">8dp</dimen>
+
+    <dimen name="tv_item_height">250dp</dimen>
+    <dimen name="tv_item_corner_radius">8dp</dimen>
+    <dimen name="tv_item_top_margin">16dp</dimen>
+    <dimen name="tv_item_bottom_margin">8dp</dimen>
+    <dimen name="tv_item_edges_margin">8dp</dimen>
 </resources>

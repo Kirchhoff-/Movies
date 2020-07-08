@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.kirchhoff.movies.ui.screens.main.fragments.PersonsFragment
-import com.kirchhoff.movies.ui.screens.main.fragments.TvsFragment
 import com.kirchhoff.movies.ui.screens.main.movies.MoviesFragment
+import com.kirchhoff.movies.ui.screens.main.tvs.TvsFragment
 
 class MainPagerAdapter(fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

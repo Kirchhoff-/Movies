@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.kirchhoff.movies.BuildConfig
 import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
 import com.kirchhoff.movies.network.services.DiscoverService
+import com.kirchhoff.movies.network.services.PersonService
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -28,4 +29,6 @@ val networkModule = module {
     }
 
     single { get<Retrofit>().create(DiscoverService::class.java) }
+
+    single { get<Retrofit>().create(PersonService::class.java) }
 }

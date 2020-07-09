@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.repository.discover
 
-import com.kirchhoff.movies.data.DiscoverMoviesResponse
-import com.kirchhoff.movies.data.DiscoverTvsResponse
+import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
+import com.kirchhoff.movies.data.responses.DiscoverTvsResponse
 import com.kirchhoff.movies.repository.Result
 
 interface IDiscoverRepository {

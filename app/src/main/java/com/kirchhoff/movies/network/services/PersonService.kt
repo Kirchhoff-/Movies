@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.network.services
 
-import com.kirchhoff.movies.data.PersonsResponse
+import com.kirchhoff.movies.data.responses.PersonsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

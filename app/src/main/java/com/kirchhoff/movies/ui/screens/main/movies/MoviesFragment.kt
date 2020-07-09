@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.DiscoverMoviesResponse
+import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
 import com.kirchhoff.movies.databinding.FragmentMoviesBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -49,13 +49,13 @@ class MoviesFragment : BaseFragment(R.layout.fragment_movies) {
         with(vm) {
             loading.subscribe { viewBinding.pbMovies.isVisible = it }
             paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
-            moviesResponse.subscribe(::obtainMoviesResponse)
+            data.subscribe(::obtainMoviesResponse)
             error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
         }
     }
 
     private fun loadMovies(page: Int) {
-        vm.discoverMovies(page)
+        vm.fetchData(page)
         paginator.isLoading = true
     }
 

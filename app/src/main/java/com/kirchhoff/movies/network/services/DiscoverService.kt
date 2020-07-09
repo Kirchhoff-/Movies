@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.network.services
 
-import com.kirchhoff.movies.data.DiscoverMoviesResponse
-import com.kirchhoff.movies.data.DiscoverTvsResponse
+import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
+import com.kirchhoff.movies.data.responses.DiscoverTvsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

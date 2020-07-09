@@ -1,69 +1,20 @@
 package com.kirchhoff.movies.ui.screens.main.movies
 
-import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.recyclerview.widget.GridLayoutManager
-import com.kirchhoff.movies.R
+import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
-import com.kirchhoff.movies.databinding.FragmentMoviesBinding
-import com.kirchhoff.movies.extensions.getSizeFromRes
-import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.main.MainScreenFragment
 import com.kirchhoff.movies.ui.screens.main.movies.adapter.MoviesListAdapter
-import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
-import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
-import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MoviesFragment : BaseFragment(R.layout.fragment_movies) {
+class MoviesFragment : MainScreenFragment<Movie, DiscoverMoviesResponse>() {
 
-    private val vm by viewModel<MoviesVM>()
+    override val vm by viewModel<MoviesVM>()
 
-    private val viewBinding: FragmentMoviesBinding by viewBinding()
-    private val moviesAdapter = MoviesListAdapter()
-    private val paginator = Paginator(loadMore = { loadMovies(it) }, threshold = MOVIES_THRESHOLD)
+    override val listAdapter = MoviesListAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        loadMovies(1)
-    }
+    override val threshold = MOVIES_THRESHOLD
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewBinding.rvMovies.apply {
-            layoutManager = GridLayoutManager(requireContext(), SPAN_COUNT)
-            adapter = moviesAdapter
-            addItemDecoration(
-                GridMarginItemDecoration(
-                    SPAN_COUNT,
-                    getSizeFromRes(R.dimen.movie_item_top_margin),
-                    getSizeFromRes(R.dimen.movie_item_bottom_margin),
-                    getSizeFromRes(R.dimen.movie_item_edges_margin)
-                )
-            )
-            addOnScrollListener(paginator)
-        }
-
-        with(vm) {
-            loading.subscribe { viewBinding.pbMovies.isVisible = it }
-            paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
-            data.subscribe(::obtainMoviesResponse)
-            error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
-        }
-    }
-
-    private fun loadMovies(page: Int) {
-        vm.fetchData(page)
-        paginator.isLoading = true
-    }
-
-    private fun obtainMoviesResponse(response: DiscoverMoviesResponse) {
-        moviesAdapter.addItems(response.results)
-        paginator.totalPages = response.total_pages
-        paginator.isLoading = false
-    }
+    override val spanCount = SPAN_COUNT
 
     companion object {
         private const val SPAN_COUNT = 2

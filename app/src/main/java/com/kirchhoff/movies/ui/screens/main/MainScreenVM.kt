@@ -4,10 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kirchhoff.movies.data.responses.PaginatedResponse
 import com.kirchhoff.movies.repository.Result
 import kotlinx.coroutines.launch
 
-abstract class MainScreenVM<T> : ViewModel() {
+abstract class MainScreenVM<T : PaginatedResponse<*>> : ViewModel() {
 
     protected abstract suspend fun loadData(page: Int): Result<T>
 

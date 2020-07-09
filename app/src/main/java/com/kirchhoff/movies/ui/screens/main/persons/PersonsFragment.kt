@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.PersonsResponse
+import com.kirchhoff.movies.data.responses.PersonsResponse
 import com.kirchhoff.movies.databinding.FragmentPersonsBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -49,13 +49,13 @@ class PersonsFragment : BaseFragment(R.layout.fragment_persons) {
         with(vm) {
             loading.subscribe { viewBinding.pbPersons.isVisible = it }
             paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
-            personsResponse.subscribe(::obtainPersonsResponse)
+            data.subscribe(::obtainPersonsResponse)
             error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
         }
     }
 
     private fun loadPersons(page: Int) {
-        vm.loadPersons(page)
+        vm.fetchData(page)
         paginator.isLoading = true
     }
 

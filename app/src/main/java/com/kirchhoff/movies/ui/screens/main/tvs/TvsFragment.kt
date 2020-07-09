@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.DiscoverTvsResponse
+import com.kirchhoff.movies.data.responses.DiscoverTvsResponse
 import com.kirchhoff.movies.databinding.FragmentTvsBinding
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.screens.main.tvs.adapter.TvsListAdapter
@@ -46,13 +46,13 @@ class TvsFragment : BaseFragment(R.layout.fragment_tvs) {
         with(vm) {
             loading.subscribe { viewBinding.pbTvs.isVisible = it }
             paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
-            tvsResponse.subscribe(::obtainTvsResponse)
+            data.subscribe(::obtainTvsResponse)
             error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
         }
     }
 
     private fun loadTvs(page: Int) {
-        vm.discoverTvs(page)
+        vm.fetchData(page)
         paginator.isLoading = true
     }
 

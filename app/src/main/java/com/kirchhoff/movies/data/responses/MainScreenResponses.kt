@@ -5,22 +5,22 @@ import com.kirchhoff.movies.data.Person
 import com.kirchhoff.movies.data.Tv
 
 data class DiscoverMoviesResponse(
-    val page: Int,
-    val results: List<Movie>,
-    val total_results: Int,
-    val total_pages: Int
-)
+    override val page: Int,
+    override val results: List<Movie>,
+    override val total_results: Int,
+    override val total_pages: Int
+) : PaginatedResponse<Movie>
 
 data class DiscoverTvsResponse(
-    val page: Int,
-    val results: List<Tv>,
-    val total_results: Int,
-    val total_pages: Int
-)
+    override val page: Int,
+    override val results: List<Tv>,
+    override val total_results: Int,
+    override val total_pages: Int
+) : PaginatedResponse<Tv>
 
 data class PersonsResponse(
-    val page: Int,
-    val results: List<Person>,
-    val total_results: Int,
-    val total_pages: Int
-)
+    override val page: Int,
+    override val results: List<Person>,
+    override val total_results: Int,
+    override val total_pages: Int
+) : PaginatedResponse<Person>

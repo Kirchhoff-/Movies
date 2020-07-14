@@ -7,5 +7,5 @@ import retrofit2.http.Path
 
 interface MovieService {
     @GET("/3/movie/{movie_id}")
-    fun fetchDetails(@Path("movie_id") id: Int): Response<MovieDetails>
+    suspend fun fetchDetails(@Path("movie_id") id: Int): Response<MovieDetails>
 }

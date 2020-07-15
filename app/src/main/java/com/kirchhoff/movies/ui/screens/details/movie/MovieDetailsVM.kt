@@ -14,8 +14,11 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository): ViewModel()
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
+    private val _error = MutableLiveData<Unit>()
+    val error: LiveData<Unit> = _error
+
+    private val _exception = MutableLiveData<Unit>()
+    val exception: LiveData<Unit> = _exception
 
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> = _movieDetails
@@ -24,16 +27,14 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository): ViewModel()
         _loading.postValue(true)
 
         viewModelScope.launch {
-            when (val result = movieRepository.fetchDetails(movieId)) {
-                is Result.Success -> {
-                    _movieDetails.postValue(result.data)
-                }
-                else -> {
-                    _error.postValue(result.toString())
-                }
-            }
+            val result = movieRepository.fetchDetails(movieId)
 
             _loading.postValue(false)
+            when (result) {
+                is Result.Success -> _movieDetails.postValue(result.data)
+                is Result.Error -> _error.postValue(Unit)
+                is Result.Exception -> _exception.postValue(Unit)
+            }
         }
     }
 }

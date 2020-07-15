@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/movie_details_edges_margin"
-    android:layout_marginTop="@dimen/movie_details_edges_margin"
-    android:layout_marginEnd="@dimen/movie_details_edges_margin"
+    android:paddingStart="@dimen/movie_details_edges_margin"
+    android:paddingEnd="@dimen/movie_details_edges_margin"
+    android:paddingTop="@dimen/movie_details_top_margin"
     android:orientation="vertical">
 
     <TextView
@@ -35,7 +35,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:drawableStart="@drawable/ic_today"
         app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
         app:layout_constraintTop_toTopOf="@+id/ivMoviePoster"
@@ -126,7 +125,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/dataGroup"
+        android:id="@+id/groupData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -134,7 +133,7 @@
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/loadingGroup"
+        android:id="@+id/groupLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
@@ -142,14 +141,14 @@
         tools:visibility="gone" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/errorGroup"
+        android:id="@+id/groupError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="tvInfo, bRetry" />
 
     <androidx.constraintlayout.widget.Group
-        android:id="@+id/exceptionGroup"
+        android:id="@+id/groupException"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

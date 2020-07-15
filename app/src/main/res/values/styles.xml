@@ -16,4 +16,23 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <!-- Movie details -->
+    <style name="MovieDetails" />
+
+    <style name="MovieDetails.InfoText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_main</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/movie_details_info_text_drawable_padding</item>
+    </style>
+
+    <style name="MovieDetails.SectionTitleText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_main</item>
+    </style>
+
+    <style name="MovieDetails.SupportText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_hint</item>
+    </style>
 </resources>

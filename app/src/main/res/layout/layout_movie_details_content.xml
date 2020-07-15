@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="@dimen/movie_details_edges_margin"
+    android:layout_marginTop="@dimen/movie_details_edges_margin"
+    android:layout_marginEnd="@dimen/movie_details_edges_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvMovieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_main"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Movie title" />
+
+    <ImageView
+        android:id="@+id/ivMoviePoster"
+        android:layout_width="@dimen/movie_details_poster_width"
+        android:layout_height="@dimen/movie_details_poster_height"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/tvReleaseDate"
+        style="@style/MovieDetails.InfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_today"
+        app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
+        app:layout_constraintTop_toTopOf="@+id/ivMoviePoster"
+        tools:text="24 November 1992" />
+
+    <TextView
+        android:id="@+id/tvRuntime"
+        style="@style/MovieDetails.InfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_access_time"
+        app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
+        app:layout_constraintTop_toBottomOf="@+id/tvReleaseDate"
+        tools:text="1:45 / 105 min" />
+
+    <TextView
+        android:id="@+id/tvCountry"
+        style="@style/MovieDetails.InfoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:drawableStart="@drawable/ic_public"
+        app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
+        app:layout_constraintTop_toBottomOf="@+id/tvRuntime"
+        tools:text="Production Country" />
+
+    <View
+        android:id="@+id/contentDivider"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivMoviePoster" />
+
+    <TextView
+        android:id="@+id/tvTagline"
+        style="@style/MovieDetails.SectionTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contentDivider"
+        tools:text="Movie Tagline" />
+
+    <TextView
+        android:id="@+id/tvOverview"
+        style="@style/MovieDetails.SupportText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTagline"
+        tools:text="Movie overview" />
+
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
+
+    <TextView
+        android:id="@+id/tvInfo"
+        style="@style/MovieDetails.SectionTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+        tools:text="Some information about error or exception" />
+
+    <Button
+        android:id="@+id/bRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/retry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/dataGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="ivMoviePoster, tvReleaseDate, tvRuntime, tvCountry, tvTagline, tvOverview"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/loadingGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="pbLoading"
+        tools:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/errorGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvInfo, bRetry" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/exceptionGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvInfo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

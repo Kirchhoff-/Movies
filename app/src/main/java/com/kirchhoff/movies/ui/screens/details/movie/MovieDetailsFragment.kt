@@ -2,7 +2,6 @@ package com.kirchhoff.movies.ui.screens.details.movie
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -21,9 +20,6 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tvTitle: TextView = view.findViewById(R.id.tvTitle)
-
-        tvTitle.text = movie.title
     }
 
     companion object {

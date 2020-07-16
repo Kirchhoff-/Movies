@@ -31,6 +31,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
             content.tvMovieTitle.text = movie.title
             content.ivMoviePoster.downloadPoster(movie.poster_path)
             ivBackdrop.downloadPoster(movie.backdrop_path)
+            toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
 
         with(vm) {

@@ -8,6 +8,7 @@ import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
+import com.kirchhoff.movies.extensions.setTextOrGone
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -48,30 +49,21 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
         with (viewBinding.content) {
             groupData.isVisible = true
 
-            tvReleaseDate.isVisible = movieDetails.release_date != null
-            tvReleaseDate.text = movieDetails.release_date
-
-            if (movieDetails.runtime != null) {
-                tvRuntime.isVisible = true
-                tvRuntime.text = getString(
+            tvOverview.text = movieDetails.overview
+            tvReleaseDate.setTextOrGone(movieDetails.release_date)
+            tvTagline.setTextOrGone(movieDetails.tagline)
+            tvRuntime.setTextOrGone(
+                movieDetails.runtime, getString(
                     R.string.movie_runtime_format,
                     formatMovieRuntime(movieDetails.runtime),
-                    movieDetails.runtime)
-            } else {
-                tvRuntime.isVisible = false
-            }
+                    movieDetails.runtime
+                )
+            )
 
+            tvCountry.isVisible = movieDetails.production_countries.isNotEmpty()
             if (movieDetails.production_countries.isNotEmpty()) {
-                tvCountry.isVisible = true
                 tvCountry.text = movieDetails.production_countries.first().name
-            } else {
-                tvCountry.isVisible = false
             }
-
-            tvTagline.isVisible = movieDetails.tagline != null
-            tvTagline.text = movieDetails.tagline
-
-            tvOverview.text = movieDetails.overview
         }
     }
 

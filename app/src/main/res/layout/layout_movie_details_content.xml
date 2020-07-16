@@ -104,7 +104,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle" />
 
     <TextView
-        android:id="@+id/tvInfo"
+        android:id="@+id/tvError"
+        style="@style/MovieDetails.SectionTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
+        tools:text="Some information about error or exception" />
+
+    <TextView
+        android:id="@+id/tvException"
         style="@style/MovieDetails.SectionTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,7 +133,7 @@
         android:text="@string/retry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvError" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/groupData"
@@ -145,13 +156,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="tvInfo, bRetry" />
+        app:constraint_referenced_ids="tvError, bRetry" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/groupException"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="tvInfo" />
+        app:constraint_referenced_ids="tvException" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

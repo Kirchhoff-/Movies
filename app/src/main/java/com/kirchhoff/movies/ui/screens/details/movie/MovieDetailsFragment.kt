@@ -34,6 +34,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
         with(viewBinding) {
             content.tvMovieTitle.text = movie.title
             content.ivMoviePoster.downloadPoster(movie.poster_path)
+            content.bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             ivBackdrop.downloadPoster(movie.backdrop_path)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
@@ -41,8 +42,8 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
         with(vm) {
             movieDetails.subscribe(::handleMovieDetailsData)
             loading.subscribe(::handleLoading)
-            error.subscribe { handleError() }
-            exception.subscribe { handleException() }
+            error.subscribe(::handleError)
+            exception.subscribe(::handleException)
         }
     }
 
@@ -69,15 +70,29 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
     }
 
     private fun handleLoading(visible: Boolean) {
-        viewBinding.content.groupLoading.isVisible = visible
+        with(viewBinding) {
+            content.groupLoading.isVisible = visible
+
+            if (visible) {
+                content.groupException.isVisible = false
+                content.groupError.isVisible = false
+                content.groupData.isVisible = false
+            }
+        }
     }
 
-    private fun handleError() {
-        viewBinding.content.groupError.isVisible = true
+    private fun handleError(error: String) {
+        with(viewBinding) {
+            content.groupError.isVisible = true
+            content.tvError.text = error
+        }
     }
 
-    private fun handleException() {
-        viewBinding.content.groupException.isVisible = true
+    private fun handleException(exception: String) {
+        with(viewBinding) {
+            content.groupException.isVisible = true
+            content.tvException.text = exception
+        }
     }
 
     private fun formatMovieRuntime(runtime: Int?) =

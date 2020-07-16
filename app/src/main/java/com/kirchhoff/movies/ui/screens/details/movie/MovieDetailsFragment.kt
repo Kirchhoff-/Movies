@@ -11,6 +11,8 @@ import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
 
@@ -51,7 +53,10 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
 
             if (movieDetails.runtime != null) {
                 tvRuntime.isVisible = true
-                tvRuntime.text = movieDetails.runtime.toString()
+                tvRuntime.text = getString(
+                    R.string.movie_runtime_format,
+                    formatMovieRuntime(movieDetails.runtime),
+                    movieDetails.runtime)
             } else {
                 tvRuntime.isVisible = false
             }
@@ -81,6 +86,16 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
     private fun handleException() {
         viewBinding.content.groupException.isVisible = true
     }
+
+    private fun formatMovieRuntime(runtime: Int?) =
+        if (runtime == null) {
+            ""
+        } else {
+            val minuteFormat = SimpleDateFormat("mm", Locale.ENGLISH)
+            val hourFormat = SimpleDateFormat("H:mm", Locale.ENGLISH)
+
+            hourFormat.format(minuteFormat.parse(runtime.toString()) as Date)
+        }
 
     companion object {
         fun newInstance(movie: Movie): MovieDetailsFragment {

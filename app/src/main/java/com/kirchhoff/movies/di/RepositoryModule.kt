@@ -11,5 +11,5 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<IDiscoverRepository> { DiscoverRepository(discoverService = get()) }
     single<IPersonsRepository> { PersonsRepository(personService = get()) }
-    single<IMovieRepository> { MovieRepository(movieService = get())}
+    single<IMovieRepository> { MovieRepository(movieService = get()) }
 }

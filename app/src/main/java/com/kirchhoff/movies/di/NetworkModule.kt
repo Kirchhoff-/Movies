@@ -33,5 +33,5 @@ val networkModule = module {
 
     single { get<Retrofit>().create(PersonService::class.java) }
 
-    single { get<Retrofit>().create(MovieService::class.java)}
+    single { get<Retrofit>().create(MovieService::class.java) }
 }

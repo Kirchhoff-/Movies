@@ -11,9 +11,10 @@ import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.extensions.setTextOrGone
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.utils.binding.viewBinding
-import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
 
@@ -46,7 +47,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
     }
 
     private fun handleMovieDetailsData(movieDetails: MovieDetails) {
-        with (viewBinding.content) {
+        with(viewBinding.content) {
             groupData.isVisible = true
 
             tvOverview.text = movieDetails.overview

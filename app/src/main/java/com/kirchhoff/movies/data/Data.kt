@@ -9,7 +9,7 @@ data class Movie(
     val title: String,
     val poster_path: String?,
     val backdrop_path: String?
-): Parcelable
+) : Parcelable
 
 data class Person(
     val id: Int,

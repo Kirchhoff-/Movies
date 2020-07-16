@@ -2,15 +2,18 @@ package com.kirchhoff.movies.ui.screens.main.movies
 
 import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
+import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.main.MainScreenFragment
 import com.kirchhoff.movies.ui.screens.main.movies.adapter.MoviesListAdapter
+import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MoviesFragment : MainScreenFragment<Movie, DiscoverMoviesResponse>() {
+class MoviesFragment : MainScreenFragment<Movie, DiscoverMoviesResponse>(),
+    BaseRecyclerViewAdapter.OnItemClickListener<Movie> {
 
     override val vm by viewModel<MoviesVM>()
 
-    override val listAdapter = MoviesListAdapter()
+    override val listAdapter = MoviesListAdapter(this)
 
     override val threshold = MOVIES_THRESHOLD
 
@@ -19,5 +22,9 @@ class MoviesFragment : MainScreenFragment<Movie, DiscoverMoviesResponse>() {
     companion object {
         private const val SPAN_COUNT = 2
         private const val MOVIES_THRESHOLD = SPAN_COUNT * 3
+    }
+
+    override fun onItemClick(item: Movie) {
+        startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), item))
     }
 }

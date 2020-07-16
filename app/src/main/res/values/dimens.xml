@@ -12,4 +12,10 @@
     <dimen name="main_screen_item_top_margin">16dp</dimen>
     <dimen name="main_screen_item_bottom_margin">8dp</dimen>
     <dimen name="main_screen_item_edges_margin">8dp</dimen>
+
+    <dimen name="movie_details_edges_margin">16dp</dimen>
+    <dimen name="movie_details_top_margin">8dp</dimen>
+    <dimen name="movie_details_poster_width">120dp</dimen>
+    <dimen name="movie_details_poster_height">175dp</dimen>
+    <dimen name="movie_details_info_text_drawable_padding">4dp</dimen>
 </resources>

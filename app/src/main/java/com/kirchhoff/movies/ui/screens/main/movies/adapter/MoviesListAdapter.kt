@@ -5,6 +5,7 @@ import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 
-class MoviesListAdapter : BaseRecyclerViewAdapter<BaseVH<Movie>, Movie>() {
+class MoviesListAdapter(clickListener: BaseRecyclerViewAdapter.OnItemClickListener<Movie>) :
+    BaseRecyclerViewAdapter<BaseVH<Movie>, Movie>(itemClickListener = clickListener) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MovieVH(parent)
 }

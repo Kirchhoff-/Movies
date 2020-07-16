@@ -1,11 +1,15 @@
 package com.kirchhoff.movies.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Movie(
     val id: Int,
     val title: String,
     val poster_path: String?,
     val backdrop_path: String?
-)
+) : Parcelable
 
 data class Person(
     val id: Int,

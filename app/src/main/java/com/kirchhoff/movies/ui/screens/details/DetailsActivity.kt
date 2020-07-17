@@ -9,7 +9,7 @@ import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.Tv
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
-import com.kirchhoff.movies.ui.screens.details.tv.TvShowDetailsFragment
+import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 
 class DetailsActivity : AppCompatActivity(R.layout.activity_details) {
 
@@ -28,7 +28,7 @@ class DetailsActivity : AppCompatActivity(R.layout.activity_details) {
                 )
             )
             DetailsType.TV -> openDetails(
-                TvShowDetailsFragment.newInstance(
+                TvDetailsFragment.newInstance(
                     intent.getParcelableExtra(
                         TV_ARG
                     )!!

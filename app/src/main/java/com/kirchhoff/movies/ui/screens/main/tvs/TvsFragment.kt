@@ -2,15 +2,18 @@ package com.kirchhoff.movies.ui.screens.main.tvs
 
 import com.kirchhoff.movies.data.Tv
 import com.kirchhoff.movies.data.responses.DiscoverTvsResponse
+import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.main.MainScreenFragment
 import com.kirchhoff.movies.ui.screens.main.tvs.adapter.TvsListAdapter
+import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TvsFragment : MainScreenFragment<Tv, DiscoverTvsResponse>() {
+class TvsFragment : MainScreenFragment<Tv, DiscoverTvsResponse>(),
+    BaseRecyclerViewAdapter.OnItemClickListener<Tv> {
 
     override val vm by viewModel<TvsVM>()
 
-    override val listAdapter = TvsListAdapter()
+    override val listAdapter = TvsListAdapter(this)
 
     override val threshold = TVS_THRESHOLD
 
@@ -19,5 +22,9 @@ class TvsFragment : MainScreenFragment<Tv, DiscoverTvsResponse>() {
     companion object {
         private const val SPAN_COUNT = 1
         private const val TVS_THRESHOLD = 3
+    }
+
+    override fun onItemClick(item: Tv) {
+        startActivity(DetailsActivity.createTvDetailsIntent(requireContext(), item))
     }
 }

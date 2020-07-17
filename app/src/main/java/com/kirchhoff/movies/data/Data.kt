@@ -17,8 +17,9 @@ data class Person(
     val profile_path: String?
 )
 
+@Parcelize
 data class Tv(
     val id: Int,
     val poster_path: String?,
     val name: String
-)
+): Parcelable

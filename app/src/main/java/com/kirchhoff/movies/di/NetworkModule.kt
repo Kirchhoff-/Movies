@@ -7,6 +7,7 @@ import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
 import com.kirchhoff.movies.network.services.DiscoverService
 import com.kirchhoff.movies.network.services.MovieService
 import com.kirchhoff.movies.network.services.PersonService
+import com.kirchhoff.movies.network.services.TvService
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -34,4 +35,6 @@ val networkModule = module {
     single { get<Retrofit>().create(PersonService::class.java) }
 
     single { get<Retrofit>().create(MovieService::class.java) }
+
+    single { get<Retrofit>().create(TvService::class.java) }
 }

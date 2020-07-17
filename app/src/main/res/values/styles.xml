@@ -35,4 +35,18 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_hint</item>
     </style>
+
+    <!-- Tv details -->
+    <style name="TvDetails" />
+
+    <style name="TvDetails.InfoText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_main</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TvDetails.SupportText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_hint</item>
+    </style>
 </resources>

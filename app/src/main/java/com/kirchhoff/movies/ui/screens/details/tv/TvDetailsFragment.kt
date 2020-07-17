@@ -27,7 +27,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with (viewBinding) {
+        with(viewBinding) {
             content.tvTvTitle.text = tv.name
             content.ivTvPoster.downloadPoster(tv.poster_path)
             content.bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
@@ -44,7 +44,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     }
 
     private fun handleTvDetailsData(tvDetails: TvDetails) {
-        with (viewBinding.content) {
+        with(viewBinding.content) {
             groupData.isVisible = true
 
             tvSeasons.text = resources.getString(R.string.tv_seasons_format, tvDetails.number_of_seasons)

@@ -9,7 +9,7 @@ import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.tv.ITvRepository
 import kotlinx.coroutines.launch
 
-class TvDetailsVM(private val tvRepository: ITvRepository): ViewModel() {
+class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading

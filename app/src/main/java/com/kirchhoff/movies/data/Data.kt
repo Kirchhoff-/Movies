@@ -23,4 +23,4 @@ data class Tv(
     val poster_path: String?,
     val backdrop_path: String?,
     val name: String
-): Parcelable
+) : Parcelable

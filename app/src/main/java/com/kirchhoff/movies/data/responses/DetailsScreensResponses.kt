@@ -17,3 +17,9 @@ class TvDetails(
     val status: String,
     val first_air_date: String
 )
+
+data class PersonDetails(
+    val birthday: String?,
+    val place_of_birth: String?,
+    val biography: String
+)

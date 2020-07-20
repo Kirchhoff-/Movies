@@ -11,11 +11,12 @@ data class Movie(
     val backdrop_path: String?
 ) : Parcelable
 
+@Parcelize
 data class Person(
     val id: Int,
     val name: String,
     val profile_path: String?
-)
+) : Parcelable
 
 @Parcelize
 data class Tv(

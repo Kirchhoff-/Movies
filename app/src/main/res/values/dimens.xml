@@ -13,12 +13,16 @@
     <dimen name="main_screen_item_bottom_margin">8dp</dimen>
     <dimen name="main_screen_item_edges_margin">8dp</dimen>
 
-    <dimen name="movie_details_edges_margin">16dp</dimen>
-    <dimen name="movie_details_top_margin">8dp</dimen>
+    <dimen name="details_screen_edges_margin">16dp</dimen>
+    <dimen name="details_screen_top_margin">8dp</dimen>
+
     <dimen name="movie_details_poster_width">120dp</dimen>
     <dimen name="movie_details_poster_height">175dp</dimen>
     <dimen name="movie_details_info_text_drawable_padding">4dp</dimen>
 
     <dimen name="tv_details_poster_width">120dp</dimen>
     <dimen name="tv_details_poster_height">175dp</dimen>
+
+    <dimen name="person_details_avatar_size">128dp</dimen>
+    <dimen name="person_details_card_margin">16dp</dimen>
 </resources>

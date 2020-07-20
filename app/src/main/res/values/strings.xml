@@ -10,4 +10,9 @@
     <string name="tv_episodes_format">Episodes: %d</string>
     <string name="tv_first_air_date_format">First Air Date: %s</string>
     <string name="tv_status_format">Status: %s</string>
+
+    <string name="born">Born</string>
+    <string name="birthplace">Birthplace</string>
+    <string name="bio">Bio</string>
+    <string name="no_information">No information</string>
 </resources>

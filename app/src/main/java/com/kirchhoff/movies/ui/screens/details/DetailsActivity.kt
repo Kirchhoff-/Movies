@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
+import com.kirchhoff.movies.data.Person
 import com.kirchhoff.movies.data.Tv
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
+import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 
 class DetailsActivity : AppCompatActivity(R.layout.activity_details) {
@@ -31,6 +33,13 @@ class DetailsActivity : AppCompatActivity(R.layout.activity_details) {
                 TvDetailsFragment.newInstance(
                     intent.getParcelableExtra(
                         TV_ARG
+                    )!!
+                )
+            )
+            DetailsType.PERSON -> openDetails(
+                PersonDetailsFragment.newInstance(
+                    intent.getParcelableExtra(
+                        PERSON_ARG
                     )!!
                 )
             )
@@ -59,12 +68,20 @@ class DetailsActivity : AppCompatActivity(R.layout.activity_details) {
             return intent
         }
 
+        fun createPersonDetailsIntent(context: Context, person: Person): Intent {
+            val intent = Intent(context, DetailsActivity::class.java)
+            intent.putExtra(DETAILS_TYPE_ARG, DetailsType.PERSON.ordinal)
+            intent.putExtra(PERSON_ARG, person)
+            return intent
+        }
+
         private enum class DetailsType {
-            MOVIE, TV
+            MOVIE, TV, PERSON
         }
 
         private const val DETAILS_TYPE_ARG = "DETAILS_TYPE_ARG"
         private const val MOVIE_ARG = "MOVIE_ARG"
         private const val TV_ARG = "TV_ARG"
+        private const val PERSON_ARG = "PERSON_ARG"
     }
 }

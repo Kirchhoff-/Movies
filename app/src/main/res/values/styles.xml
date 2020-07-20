@@ -49,4 +49,18 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_hint</item>
     </style>
+
+    <!-- Person details -->
+    <style name="PersonDetails" />
+
+    <style name="PersonDetails.InfoText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_main</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="PersonDetails.SupportText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_hint</item>
+    </style>
 </resources>

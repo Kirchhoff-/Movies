@@ -21,6 +21,8 @@
         </activity>
 
         <activity android:name=".ui.screens.details.DetailsActivity" />
+
+        <activity android:name=".ui.screens.reviews.ReviewsActivity" />
     </application>
 
 </manifest>

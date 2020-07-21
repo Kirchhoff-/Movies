@@ -36,6 +36,15 @@
         <item name="android:textColor">@color/text_hint</item>
     </style>
 
+    <style name="MovieDetails.TextWithArrow">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_main</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:drawableEnd">@drawable/ic_keyboard_arrow_right</item>
+        <item name="android:drawablePadding">@dimen/movie_details_info_text_drawable_padding</item>
+    </style>
+
     <!-- Tv details -->
     <style name="TvDetails" />
 
@@ -62,5 +71,13 @@
     <style name="PersonDetails.SupportText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_hint</item>
+    </style>
+
+    <!-- Reviews list -->
+    <style name="ReviewsList" />
+
+    <style name="ReviewsList.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 </resources>

@@ -13,7 +13,7 @@ import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 
-class DetailsActivity : AppCompatActivity(R.layout.activity_details) {
+class DetailsActivity : AppCompatActivity(R.layout.activity_with_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

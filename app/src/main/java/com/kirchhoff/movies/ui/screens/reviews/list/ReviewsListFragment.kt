@@ -6,12 +6,19 @@ import com.kirchhoff.movies.R
 import com.kirchhoff.movies.databinding.FragmentReviewsListBinding
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.utils.binding.viewBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list) {
 
     private val movieId: Int by lazy { arguments!!.getInt(MOVIE_ID_ARG) }
 
+    private val vm by viewModel<ReviewsListVM>()
     private val viewBinding: FragmentReviewsListBinding by viewBinding()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        vm.fetchReviews(movieId, 1)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

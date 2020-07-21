@@ -9,7 +9,7 @@ import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import kotlinx.coroutines.launch
 
-class ReviewsListVM(private val movieRepository: IMovieRepository): ViewModel() {
+class ReviewsListVM(private val movieRepository: IMovieRepository) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading

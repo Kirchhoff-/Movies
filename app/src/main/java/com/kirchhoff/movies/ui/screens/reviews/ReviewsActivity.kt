@@ -16,7 +16,7 @@ class ReviewsActivity : AppCompatActivity(R.layout.activity_with_fragment) {
         val movie: Movie = intent.extras!!.getParcelable<Movie>(MOVIE_ARG)!!
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstance(movie.id))
+            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstance(movie))
             .commit()
     }
 

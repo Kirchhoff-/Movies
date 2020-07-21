@@ -25,4 +25,8 @@
 
     <dimen name="person_details_avatar_size">128dp</dimen>
     <dimen name="person_details_card_margin">16dp</dimen>
+
+    <dimen name="reviews_list_screen_item_top_margin">16dp</dimen>
+    <dimen name="reviews_list_screen_item_bottom_margin">8dp</dimen>
+    <dimen name="reviews_list_screen_item_edges_margin">8dp</dimen>
 </resources>

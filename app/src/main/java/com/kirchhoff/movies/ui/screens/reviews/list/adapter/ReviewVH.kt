@@ -7,7 +7,7 @@ import com.kirchhoff.movies.data.Review
 import com.kirchhoff.movies.extensions.inflate
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 
-class ReviewVH(parent: ViewGroup): BaseVH<Review>(parent.inflate(R.layout.item_review)) {
+class ReviewVH(parent: ViewGroup) : BaseVH<Review>(parent.inflate(R.layout.item_review)) {
 
     private val tvReviewerName: TextView = itemView.findViewById(R.id.tvReviewerName)
     private val tvReviewContent: TextView = itemView.findViewById(R.id.tvReviewContent)

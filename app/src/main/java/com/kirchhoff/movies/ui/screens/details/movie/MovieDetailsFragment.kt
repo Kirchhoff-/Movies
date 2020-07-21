@@ -10,6 +10,7 @@ import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.extensions.setTextOrGone
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.utils.binding.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -37,6 +38,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
             content.bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             ivBackdrop.downloadPoster(movie.backdrop_path)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            content.tvReviews.setOnClickListener { startActivity(ReviewsActivity.createReviewsIntent(requireContext(), movie)) }
         }
 
         with(vm) {

@@ -7,17 +7,21 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
+import com.kirchhoff.movies.data.Review
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
 import com.kirchhoff.movies.databinding.FragmentReviewsListBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.reviews.details.ReviewDetailsFragment
 import com.kirchhoff.movies.ui.screens.reviews.list.adapter.ReviewsListAdapter
+import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list) {
+class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list),
+    BaseRecyclerViewAdapter.OnItemClickListener<Review> {
 
     private val movie: Movie by lazy { arguments!!.getParcelable<Movie>(MOVIE_ARG)!! }
 
@@ -27,7 +31,7 @@ class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list) {
 
     private val paginator = Paginator(loadMore = { loadReviews(it) }, threshold = REVIEWS_THRESHOLD)
 
-    private val reviewsAdapter = ReviewsListAdapter()
+    private val reviewsAdapter = ReviewsListAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,11 +55,6 @@ class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list) {
             addOnScrollListener(paginator)
         }
 
-        viewBinding.toolbar.apply {
-            title = movie.title
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
-        }
-
         with(vm) {
             loading.subscribe { viewBinding.pbLoading.isVisible = it }
             paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
@@ -73,6 +72,14 @@ class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list) {
         reviewsAdapter.addItems(response.results)
         paginator.totalPages = response.total_pages
         paginator.isLoading = false
+    }
+
+    override fun onItemClick(item: Review) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainer, ReviewDetailsFragment.newInstance(item.content))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

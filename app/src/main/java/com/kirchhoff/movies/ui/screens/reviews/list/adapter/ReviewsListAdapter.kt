@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import com.kirchhoff.movies.data.Review
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 
-class ReviewsListAdapter : BaseRecyclerViewAdapter<ReviewVH, Review>() {
+class ReviewsListAdapter(clickListener: OnItemClickListener<Review>) :
+    BaseRecyclerViewAdapter<ReviewVH, Review>(itemClickListener = clickListener) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ReviewVH(parent)
 }

@@ -3,7 +3,9 @@ package com.kirchhoff.movies.utils.binding
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.annotation.MainThread
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -13,22 +15,22 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-@PublishedApi
-internal class FragmentViewBindingProperty<T : ViewBinding>(
-    private val viewBinder: ViewBinder<T>
-) : ReadOnlyProperty<Fragment, T> {
+abstract class ViewBindingProperty<in R, T : ViewBinding>(
+    private val viewBinder: (R) -> T
+) : ReadOnlyProperty<R, T> {
 
     internal var viewBinding: T? = null
     private val lifecycleObserver = BindingLifecycleObserver()
 
-    @MainThread
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
-        checkIsMainThread()
-        this.viewBinding?.let { return it }
+    protected abstract fun getLifecycleOwner(thisRef: R): LifecycleOwner
 
-        val view = thisRef.requireView()
-        thisRef.viewLifecycleOwner.lifecycle.addObserver(lifecycleObserver)
-        return viewBinder.bind(view).also { vb -> this.viewBinding = vb }
+    @MainThread
+    override fun getValue(thisRef: R, property: KProperty<*>): T {
+        checkIsMainThread()
+        viewBinding?.let { return it }
+
+        getLifecycleOwner(thisRef).lifecycle.addObserver(lifecycleObserver)
+        return viewBinder(thisRef).also { viewBinding = it }
     }
 
     private inner class BindingLifecycleObserver : LifecycleObserver {
@@ -39,8 +41,6 @@ internal class FragmentViewBindingProperty<T : ViewBinding>(
         @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         fun onDestroy(owner: LifecycleOwner) {
             owner.lifecycle.removeObserver(this)
-            // Fragment.viewLifecycleOwner call LifecycleObserver.onDestroy() before Fragment.onDestroyView().
-            // That's why we need to postpone reset of the viewBinding
             mainHandler.post {
                 viewBinding = null
             }
@@ -48,25 +48,60 @@ internal class FragmentViewBindingProperty<T : ViewBinding>(
     }
 }
 
+@PublishedApi
+internal class ActivityViewBindingProperty<A : AppCompatActivity, T : ViewBinding>(
+    viewBinder: (A) -> T
+) : ViewBindingProperty<A, T>(viewBinder) {
+
+    override fun getLifecycleOwner(thisRef: A) = thisRef
+}
+
+@PublishedApi
+internal class FragmentViewBindingProperty<F : Fragment, T : ViewBinding>(
+    viewBinder: (F) -> T
+) : ViewBindingProperty<F, T>(viewBinder) {
+
+    override fun getLifecycleOwner(thisRef: F) = thisRef.viewLifecycleOwner
+}
+
+/**
+ * Create new [ViewBinding] associated with the [Activity][this]
+ *
+ * @param viewBindingRootId Root view's id that will be used as root for the view binding
+ */
+@Suppress("unused")
+inline fun <A : AppCompatActivity, reified T : ViewBinding> A.viewBinding(
+    @IdRes viewBindingRootId: Int
+): ViewBindingProperty<A, T> {
+    val activityViewBinder =
+        ActivityViewBinder(T::class.java) { it.requireViewByIdCompat(viewBindingRootId) }
+    return viewBinding(activityViewBinder::bind)
+}
+
+/**
+ * Create new [ViewBinding] associated with the [Activity][this] and allow customize how
+ * a [View] will be bounded to the view binding.
+ */
+@Suppress("unused")
+@JvmName("viewBindingActivity")
+fun <A : AppCompatActivity, T : ViewBinding> A.viewBinding(viewBinder: (A) -> T): ViewBindingProperty<A, T> {
+    return ActivityViewBindingProperty(viewBinder)
+}
+
 /**
  * Create new [ViewBinding] associated with the [Fragment][this]
  */
 @Suppress("unused")
-inline fun <reified T : ViewBinding> Fragment.viewBinding(): ReadOnlyProperty<Fragment, T> {
-    return FragmentViewBindingProperty(
-        DefaultViewBinder(T::class.java)
-    )
+@JvmName("viewBindingFragment")
+inline fun <F : Fragment, reified T : ViewBinding> F.viewBinding(): ViewBindingProperty<Fragment, T> {
+    return viewBinding(FragmentViewBinder(T::class.java)::bind)
 }
 
 /**
- * Create new [ViewBinding] associated with the [Fragment][this] and allow customize how
- * a [View] will be bounded to the view binding.
+ * Create new [ViewBinding] associated with the [Fragment][this]
  */
 @Suppress("unused")
-inline fun <T : ViewBinding> Fragment.viewBinding(
-    crossinline bindView: (View) -> T
-): ReadOnlyProperty<Fragment, T> {
-    return FragmentViewBindingProperty(
-        viewBinder(bindView)
-    )
+@JvmName("viewBindingFragment")
+fun <F : Fragment, T : ViewBinding> F.viewBinding(viewBinder: (F) -> T): ViewBindingProperty<F, T> {
+    return FragmentViewBindingProperty(viewBinder)
 }

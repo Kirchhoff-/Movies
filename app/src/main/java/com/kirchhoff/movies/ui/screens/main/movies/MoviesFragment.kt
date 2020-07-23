@@ -3,12 +3,12 @@ package com.kirchhoff.movies.ui.screens.main.movies
 import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.ui.screens.main.MainScreenFragment
+import com.kirchhoff.movies.ui.screens.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.main.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MoviesFragment : MainScreenFragment<Movie, DiscoverMoviesResponse>(),
+class MoviesFragment : PaginatedScreenFragment<Movie, DiscoverMoviesResponse>(),
     BaseRecyclerViewAdapter.OnItemClickListener<Movie> {
 
     override val vm by viewModel<MoviesVM>()

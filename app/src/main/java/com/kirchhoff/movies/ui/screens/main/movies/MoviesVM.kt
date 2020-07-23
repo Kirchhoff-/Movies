@@ -2,7 +2,7 @@ package com.kirchhoff.movies.ui.screens.main.movies
 
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
 import com.kirchhoff.movies.repository.discover.IDiscoverRepository
-import com.kirchhoff.movies.ui.screens.PaginatedScreenVM
+import com.kirchhoff.movies.ui.screens.core.PaginatedScreenVM
 
 class MoviesVM(private val discoverRepository: IDiscoverRepository) :
     PaginatedScreenVM<DiscoverMoviesResponse>() {

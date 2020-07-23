@@ -2,9 +2,9 @@ package com.kirchhoff.movies.ui.screens.main.movies
 
 import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
+import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
+import com.kirchhoff.movies.ui.screens.core.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.ui.screens.PaginatedScreenFragment
-import com.kirchhoff.movies.ui.screens.main.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 

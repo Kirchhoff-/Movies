@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens
+package com.kirchhoff.movies.ui.screens.core
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,7 @@ import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.responses.PaginatedResponse
 import com.kirchhoff.movies.databinding.FragmentMainScreenBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
+import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 import com.kirchhoff.movies.ui.utils.recyclerView.Paginator

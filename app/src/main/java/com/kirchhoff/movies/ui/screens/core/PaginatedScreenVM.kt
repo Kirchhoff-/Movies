@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens
+package com.kirchhoff.movies.ui.screens.core
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

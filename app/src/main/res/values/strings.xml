@@ -16,4 +16,7 @@
     <string name="bio">Bio</string>
     <string name="no_information">No information</string>
     <string name="reviews">Reviews</string>
+    <string name="similar_movies">Similar Movies</string>
+
+    <string name="movies_like">Movies like %s</string>
 </resources>

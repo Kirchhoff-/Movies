@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.main
+package com.kirchhoff.movies.ui.screens.core
 
 import android.os.Bundle
 import android.view.View
@@ -16,12 +16,14 @@ import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.utils.binding.viewBinding
 
-abstract class MainScreenFragment<Data, T : PaginatedResponse<Data>> : BaseFragment(R.layout.fragment_main_screen) {
+abstract class PaginatedScreenFragment<Data, T : PaginatedResponse<Data>> : BaseFragment(R.layout.fragment_main_screen) {
 
     abstract val threshold: Int
     abstract val spanCount: Int
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
-    abstract val vm: MainScreenVM<T>
+    abstract val vm: PaginatedScreenVM<T>
+
+    protected open val dataId: Int = 0
 
     private val viewBinding: FragmentMainScreenBinding by viewBinding()
     private lateinit var paginator: Paginator
@@ -58,7 +60,7 @@ abstract class MainScreenFragment<Data, T : PaginatedResponse<Data>> : BaseFragm
     }
 
     private fun loadData(page: Int) {
-        vm.fetchData(page)
+        vm.fetchData(page, dataId)
         paginator.isLoading = true
     }
 

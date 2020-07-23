@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.main.movies.adapter
+package com.kirchhoff.movies.ui.screens.core.movies.adapter
 
 import android.view.ViewGroup
 import com.kirchhoff.movies.data.Movie

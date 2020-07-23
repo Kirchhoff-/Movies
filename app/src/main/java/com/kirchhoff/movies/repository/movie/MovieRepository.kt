@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.repository.movie
 
+import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
 import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
 import com.kirchhoff.movies.network.services.MovieService
@@ -13,5 +14,12 @@ class MovieRepository(private val movieService: MovieService) : BaseRepository()
 
     override suspend fun fetchReviewsList(movieId: Int, page: Int): Result<ReviewsListResponse> {
         return apiCall { movieService.fetchReviews(movieId, page) }
+    }
+
+    override suspend fun fetchSimilarMoviesList(
+        movieId: Int,
+        page: Int
+    ): Result<DiscoverMoviesResponse> {
+        return apiCall { movieService.fetchSimilarMovies(movieId, page) }
     }
 }

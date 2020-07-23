@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.network.services
 
+import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
 import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
 import retrofit2.Response
@@ -13,4 +14,7 @@ interface MovieService {
 
     @GET("/3/movie/{movie_id}/reviews")
     suspend fun fetchReviews(@Path("movie_id") id: Int, @Query("page") page: Int): Response<ReviewsListResponse>
+
+    @GET("/3/movie/{movie_id}/similar")
+    suspend fun fetchSimilarMovies(@Path("movie_id") id: Int, @Query("page") page: Int): Response<DiscoverMoviesResponse>
 }

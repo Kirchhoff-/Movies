@@ -7,6 +7,7 @@ import com.kirchhoff.movies.ui.screens.main.movies.MoviesVM
 import com.kirchhoff.movies.ui.screens.main.persons.PersonsVM
 import com.kirchhoff.movies.ui.screens.main.tvs.TvsVM
 import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListVM
+import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesVM
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,4 +19,5 @@ val viewModelModule = module {
     viewModel { TvDetailsVM(tvRepository = get()) }
     viewModel { PersonDetailsVM(personRepository = get()) }
     viewModel { ReviewsListVM(movieRepository = get()) }
+    viewModel { SimilarMoviesVM(movieRepository = get()) }
 }

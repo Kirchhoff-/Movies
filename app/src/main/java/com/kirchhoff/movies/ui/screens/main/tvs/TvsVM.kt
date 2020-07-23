@@ -6,5 +6,5 @@ import com.kirchhoff.movies.ui.screens.PaginatedScreenVM
 
 class TvsVM(private val discoverRepository: IDiscoverRepository) :
     PaginatedScreenVM<DiscoverTvsResponse>() {
-    override suspend fun loadData(page: Int) = discoverRepository.fetchTvs(page)
+    override suspend fun loadData(page: Int, dataId: Int) = discoverRepository.fetchTvs(page)
 }

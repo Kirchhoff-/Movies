@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 abstract class PaginatedScreenVM<T : PaginatedResponse<*>> : ViewModel() {
 
-    protected abstract suspend fun loadData(page: Int): Result<T>
+    protected abstract suspend fun loadData(page: Int, dataId: Int = 0): Result<T>
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -24,7 +24,7 @@ abstract class PaginatedScreenVM<T : PaginatedResponse<*>> : ViewModel() {
     private val _data = MutableLiveData<T>()
     val data: LiveData<T> = _data
 
-    fun fetchData(page: Int) {
+    fun fetchData(page: Int, dataId: Int = 0) {
         if (page == 1) {
             _loading.postValue(true)
         } else {
@@ -32,7 +32,7 @@ abstract class PaginatedScreenVM<T : PaginatedResponse<*>> : ViewModel() {
         }
 
         viewModelScope.launch {
-            val result = loadData(page)
+            val result = loadData(page, dataId)
 
             if (page == 1) {
                 _loading.postValue(false)

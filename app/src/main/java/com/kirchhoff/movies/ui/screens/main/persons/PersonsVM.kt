@@ -6,5 +6,5 @@ import com.kirchhoff.movies.ui.screens.PaginatedScreenVM
 
 class PersonsVM(private val personRepository: IPersonsRepository) :
     PaginatedScreenVM<PersonsResponse>() {
-    override suspend fun loadData(page: Int) = personRepository.fetchPopularPersons(page)
+    override suspend fun loadData(page: Int, dataId: Int) = personRepository.fetchPopularPersons(page)
 }

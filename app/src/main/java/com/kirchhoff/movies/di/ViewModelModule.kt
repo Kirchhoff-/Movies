@@ -19,7 +19,7 @@ val viewModelModule = module {
     viewModel { MovieDetailsVM(movieRepository = get()) }
     viewModel { TvDetailsVM(tvRepository = get()) }
     viewModel { PersonDetailsVM(personRepository = get()) }
-    viewModel { ReviewsListVM(movieRepository = get()) }
+    viewModel { ReviewsListVM(movieRepository = get(), tvRepository = get()) }
     viewModel { SimilarMoviesVM(movieRepository = get()) }
     viewModel { SimilarTvsVM(tvRepository = get()) }
 }

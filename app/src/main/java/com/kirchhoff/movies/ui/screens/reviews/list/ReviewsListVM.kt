@@ -7,9 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
+import com.kirchhoff.movies.repository.tv.ITvRepository
+import com.kirchhoff.movies.ui.screens.reviews.ReviewType
 import kotlinx.coroutines.launch
 
-class ReviewsListVM(private val movieRepository: IMovieRepository) : ViewModel() {
+class ReviewsListVM(
+    private val movieRepository: IMovieRepository,
+    private val tvRepository: ITvRepository
+) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -23,7 +28,7 @@ class ReviewsListVM(private val movieRepository: IMovieRepository) : ViewModel()
     private val _data = MutableLiveData<ReviewsListResponse>()
     val data: LiveData<ReviewsListResponse> = _data
 
-    fun fetchReviews(movieId: Int, page: Int) {
+    fun fetchReviews(dataId: Int, reviewType: ReviewType, page: Int) {
         if (page == 1) {
             _loading.postValue(true)
         } else {
@@ -31,7 +36,10 @@ class ReviewsListVM(private val movieRepository: IMovieRepository) : ViewModel()
         }
 
         viewModelScope.launch {
-            val result = movieRepository.fetchReviewsList(movieId, page)
+            val result = when (reviewType) {
+                ReviewType.MOVIE -> movieRepository.fetchReviewsList(dataId, page)
+                ReviewType.TV -> tvRepository.fetchReviewsList(dataId, page)
+            }
 
             if (page == 1) {
                 _loading.postValue(false)

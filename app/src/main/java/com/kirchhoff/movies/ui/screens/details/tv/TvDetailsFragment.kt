@@ -9,6 +9,7 @@ import com.kirchhoff.movies.data.responses.TvDetails
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
 import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -28,11 +29,15 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
-            content.tvTvTitle.text = tv.name
-            content.ivTvPoster.downloadPoster(tv.poster_path)
-            content.bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
             ivBackdrop.downloadPoster(tv.backdrop_path)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        }
+
+        with(viewBinding.content) {
+            tvTvTitle.text = tv.name
+            ivTvPoster.downloadPoster(tv.poster_path)
+            bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
+            tvSimilarTv.setOnClickListener { startActivity(SimilarActivity.createSimilarTvIntent(requireContext(), tv)) }
         }
 
         with(vm) {

@@ -6,12 +6,12 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.Review
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
 import com.kirchhoff.movies.databinding.FragmentReviewsListBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.reviews.ReviewType
 import com.kirchhoff.movies.ui.screens.reviews.details.ReviewDetailsFragment
 import com.kirchhoff.movies.ui.screens.reviews.list.adapter.ReviewsListAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
@@ -23,7 +23,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list),
     BaseRecyclerViewAdapter.OnItemClickListener<Review> {
 
-    private val movie: Movie by lazy { arguments!!.getParcelable<Movie>(MOVIE_ARG)!! }
+    private val dataId: Int by lazy { arguments!!.getInt(ID_ARG) }
+    private val reviewType: ReviewType by lazy { ReviewType.values()[arguments!!.getInt(REVIEW_TYPE_ARG)] }
 
     private val vm by viewModel<ReviewsListVM>()
 
@@ -64,7 +65,7 @@ class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list),
     }
 
     private fun loadReviews(page: Int) {
-        vm.fetchReviews(movie.id, page)
+        vm.fetchReviews(dataId, reviewType, page)
         paginator.isLoading = true
     }
 
@@ -84,15 +85,17 @@ class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list),
 
     companion object {
 
-        fun newInstance(movie: Movie): ReviewsListFragment {
+        fun newInstance(id: Int, reviewType: ReviewType): ReviewsListFragment {
             val fragment = ReviewsListFragment()
             val arg = Bundle()
-            arg.putParcelable(MOVIE_ARG, movie)
+            arg.putInt(ID_ARG, id)
+            arg.putInt(REVIEW_TYPE_ARG, reviewType.ordinal)
             fragment.arguments = arg
             return fragment
         }
 
-        private const val MOVIE_ARG = "MOVIE_ARG"
+        private const val ID_ARG = "ID_ARG"
+        private const val REVIEW_TYPE_ARG = "REVIEW_TYPE_ARG"
         private const val SPAN_COUNT = 1
         private const val REVIEWS_THRESHOLD = 3
     }

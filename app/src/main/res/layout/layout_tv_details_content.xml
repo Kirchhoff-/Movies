@@ -92,6 +92,19 @@
         app:layout_constraintTop_toBottomOf="@+id/contentDivider"
         tools:text="Tv Overview" />
 
+    <TextView
+        android:id="@+id/tvSimilarTv"
+        style="@style/MovieDetails.TextWithArrow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="@string/similar_tv_shows"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+
     <ProgressBar
         android:id="@+id/pbLoading"
         style="?android:attr/progressBarStyle"
@@ -123,6 +136,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTvTitle"
         tools:text="Some information about error or exception" />
+
     <Button
         android:id="@+id/bRetry"
         android:layout_width="wrap_content"
@@ -138,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="ivTvPoster, tvSeasons, tvEpisodes, tvFirstAirDate, tvStatus, tvOverview"
+        app:constraint_referenced_ids="ivTvPoster, tvSeasons, tvEpisodes, tvFirstAirDate, tvStatus, tvOverview, tvSimilarTv"
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group

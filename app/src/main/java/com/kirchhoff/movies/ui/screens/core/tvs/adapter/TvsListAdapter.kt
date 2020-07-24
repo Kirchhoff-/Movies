@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.main.tvs.adapter
+package com.kirchhoff.movies.ui.screens.core.tvs.adapter
 
 import android.view.ViewGroup
 import com.kirchhoff.movies.data.Tv

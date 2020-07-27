@@ -32,3 +32,8 @@ data class Review(
     val author: String,
     val content: String
 ) : Parcelable
+
+data class Trailer(
+    val site: String,
+    val key: String
+)

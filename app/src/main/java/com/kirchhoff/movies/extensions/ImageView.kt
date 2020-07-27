@@ -21,5 +21,15 @@ fun ImageView.downloadAvatar(path: String?) {
     }
 }
 
+fun ImageView.downloadYoutubePoster(path: String?) {
+    path?.let {
+        Glide.with(context)
+            .load(String.format(YOUTUBE_POSTER_PATH, path))
+            .into(this)
+    }
+}
+
 private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
+private const val YOUTUBE_POSTER_PATH = "https://img.youtube.com/vi/%s/0.jpg"
+
 private val avatarOptions: RequestOptions = RequestOptions().centerCrop().circleCrop()

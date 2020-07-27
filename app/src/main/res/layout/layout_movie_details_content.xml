@@ -4,10 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/details_screen_edges_margin"
-    android:paddingEnd="@dimen/details_screen_edges_margin"
     android:paddingTop="@dimen/details_screen_top_margin"
     android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/details_screen_edges_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/details_screen_edges_margin" />
 
     <TextView
         android:id="@+id/tvMovieTitle"
@@ -15,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/text_main"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Movie title" />
 
@@ -25,7 +37,7 @@
         android:layout_height="@dimen/movie_details_poster_height"
         android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
@@ -76,9 +88,10 @@
     <TextView
         android:id="@+id/tvTagline"
         style="@style/MovieDetails.SectionTitleText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
         app:layout_constraintTop_toBottomOf="@+id/contentDivider"
         tools:text="Movie Tagline" />
 
@@ -88,10 +101,33 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
         app:layout_constraintTop_toBottomOf="@+id/tvTagline"
         tools:text="Movie overview" />
+
+    <TextView
+        android:id="@+id/tvTrailers"
+        style="@style/MovieDetails.SectionTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/trailers"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
+        app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTrailers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTrailers"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_trailer"
+        tools:orientation="horizontal" />
 
     <TextView
         android:id="@+id/tvSimilarMovies"
@@ -99,12 +135,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
+        android:padding="@dimen/details_screen_edges_margin"
         android:text="@string/similar_movies"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+        app:layout_constraintTop_toBottomOf="@+id/rvTrailers" />
 
     <TextView
         android:id="@+id/tvReviews"
@@ -112,8 +147,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
+        android:padding="@dimen/details_screen_edges_margin"
         android:text="@string/reviews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,7 +200,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="ivMoviePoster, tvReleaseDate, tvRuntime, tvCountry, tvTagline, tvOverview, tvReviews, tvSimilarMovies"
+        app:constraint_referenced_ids="ivMoviePoster, tvReleaseDate, tvRuntime, tvCountry, tvTagline, tvOverview, tvReviews, tvSimilarMovies, voteView"
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
@@ -190,5 +224,13 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="tvException" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupTrailers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvTrailers, rvTrailers"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

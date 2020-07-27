@@ -1,24 +1,32 @@
 package com.kirchhoff.movies.ui.screens.details.movie
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
+import com.kirchhoff.movies.data.Trailer
 import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.extensions.setTextOrGone
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
+import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.ui.utils.recyclerView.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.utils.binding.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
+class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
+    BaseRecyclerViewAdapter.OnItemClickListener<Trailer> {
 
     private val movie: Movie by lazy { arguments!!.getParcelable<Movie>(MOVIE_ARG)!! }
 
@@ -38,6 +46,13 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
 
+        with(viewBinding.content.rvTrailers) {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            addItemDecoration(EdgesMarginItemDecoration(
+                resources.getDimensionPixelSize(R.dimen.trailer_item_margin)
+            ))
+        }
+
         with(viewBinding.content) {
             tvMovieTitle.text = movie.title
             ivMoviePoster.downloadPoster(movie.poster_path)
@@ -51,7 +66,13 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
             loading.subscribe(::handleLoading)
             error.subscribe(::handleError)
             exception.subscribe(::handleException)
+            trailers.subscribe(::handleTrailers)
         }
+    }
+
+    override fun onItemClick(item: Trailer) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + item.key))
+        startActivity(intent)
     }
 
     private fun handleMovieDetailsData(movieDetails: MovieDetails) {
@@ -102,6 +123,15 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
         }
     }
 
+    private fun handleTrailers(trailersList: List<Trailer>) {
+        if (trailersList.isNotEmpty()) {
+            with(viewBinding.content) {
+                groupTrailers.isVisible = true
+                rvTrailers.adapter = TrailersListAdapter(trailersList, this@MovieDetailsFragment)
+            }
+        }
+    }
+
     private fun formatMovieRuntime(runtime: Int?) =
         if (runtime == null) {
             ""
@@ -122,5 +152,6 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details) {
         }
 
         private const val MOVIE_ARG = "MOVIE_ARG"
+        const val YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v="
     }
 }

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.core.credit
+package com.kirchhoff.movies.ui.screens.core.credit.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView

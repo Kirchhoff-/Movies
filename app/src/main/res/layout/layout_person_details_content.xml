@@ -134,7 +134,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cvAlsoKnowAs"
         app:layout_constraintVertical_bias="0.0" />
 
-    <com.kirchhoff.movies.ui.screens.details.person.views.PersonCreditsView
+    <com.kirchhoff.movies.ui.screens.core.credit.CreditsView
         android:id="@+id/vCastCredits"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
         app:layout_constraintTop_toBottomOf="@+id/vCastCredits"
         app:layout_constraintVertical_bias="0.0" />
 
-    <com.kirchhoff.movies.ui.screens.details.person.views.PersonCreditsView
+    <com.kirchhoff.movies.ui.screens.core.credit.CreditsView
         android:id="@+id/vCrewCredits"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

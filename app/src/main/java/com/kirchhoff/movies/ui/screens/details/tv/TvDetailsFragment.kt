@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Tv
+import com.kirchhoff.movies.data.responses.TvCredits
 import com.kirchhoff.movies.data.responses.TvDetails
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
@@ -44,6 +45,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
 
         with(vm) {
             tvDetails.subscribe(::handleTvDetailsData)
+            tvCredits.subscribe(::handleTvCredits)
             loading.subscribe(::handleLoading)
             error.subscribe(::handleError)
             exception.subscribe(::handleException)
@@ -61,6 +63,20 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             tvOverview.text = tvDetails.overview
             voteView.displayRatingAndVoteCount(tvDetails.vote_average, tvDetails.vote_count)
             vKeywords.displayItems(tvDetails.genres.map { it.name })
+        }
+    }
+
+    private fun handleTvCredits(tvCredits: TvCredits) {
+        with(viewBinding.content) {
+            if (!tvCredits.cast.isNullOrEmpty()) {
+                castCreditsGroup.isVisible = true
+                vCastCredits.displayItems(tvCredits.cast)
+            }
+
+            if (!tvCredits.crew.isNullOrEmpty()) {
+                crewCreditsGroup.isVisible = true
+                vCrewCredits.displayItems(tvCredits.crew)
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kirchhoff.movies.data.Trailer
 import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
@@ -23,6 +24,9 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel(
     private val _movieDetails = MutableLiveData<MovieDetails>()
     val movieDetails: LiveData<MovieDetails> = _movieDetails
 
+    private val _trailers = MutableLiveData<List<Trailer>>()
+    val trailers: LiveData<List<Trailer>> = _trailers
+
     fun loadMovieDetails(movieId: Int) {
         _loading.postValue(true)
 
@@ -34,6 +38,10 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel(
                 is Result.Success -> _movieDetails.postValue(result.data)
                 is Result.Error -> _error.postValue(result.toString())
                 is Result.Exception -> _exception.postValue(result.toString())
+            }
+
+            when (val trailersResult = movieRepository.fetchTrailersList(movieId)) {
+                is Result.Success -> _trailers.postValue(trailersResult.data.results)
             }
         }
     }

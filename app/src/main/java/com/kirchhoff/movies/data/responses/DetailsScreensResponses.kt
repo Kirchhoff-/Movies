@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.data.responses
 
 import com.kirchhoff.movies.data.CountyItem
+import com.kirchhoff.movies.data.Trailer
 
 class MovieDetails(
     val production_countries: List<CountyItem>,
@@ -23,3 +24,5 @@ data class PersonDetails(
     val place_of_birth: String?,
     val biography: String
 )
+
+data class TrailersListResponse(val results: List<Trailer>)

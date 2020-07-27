@@ -4,6 +4,7 @@
     <string name="menu_tv">Tvs</string>
     <string name="menu_persons">Persons</string>
     <string name="retry">Retry</string>
+    <string name="trailers">Trailers</string>
     <string name="movie_runtime_format">%1$s / %2$d min</string>
 
     <string name="tv_seasons_format">Seasons: %d</string>

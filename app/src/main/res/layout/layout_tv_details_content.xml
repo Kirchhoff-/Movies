@@ -29,14 +29,23 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTvTitle"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+    <com.kirchhoff.movies.ui.views.VoteView
+        android:id="@+id/voteView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/ivTvPoster"
+        app:layout_constraintTop_toTopOf="@+id/ivTvPoster" />
+
     <TextView
         android:id="@+id/tvSeasons"
         style="@style/TvDetails.InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/ivTvPoster"
-        app:layout_constraintTop_toTopOf="@+id/ivTvPoster"
+        app:layout_constraintTop_toBottomOf="@+id/voteView"
         tools:text="Seasons: 12" />
 
     <TextView

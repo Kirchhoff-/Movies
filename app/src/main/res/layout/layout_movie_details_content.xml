@@ -41,15 +41,24 @@
         app:layout_constraintTop_toBottomOf="@+id/tvMovieTitle"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+    <com.kirchhoff.movies.ui.views.VoteView
+        android:id="@+id/voteView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
+        app:layout_constraintTop_toTopOf="@+id/ivMoviePoster" />
+
     <TextView
         android:id="@+id/tvReleaseDate"
         style="@style/MovieDetails.InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:drawableStart="@drawable/ic_today"
         app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
-        app:layout_constraintTop_toTopOf="@+id/ivMoviePoster"
+        app:layout_constraintTop_toBottomOf="@+id/voteView"
         tools:text="24 November 1992" />
 
     <TextView

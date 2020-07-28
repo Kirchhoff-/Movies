@@ -59,6 +59,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             tvFirstAirDate.text = resources.getString(R.string.tv_first_air_date_format, tvDetails.first_air_date)
             tvStatus.text = resources.getString(R.string.tv_status_format, tvDetails.status)
             tvOverview.text = tvDetails.overview
+            voteView.displayRatingAndVoteCount(tvDetails.vote_average, tvDetails.vote_count)
         }
     }
 

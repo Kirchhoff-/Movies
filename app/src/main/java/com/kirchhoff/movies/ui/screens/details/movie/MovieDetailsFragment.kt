@@ -94,6 +94,8 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             if (movieDetails.production_countries.isNotEmpty()) {
                 tvCountry.text = movieDetails.production_countries.first().name
             }
+
+            voteView.displayRatingAndVoteCount(movieDetails.vote_average, movieDetails.vote_count)
         }
     }
 

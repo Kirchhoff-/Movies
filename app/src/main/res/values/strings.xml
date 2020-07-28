@@ -22,4 +22,5 @@
 
     <string name="movies_like">Movies like %s</string>
     <string name="tv_show_like">Tv show like %s</string>
+    <string name="rating_format">%.1f / 10</string>
 </resources>

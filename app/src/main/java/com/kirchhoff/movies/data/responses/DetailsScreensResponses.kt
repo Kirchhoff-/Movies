@@ -8,7 +8,9 @@ class MovieDetails(
     val runtime: Int?,
     val tagline: String?,
     val overview: String,
-    val release_date: String?
+    val release_date: String?,
+    val vote_count: Int?,
+    val vote_average: Float?
 )
 
 class TvDetails(
@@ -16,7 +18,9 @@ class TvDetails(
     val number_of_episodes: Int,
     val overview: String,
     val status: String,
-    val first_air_date: String
+    val first_air_date: String,
+    val vote_count: Int?,
+    val vote_average: Float?
 )
 
 data class PersonDetails(

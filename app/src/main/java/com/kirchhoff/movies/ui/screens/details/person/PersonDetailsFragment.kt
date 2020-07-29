@@ -50,6 +50,11 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
             tvBorn.setTextOrNoInfo(personDetails.birthday)
             tvBirthplace.setTextOrNoInfo(personDetails.place_of_birth)
             tvBio.setTextOrNoInfo(personDetails.biography)
+
+            if (!personDetails.also_known_as.isNullOrEmpty()) {
+                cvAlsoKnowAs.isVisible = true
+                vKeywords.displayItems(personDetails.also_known_as)
+            }
         }
     }
 

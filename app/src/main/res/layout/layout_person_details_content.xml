@@ -83,6 +83,29 @@
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvAlsoKnowAs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/person_details_card_margin"
+        android:layout_marginTop="32dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvPerson"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible">
+
+        <com.kirchhoff.movies.ui.views.keywords.KeywordsView
+            android:id="@+id/vKeywords"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:firstItemMarginEnabled="true"
+            android:padding="@dimen/person_details_keywords_padding" />
+
+    </androidx.cardview.widget.CardView>
+
     <ProgressBar
         android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
@@ -132,7 +155,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="cvPerson"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/groupLoading"

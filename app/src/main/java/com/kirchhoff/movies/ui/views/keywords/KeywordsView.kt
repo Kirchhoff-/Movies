@@ -2,6 +2,7 @@ package com.kirchhoff.movies.ui.views.keywords
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.core.content.res.use
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -18,6 +19,11 @@ class KeywordsView @JvmOverloads constructor(
     private val keywordAdapter = KeywordsListAdapter()
 
     init {
+        var firstItemMarginEnabled: Boolean = false
+        context.theme.obtainStyledAttributes(attrs, R.styleable.KeywordsView, 0, 0).use {
+            firstItemMarginEnabled = it.getBoolean(R.styleable.KeywordsView_firstItemMarginEnabled, false)
+        }
+
         val layoutMng = FlexboxLayoutManager(context).apply {
             flexDirection = FlexDirection.ROW
             justifyContent = JustifyContent.FLEX_START
@@ -27,7 +33,8 @@ class KeywordsView @JvmOverloads constructor(
             KeywordsItemDecoration(
                 resources.getDimensionPixelSize(R.dimen.keyword_item_top_margin),
                 resources.getDimensionPixelSize(R.dimen.keyword_item_bottom_margin),
-                resources.getDimensionPixelSize(R.dimen.keyword_item_edges_margin)
+                resources.getDimensionPixelSize(R.dimen.keyword_item_edges_margin),
+                firstItemMarginEnabled
             )
         )
 

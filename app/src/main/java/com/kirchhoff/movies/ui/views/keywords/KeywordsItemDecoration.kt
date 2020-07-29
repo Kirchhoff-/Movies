@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 class KeywordsItemDecoration(
     private val topMargin: Int = 0,
     private val bottomMargin: Int = 0,
-    private val edgesMargin: Int = 0
+    private val edgesMargin: Int = 0,
+    private val firstItemMarginEnabled: Boolean
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
@@ -21,8 +22,10 @@ class KeywordsItemDecoration(
             bottom = bottomMargin
             right = edgesMargin
 
-            if (parent.getChildAdapterPosition(view) != 0) {
-                left = edgesMargin
+            left = if (firstItemMarginEnabled && parent.getChildAdapterPosition(view) == 0) {
+                edgesMargin / 2
+            } else {
+                0
             }
         }
     }

@@ -29,7 +29,8 @@ class TvDetails(
 data class PersonDetails(
     val birthday: String?,
     val place_of_birth: String?,
-    val biography: String
+    val biography: String,
+    val also_known_as: List<String>?
 )
 
 data class TrailersListResponse(val results: List<Trailer>)

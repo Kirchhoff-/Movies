@@ -60,6 +60,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             tvStatus.text = resources.getString(R.string.tv_status_format, tvDetails.status)
             tvOverview.text = tvDetails.overview
             voteView.displayRatingAndVoteCount(tvDetails.vote_average, tvDetails.vote_count)
+            vKeywords.displayItems(tvDetails.genres.map { it.name })
         }
     }
 

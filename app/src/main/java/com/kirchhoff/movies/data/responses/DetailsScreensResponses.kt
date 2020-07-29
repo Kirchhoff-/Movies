@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.data.responses
 
 import com.kirchhoff.movies.data.CountyItem
+import com.kirchhoff.movies.data.GenresItem
 import com.kirchhoff.movies.data.Trailer
 
 class MovieDetails(
@@ -10,7 +11,8 @@ class MovieDetails(
     val overview: String,
     val release_date: String?,
     val vote_count: Int?,
-    val vote_average: Float?
+    val vote_average: Float?,
+    val genres: List<GenresItem>
 )
 
 class TvDetails(
@@ -20,7 +22,8 @@ class TvDetails(
     val status: String,
     val first_air_date: String,
     val vote_count: Int?,
-    val vote_average: Float?
+    val vote_average: Float?,
+    val genres: List<GenresItem>
 )
 
 data class PersonDetails(

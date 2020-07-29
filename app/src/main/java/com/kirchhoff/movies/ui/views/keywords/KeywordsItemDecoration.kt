@@ -1,11 +1,10 @@
-package com.kirchhoff.movies.ui.utils.recyclerView.decorations
+package com.kirchhoff.movies.ui.views.keywords
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class GridMarginItemDecoration(
-    private val spanCount: Int = 0,
+class KeywordsItemDecoration(
     private val topMargin: Int = 0,
     private val bottomMargin: Int = 0,
     private val edgesMargin: Int = 0
@@ -18,20 +17,13 @@ class GridMarginItemDecoration(
         state: RecyclerView.State
     ) {
         with(outRect) {
-            top = if (spanCount > 0) {
-                if (parent.getChildAdapterPosition(view) < spanCount) {
-                    topMargin
-                } else {
-                    topMargin / 2
-                }
-            } else {
-                topMargin
-            }
-
+            top = topMargin
             bottom = bottomMargin
-
-            left = edgesMargin
             right = edgesMargin
+
+            if (parent.getChildAdapterPosition(view) != 0) {
+                left = edgesMargin
+            }
         }
     }
 }

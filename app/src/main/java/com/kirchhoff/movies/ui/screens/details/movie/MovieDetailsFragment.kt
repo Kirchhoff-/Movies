@@ -96,6 +96,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             }
 
             voteView.displayRatingAndVoteCount(movieDetails.vote_average, movieDetails.vote_count)
+            vKeywords.displayItems(movieDetails.genres.map { it.name })
         }
     }
 

@@ -36,4 +36,10 @@
     <dimen name="trailer_item_height">150dp</dimen>
     <dimen name="trailer_item_margin">16dp</dimen>
     <dimen name="trailer_item_source_image_size">48dp</dimen>
+
+    <dimen name="keyword_item_corner_radius">16dp</dimen>
+    <dimen name="keyword_item_padding">4dp</dimen>
+    <dimen name="keyword_item_top_margin">2dp</dimen>
+    <dimen name="keyword_item_bottom_margin">2dp</dimen>
+    <dimen name="keyword_item_edges_margin">4dp</dimen>
 </resources>

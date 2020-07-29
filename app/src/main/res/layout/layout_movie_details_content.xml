@@ -94,14 +94,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivMoviePoster" />
 
+    <com.kirchhoff.movies.ui.views.keywords.KeywordsView
+        android:id="@+id/vKeywords"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
+        app:layout_constraintTop_toBottomOf="@+id/contentDivider" />
+
     <TextView
         android:id="@+id/tvTagline"
         style="@style/MovieDetails.SectionTitleText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/glEnd"
         app:layout_constraintStart_toEndOf="@+id/glBegin"
-        app:layout_constraintTop_toBottomOf="@+id/contentDivider"
+        app:layout_constraintTop_toBottomOf="@+id/vKeywords"
         tools:text="Movie Tagline" />
 
     <TextView

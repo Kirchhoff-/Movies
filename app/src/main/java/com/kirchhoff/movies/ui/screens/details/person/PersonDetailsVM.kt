@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kirchhoff.movies.data.responses.PersonCredits
 import com.kirchhoff.movies.data.responses.PersonDetails
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.person.IPersonsRepository
@@ -23,6 +24,9 @@ class PersonDetailsVM(private val personRepository: IPersonsRepository) : ViewMo
     private val _personDetails = MutableLiveData<PersonDetails>()
     val personDetails: LiveData<PersonDetails> = _personDetails
 
+    private val _personCredits = MutableLiveData<PersonCredits>()
+    val personCredits: LiveData<PersonCredits> = _personCredits
+
     fun loadPersonDetails(personId: Int) {
         _loading.postValue(true)
 
@@ -34,6 +38,10 @@ class PersonDetailsVM(private val personRepository: IPersonsRepository) : ViewMo
                 is Result.Success -> _personDetails.postValue(result.data)
                 is Result.Error -> _error.postValue(result.toString())
                 is Result.Exception -> _exception.postValue(result.toString())
+            }
+
+            when (val creditsResult = personRepository.fetchPersonCredits(personId)) {
+                is Result.Success -> _personCredits.postValue(creditsResult.data)
             }
         }
     }

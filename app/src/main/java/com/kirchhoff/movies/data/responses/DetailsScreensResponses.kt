@@ -34,3 +34,14 @@ data class PersonDetails(
 )
 
 data class TrailersListResponse(val results: List<Trailer>)
+
+data class PersonCredit(
+    val title: String?,
+    val character: String?,
+    val poster_path: String?
+)
+
+data class PersonCredits(
+    val cast: List<PersonCredit>?,
+    val crew: List<PersonCredit>?
+)

@@ -7,6 +7,20 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/details_screen_top_margin">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/details_screen_edges_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/details_screen_edges_margin" />
+
     <TextView
         android:id="@+id/tvPersonName"
         android:layout_width="wrap_content"
@@ -23,12 +37,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPerson"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/person_details_card_margin"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
         app:layout_constraintTop_toBottomOf="@+id/tvPersonName"
         app:layout_constraintVertical_bias="0.0">
 
@@ -85,14 +100,14 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAlsoKnowAs"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/person_details_card_margin"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toEndOf="@+id/glBegin"
         app:layout_constraintTop_toBottomOf="@+id/cvPerson"
         app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible">
@@ -101,10 +116,58 @@
             android:id="@+id/vKeywords"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:firstItemMarginEnabled="true"
-            android:padding="@dimen/person_details_keywords_padding" />
+            android:padding="@dimen/person_details_keywords_padding"
+            app:firstItemMarginEnabled="true" />
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvCastCredits"
+        style="@style/PersonDetails.SectionTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/cast_credits"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toStartOf="@+id/glBegin"
+        app:layout_constraintTop_toBottomOf="@+id/cvAlsoKnowAs"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.kirchhoff.movies.ui.screens.details.person.views.PersonCreditsView
+        android:id="@+id/vCastCredits"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCastCredits"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvCrewCredits"
+        style="@style/PersonDetails.SectionTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/crew_credits"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toStartOf="@+id/glBegin"
+        app:layout_constraintTop_toBottomOf="@+id/vCastCredits"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.kirchhoff.movies.ui.screens.details.person.views.PersonCreditsView
+        android:id="@+id/vCrewCredits"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCrewCredits"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -178,5 +241,21 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="tvException" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/castCreditsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvCastCredits, vCastCredits"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/crewCreditsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvCrewCredits, vCrewCredits"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

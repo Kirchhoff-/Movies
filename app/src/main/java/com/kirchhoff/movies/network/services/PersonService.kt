@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.network.services
 
+import com.kirchhoff.movies.data.responses.PersonCredits
 import com.kirchhoff.movies.data.responses.PersonDetails
 import com.kirchhoff.movies.data.responses.PersonsResponse
 import retrofit2.Response
@@ -13,4 +14,7 @@ interface PersonService {
 
     @GET("/3/person/{person_id}")
     suspend fun fetchPersonDetail(@Path("person_id") personId: Int): Response<PersonDetails>
+
+    @GET("/3/person/{person_id}/combined_credits")
+    suspend fun fetchPersonCredits(@Path("person_id") personId: Int): Response<PersonCredits>
 }

@@ -5,7 +5,8 @@
     <string name="menu_persons">Persons</string>
     <string name="retry">Retry</string>
     <string name="trailers">Trailers</string>
-    <string name="movie_runtime_format">%1$s / %2$d min</string>
+    <string name="cast_credits">Cast Credits</string>
+    <string name="crew_credits">Crew Credits</string>
 
     <string name="tv_seasons_format">Seasons: %d</string>
     <string name="tv_episodes_format">Episodes: %d</string>
@@ -23,4 +24,5 @@
     <string name="movies_like">Movies like %s</string>
     <string name="tv_show_like">Tv show like %s</string>
     <string name="rating_format">%.1f / 10</string>
+    <string name="movie_runtime_format">%1$s / %2$d min</string>
 </resources>

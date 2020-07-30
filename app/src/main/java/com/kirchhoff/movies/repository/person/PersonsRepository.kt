@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.repository.person
 
+import com.kirchhoff.movies.data.responses.PersonCredits
 import com.kirchhoff.movies.data.responses.PersonDetails
 import com.kirchhoff.movies.data.responses.PersonsResponse
 import com.kirchhoff.movies.network.services.PersonService
@@ -13,5 +14,9 @@ class PersonsRepository(private val personService: PersonService) : BaseReposito
 
     override suspend fun fetchPersonDetail(personId: Int): Result<PersonDetails> {
         return apiCall { personService.fetchPersonDetail(personId) }
+    }
+
+    override suspend fun fetchPersonCredits(personId: Int): Result<PersonCredits> {
+        return apiCall { personService.fetchPersonCredits(personId) }
     }
 }

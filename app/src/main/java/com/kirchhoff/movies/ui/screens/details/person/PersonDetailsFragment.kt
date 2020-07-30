@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Person
+import com.kirchhoff.movies.data.responses.PersonCredits
 import com.kirchhoff.movies.data.responses.PersonDetails
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
@@ -37,6 +38,7 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
         with(vm) {
             personDetails.subscribe(::handlePersonDetails)
+            personCredits.subscribe(::handlePersonCredits)
             loading.subscribe(::handleLoading)
             error.subscribe(::handleError)
             exception.subscribe(::handleException)
@@ -54,6 +56,20 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
             if (!personDetails.also_known_as.isNullOrEmpty()) {
                 cvAlsoKnowAs.isVisible = true
                 vKeywords.displayItems(personDetails.also_known_as)
+            }
+        }
+    }
+
+    private fun handlePersonCredits(personCredits: PersonCredits) {
+        with(viewBinding.content) {
+            if (!personCredits.cast.isNullOrEmpty()) {
+                castCreditsGroup.isVisible = true
+                vCastCredits.displayItems(personCredits.cast)
+            }
+
+            if (!personCredits.crew.isNullOrEmpty()) {
+                crewCreditsGroup.isVisible = true
+                vCrewCredits.displayItems(personCredits.crew)
             }
         }
     }

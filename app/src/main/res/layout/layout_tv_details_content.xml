@@ -122,6 +122,54 @@
         tools:text="Tv Overview" />
 
     <TextView
+        android:id="@+id/tvCastCredits"
+        style="@style/TvDetails.SectionTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/cast_credits"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toStartOf="@+id/glBegin"
+        app:layout_constraintTop_toBottomOf="@+id/tvOverview"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.kirchhoff.movies.ui.screens.core.credit.CreditsView
+        android:id="@+id/vCastCredits"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCastCredits"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvCrewCredits"
+        style="@style/TvDetails.SectionTitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/crew_credits"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/glEnd"
+        app:layout_constraintStart_toStartOf="@+id/glBegin"
+        app:layout_constraintTop_toBottomOf="@+id/vCastCredits"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.kirchhoff.movies.ui.screens.core.credit.CreditsView
+        android:id="@+id/vCrewCredits"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCrewCredits"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/tvSimilarTv"
         style="@style/MovieDetails.TextWithArrow"
         android:layout_width="0dp"
@@ -131,7 +179,7 @@
         android:text="@string/similar_tv_shows"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOverview" />
+        app:layout_constraintTop_toBottomOf="@+id/vCrewCredits" />
 
     <TextView
         android:id="@+id/tvReviews"
@@ -216,5 +264,21 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="tvException" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/castCreditsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvCastCredits, vCastCredits"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/crewCreditsGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvCrewCredits, vCrewCredits"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

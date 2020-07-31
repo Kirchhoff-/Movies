@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kirchhoff.movies.data.responses.TvCredits
 import com.kirchhoff.movies.data.responses.TvDetails
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.tv.ITvRepository
@@ -23,6 +24,9 @@ class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
     private val _tvDetails = MutableLiveData<TvDetails>()
     val tvDetails: LiveData<TvDetails> = _tvDetails
 
+    private val _tvCredits = MutableLiveData<TvCredits>()
+    val tvCredits: LiveData<TvCredits> = _tvCredits
+
     fun loadTvDetails(tvId: Int) {
         _loading.postValue(true)
 
@@ -34,6 +38,10 @@ class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
                 is Result.Success -> _tvDetails.postValue(result.data)
                 is Result.Error -> _error.postValue(result.toString())
                 is Result.Exception -> _exception.postValue(result.toString())
+            }
+
+            when (val credits = tvRepository.fetchTvCredits(tvId)) {
+                is Result.Success -> _tvCredits.postValue(credits.data)
             }
         }
     }

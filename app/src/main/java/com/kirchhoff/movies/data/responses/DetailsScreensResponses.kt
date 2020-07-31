@@ -39,7 +39,14 @@ data class PersonCredit(
     val title: String?,
     val character: String?,
     val poster_path: String?
-)
+) : CreditsInfo {
+
+    override fun title() = title
+
+    override fun description() = character
+
+    override fun imagePath() = poster_path
+}
 
 data class PersonCredits(
     val cast: List<PersonCredit>?,

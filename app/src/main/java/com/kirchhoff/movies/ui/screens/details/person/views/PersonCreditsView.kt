@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.responses.PersonCredit
-import com.kirchhoff.movies.ui.screens.details.person.views.adapter.PersonCreditAdapter
+import com.kirchhoff.movies.ui.screens.core.credit.CreditAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.TopBottomMarginItemDecoration
 
@@ -16,7 +16,8 @@ class PersonCreditsView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
-    private val creditsAdapter = PersonCreditAdapter()
+    private val creditsAdapter =
+        CreditAdapter()
 
     init {
         adapter = creditsAdapter

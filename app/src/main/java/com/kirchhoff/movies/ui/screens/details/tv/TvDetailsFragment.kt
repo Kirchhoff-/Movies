@@ -67,16 +67,9 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     }
 
     private fun handleTvCredits(tvCredits: TvCredits) {
-        with(viewBinding.content) {
-            if (!tvCredits.cast.isNullOrEmpty()) {
-                castCreditsGroup.isVisible = true
-                vCastCredits.displayItems(tvCredits.cast)
-            }
-
-            if (!tvCredits.crew.isNullOrEmpty()) {
-                crewCreditsGroup.isVisible = true
-                vCrewCredits.displayItems(tvCredits.crew)
-            }
+        with(viewBinding.content.vCredits) {
+            isVisible = true
+            displayItems(tvCredits.cast, tvCredits.crew)
         }
     }
 

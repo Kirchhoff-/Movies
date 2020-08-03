@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.core.credit.adapter
+package com.kirchhoff.movies.ui.screens.core.credits.adapter
 
 import android.view.ViewGroup
 import com.kirchhoff.movies.data.responses.CreditsInfo

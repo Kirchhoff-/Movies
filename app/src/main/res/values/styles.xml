@@ -59,11 +59,6 @@
         <item name="android:textColor">@color/text_hint</item>
     </style>
 
-    <style name="TvDetails.SectionTitleText">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/text_main</item>
-    </style>
-
     <!-- Person details -->
     <style name="PersonDetails" />
 
@@ -78,16 +73,17 @@
         <item name="android:textColor">@color/text_hint</item>
     </style>
 
-    <style name="PersonDetails.SectionTitleText">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/text_main</item>
-    </style>
-
     <!-- Reviews list -->
     <style name="ReviewsList" />
 
     <style name="ReviewsList.Toolbar">
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <!-- CreditsView -->
+    <style name="CreditsViewText">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_main</item>
     </style>
 </resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvCastCredits"
+        style="@style/CreditsViewText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/credits_view_edges_margin"
+        android:layout_marginEnd="@dimen/credits_view_edges_margin"
+        android:text="@string/cast_credits"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCastCredits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:layout_marginTop="8dp"
+        tools:listitem="@layout/item_credit"
+        tools:orientation="horizontal"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvCrewCredits"
+        style="@style/CreditsViewText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/credits_view_edges_margin"
+        android:layout_marginEnd="@dimen/credits_view_edges_margin"
+        android:text="@string/crew_credits"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCrewCredits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:layout_marginTop="8dp"
+        tools:listitem="@layout/item_credit"
+        tools:orientation="horizontal"
+        tools:visibility="visible" />
+
+</LinearLayout>

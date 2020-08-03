@@ -61,16 +61,9 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
     }
 
     private fun handlePersonCredits(personCredits: PersonCredits) {
-        with(viewBinding.content) {
-            if (!personCredits.cast.isNullOrEmpty()) {
-                castCreditsGroup.isVisible = true
-                vCastCredits.displayItems(personCredits.cast)
-            }
-
-            if (!personCredits.crew.isNullOrEmpty()) {
-                crewCreditsGroup.isVisible = true
-                vCrewCredits.displayItems(personCredits.crew)
-            }
+        with(viewBinding.content.vCredits) {
+            isVisible = true
+            displayItems(personCredits.cast, personCredits.crew)
         }
     }
 

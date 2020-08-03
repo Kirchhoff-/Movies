@@ -26,7 +26,6 @@
     <dimen name="person_details_avatar_size">128dp</dimen>
     <dimen name="person_details_card_margin">16dp</dimen>
     <dimen name="person_details_keywords_padding">8dp</dimen>
-    <dimen name="person_details_credits_margin">16dp</dimen>
 
     <dimen name="reviews_list_screen_item_top_margin">16dp</dimen>
     <dimen name="reviews_list_screen_item_bottom_margin">8dp</dimen>
@@ -48,4 +47,6 @@
     <dimen name="credit_item_height">250dp</dimen>
     <dimen name="credit_item_width">150dp</dimen>
     <dimen name="credit_item_image_height">190dp</dimen>
+
+    <dimen name="credits_view_edges_margin">16dp</dimen>
 </resources>

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.data.responses.PersonCredits
-import com.kirchhoff.movies.data.responses.PersonDetails
+import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
+import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.person.IPersonsRepository
 import kotlinx.coroutines.launch
@@ -21,11 +21,11 @@ class PersonDetailsVM(private val personRepository: IPersonsRepository) : ViewMo
     private val _exception = MutableLiveData<String>()
     val exception: LiveData<String> = _exception
 
-    private val _personDetails = MutableLiveData<PersonDetails>()
-    val personDetails: LiveData<PersonDetails> = _personDetails
+    private val _personDetails = MutableLiveData<UIPersonDetails>()
+    val personDetails: LiveData<UIPersonDetails> = _personDetails
 
-    private val _personCredits = MutableLiveData<PersonCredits>()
-    val personCredits: LiveData<PersonCredits> = _personCredits
+    private val _personCredits = MutableLiveData<UIPersonCredits>()
+    val personCredits: LiveData<UIPersonCredits> = _personCredits
 
     fun loadPersonDetails(personId: Int) {
         _loading.postValue(true)

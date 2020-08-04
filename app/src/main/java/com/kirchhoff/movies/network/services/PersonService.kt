@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.network.services
 
-import com.kirchhoff.movies.data.responses.PersonCredits
-import com.kirchhoff.movies.data.responses.PersonDetails
+import com.kirchhoff.movies.data.network.details.person.NetworkPersonCredits
+import com.kirchhoff.movies.data.network.details.person.NetworkPersonDetails
 import com.kirchhoff.movies.data.responses.PersonsResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,8 +13,8 @@ interface PersonService {
     suspend fun fetchPopularPerson(@Query("page") page: Int): Response<PersonsResponse>
 
     @GET("/3/person/{person_id}")
-    suspend fun fetchPersonDetail(@Path("person_id") personId: Int): Response<PersonDetails>
+    suspend fun fetchPersonDetail(@Path("person_id") personId: Int): Response<NetworkPersonDetails>
 
     @GET("/3/person/{person_id}/combined_credits")
-    suspend fun fetchPersonCredits(@Path("person_id") personId: Int): Response<PersonCredits>
+    suspend fun fetchPersonCredits(@Path("person_id") personId: Int): Response<NetworkPersonCredits>
 }

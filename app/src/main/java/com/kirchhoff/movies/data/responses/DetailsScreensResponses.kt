@@ -26,32 +26,7 @@ class TvDetails(
     val genres: List<GenresItem>
 )
 
-data class PersonDetails(
-    val birthday: String?,
-    val place_of_birth: String?,
-    val biography: String,
-    val also_known_as: List<String>?
-)
-
 data class TrailersListResponse(val results: List<Trailer>)
-
-data class PersonCredit(
-    val title: String?,
-    val character: String?,
-    val poster_path: String?
-) : CreditsInfo {
-
-    override fun title() = title
-
-    override fun description() = character
-
-    override fun imagePath() = poster_path
-}
-
-data class PersonCredits(
-    val cast: List<PersonCredit>?,
-    val crew: List<PersonCredit>?
-)
 
 data class TvCredit(
     val name: String,

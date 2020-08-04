@@ -6,8 +6,8 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Person
-import com.kirchhoff.movies.data.responses.PersonCredits
-import com.kirchhoff.movies.data.responses.PersonDetails
+import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
+import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -45,22 +45,22 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         }
     }
 
-    private fun handlePersonDetails(personDetails: PersonDetails) {
+    private fun handlePersonDetails(personDetails: UIPersonDetails) {
         with(viewBinding.content) {
             groupData.isVisible = true
 
             tvBorn.setTextOrNoInfo(personDetails.birthday)
-            tvBirthplace.setTextOrNoInfo(personDetails.place_of_birth)
+            tvBirthplace.setTextOrNoInfo(personDetails.placeOfBirth)
             tvBio.setTextOrNoInfo(personDetails.biography)
 
-            if (!personDetails.also_known_as.isNullOrEmpty()) {
+            if (!personDetails.alsoKnownAs.isNullOrEmpty()) {
                 cvAlsoKnowAs.isVisible = true
-                vKeywords.displayItems(personDetails.also_known_as)
+                vKeywords.displayItems(personDetails.alsoKnownAs)
             }
         }
     }
 
-    private fun handlePersonCredits(personCredits: PersonCredits) {
+    private fun handlePersonCredits(personCredits: UIPersonCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
             displayItems(personCredits.cast, personCredits.crew)

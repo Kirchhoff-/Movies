@@ -2,6 +2,7 @@ package com.kirchhoff.movies
 
 import android.app.Application
 import com.facebook.stetho.Stetho
+import com.kirchhoff.movies.di.mapperModule
 import com.kirchhoff.movies.di.networkModule
 import com.kirchhoff.movies.di.repositoryModule
 import com.kirchhoff.movies.di.viewModelModule
@@ -19,6 +20,7 @@ class MoviesApplication : Application() {
             modules(networkModule)
             modules(repositoryModule)
             modules(viewModelModule)
+            modules(mapperModule)
         }
 
         initStetho()

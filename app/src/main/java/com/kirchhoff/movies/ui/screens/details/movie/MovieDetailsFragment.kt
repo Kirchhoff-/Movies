@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.Trailer
+import com.kirchhoff.movies.data.responses.MovieCredits
 import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
@@ -63,6 +64,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
         with(vm) {
             movieDetails.subscribe(::handleMovieDetailsData)
+            movieCredits.subscribe(::handleMovieCredits)
             loading.subscribe(::handleLoading)
             error.subscribe(::handleError)
             exception.subscribe(::handleException)
@@ -132,6 +134,13 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
                 groupTrailers.isVisible = true
                 rvTrailers.adapter = TrailersListAdapter(trailersList, this@MovieDetailsFragment)
             }
+        }
+    }
+
+    private fun handleMovieCredits(movieCredits: MovieCredits) {
+        with(viewBinding.content.vCredits) {
+            isVisible = true
+            displayItems(movieCredits.cast, movieCredits.crew)
         }
     }
 

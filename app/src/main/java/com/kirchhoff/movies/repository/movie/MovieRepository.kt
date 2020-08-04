@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.repository.movie
 
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
+import com.kirchhoff.movies.data.responses.MovieCredits
 import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
 import com.kirchhoff.movies.data.responses.TrailersListResponse
@@ -26,5 +27,9 @@ class MovieRepository(private val movieService: MovieService) : BaseRepository()
 
     override suspend fun fetchTrailersList(movieId: Int): Result<TrailersListResponse> {
         return apiCall { movieService.fetchTrailersList(movieId) }
+    }
+
+    override suspend fun fetchMovieCredits(movieId: Int): Result<MovieCredits> {
+        return apiCall { movieService.fetchMovieCredits(movieId) }
     }
 }

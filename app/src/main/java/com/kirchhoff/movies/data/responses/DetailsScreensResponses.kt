@@ -69,3 +69,32 @@ data class TvCredits(
     val cast: List<TvCredit>?,
     val crew: List<TvCredit>?
 )
+
+data class MovieCastCredit(
+    val name: String,
+    val profile_path: String?,
+    val character: String?
+) : CreditsInfo {
+    override fun title() = name
+
+    override fun description() = character
+
+    override fun imagePath() = profile_path
+}
+
+data class MovieCrewCredit(
+    val name: String,
+    val profile_path: String?,
+    val job: String?
+) : CreditsInfo {
+    override fun title() = name
+
+    override fun description() = job
+
+    override fun imagePath() = profile_path
+}
+
+data class MovieCredits(
+    val cast: List<MovieCastCredit>?,
+    val crew: List<MovieCrewCredit>?
+)

@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.Trailer
-import com.kirchhoff.movies.data.responses.MovieCredits
-import com.kirchhoff.movies.data.responses.MovieDetails
+import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
+import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.extensions.setTextOrGone
@@ -77,13 +77,13 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         startActivity(intent)
     }
 
-    private fun handleMovieDetailsData(movieDetails: MovieDetails) {
+    private fun handleMovieDetailsData(movieDetails: UIMovieDetails) {
         with(viewBinding.content) {
             groupData.isVisible = true
 
             tvOverview.text = movieDetails.overview
-            tvReleaseDate.setTextOrGone(movieDetails.release_date)
-            tvTagline.setTextOrGone(movieDetails.tagline)
+            tvReleaseDate.setTextOrGone(movieDetails.releaseDate)
+            tvTagline.setTextOrGone(movieDetails.tagLine)
             tvRuntime.setTextOrGone(
                 movieDetails.runtime, getString(
                     R.string.movie_runtime_format,
@@ -92,12 +92,12 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
                 )
             )
 
-            tvCountry.isVisible = movieDetails.production_countries.isNotEmpty()
-            if (movieDetails.production_countries.isNotEmpty()) {
-                tvCountry.text = movieDetails.production_countries.first().name
+            tvCountry.isVisible = movieDetails.productionCountries.isNotEmpty()
+            if (movieDetails.productionCountries.isNotEmpty()) {
+                tvCountry.text = movieDetails.productionCountries.first().name
             }
 
-            voteView.displayRatingAndVoteCount(movieDetails.vote_average, movieDetails.vote_count)
+            voteView.displayRatingAndVoteCount(movieDetails.voteAverage, movieDetails.voteCount)
             vKeywords.displayItems(movieDetails.genres.map { it.name })
         }
     }
@@ -137,7 +137,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
-    private fun handleMovieCredits(movieCredits: MovieCredits) {
+    private fun handleMovieCredits(movieCredits: UIMovieCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
             displayItems(movieCredits.cast, movieCredits.crew)

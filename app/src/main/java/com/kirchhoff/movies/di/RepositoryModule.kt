@@ -14,5 +14,5 @@ val repositoryModule = module {
     single<IDiscoverRepository> { DiscoverRepository(discoverService = get()) }
     single<IPersonsRepository> { PersonsRepository(personService = get(), personDetailsMapper = get()) }
     single<IMovieRepository> { MovieRepository(movieService = get(), movieDetailsMapper = get()) }
-    single<ITvRepository> { TvRepository(tvService = get()) }
+    single<ITvRepository> { TvRepository(tvService = get(), tvDetailsMapper = get()) }
 }

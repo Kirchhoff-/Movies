@@ -5,8 +5,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Tv
-import com.kirchhoff.movies.data.responses.TvCredits
-import com.kirchhoff.movies.data.responses.TvDetails
+import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
+import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -52,21 +52,21 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         }
     }
 
-    private fun handleTvDetailsData(tvDetails: TvDetails) {
+    private fun handleTvDetailsData(tvDetails: UITvDetails) {
         with(viewBinding.content) {
             groupData.isVisible = true
 
-            tvSeasons.text = resources.getString(R.string.tv_seasons_format, tvDetails.number_of_seasons)
-            tvEpisodes.text = resources.getString(R.string.tv_episodes_format, tvDetails.number_of_episodes)
-            tvFirstAirDate.text = resources.getString(R.string.tv_first_air_date_format, tvDetails.first_air_date)
+            tvSeasons.text = resources.getString(R.string.tv_seasons_format, tvDetails.numberOfSeasons)
+            tvEpisodes.text = resources.getString(R.string.tv_episodes_format, tvDetails.numberOfEpisodes)
+            tvFirstAirDate.text = resources.getString(R.string.tv_first_air_date_format, tvDetails.firstAirDate)
             tvStatus.text = resources.getString(R.string.tv_status_format, tvDetails.status)
             tvOverview.text = tvDetails.overview
-            voteView.displayRatingAndVoteCount(tvDetails.vote_average, tvDetails.vote_count)
+            voteView.displayRatingAndVoteCount(tvDetails.voteAverage, tvDetails.voteCount)
             vKeywords.displayItems(tvDetails.genres.map { it.name })
         }
     }
 
-    private fun handleTvCredits(tvCredits: TvCredits) {
+    private fun handleTvCredits(tvCredits: UITvCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
             displayItems(tvCredits.cast, tvCredits.crew)

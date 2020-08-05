@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.network.services
 
+import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCredits
+import com.kirchhoff.movies.data.network.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
-import com.kirchhoff.movies.data.responses.MovieCredits
-import com.kirchhoff.movies.data.responses.MovieDetails
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
 import com.kirchhoff.movies.data.responses.TrailersListResponse
 import retrofit2.Response
@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 interface MovieService {
     @GET("/3/movie/{movie_id}")
-    suspend fun fetchDetails(@Path("movie_id") id: Int): Response<MovieDetails>
+    suspend fun fetchDetails(@Path("movie_id") id: Int): Response<NetworkMovieDetails>
 
     @GET("/3/movie/{movie_id}/reviews")
     suspend fun fetchReviews(@Path("movie_id") id: Int, @Query("page") page: Int): Response<ReviewsListResponse>
@@ -24,5 +24,5 @@ interface MovieService {
     suspend fun fetchTrailersList(@Path("movie_id") id: Int): Response<TrailersListResponse>
 
     @GET("/3/movie/{movie_id}/credits")
-    suspend fun fetchMovieCredits(@Path("movie_id") id: Int): Response<MovieCredits>
+    suspend fun fetchMovieCredits(@Path("movie_id") id: Int): Response<NetworkMovieCredits>
 }

@@ -2,9 +2,9 @@ package com.kirchhoff.movies.repository.movie
 
 import com.kirchhoff.movies.data.responses.DiscoverMoviesResponse
 import com.kirchhoff.movies.data.responses.ReviewsListResponse
-import com.kirchhoff.movies.data.responses.TrailersListResponse
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
+import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.network.services.MovieService
 import com.kirchhoff.movies.repository.BaseRepository
@@ -31,9 +31,10 @@ class MovieRepository(
         return apiCall { movieService.fetchSimilarMovies(movieId, page) }
     }
 
-    override suspend fun fetchTrailersList(movieId: Int): Result<TrailersListResponse> {
-        return apiCall { movieService.fetchTrailersList(movieId) }
-    }
+    override suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList> =
+        movieDetailsMapper.createUITrailersList(apiCall {
+            movieService.fetchTrailersList(movieId)
+        })
 
     override suspend fun fetchMovieCredits(movieId: Int): Result<UIMovieCredits> =
         movieDetailsMapper.createUIMovieCredits(apiCall {

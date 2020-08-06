@@ -39,3 +39,10 @@ data class UIMovieCredits(
     val cast: List<UIMovieCastCredit>?,
     val crew: List<UIMovieCrewCredit>?
 )
+
+data class UITrailer(
+    val site: String,
+    val key: String
+)
+
+data class UITrailersList(val results: List<UITrailer>)

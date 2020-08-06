@@ -30,3 +30,10 @@ data class NetworkMovieCredits(
     val cast: List<NetworkMovieCastCredit>?,
     val crew: List<NetworkMovieCrewCredit>?
 )
+
+data class NetworkTrailer(
+    val site: String,
+    val key: String
+)
+
+data class NetworkTrailersList(val results: List<NetworkTrailer>)

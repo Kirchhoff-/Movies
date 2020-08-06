@@ -8,9 +8,9 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Movie
-import com.kirchhoff.movies.data.Trailer
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
+import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.extensions.setTextOrGone
@@ -27,7 +27,7 @@ import java.util.Locale
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
-    BaseRecyclerViewAdapter.OnItemClickListener<Trailer> {
+    BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
     private val movie: Movie by lazy { arguments!!.getParcelable<Movie>(MOVIE_ARG)!! }
 
@@ -72,7 +72,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
-    override fun onItemClick(item: Trailer) {
+    override fun onItemClick(item: UITrailer) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + item.key))
         startActivity(intent)
     }
@@ -128,7 +128,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
-    private fun handleTrailers(trailersList: List<Trailer>) {
+    private fun handleTrailers(trailersList: List<UITrailer>) {
         if (trailersList.isNotEmpty()) {
             with(viewBinding.content) {
                 groupTrailers.isVisible = true

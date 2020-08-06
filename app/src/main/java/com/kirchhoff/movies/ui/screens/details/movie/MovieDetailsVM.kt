@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.data.Trailer
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
+import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import kotlinx.coroutines.launch
@@ -25,8 +25,8 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel(
     private val _movieDetails = MutableLiveData<UIMovieDetails>()
     val movieDetails: LiveData<UIMovieDetails> = _movieDetails
 
-    private val _trailers = MutableLiveData<List<Trailer>>()
-    val trailers: LiveData<List<Trailer>> = _trailers
+    private val _trailers = MutableLiveData<List<UITrailer>>()
+    val trailers: LiveData<List<UITrailer>> = _trailers
 
     private val _movieCredits = MutableLiveData<UIMovieCredits>()
     val movieCredits: LiveData<UIMovieCredits> = _movieCredits

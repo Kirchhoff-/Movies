@@ -4,10 +4,14 @@ import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCastCredit
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCredits
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCrewCredit
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieDetails
+import com.kirchhoff.movies.data.network.details.movie.NetworkTrailer
+import com.kirchhoff.movies.data.network.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCastCredit
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCrewCredit
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
+import com.kirchhoff.movies.data.ui.details.movie.UITrailer
+import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.repository.Result
 
@@ -22,6 +26,12 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
         when (movieCreditsResult) {
             is Result.Success -> Result.Success(createUIMovieCredits(movieCreditsResult.data))
             else -> mapErrorOrException(movieCreditsResult)
+        }
+
+    override fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<UITrailersList> =
+        when (trailersListResult) {
+            is Result.Success -> Result.Success(createUITrailerList(trailersListResult.data))
+            else -> mapErrorOrException(trailersListResult)
         }
 
     private fun createUIMovieDetails(movieDetails: NetworkMovieDetails) =
@@ -55,4 +65,10 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
             crewCredit.profile_path,
             crewCredit.job
         )
+
+    private fun createUITrailerList(trailer: NetworkTrailersList) =
+        UITrailersList(trailer.results.map { createUITrailer(it) })
+
+    private fun createUITrailer(trailer: NetworkTrailer) =
+        UITrailer(trailer.site, trailer.key)
 }

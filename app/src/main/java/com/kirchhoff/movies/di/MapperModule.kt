@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.di
 
+import com.kirchhoff.movies.mapper.mapper.IReviewListMapper
+import com.kirchhoff.movies.mapper.mapper.ReviewListMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.mapper.movie.MovieDetailsMapper
 import com.kirchhoff.movies.mapper.person.IPersonDetailsMapper
@@ -12,4 +14,5 @@ val mapperModule = module {
     single<IPersonDetailsMapper> { PersonDetailsMapper() }
     single<IMovieDetailsMapper> { MovieDetailsMapper() }
     single<ITvDetailsMapper> { TvDetailsMapper() }
+    single<IReviewListMapper> { ReviewListMapper() }
 }

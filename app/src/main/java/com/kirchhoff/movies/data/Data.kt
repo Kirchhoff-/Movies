@@ -25,10 +25,3 @@ data class Tv(
     val backdrop_path: String?,
     val name: String
 ) : Parcelable
-
-@Parcelize
-data class Review(
-    val id: String,
-    val author: String,
-    val content: String
-) : Parcelable

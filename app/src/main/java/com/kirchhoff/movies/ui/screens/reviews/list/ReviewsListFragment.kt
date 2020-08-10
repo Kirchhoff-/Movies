@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.Review
-import com.kirchhoff.movies.data.responses.ReviewsListResponse
+import com.kirchhoff.movies.data.ui.details.review.UIReview
+import com.kirchhoff.movies.data.ui.details.review.UIReviewsListResponse
 import com.kirchhoff.movies.databinding.FragmentReviewsListBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -21,7 +21,7 @@ import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list),
-    BaseRecyclerViewAdapter.OnItemClickListener<Review> {
+    BaseRecyclerViewAdapter.OnItemClickListener<UIReview> {
 
     private val dataId: Int by lazy { arguments!!.getInt(ID_ARG) }
     private val reviewType: ReviewType by lazy { ReviewType.values()[arguments!!.getInt(REVIEW_TYPE_ARG)] }
@@ -69,13 +69,13 @@ class ReviewsListFragment : BaseFragment(R.layout.fragment_reviews_list),
         paginator.isLoading = true
     }
 
-    private fun obtainReviewsResponse(response: ReviewsListResponse) {
+    private fun obtainReviewsResponse(response: UIReviewsListResponse) {
         reviewsAdapter.addItems(response.results)
-        paginator.totalPages = response.total_pages
+        paginator.totalPages = response.totalPages
         paginator.isLoading = false
     }
 
-    override fun onItemClick(item: Review) {
+    override fun onItemClick(item: UIReview) {
         requireActivity().supportFragmentManager
             .beginTransaction()
             .add(R.id.fragmentContainer, ReviewDetailsFragment.newInstance(item.content))

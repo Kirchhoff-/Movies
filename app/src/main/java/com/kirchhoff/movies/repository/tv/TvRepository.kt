@@ -1,9 +1,10 @@
 package com.kirchhoff.movies.repository.tv
 
 import com.kirchhoff.movies.data.responses.DiscoverTvsResponse
-import com.kirchhoff.movies.data.responses.ReviewsListResponse
+import com.kirchhoff.movies.data.ui.details.review.UIReviewsListResponse
 import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
+import com.kirchhoff.movies.mapper.mapper.IReviewListMapper
 import com.kirchhoff.movies.mapper.tv.ITvDetailsMapper
 import com.kirchhoff.movies.network.services.TvService
 import com.kirchhoff.movies.repository.BaseRepository
@@ -11,7 +12,8 @@ import com.kirchhoff.movies.repository.Result
 
 class TvRepository(
     private val tvService: TvService,
-    private val tvDetailsMapper: ITvDetailsMapper
+    private val tvDetailsMapper: ITvDetailsMapper,
+    private val reviewListMapper: IReviewListMapper
 ) : BaseRepository(), ITvRepository {
 
     override suspend fun fetchDetails(tvId: Int): Result<UITvDetails> =
@@ -23,9 +25,10 @@ class TvRepository(
         return apiCall { tvService.fetchSimilarTv(tvId, page) }
     }
 
-    override suspend fun fetchReviewsList(tvId: Int, page: Int): Result<ReviewsListResponse> {
-        return apiCall { tvService.fetchReviews(tvId, page) }
-    }
+    override suspend fun fetchReviewsList(tvId: Int, page: Int): Result<UIReviewsListResponse> =
+        reviewListMapper.createUIReviewList(apiCall {
+            tvService.fetchReviews(tvId, page)
+        })
 
     override suspend fun fetchTvCredits(tvId: Int): Result<UITvCredits> =
         tvDetailsMapper.createUITvCredits(apiCall {

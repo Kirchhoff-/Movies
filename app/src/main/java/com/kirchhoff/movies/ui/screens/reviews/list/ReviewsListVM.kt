@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.data.responses.ReviewsListResponse
+import com.kirchhoff.movies.data.ui.details.review.UIReviewsListResponse
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import com.kirchhoff.movies.repository.tv.ITvRepository
@@ -25,8 +25,8 @@ class ReviewsListVM(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
-    private val _data = MutableLiveData<ReviewsListResponse>()
-    val data: LiveData<ReviewsListResponse> = _data
+    private val _data = MutableLiveData<UIReviewsListResponse>()
+    val data: LiveData<UIReviewsListResponse> = _data
 
     fun fetchReviews(dataId: Int, reviewType: ReviewType, page: Int) {
         if (page == 1) {

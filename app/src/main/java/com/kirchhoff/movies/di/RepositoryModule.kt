@@ -11,8 +11,8 @@ import com.kirchhoff.movies.repository.tv.TvRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
-    single<IDiscoverRepository> { DiscoverRepository(discoverService = get()) }
+    single<IDiscoverRepository> { DiscoverRepository(discoverService = get(), discoverMapper = get()) }
     single<IPersonsRepository> { PersonsRepository(personService = get(), personDetailsMapper = get()) }
-    single<IMovieRepository> { MovieRepository(movieService = get(), movieDetailsMapper = get(), reviewListMapper = get()) }
+    single<IMovieRepository> { MovieRepository(movieService = get(), movieDetailsMapper = get(), reviewListMapper = get(), discoverMapper = get()) }
     single<ITvRepository> { TvRepository(tvService = get(), tvDetailsMapper = get(), reviewListMapper = get()) }
 }

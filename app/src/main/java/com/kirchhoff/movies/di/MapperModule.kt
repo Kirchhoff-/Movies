@@ -6,8 +6,10 @@ import com.kirchhoff.movies.mapper.mapper.IReviewListMapper
 import com.kirchhoff.movies.mapper.mapper.ReviewListMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.mapper.movie.MovieDetailsMapper
-import com.kirchhoff.movies.mapper.person.IPersonDetailsMapper
-import com.kirchhoff.movies.mapper.person.PersonDetailsMapper
+import com.kirchhoff.movies.mapper.person.details.IPersonDetailsMapper
+import com.kirchhoff.movies.mapper.person.details.PersonDetailsMapper
+import com.kirchhoff.movies.mapper.person.main.IPersonsMapper
+import com.kirchhoff.movies.mapper.person.main.PersonsMapper
 import com.kirchhoff.movies.mapper.tv.ITvDetailsMapper
 import com.kirchhoff.movies.mapper.tv.TvDetailsMapper
 import org.koin.dsl.module
@@ -18,4 +20,5 @@ val mapperModule = module {
     single<ITvDetailsMapper> { TvDetailsMapper() }
     single<IReviewListMapper> { ReviewListMapper() }
     single<IDiscoverMapper> { DiscoverMapper() }
+    single<IPersonsMapper> { PersonsMapper() }
 }

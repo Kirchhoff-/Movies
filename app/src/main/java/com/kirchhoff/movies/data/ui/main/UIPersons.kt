@@ -1,8 +1,9 @@
-package com.kirchhoff.movies.data.responses
+package com.kirchhoff.movies.data.ui.main
 
 import com.kirchhoff.movies.data.Person
+import com.kirchhoff.movies.data.responses.PaginatedResponse
 
-data class PersonsResponse(
+class UIPersons(
     override val page: Int,
     override val results: List<Person>,
     override val total_results: Int,

@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.network.services
 
 import com.kirchhoff.movies.data.network.main.NetworkDiscoverMovies
-import com.kirchhoff.movies.data.responses.DiscoverTvsResponse
+import com.kirchhoff.movies.data.network.main.NetworkDiscoverTvs
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,5 +11,5 @@ interface DiscoverService {
     suspend fun fetchDiscoverMovie(@Query("page") page: Int): Response<NetworkDiscoverMovies>
 
     @GET("/3/discover/tv?language=en&sort_by=popularity.desc")
-    suspend fun fetchDiscoverTv(@Query("page") page: Int): Response<DiscoverTvsResponse>
+    suspend fun fetchDiscoverTv(@Query("page") page: Int): Response<NetworkDiscoverTvs>
 }

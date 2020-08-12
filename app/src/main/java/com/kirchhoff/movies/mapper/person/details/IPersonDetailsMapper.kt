@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.mapper.person
+package com.kirchhoff.movies.mapper.person.details
 
 import com.kirchhoff.movies.data.network.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.data.network.details.person.NetworkPersonDetails

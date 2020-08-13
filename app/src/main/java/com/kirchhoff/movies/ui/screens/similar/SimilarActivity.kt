@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.Tv
+import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.databinding.ActivitySimilarBinding
 import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsFragment
@@ -32,7 +32,7 @@ class SimilarActivity : AppCompatActivity(R.layout.activity_similar) {
     }
 
     private fun similarMovie() {
-        val movie: Movie = intent.getParcelableExtra(MOVIE_ARG)!!
+        val movie: UIMovie = intent.getParcelableExtra(MOVIE_ARG)!!
 
         viewBinding.toolbar.title = getString(R.string.movies_like, movie.title)
         openSimilar(SimilarMoviesFragment.newInstance(movie.id))
@@ -53,7 +53,7 @@ class SimilarActivity : AppCompatActivity(R.layout.activity_similar) {
 
     companion object {
 
-        fun createSimilarMoviesIntent(context: Context, movie: Movie): Intent {
+        fun createSimilarMoviesIntent(context: Context, movie: UIMovie): Intent {
             val intent = Intent(context, SimilarActivity::class.java)
             intent.putExtra(SIMILAR_TYPE_ARG, SimilarType.MOVIE.ordinal)
             intent.putExtra(MOVIE_ARG, movie)

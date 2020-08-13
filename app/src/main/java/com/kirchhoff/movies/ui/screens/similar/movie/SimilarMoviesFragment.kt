@@ -1,16 +1,16 @@
 package com.kirchhoff.movies.ui.screens.similar.movie
 
 import android.os.Bundle
-import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.ui.main.UIDiscoverMovies
+import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class SimilarMoviesFragment : PaginatedScreenFragment<Movie, UIDiscoverMovies>(),
-    BaseRecyclerViewAdapter.OnItemClickListener<Movie> {
+class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, UIDiscoverMovies>(),
+    BaseRecyclerViewAdapter.OnItemClickListener<UIMovie> {
 
     override val vm by viewModel<SimilarMoviesVM>()
 
@@ -22,7 +22,7 @@ class SimilarMoviesFragment : PaginatedScreenFragment<Movie, UIDiscoverMovies>()
 
     override val dataId: Int by lazy { arguments!!.getInt(MOVIE_ID_ARG) }
 
-    override fun onItemClick(item: Movie) {
+    override fun onItemClick(item: UIMovie) {
         startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), item))
     }
 

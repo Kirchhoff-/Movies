@@ -7,10 +7,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
+import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.extensions.setTextOrGone
@@ -29,7 +29,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
-    private val movie: Movie by lazy { arguments!!.getParcelable<Movie>(MOVIE_ARG)!! }
+    private val movie: UIMovie by lazy { arguments!!.getParcelable<UIMovie>(MOVIE_ARG)!! }
 
     private val vm by viewModel<MovieDetailsVM>()
     private val viewBinding: FragmentMovieDetailsBinding by viewBinding()
@@ -43,7 +43,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
-            ivBackdrop.downloadPoster(movie.backdrop_path)
+            ivBackdrop.downloadPoster(movie.backdropPath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
 
@@ -56,7 +56,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
         with(viewBinding.content) {
             tvMovieTitle.text = movie.title
-            ivMoviePoster.downloadPoster(movie.poster_path)
+            ivMoviePoster.downloadPoster(movie.posterPath)
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { startActivity(ReviewsActivity.createReviewsIntent(requireContext(), movie)) }
             tvSimilarMovies.setOnClickListener { startActivity(SimilarActivity.createSimilarMoviesIntent(requireContext(), movie)) }
@@ -155,7 +155,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
 
     companion object {
-        fun newInstance(movie: Movie): MovieDetailsFragment {
+        fun newInstance(movie: UIMovie): MovieDetailsFragment {
             val fragment = MovieDetailsFragment()
             val arg = Bundle()
             arg.putParcelable(MOVIE_ARG, movie)

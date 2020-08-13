@@ -1,15 +1,15 @@
 package com.kirchhoff.movies.ui.screens.main.movies
 
-import com.kirchhoff.movies.data.Movie
 import com.kirchhoff.movies.data.ui.main.UIDiscoverMovies
+import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MoviesFragment : PaginatedScreenFragment<Movie, UIDiscoverMovies>(),
-    BaseRecyclerViewAdapter.OnItemClickListener<Movie> {
+class MoviesFragment : PaginatedScreenFragment<UIMovie, UIDiscoverMovies>(),
+    BaseRecyclerViewAdapter.OnItemClickListener<UIMovie> {
 
     override val vm by viewModel<MoviesVM>()
 
@@ -24,7 +24,7 @@ class MoviesFragment : PaginatedScreenFragment<Movie, UIDiscoverMovies>(),
         private const val MOVIES_THRESHOLD = SPAN_COUNT * 3
     }
 
-    override fun onItemClick(item: Movie) {
+    override fun onItemClick(item: UIMovie) {
         startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), item))
     }
 }

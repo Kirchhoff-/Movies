@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.Person
-import com.kirchhoff.movies.data.Tv
 import com.kirchhoff.movies.data.ui.main.UIMovie
+import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
@@ -61,7 +61,7 @@ class DetailsActivity : AppCompatActivity(R.layout.activity_with_fragment) {
             return intent
         }
 
-        fun createTvDetailsIntent(context: Context, tv: Tv): Intent {
+        fun createTvDetailsIntent(context: Context, tv: UITv): Intent {
             val intent = Intent(context, DetailsActivity::class.java)
             intent.putExtra(DETAILS_TYPE_ARG, DetailsType.TV.ordinal)
             intent.putExtra(TV_ARG, tv)

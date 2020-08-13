@@ -2,8 +2,10 @@ package com.kirchhoff.movies.mapper.discover
 
 import com.kirchhoff.movies.data.network.main.NetworkDiscoverMovies
 import com.kirchhoff.movies.data.network.main.NetworkDiscoverTvs
+import com.kirchhoff.movies.data.network.main.NetworkMovie
 import com.kirchhoff.movies.data.ui.main.UIDiscoverMovies
 import com.kirchhoff.movies.data.ui.main.UIDiscoverTvs
+import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.repository.Result
 
@@ -24,7 +26,7 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
     private fun createUIDiscoverMovies(response: NetworkDiscoverMovies) =
         UIDiscoverMovies(
             response.page,
-            response.results,
+            response.results.map { createUIMovie(it) },
             response.total_results,
             response.total_pages
         )
@@ -35,5 +37,13 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
             response.results,
             response.total_results,
             response.total_pages
+        )
+
+    private fun createUIMovie(movie: NetworkMovie) =
+        UIMovie(
+            movie.id,
+            movie.title,
+            movie.poster_path,
+            movie.backdrop_path
         )
 }

@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.Tv
 import com.kirchhoff.movies.data.ui.main.UIMovie
+import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.ActivityReviewBinding
 import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
 import com.kirchhoff.movies.utils.binding.viewBinding
@@ -38,7 +38,7 @@ class ReviewsActivity : AppCompatActivity(R.layout.activity_review) {
     }
 
     private fun tvReview() {
-        val tv: Tv = intent.getParcelableExtra(TV_ARG)!!
+        val tv: UITv = intent.getParcelableExtra(TV_ARG)!!
 
         viewBinding.toolbar.title = tv.name
         openReviews(ReviewsListFragment.newInstance(tv.id, ReviewType.TV))
@@ -59,7 +59,7 @@ class ReviewsActivity : AppCompatActivity(R.layout.activity_review) {
             return intent
         }
 
-        fun createTvIntent(context: Context, tv: Tv): Intent {
+        fun createTvIntent(context: Context, tv: UITv): Intent {
             val intent = Intent(context, ReviewsActivity::class.java)
             intent.putExtra(REVIEW_TYPE_ARG, ReviewType.TV.ordinal)
             intent.putExtra(TV_ARG, tv)

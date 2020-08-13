@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.Tv
 import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
+import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -17,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
 
-    private val tv: Tv by lazy { arguments!!.getParcelable<Tv>(TV_ARG)!! }
+    private val tv: UITv by lazy { arguments!!.getParcelable<UITv>(TV_ARG)!! }
 
     private val vm by viewModel<TvDetailsVM>()
     private val viewBinding: FragmentTvDetailsBinding by viewBinding()
@@ -31,13 +31,13 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
-            ivBackdrop.downloadPoster(tv.backdrop_path)
+            ivBackdrop.downloadPoster(tv.backdropPath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
 
         with(viewBinding.content) {
             tvTvTitle.text = tv.name
-            ivTvPoster.downloadPoster(tv.poster_path)
+            ivTvPoster.downloadPoster(tv.posterPath)
             bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
             tvSimilarTv.setOnClickListener { startActivity(SimilarActivity.createSimilarTvIntent(requireContext(), tv)) }
             tvReviews.setOnClickListener { startActivity(ReviewsActivity.createTvIntent(requireContext(), tv)) }
@@ -100,7 +100,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     }
 
     companion object {
-        fun newInstance(tv: Tv): TvDetailsFragment {
+        fun newInstance(tv: UITv): TvDetailsFragment {
             val fragment = TvDetailsFragment()
             val arg = Bundle()
             arg.putParcelable(TV_ARG, tv)

@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.data.ui.details.tv
 
-import com.kirchhoff.movies.data.GenresItem
 import com.kirchhoff.movies.data.responses.CreditsInfo
+import com.kirchhoff.movies.data.ui.core.UIGenre
 
 class UITvDetails(
     val numberOfSeasons: Int,
@@ -11,7 +11,7 @@ class UITvDetails(
     val firstAirDate: String,
     val voteCount: Int?,
     val voteAverage: Float?,
-    val genres: List<GenresItem>
+    val genres: List<UIGenre>
 )
 
 data class UITvCredits(

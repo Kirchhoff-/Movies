@@ -1,9 +1,11 @@
 package com.kirchhoff.movies.mapper.tv
 
+import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
 import com.kirchhoff.movies.data.network.details.tv.NetworkTvCastCredit
 import com.kirchhoff.movies.data.network.details.tv.NetworkTvCredits
 import com.kirchhoff.movies.data.network.details.tv.NetworkTvCrewCredit
 import com.kirchhoff.movies.data.network.details.tv.NetworkTvDetails
+import com.kirchhoff.movies.data.ui.core.UIGenre
 import com.kirchhoff.movies.data.ui.details.tv.UITvCastCredit
 import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvCrewCredit
@@ -34,7 +36,7 @@ class TvDetailsMapper : BaseMapper(), ITvDetailsMapper {
             tvDetails.first_air_date,
             tvDetails.vote_count,
             tvDetails.vote_average,
-            tvDetails.genres
+            tvDetails.genres.map { createUIGenre(it) }
         )
 
     private fun createUITvCredits(tvCredits: NetworkTvCredits) =
@@ -56,4 +58,7 @@ class TvDetailsMapper : BaseMapper(), ITvDetailsMapper {
             crewCredit.job,
             crewCredit.poster_path
         )
+
+    private fun createUIGenre(item: NetworkObjectWithName) =
+        UIGenre(item.name)
 }

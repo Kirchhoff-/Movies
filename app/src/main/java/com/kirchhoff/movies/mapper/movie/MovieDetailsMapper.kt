@@ -1,11 +1,14 @@
 package com.kirchhoff.movies.mapper.movie
 
+import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCastCredit
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCredits
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCrewCredit
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.data.network.details.movie.NetworkTrailer
 import com.kirchhoff.movies.data.network.details.movie.NetworkTrailersList
+import com.kirchhoff.movies.data.ui.core.UIGenre
+import com.kirchhoff.movies.data.ui.details.movie.UICountry
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCastCredit
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCrewCredit
@@ -36,14 +39,14 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
 
     private fun createUIMovieDetails(movieDetails: NetworkMovieDetails) =
         UIMovieDetails(
-            movieDetails.production_countries,
+            movieDetails.production_countries.map { createUICountry(it) },
             movieDetails.runtime,
             movieDetails.tagline,
             movieDetails.overview,
             movieDetails.release_date,
             movieDetails.vote_count,
             movieDetails.vote_average,
-            movieDetails.genres
+            movieDetails.genres.map { createUIGenre(it) }
         )
 
     private fun createUIMovieCredits(movieCredits: NetworkMovieCredits) =
@@ -71,4 +74,10 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
 
     private fun createUITrailer(trailer: NetworkTrailer) =
         UITrailer(trailer.site, trailer.key)
+
+    private fun createUICountry(item: NetworkObjectWithName) =
+        UICountry(item.name)
+
+    private fun createUIGenre(item: NetworkObjectWithName) =
+        UIGenre(item.name)
 }

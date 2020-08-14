@@ -1,17 +1,16 @@
 package com.kirchhoff.movies.data.network.details.movie
 
-import com.kirchhoff.movies.data.CountyItem
-import com.kirchhoff.movies.data.GenresItem
+import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
 
 class NetworkMovieDetails(
-    val production_countries: List<CountyItem>,
+    val production_countries: List<NetworkObjectWithName>,
     val runtime: Int?,
     val tagline: String?,
     val overview: String,
     val release_date: String?,
     val vote_count: Int?,
     val vote_average: Float?,
-    val genres: List<GenresItem>
+    val genres: List<NetworkObjectWithName>
 )
 
 data class NetworkMovieCastCredit(

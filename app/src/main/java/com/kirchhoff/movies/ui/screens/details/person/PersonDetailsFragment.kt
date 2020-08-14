@@ -5,9 +5,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.Person
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
+import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -16,7 +16,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
-    private val person: Person by lazy { arguments!!.getParcelable<Person>(PERSON_ARG)!! }
+    private val person: UIPerson by lazy { arguments!!.getParcelable<UIPerson>(PERSON_ARG)!! }
 
     private val vm by viewModel<PersonDetailsVM>()
     private val viewBinding: FragmentPersonDetailsBinding by viewBinding()
@@ -31,7 +31,7 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
         with(viewBinding) {
             content.tvPersonName.text = person.name
-            ivBackdrop.downloadPoster(person.profile_path)
+            ivBackdrop.downloadPoster(person.profilePath)
             content.bRetry.setOnClickListener { vm.loadPersonDetails(person.id) }
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         }
@@ -94,7 +94,7 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
     }
 
     companion object {
-        fun newInstance(person: Person): PersonDetailsFragment {
+        fun newInstance(person: UIPerson): PersonDetailsFragment {
             val fragment = PersonDetailsFragment()
             val arg = Bundle()
             arg.putParcelable(PERSON_ARG, person)

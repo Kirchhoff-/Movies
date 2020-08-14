@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.ui.screens.main.persons
 
-import com.kirchhoff.movies.data.Person
+import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UIPersons
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
@@ -8,8 +8,8 @@ import com.kirchhoff.movies.ui.screens.main.persons.adapter.PersonsListAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class PersonsFragment : PaginatedScreenFragment<Person, UIPersons>(),
-    BaseRecyclerViewAdapter.OnItemClickListener<Person> {
+class PersonsFragment : PaginatedScreenFragment<UIPerson, UIPersons>(),
+    BaseRecyclerViewAdapter.OnItemClickListener<UIPerson> {
 
     override val vm by viewModel<PersonsVM>()
 
@@ -24,7 +24,7 @@ class PersonsFragment : PaginatedScreenFragment<Person, UIPersons>(),
         private const val PERSONS_THRESHOLD = SPAN_COUNT * 2
     }
 
-    override fun onItemClick(item: Person) {
+    override fun onItemClick(item: UIPerson) {
         startActivity(DetailsActivity.createPersonDetailsIntent(requireContext(), item))
     }
 }

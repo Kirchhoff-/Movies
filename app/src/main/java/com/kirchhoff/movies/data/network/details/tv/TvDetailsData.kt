@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.data.network.details.tv
 
-import com.kirchhoff.movies.data.GenresItem
+import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
 
 class NetworkTvDetails(
     val number_of_seasons: Int,
@@ -10,7 +10,7 @@ class NetworkTvDetails(
     val first_air_date: String,
     val vote_count: Int?,
     val vote_average: Float?,
-    val genres: List<GenresItem>
+    val genres: List<NetworkObjectWithName>
 )
 
 data class NetworkTvCredits(

@@ -18,7 +18,6 @@ class PersonsMapper : BaseMapper(), IPersonsMapper {
         UIPersons(
             response.page,
             response.results.map { createUIPerson(it) },
-            response.total_results,
             response.total_pages
         )
 

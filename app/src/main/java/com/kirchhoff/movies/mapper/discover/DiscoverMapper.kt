@@ -29,7 +29,6 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
         UIDiscoverMovies(
             response.page,
             response.results.map { createUIMovie(it) },
-            response.total_results,
             response.total_pages
         )
 
@@ -37,7 +36,6 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
         UIDiscoverTvs(
             response.page,
             response.results.map { createUITv(it) },
-            response.total_results,
             response.total_pages
         )
 

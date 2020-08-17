@@ -1,12 +1,12 @@
 package com.kirchhoff.movies.ui.screens.core.credits.adapter
 
 import android.view.ViewGroup
-import com.kirchhoff.movies.data.responses.CreditsInfo
+import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 
-class CreditsAdapter : BaseRecyclerViewAdapter<BaseVH<CreditsInfo>, CreditsInfo>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseVH<CreditsInfo> =
+class CreditsAdapter : BaseRecyclerViewAdapter<BaseVH<CreditsView.CreditsInfo>, CreditsView.CreditsInfo>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseVH<CreditsView.CreditsInfo> =
         CreditVH(
             parent
         )

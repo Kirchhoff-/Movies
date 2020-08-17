@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.responses.CreditsInfo
 import com.kirchhoff.movies.ui.screens.core.credits.adapter.CreditsAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.TopBottomMarginItemDecoration
@@ -67,5 +66,11 @@ class CreditsView @JvmOverloads constructor(
             )
             isNestedScrollingEnabled = false
         }
+    }
+
+    interface CreditsInfo {
+        fun title(): String?
+        fun description(): String?
+        fun imagePath(): String?
     }
 }

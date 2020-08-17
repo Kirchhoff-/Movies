@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.data.ui.details.tv
 
-import com.kirchhoff.movies.data.responses.CreditsInfo
 import com.kirchhoff.movies.data.ui.core.UIGenre
+import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 
 class UITvDetails(
     val numberOfSeasons: Int,
@@ -23,7 +23,7 @@ data class UITvCastCredit(
     val name: String,
     val character: String,
     val profilePath: String?
-) : CreditsInfo {
+) : CreditsView.CreditsInfo {
     override fun title() = name
     override fun description() = character
     override fun imagePath() = profilePath
@@ -33,7 +33,7 @@ data class UITvCrewCredit(
     val name: String?,
     val job: String,
     val posterPath: String?
-) : CreditsInfo {
+) : CreditsView.CreditsInfo {
     override fun title() = name
     override fun description() = job
     override fun imagePath() = posterPath

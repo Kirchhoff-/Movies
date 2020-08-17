@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.data.ui.details.movie
 
-import com.kirchhoff.movies.data.responses.CreditsInfo
 import com.kirchhoff.movies.data.ui.core.UIGenre
+import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 
 class UIMovieDetails(
     val productionCountries: List<UICountry>,
@@ -18,7 +18,7 @@ data class UIMovieCastCredit(
     val name: String,
     val profilePath: String?,
     val character: String?
-) : CreditsInfo {
+) : CreditsView.CreditsInfo {
     override fun title() = name
     override fun description() = character
     override fun imagePath() = profilePath
@@ -28,7 +28,7 @@ data class UIMovieCrewCredit(
     val name: String,
     val profilePath: String?,
     val job: String?
-) : CreditsInfo {
+) : CreditsView.CreditsInfo {
     override fun title() = name
     override fun description() = job
     override fun imagePath() = profilePath

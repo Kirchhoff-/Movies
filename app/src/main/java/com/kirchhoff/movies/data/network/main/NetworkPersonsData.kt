@@ -1,13 +1,10 @@
 package com.kirchhoff.movies.data.network.main
 
-import com.kirchhoff.movies.data.responses.PaginatedResponse
-
 data class NetworkPersons(
-    override val page: Int,
-    override val results: List<NetworkPerson>,
-    override val total_results: Int,
-    override val total_pages: Int
-) : PaginatedResponse<NetworkPerson>
+    val page: Int,
+    val results: List<NetworkPerson>,
+    val total_pages: Int
+)
 
 data class NetworkPerson(
     val id: Int,

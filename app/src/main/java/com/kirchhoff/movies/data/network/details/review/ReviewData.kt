@@ -1,13 +1,10 @@
 package com.kirchhoff.movies.data.network.details.review
 
-import com.kirchhoff.movies.data.responses.PaginatedResponse
-
 class NetworkReviewsListResponse(
-    override val page: Int,
-    override val results: List<NetworkReview>,
-    override val total_pages: Int,
-    override val total_results: Int
-) : PaginatedResponse<NetworkReview>
+    val page: Int,
+    val results: List<NetworkReview>,
+    val total_pages: Int
+)
 
 data class NetworkReview(
     val id: String,

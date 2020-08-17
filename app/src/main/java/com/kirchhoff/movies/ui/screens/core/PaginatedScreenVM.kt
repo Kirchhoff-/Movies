@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.data.responses.PaginatedResponse
+import com.kirchhoff.movies.data.ui.core.Paginated
 import com.kirchhoff.movies.repository.Result
 import kotlinx.coroutines.launch
 
-abstract class PaginatedScreenVM<T : PaginatedResponse<*>> : ViewModel() {
+abstract class PaginatedScreenVM<T : Paginated<*>> : ViewModel() {
 
     protected abstract suspend fun loadData(page: Int, dataId: Int = 0): Result<T>
 

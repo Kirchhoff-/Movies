@@ -1,10 +1,11 @@
 package com.kirchhoff.movies.repository.movie
 
+import com.kirchhoff.movies.data.ui.core.PaginatedData
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.data.ui.details.review.UIReviewsListResponse
-import com.kirchhoff.movies.data.ui.main.UIDiscoverMovies
+import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
 import com.kirchhoff.movies.mapper.mapper.IReviewListMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
@@ -32,7 +33,7 @@ class MovieRepository(
     override suspend fun fetchSimilarMoviesList(
         movieId: Int,
         page: Int
-    ): Result<UIDiscoverMovies> =
+    ): Result<PaginatedData<UIMovie>> =
         discoverMapper.createUIDiscoverMovieList(apiCall {
             movieService.fetchSimilarMovies(movieId, page)
         })

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.ui.core.Paginated
+import com.kirchhoff.movies.data.ui.core.PaginatedData
 import com.kirchhoff.movies.databinding.FragmentMainScreenBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
@@ -16,7 +16,7 @@ import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.utils.binding.viewBinding
 
-abstract class PaginatedScreenFragment<Data, T : Paginated<Data>> : BaseFragment(R.layout.fragment_main_screen) {
+abstract class PaginatedScreenFragment<Data, T : PaginatedData<Data>> : BaseFragment(R.layout.fragment_main_screen) {
 
     abstract val threshold: Int
     abstract val spanCount: Int

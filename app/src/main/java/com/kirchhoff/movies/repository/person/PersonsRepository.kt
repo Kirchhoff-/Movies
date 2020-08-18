@@ -1,8 +1,9 @@
 package com.kirchhoff.movies.repository.person
 
+import com.kirchhoff.movies.data.ui.core.PaginatedData
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
-import com.kirchhoff.movies.data.ui.main.UIPersons
+import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.mapper.person.details.IPersonDetailsMapper
 import com.kirchhoff.movies.mapper.person.main.IPersonsMapper
 import com.kirchhoff.movies.network.services.PersonService
@@ -15,7 +16,7 @@ class PersonsRepository(
     private val personDetailsMapper: IPersonDetailsMapper
 ) : BaseRepository(), IPersonsRepository {
 
-    override suspend fun fetchPopularPersons(page: Int): Result<UIPersons> =
+    override suspend fun fetchPopularPersons(page: Int): Result<PaginatedData<UIPerson>> =
         personMapper.createUIPersons(apiCall {
             personService.fetchPopularPerson(page)
         })

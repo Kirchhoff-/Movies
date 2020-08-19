@@ -23,8 +23,6 @@ abstract class PaginatedScreenFragment<Data, T : PaginatedData<Data>> : BaseFrag
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
     abstract val vm: PaginatedScreenVM<T>
 
-    protected open val dataId: Int = 0
-
     private val viewBinding: FragmentMainScreenBinding by viewBinding()
     private lateinit var paginator: Paginator
 
@@ -60,7 +58,7 @@ abstract class PaginatedScreenFragment<Data, T : PaginatedData<Data>> : BaseFrag
     }
 
     private fun loadData(page: Int) {
-        vm.fetchData(page, dataId)
+        vm.fetchData(page)
         paginator.isLoading = true
     }
 

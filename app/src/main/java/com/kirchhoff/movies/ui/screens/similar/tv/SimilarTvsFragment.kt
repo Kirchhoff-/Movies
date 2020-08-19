@@ -8,19 +8,18 @@ import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SimilarTvsFragment : PaginatedScreenFragment<UITv, PaginatedData<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
-    override val vm by viewModel<SimilarTvsVM>()
+    override val vm: SimilarTvsVM by viewModel { parametersOf(arguments!!.getInt(TV_ID_ARG)) }
 
     override val listAdapter = TvsListAdapter(this)
 
     override val threshold = TVS_THRESHOLD
 
     override val spanCount = SPAN_COUNT
-
-    override val dataId: Int by lazy { arguments!!.getInt(TV_ID_ARG) }
 
     override fun onItemClick(item: UITv) {
         startActivity(DetailsActivity.createTvDetailsIntent(requireContext(), item))

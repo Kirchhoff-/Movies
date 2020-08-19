@@ -7,5 +7,5 @@ import com.kirchhoff.movies.ui.screens.core.PaginatedScreenVM
 
 class MoviesVM(private val discoverRepository: IDiscoverRepository) :
     PaginatedScreenVM<PaginatedData<UIMovie>>() {
-    override suspend fun loadData(page: Int, dataId: Int) = discoverRepository.fetchMovies(page)
+    override suspend fun loadData(page: Int) = discoverRepository.fetchMovies(page)
 }

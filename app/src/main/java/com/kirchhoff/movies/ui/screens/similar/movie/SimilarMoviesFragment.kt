@@ -8,19 +8,18 @@ import com.kirchhoff.movies.ui.screens.core.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, PaginatedData<UIMovie>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UIMovie> {
 
-    override val vm by viewModel<SimilarMoviesVM>()
+    override val vm: SimilarMoviesVM by viewModel { parametersOf(arguments!!.getInt(MOVIE_ID_ARG)) }
 
     override val listAdapter = MoviesListAdapter(this)
 
     override val threshold = MOVIES_THRESHOLD
 
     override val spanCount = SPAN_COUNT
-
-    override val dataId: Int by lazy { arguments!!.getInt(MOVIE_ID_ARG) }
 
     override fun onItemClick(item: UIMovie) {
         startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), item))

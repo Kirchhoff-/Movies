@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.ui.screens.reviews.list
 
-import com.kirchhoff.movies.data.ui.core.PaginatedData
+import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import com.kirchhoff.movies.repository.tv.ITvRepository
@@ -12,7 +12,7 @@ class ReviewsListVM(
     private val reviewType: ReviewType,
     private val movieRepository: IMovieRepository,
     private val tvRepository: ITvRepository
-) : PaginatedScreenVM<PaginatedData<UIReview>>() {
+) : PaginatedScreenVM<UIPaginated<UIReview>>() {
 
     override suspend fun loadData(page: Int) = when (reviewType) {
         ReviewType.MOVIE -> movieRepository.fetchReviewsList(dataId, page)

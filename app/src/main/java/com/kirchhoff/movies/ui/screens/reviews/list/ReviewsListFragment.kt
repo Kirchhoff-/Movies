@@ -2,7 +2,7 @@ package com.kirchhoff.movies.ui.screens.reviews.list
 
 import android.os.Bundle
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.ui.core.PaginatedData
+import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.reviews.ReviewType
@@ -12,7 +12,7 @@ import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class ReviewsListFragment : PaginatedScreenFragment<UIReview, PaginatedData<UIReview>>(),
+class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIReview>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UIReview> {
 
     override val vm: ReviewsListVM by viewModel {

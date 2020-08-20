@@ -7,7 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.ui.core.PaginatedData
-import com.kirchhoff.movies.databinding.FragmentMainScreenBinding
+import com.kirchhoff.movies.databinding.FragmentPaginatedBinding
 import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
@@ -16,14 +16,14 @@ import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.utils.binding.viewBinding
 
-abstract class PaginatedScreenFragment<Data, T : PaginatedData<Data>> : BaseFragment(R.layout.fragment_main_screen) {
+abstract class PaginatedScreenFragment<Data, T : PaginatedData<Data>> : BaseFragment(R.layout.fragment_paginated) {
 
     abstract val threshold: Int
     abstract val spanCount: Int
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
     abstract val vm: PaginatedScreenVM<T>
 
-    private val viewBinding: FragmentMainScreenBinding by viewBinding()
+    private val viewBinding: FragmentPaginatedBinding by viewBinding()
     private lateinit var paginator: Paginator
 
     override fun onCreate(savedInstanceState: Bundle?) {

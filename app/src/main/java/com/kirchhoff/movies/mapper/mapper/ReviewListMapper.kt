@@ -2,21 +2,21 @@ package com.kirchhoff.movies.mapper.mapper
 
 import com.kirchhoff.movies.data.network.details.review.NetworkReview
 import com.kirchhoff.movies.data.network.details.review.NetworkReviewsListResponse
+import com.kirchhoff.movies.data.ui.core.PaginatedData
 import com.kirchhoff.movies.data.ui.details.review.UIReview
-import com.kirchhoff.movies.data.ui.details.review.UIReviewsListResponse
 import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.repository.Result
 
 class ReviewListMapper : BaseMapper(), IReviewListMapper {
 
-    override fun createUIReviewList(reviewsListResponse: Result<NetworkReviewsListResponse>): Result<UIReviewsListResponse> =
+    override fun createUIReviewList(reviewsListResponse: Result<NetworkReviewsListResponse>): Result<PaginatedData<UIReview>> =
         when (reviewsListResponse) {
             is Result.Success -> Result.Success(createUIReviewResponse(reviewsListResponse.data))
             else -> mapErrorOrException(reviewsListResponse)
         }
 
     private fun createUIReviewResponse(response: NetworkReviewsListResponse) =
-        UIReviewsListResponse(
+        PaginatedData(
             response.page,
             response.results.map { createUIReview(it) },
             response.total_pages

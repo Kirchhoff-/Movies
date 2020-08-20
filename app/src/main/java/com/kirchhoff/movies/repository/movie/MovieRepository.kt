@@ -4,7 +4,7 @@ import com.kirchhoff.movies.data.ui.core.PaginatedData
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
-import com.kirchhoff.movies.data.ui.details.review.UIReviewsListResponse
+import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
 import com.kirchhoff.movies.mapper.mapper.IReviewListMapper
@@ -25,7 +25,7 @@ class MovieRepository(
             movieService.fetchDetails(movieId)
         })
 
-    override suspend fun fetchReviewsList(movieId: Int, page: Int): Result<UIReviewsListResponse> =
+    override suspend fun fetchReviewsList(movieId: Int, page: Int): Result<PaginatedData<UIReview>> =
         reviewListMapper.createUIReviewList(apiCall {
             movieService.fetchReviews(movieId, page)
         })

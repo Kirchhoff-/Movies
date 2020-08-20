@@ -1,8 +1,9 @@
 package com.kirchhoff.movies.network.services
 
+import com.kirchhoff.movies.data.network.core.NetworkPaginated
 import com.kirchhoff.movies.data.network.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.data.network.details.person.NetworkPersonDetails
-import com.kirchhoff.movies.data.network.main.NetworkPersons
+import com.kirchhoff.movies.data.network.main.NetworkPerson
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,7 +11,7 @@ import retrofit2.http.Query
 
 interface PersonService {
     @GET("/3/person/popular?language=en")
-    suspend fun fetchPopularPerson(@Query("page") page: Int): Response<NetworkPersons>
+    suspend fun fetchPopularPerson(@Query("page") page: Int): Response<NetworkPaginated<NetworkPerson>>
 
     @GET("/3/person/{person_id}")
     suspend fun fetchPersonDetail(@Path("person_id") personId: Int): Response<NetworkPersonDetails>

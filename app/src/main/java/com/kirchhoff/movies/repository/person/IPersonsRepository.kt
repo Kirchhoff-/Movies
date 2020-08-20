@@ -1,13 +1,13 @@
 package com.kirchhoff.movies.repository.person
 
-import com.kirchhoff.movies.data.ui.core.PaginatedData
+import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.repository.Result
 
 interface IPersonsRepository {
-    suspend fun fetchPopularPersons(page: Int): Result<PaginatedData<UIPerson>>
+    suspend fun fetchPopularPersons(page: Int): Result<UIPaginated<UIPerson>>
     suspend fun fetchPersonDetail(personId: Int): Result<UIPersonDetails>
     suspend fun fetchPersonCredits(personId: Int): Result<UIPersonCredits>
 }

@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.ui.screens.similar.tv
 
 import android.os.Bundle
-import com.kirchhoff.movies.data.ui.core.PaginatedData
+import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter
@@ -10,7 +10,7 @@ import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class SimilarTvsFragment : PaginatedScreenFragment<UITv, PaginatedData<UITv>>(),
+class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
     override val vm: SimilarTvsVM by viewModel { parametersOf(arguments!!.getInt(TV_ID_ARG)) }

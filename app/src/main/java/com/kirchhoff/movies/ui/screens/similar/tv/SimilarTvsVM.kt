@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.ui.screens.similar.tv
 
-import com.kirchhoff.movies.data.ui.core.PaginatedData
+import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.repository.tv.ITvRepository
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenVM
@@ -8,6 +8,6 @@ import com.kirchhoff.movies.ui.screens.core.PaginatedScreenVM
 class SimilarTvsVM(
     private val tvId: Int,
     private val tvRepository: ITvRepository
-) : PaginatedScreenVM<PaginatedData<UITv>>() {
+) : PaginatedScreenVM<UIPaginated<UITv>>() {
     override suspend fun loadData(page: Int) = tvRepository.fetchSimilarTvs(tvId, page)
 }

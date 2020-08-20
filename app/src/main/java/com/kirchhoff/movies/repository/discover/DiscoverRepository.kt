@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.repository.discover
 
-import com.kirchhoff.movies.data.ui.core.PaginatedData
+import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
@@ -13,12 +13,12 @@ class DiscoverRepository(
     private val discoverMapper: IDiscoverMapper
 ) : BaseRepository(), IDiscoverRepository {
 
-    override suspend fun fetchMovies(page: Int): Result<PaginatedData<UIMovie>> =
+    override suspend fun fetchMovies(page: Int): Result<UIPaginated<UIMovie>> =
         discoverMapper.createUIDiscoverMovieList(apiCall {
             discoverService.fetchDiscoverMovie(page)
         })
 
-    override suspend fun fetchTvs(page: Int): Result<PaginatedData<UITv>> =
+    override suspend fun fetchTvs(page: Int): Result<UIPaginated<UITv>> =
         discoverMapper.createUIDiscoverTvList(apiCall {
             discoverService.fetchDiscoverTv(page)
         })

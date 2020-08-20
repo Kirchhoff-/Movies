@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.repository.tv
 
 import com.kirchhoff.movies.data.ui.core.PaginatedData
-import com.kirchhoff.movies.data.ui.details.review.UIReviewsListResponse
+import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.data.ui.main.UITv
@@ -29,7 +29,7 @@ class TvRepository(
             tvService.fetchSimilarTv(tvId, page)
         })
 
-    override suspend fun fetchReviewsList(tvId: Int, page: Int): Result<UIReviewsListResponse> =
+    override suspend fun fetchReviewsList(tvId: Int, page: Int): Result<PaginatedData<UIReview>> =
         reviewListMapper.createUIReviewList(apiCall {
             tvService.fetchReviews(tvId, page)
         })

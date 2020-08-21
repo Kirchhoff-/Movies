@@ -4,7 +4,7 @@ import com.kirchhoff.movies.data.network.core.NetworkPaginated
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCredits
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.data.network.details.movie.NetworkTrailersList
-import com.kirchhoff.movies.data.network.details.review.NetworkReviewsListResponse
+import com.kirchhoff.movies.data.network.details.review.NetworkReview
 import com.kirchhoff.movies.data.network.main.NetworkMovie
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,7 +16,7 @@ interface MovieService {
     suspend fun fetchDetails(@Path("movie_id") id: Int): Response<NetworkMovieDetails>
 
     @GET("/3/movie/{movie_id}/reviews")
-    suspend fun fetchReviews(@Path("movie_id") id: Int, @Query("page") page: Int): Response<NetworkReviewsListResponse>
+    suspend fun fetchReviews(@Path("movie_id") id: Int, @Query("page") page: Int): Response<NetworkPaginated<NetworkReview>>
 
     @GET("/3/movie/{movie_id}/similar")
     suspend fun fetchSimilarMovies(@Path("movie_id") id: Int, @Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>

@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.network.services
 
 import com.kirchhoff.movies.data.network.core.NetworkPaginated
-import com.kirchhoff.movies.data.network.details.review.NetworkReviewsListResponse
+import com.kirchhoff.movies.data.network.details.review.NetworkReview
 import com.kirchhoff.movies.data.network.details.tv.NetworkTvCredits
 import com.kirchhoff.movies.data.network.details.tv.NetworkTvDetails
 import com.kirchhoff.movies.data.network.main.NetworkTv
@@ -18,7 +18,7 @@ interface TvService {
     suspend fun fetchSimilarTv(@Path("tv_id") id: Int, @Query("page") page: Int): Response<NetworkPaginated<NetworkTv>>
 
     @GET("/3/tv/{tv_id}/reviews")
-    suspend fun fetchReviews(@Path("tv_id") id: Int, @Query("page") page: Int): Response<NetworkReviewsListResponse>
+    suspend fun fetchReviews(@Path("tv_id") id: Int, @Query("page") page: Int): Response<NetworkPaginated<NetworkReview>>
 
     @GET("/3/tv/{tv_id}/credits")
     suspend fun fetchTvCredits(@Path("tv_id") id: Int): Response<NetworkTvCredits>

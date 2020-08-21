@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.mapper.mapper
 
+import com.kirchhoff.movies.data.network.core.NetworkPaginated
 import com.kirchhoff.movies.data.network.details.review.NetworkReview
-import com.kirchhoff.movies.data.network.details.review.NetworkReviewsListResponse
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.mapper.BaseMapper
@@ -9,13 +9,13 @@ import com.kirchhoff.movies.repository.Result
 
 class ReviewListMapper : BaseMapper(), IReviewListMapper {
 
-    override fun createUIReviewList(reviewsListResponse: Result<NetworkReviewsListResponse>): Result<UIPaginated<UIReview>> =
+    override fun createUIReviewList(reviewsListResponse: Result<NetworkPaginated<NetworkReview>>): Result<UIPaginated<UIReview>> =
         when (reviewsListResponse) {
             is Result.Success -> Result.Success(createUIReviewResponse(reviewsListResponse.data))
             else -> mapErrorOrException(reviewsListResponse)
         }
 
-    private fun createUIReviewResponse(response: NetworkReviewsListResponse) =
+    private fun createUIReviewResponse(response: NetworkPaginated<NetworkReview>) =
         UIPaginated(
             response.page,
             response.results.map { createUIReview(it) },

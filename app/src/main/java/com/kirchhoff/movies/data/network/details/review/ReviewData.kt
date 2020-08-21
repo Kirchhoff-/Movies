@@ -7,7 +7,6 @@ class NetworkReviewsListResponse(
 )
 
 data class NetworkReview(
-    val id: String,
     val author: String,
     val content: String
 )

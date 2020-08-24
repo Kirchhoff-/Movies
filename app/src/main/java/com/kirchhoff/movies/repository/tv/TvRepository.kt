@@ -6,7 +6,7 @@ import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
-import com.kirchhoff.movies.mapper.mapper.IReviewListMapper
+import com.kirchhoff.movies.mapper.review.IReviewListMapper
 import com.kirchhoff.movies.mapper.tv.ITvDetailsMapper
 import com.kirchhoff.movies.network.services.TvService
 import com.kirchhoff.movies.repository.BaseRepository

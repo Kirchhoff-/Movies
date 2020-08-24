@@ -7,8 +7,8 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
-import com.kirchhoff.movies.mapper.mapper.IReviewListMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
+import com.kirchhoff.movies.mapper.review.IReviewListMapper
 import com.kirchhoff.movies.network.services.MovieService
 import com.kirchhoff.movies.repository.BaseRepository
 import com.kirchhoff.movies.repository.Result

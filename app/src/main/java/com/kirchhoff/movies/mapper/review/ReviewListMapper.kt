@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.mapper.mapper
+package com.kirchhoff.movies.mapper.review
 
 import com.kirchhoff.movies.data.network.core.NetworkPaginated
 import com.kirchhoff.movies.data.network.details.review.NetworkReview

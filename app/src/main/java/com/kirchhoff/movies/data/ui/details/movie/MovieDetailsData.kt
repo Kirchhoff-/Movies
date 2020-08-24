@@ -15,6 +15,7 @@ class UIMovieDetails(
 )
 
 data class UIMovieCastCredit(
+    val id: Int,
     val name: String,
     val profilePath: String?,
     val character: String?
@@ -25,6 +26,7 @@ data class UIMovieCastCredit(
 }
 
 data class UIMovieCrewCredit(
+    val id: Int,
     val name: String,
     val profilePath: String?,
     val job: String?

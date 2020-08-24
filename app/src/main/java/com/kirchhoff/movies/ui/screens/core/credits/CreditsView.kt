@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.ui.screens.core.credits.adapter.CreditsAdapter
+import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.TopBottomMarginItemDecoration
 
@@ -19,13 +20,22 @@ class CreditsView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    private val castAdapter = CreditsAdapter()
-    private val crewAdapter = CreditsAdapter()
+    interface CreditsInfo {
+        fun title(): String?
+        fun description(): String?
+        fun imagePath(): String?
+    }
+
+    private val castAdapter = CreditsAdapter(CastCreditsClickListener())
+    private val crewAdapter = CreditsAdapter(CrewCreditsClickListener())
 
     private val tvCastCredits: TextView
     private val tvCrewCredits: TextView
     private val rvCastCredits: RecyclerView
     private val rvCrewCredits: RecyclerView
+
+    private var castClickListener: ((CreditsInfo) -> Unit)? = null
+    private var crewClickListener: ((CreditsInfo) -> Unit)? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_credits, this)
@@ -53,6 +63,14 @@ class CreditsView @JvmOverloads constructor(
         }
     }
 
+    fun setCastClickListener(castClickListener: (CreditsInfo) -> Unit) {
+        this.castClickListener = castClickListener
+    }
+
+    fun setCrewClickListener(crewClickListener: (CreditsInfo) -> Unit) {
+        this.crewClickListener = crewClickListener
+    }
+
     private fun configRecyclerView(recyclerView: RecyclerView, creditsAdapter: RecyclerView.Adapter<*>) {
         recyclerView.apply {
             adapter = creditsAdapter
@@ -68,9 +86,15 @@ class CreditsView @JvmOverloads constructor(
         }
     }
 
-    interface CreditsInfo {
-        fun title(): String?
-        fun description(): String?
-        fun imagePath(): String?
+    private inner class CastCreditsClickListener : BaseRecyclerViewAdapter.OnItemClickListener<CreditsInfo> {
+        override fun onItemClick(item: CreditsInfo) {
+            castClickListener?.invoke(item)
+        }
+    }
+
+    private inner class CrewCreditsClickListener : BaseRecyclerViewAdapter.OnItemClickListener<CreditsInfo> {
+        override fun onItemClick(item: CreditsInfo) {
+            crewClickListener?.invoke(item)
+        }
     }
 }

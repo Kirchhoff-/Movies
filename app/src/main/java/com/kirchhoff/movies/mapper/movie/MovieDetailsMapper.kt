@@ -57,6 +57,7 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
 
     private fun createUIMovieCastCredit(castCredit: NetworkMovieCastCredit) =
         UIMovieCastCredit(
+            castCredit.id,
             castCredit.name,
             castCredit.profile_path,
             castCredit.character
@@ -64,6 +65,7 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
 
     private fun createUIMovieCrewCredit(crewCredit: NetworkMovieCrewCredit) =
         UIMovieCrewCredit(
+            crewCredit.id,
             crewCredit.name,
             crewCredit.profile_path,
             crewCredit.job

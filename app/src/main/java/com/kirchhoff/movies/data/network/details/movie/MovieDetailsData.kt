@@ -14,12 +14,14 @@ class NetworkMovieDetails(
 )
 
 data class NetworkMovieCastCredit(
+    val id: Int,
     val name: String,
     val profile_path: String?,
     val character: String?
 )
 
 data class NetworkMovieCrewCredit(
+    val id: Int,
     val name: String,
     val profile_path: String?,
     val job: String?

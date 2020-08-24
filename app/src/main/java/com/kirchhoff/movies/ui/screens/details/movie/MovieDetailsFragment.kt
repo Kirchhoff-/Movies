@@ -7,14 +7,19 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.data.ui.details.movie.UIMovieCastCredit
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
+import com.kirchhoff.movies.data.ui.details.movie.UIMovieCrewCredit
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.main.UIMovie
+import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.extensions.setTextOrGone
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
+import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
@@ -60,6 +65,8 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { startActivity(ReviewsActivity.createReviewsIntent(requireContext(), movie)) }
             tvSimilarMovies.setOnClickListener { startActivity(SimilarActivity.createSimilarMoviesIntent(requireContext(), movie)) }
+            vCredits.setCastClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
+            vCredits.setCrewClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
         }
 
         with(vm) {
@@ -153,6 +160,16 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
             hourFormat.format(minuteFormat.parse(runtime.toString()) as Date)
         }
+
+    private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {
+        val person: UIPerson = when (creditsInfo) {
+            is UIMovieCastCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
+            is UIMovieCrewCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
+            else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
+        }
+
+        startActivity(DetailsActivity.createPersonDetailsIntent(requireContext(), person))
+    }
 
     companion object {
         fun newInstance(movie: UIMovie): MovieDetailsFragment {

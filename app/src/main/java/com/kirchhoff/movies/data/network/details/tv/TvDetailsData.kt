@@ -19,13 +19,15 @@ data class NetworkTvCredits(
 )
 
 data class NetworkTvCastCredit(
+    val id: Int,
     val name: String,
     val profile_path: String?,
     val character: String
 )
 
 data class NetworkTvCrewCredit(
-    val name: String?,
+    val id: Int,
+    val name: String,
     val job: String,
-    val poster_path: String?
+    val profile_path: String?
 )

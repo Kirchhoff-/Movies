@@ -5,9 +5,10 @@ import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 
-class CreditsAdapter : BaseRecyclerViewAdapter<BaseVH<CreditsView.CreditsInfo>, CreditsView.CreditsInfo>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseVH<CreditsView.CreditsInfo> =
-        CreditVH(
-            parent
-        )
+class CreditsAdapter(itemClickListener: OnItemClickListener<CreditsView.CreditsInfo>) :
+    BaseRecyclerViewAdapter<BaseVH<CreditsView.CreditsInfo>, CreditsView.CreditsInfo>(itemClickListener = itemClickListener) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): BaseVH<CreditsView.CreditsInfo> = CreditVH(parent)
 }

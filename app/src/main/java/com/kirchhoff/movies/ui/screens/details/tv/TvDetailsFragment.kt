@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.data.ui.details.tv.UITvCastCredit
 import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
+import com.kirchhoff.movies.data.ui.details.tv.UITvCrewCredit
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
+import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
+import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
 import com.kirchhoff.movies.utils.binding.viewBinding
@@ -41,6 +46,8 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
             tvSimilarTv.setOnClickListener { startActivity(SimilarActivity.createSimilarTvIntent(requireContext(), tv)) }
             tvReviews.setOnClickListener { startActivity(ReviewsActivity.createTvIntent(requireContext(), tv)) }
+            vCredits.setCastClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
+            vCredits.setCrewClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
         }
 
         with(vm) {
@@ -97,6 +104,16 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             content.groupException.isVisible = true
             content.tvException.text = exception
         }
+    }
+
+    private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {
+        val person: UIPerson = when (creditsInfo) {
+            is UITvCastCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
+            is UITvCrewCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
+            else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
+        }
+
+        startActivity(DetailsActivity.createPersonDetailsIntent(requireContext(), person))
     }
 
     companion object {

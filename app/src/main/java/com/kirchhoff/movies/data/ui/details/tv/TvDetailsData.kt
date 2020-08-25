@@ -20,6 +20,7 @@ data class UITvCredits(
 )
 
 data class UITvCastCredit(
+    val id: Int,
     val name: String,
     val character: String,
     val profilePath: String?
@@ -30,11 +31,12 @@ data class UITvCastCredit(
 }
 
 data class UITvCrewCredit(
-    val name: String?,
+    val id: Int,
+    val name: String,
     val job: String,
-    val posterPath: String?
+    val profilePath: String?
 ) : CreditsView.CreditsInfo {
     override fun title() = name
     override fun description() = job
-    override fun imagePath() = posterPath
+    override fun imagePath() = profilePath
 }

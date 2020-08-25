@@ -47,6 +47,7 @@ class TvDetailsMapper : BaseMapper(), ITvDetailsMapper {
 
     private fun createUITvCastCredit(castCredit: NetworkTvCastCredit) =
         UITvCastCredit(
+            castCredit.id,
             castCredit.name,
             castCredit.character,
             castCredit.profile_path
@@ -54,9 +55,10 @@ class TvDetailsMapper : BaseMapper(), ITvDetailsMapper {
 
     private fun createUITvCrewCredit(crewCredit: NetworkTvCrewCredit) =
         UITvCrewCredit(
+            crewCredit.id,
             crewCredit.name,
             crewCredit.job,
-            crewCredit.poster_path
+            crewCredit.profile_path
         )
 
     private fun createUIGenre(item: NetworkObjectWithName) =

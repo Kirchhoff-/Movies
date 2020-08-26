@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.repository.movie
 
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIPaginated
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.data.ui.details.review.UIReview
@@ -43,8 +43,8 @@ class MovieRepository(
             movieService.fetchTrailersList(movieId)
         })
 
-    override suspend fun fetchMovieCredits(movieId: Int): Result<UIMovieCredits> =
-        movieDetailsMapper.createUIMovieCredits(apiCall {
+    override suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits> =
+        movieDetailsMapper.createUIEntertainmentCredits(apiCall {
             movieService.fetchMovieCredits(movieId)
         })
 }

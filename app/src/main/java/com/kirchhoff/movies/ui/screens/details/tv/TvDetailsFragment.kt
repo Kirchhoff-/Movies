@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.ui.details.tv.UITvCastCredit
-import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
-import com.kirchhoff.movies.data.ui.details.tv.UITvCrewCredit
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
@@ -73,7 +72,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         }
     }
 
-    private fun handleTvCredits(tvCredits: UITvCredits) {
+    private fun handleTvCredits(tvCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
             displayItems(tvCredits.cast, tvCredits.crew)
@@ -108,8 +107,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
 
     private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {
         val person: UIPerson = when (creditsInfo) {
-            is UITvCastCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
-            is UITvCrewCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
+            is UIEntertainmentPerson -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
             else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
         }
 

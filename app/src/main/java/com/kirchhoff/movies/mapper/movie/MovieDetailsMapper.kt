@@ -1,17 +1,15 @@
 package com.kirchhoff.movies.mapper.movie
 
+import com.kirchhoff.movies.data.network.core.NetworkEntertainmentCredits
+import com.kirchhoff.movies.data.network.core.NetworkEntertainmentPerson
 import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
-import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCastCredit
-import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCredits
-import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCrewCredit
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.data.network.details.movie.NetworkTrailer
 import com.kirchhoff.movies.data.network.details.movie.NetworkTrailersList
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.core.UIGenre
 import com.kirchhoff.movies.data.ui.details.movie.UICountry
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCastCredit
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCrewCredit
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
@@ -25,9 +23,9 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
             else -> mapErrorOrException(movieDetailsResult)
         }
 
-    override fun createUIMovieCredits(movieCreditsResult: Result<NetworkMovieCredits>): Result<UIMovieCredits> =
+    override fun createUIEntertainmentCredits(movieCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits> =
         when (movieCreditsResult) {
-            is Result.Success -> Result.Success(createUIMovieCredits(movieCreditsResult.data))
+            is Result.Success -> Result.Success(createUIEntertainmentCredits(movieCreditsResult.data))
             else -> mapErrorOrException(movieCreditsResult)
         }
 
@@ -49,26 +47,26 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
             movieDetails.genres.map { createUIGenre(it) }
         )
 
-    private fun createUIMovieCredits(movieCredits: NetworkMovieCredits) =
-        UIMovieCredits(
-            movieCredits.cast?.map { createUIMovieCastCredit(it) },
-            movieCredits.crew?.map { createUIMovieCrewCredit(it) }
+    private fun createUIEntertainmentCredits(movieCredits: NetworkEntertainmentCredits) =
+        UIEntertainmentCredits(
+            movieCredits.cast?.map { createUIEntertainmentActor(it) },
+            movieCredits.crew?.map { createUIEntertainmentCreator(it) }
         )
 
-    private fun createUIMovieCastCredit(castCredit: NetworkMovieCastCredit) =
-        UIMovieCastCredit(
-            castCredit.id,
-            castCredit.name,
-            castCredit.profile_path,
-            castCredit.character
+    private fun createUIEntertainmentActor(actor: NetworkEntertainmentPerson.Actor) =
+        UIEntertainmentPerson.Actor(
+            actor.id,
+            actor.name,
+            actor.profile_path,
+            actor.character
         )
 
-    private fun createUIMovieCrewCredit(crewCredit: NetworkMovieCrewCredit) =
-        UIMovieCrewCredit(
-            crewCredit.id,
-            crewCredit.name,
-            crewCredit.profile_path,
-            crewCredit.job
+    private fun createUIEntertainmentCreator(creator: NetworkEntertainmentPerson.Creator) =
+        UIEntertainmentPerson.Creator(
+            creator.id,
+            creator.name,
+            creator.profile_path,
+            creator.job
         )
 
     private fun createUITrailerList(trailer: NetworkTrailersList) =
@@ -77,9 +75,7 @@ class MovieDetailsMapper : BaseMapper(), IMovieDetailsMapper {
     private fun createUITrailer(trailer: NetworkTrailer) =
         UITrailer(trailer.site, trailer.key)
 
-    private fun createUICountry(item: NetworkObjectWithName) =
-        UICountry(item.name)
+    private fun createUICountry(item: NetworkObjectWithName) = UICountry(item.name)
 
-    private fun createUIGenre(item: NetworkObjectWithName) =
-        UIGenre(item.name)
+    private fun createUIGenre(item: NetworkObjectWithName) = UIGenre(item.name)
 }

@@ -12,22 +12,3 @@ class NetworkTvDetails(
     val vote_average: Float?,
     val genres: List<NetworkObjectWithName>
 )
-
-data class NetworkTvCredits(
-    val cast: List<NetworkTvCastCredit>?,
-    val crew: List<NetworkTvCrewCredit>?
-)
-
-data class NetworkTvCastCredit(
-    val id: Int,
-    val name: String,
-    val profile_path: String?,
-    val character: String
-)
-
-data class NetworkTvCrewCredit(
-    val id: Int,
-    val name: String,
-    val job: String,
-    val profile_path: String?
-)

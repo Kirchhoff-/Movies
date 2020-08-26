@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.repository.tv
 
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.details.review.UIReview
-import com.kirchhoff.movies.data.ui.details.tv.UITvCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
@@ -34,8 +34,8 @@ class TvRepository(
             tvService.fetchReviews(tvId, page)
         })
 
-    override suspend fun fetchTvCredits(tvId: Int): Result<UITvCredits> =
-        tvDetailsMapper.createUITvCredits(apiCall {
+    override suspend fun fetchTvCredits(tvId: Int): Result<UIEntertainmentCredits> =
+        tvDetailsMapper.createUIEntertainmentCredits(apiCall {
             tvService.fetchTvCredits(tvId)
         })
 }

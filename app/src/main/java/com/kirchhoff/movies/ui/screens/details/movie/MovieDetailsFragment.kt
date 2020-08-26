@@ -7,9 +7,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCastCredit
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCrewCredit
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.main.UIMovie
@@ -144,7 +143,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
-    private fun handleMovieCredits(movieCredits: UIMovieCredits) {
+    private fun handleMovieCredits(movieCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
             displayItems(movieCredits.cast, movieCredits.crew)
@@ -163,8 +162,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
     private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {
         val person: UIPerson = when (creditsInfo) {
-            is UIMovieCastCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
-            is UIMovieCrewCredit -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
+            is UIEntertainmentPerson -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
             else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
         }
 

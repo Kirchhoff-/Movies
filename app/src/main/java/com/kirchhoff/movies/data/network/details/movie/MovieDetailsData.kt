@@ -13,25 +13,6 @@ class NetworkMovieDetails(
     val genres: List<NetworkObjectWithName>
 )
 
-data class NetworkMovieCastCredit(
-    val id: Int,
-    val name: String,
-    val profile_path: String?,
-    val character: String?
-)
-
-data class NetworkMovieCrewCredit(
-    val id: Int,
-    val name: String,
-    val profile_path: String?,
-    val job: String?
-)
-
-data class NetworkMovieCredits(
-    val cast: List<NetworkMovieCastCredit>?,
-    val crew: List<NetworkMovieCrewCredit>?
-)
-
 data class NetworkTrailer(
     val site: String,
     val key: String

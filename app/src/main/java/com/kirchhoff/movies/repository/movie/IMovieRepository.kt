@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.repository.movie
 
+import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIPaginated
-import com.kirchhoff.movies.data.ui.details.movie.UIMovieCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.data.ui.details.review.UIReview
@@ -13,5 +13,5 @@ interface IMovieRepository {
     suspend fun fetchReviewsList(movieId: Int, page: Int): Result<UIPaginated<UIReview>>
     suspend fun fetchSimilarMoviesList(movieId: Int, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList>
-    suspend fun fetchMovieCredits(movieId: Int): Result<UIMovieCredits>
+    suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits>
 }

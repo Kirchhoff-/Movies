@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.network.services
 
+import com.kirchhoff.movies.data.network.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.data.network.core.NetworkPaginated
-import com.kirchhoff.movies.data.network.details.movie.NetworkMovieCredits
 import com.kirchhoff.movies.data.network.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.data.network.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.data.network.details.review.NetworkReview
@@ -25,5 +25,5 @@ interface MovieService {
     suspend fun fetchTrailersList(@Path("movie_id") id: Int): Response<NetworkTrailersList>
 
     @GET("/3/movie/{movie_id}/credits")
-    suspend fun fetchMovieCredits(@Path("movie_id") id: Int): Response<NetworkMovieCredits>
+    suspend fun fetchMovieCredits(@Path("movie_id") id: Int): Response<NetworkEntertainmentCredits>
 }

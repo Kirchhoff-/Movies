@@ -48,8 +48,8 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
     private fun createUITv(tv: NetworkTv) =
         UITv(
             tv.id,
+            tv.name,
             tv.poster_path,
-            tv.backdrop_path,
-            tv.name
+            tv.backdrop_path
         )
 }

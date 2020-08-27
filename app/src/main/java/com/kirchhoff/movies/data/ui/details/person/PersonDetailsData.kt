@@ -10,26 +10,42 @@ data class UIPersonDetails(
 )
 
 data class UIPersonCredits(
-    val cast: List<UIPersonCastCredit>?,
-    val crew: List<UIPersonCrewCredit>?
+    val cast: List<UIPersonCredit.Actor>?,
+    val crew: List<UIPersonCredit.Creator>?
 )
 
-data class UIPersonCastCredit(
+sealed class UIPersonCredit(
+    val id: Int,
     val title: String?,
-    val character: String?,
-    val posterPath: String?
-) : CreditsView.CreditsInfo {
-    override fun title() = title
-    override fun description() = character
-    override fun imagePath() = posterPath
+    val posterPath: String?,
+    val backdropPath: String?,
+    val mediaType: UIMediaType
+) {
+    class Actor(
+        id: Int,
+        title: String?,
+        posterPath: String?,
+        backdropPath: String?,
+        mediaType: UIMediaType,
+        val character: String?
+    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType), CreditsView.CreditsInfo {
+        override fun title() = title
+        override fun description() = character
+        override fun imagePath() = posterPath
+    }
+
+    class Creator(
+        id: Int,
+        title: String?,
+        posterPath: String?,
+        backdropPath: String?,
+        mediaType: UIMediaType,
+        val job: String
+    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType), CreditsView.CreditsInfo {
+        override fun title() = title
+        override fun description() = job
+        override fun imagePath() = posterPath
+    }
 }
 
-data class UIPersonCrewCredit(
-    val title: String?,
-    val job: String,
-    val posterPath: String?
-) : CreditsView.CreditsInfo {
-    override fun title() = title
-    override fun description() = job
-    override fun imagePath() = posterPath
-}
+enum class UIMediaType { MOVIE, TV }

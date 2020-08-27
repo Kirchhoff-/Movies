@@ -13,13 +13,19 @@ data class NetworkPersonCredits(
 )
 
 data class NetworkPersonCastCredit(
+    val id: Int,
     val title: String?,
     val character: String?,
-    val poster_path: String?
+    val poster_path: String?,
+    val backdrop_path: String?,
+    val media_type: String
 )
 
 data class NetworkPersonCrewCredit(
+    val id: Int,
     val title: String?,
     val job: String,
-    val poster_path: String?
+    val poster_path: String?,
+    val backdrop_path: String?,
+    val media_type: String
 )

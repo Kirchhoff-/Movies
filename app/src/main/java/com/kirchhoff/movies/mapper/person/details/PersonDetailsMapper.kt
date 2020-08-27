@@ -4,9 +4,9 @@ import com.kirchhoff.movies.data.network.details.person.NetworkPersonCastCredit
 import com.kirchhoff.movies.data.network.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.data.network.details.person.NetworkPersonCrewCredit
 import com.kirchhoff.movies.data.network.details.person.NetworkPersonDetails
-import com.kirchhoff.movies.data.ui.details.person.UIPersonCastCredit
+import com.kirchhoff.movies.data.ui.details.person.UIMediaType
+import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
-import com.kirchhoff.movies.data.ui.details.person.UIPersonCrewCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.repository.Result
@@ -36,21 +36,34 @@ class PersonDetailsMapper : BaseMapper(),
 
     private fun createUIPersonCredits(personCredits: NetworkPersonCredits) =
         UIPersonCredits(
-            personCredits.cast?.map { createUIPersonCastCredit(it) },
-            personCredits.crew?.map { createUIPersonCrewCredit(it) }
+            personCredits.cast?.map { createUIPersonActor(it) },
+            personCredits.crew?.map { createUIPersonCreator(it) }
         )
 
-    private fun createUIPersonCastCredit(castCredit: NetworkPersonCastCredit) =
-        UIPersonCastCredit(
+    private fun createUIPersonActor(castCredit: NetworkPersonCastCredit) =
+        UIPersonCredit.Actor(
+            castCredit.id,
             castCredit.title,
-            castCredit.character,
-            castCredit.poster_path
+            castCredit.poster_path,
+            castCredit.backdrop_path,
+            createMediaType(castCredit.media_type),
+            castCredit.character
         )
 
-    private fun createUIPersonCrewCredit(crewCredit: NetworkPersonCrewCredit) =
-        UIPersonCrewCredit(
+    private fun createUIPersonCreator(crewCredit: NetworkPersonCrewCredit) =
+        UIPersonCredit.Creator(
+            crewCredit.id,
             crewCredit.title,
-            crewCredit.job,
-            crewCredit.poster_path
+            crewCredit.poster_path,
+            crewCredit.backdrop_path,
+            createMediaType(crewCredit.media_type),
+            crewCredit.job
         )
+
+    private fun createMediaType(value: String) =
+        when {
+            value.equals(UIMediaType.MOVIE.name, true) -> UIMediaType.MOVIE
+            value.equals(UIMediaType.TV.name, true) -> UIMediaType.TV
+            else -> error("Unknown media type = $value")
+        }
 }

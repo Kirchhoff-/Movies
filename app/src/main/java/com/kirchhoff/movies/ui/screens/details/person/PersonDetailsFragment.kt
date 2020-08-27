@@ -5,12 +5,18 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.data.ui.details.person.UIMediaType
+import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
+import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
+import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
+import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.utils.binding.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -30,10 +36,15 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
-            content.tvPersonName.text = person.name
             ivBackdrop.downloadPoster(person.profilePath)
-            content.bRetry.setOnClickListener { vm.loadPersonDetails(person.id) }
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        }
+
+        with(viewBinding.content) {
+            tvPersonName.text = person.name
+            bRetry.setOnClickListener { vm.loadPersonDetails(person.id) }
+            vCredits.setCastClickListener { creditsInfo -> startEntertainmentActivity(creditsInfo) }
+            vCredits.setCrewClickListener { creditsInfo -> startEntertainmentActivity(creditsInfo) }
         }
 
         with(vm) {
@@ -90,6 +101,21 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         with(viewBinding) {
             content.groupException.isVisible = true
             content.tvException.text = exception
+        }
+    }
+
+    private fun startEntertainmentActivity(creditsInfo: CreditsView.CreditsInfo) {
+        if (creditsInfo is UIPersonCredit) {
+            when (creditsInfo.mediaType) {
+                UIMediaType.MOVIE -> {
+                    val uiMovie = UIMovie(creditsInfo.id, creditsInfo.title, creditsInfo.posterPath, creditsInfo.backdropPath)
+                    startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), uiMovie))
+                }
+                UIMediaType.TV -> {
+                    val uiTv = UITv(creditsInfo.id, creditsInfo.title, creditsInfo.posterPath, creditsInfo.backdropPath)
+                    startActivity(DetailsActivity.createTvDetailsIntent(requireContext(), uiTv))
+                }
+            }
         }
     }
 

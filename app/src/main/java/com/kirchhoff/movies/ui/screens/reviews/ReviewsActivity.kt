@@ -10,11 +10,11 @@ import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.ActivityReviewBinding
 import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
-import com.kirchhoff.movies.utils.binding.viewBinding
+import com.kirchhoff.movies.utils.viewBinding
 
 class ReviewsActivity : AppCompatActivity(R.layout.activity_review) {
 
-    private val viewBinding: ActivityReviewBinding by viewBinding(R.id.container)
+    private val viewBinding by viewBinding(ActivityReviewBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

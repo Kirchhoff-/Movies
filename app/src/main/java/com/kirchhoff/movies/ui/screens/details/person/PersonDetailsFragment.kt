@@ -17,7 +17,7 @@ import com.kirchhoff.movies.extensions.downloadPoster
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.utils.binding.viewBinding
+import com.kirchhoff.movies.utils.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
@@ -25,7 +25,7 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
     private val person: UIPerson by lazy { arguments!!.getParcelable<UIPerson>(PERSON_ARG)!! }
 
     private val vm by viewModel<PersonDetailsVM>()
-    private val viewBinding: FragmentPersonDetailsBinding by viewBinding()
+    private val viewBinding by viewBinding(FragmentPersonDetailsBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -16,7 +16,7 @@ import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
-import com.kirchhoff.movies.utils.binding.viewBinding
+import com.kirchhoff.movies.utils.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
@@ -24,7 +24,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     private val tv: UITv by lazy { arguments!!.getParcelable<UITv>(TV_ARG)!! }
 
     private val vm by viewModel<TvDetailsVM>()
-    private val viewBinding: FragmentTvDetailsBinding by viewBinding()
+    private val viewBinding by viewBinding(FragmentTvDetailsBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

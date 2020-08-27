@@ -11,11 +11,11 @@ import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.ActivitySimilarBinding
 import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsFragment
-import com.kirchhoff.movies.utils.binding.viewBinding
+import com.kirchhoff.movies.utils.viewBinding
 
 class SimilarActivity : AppCompatActivity(R.layout.activity_similar) {
 
-    private val viewBinding: ActivitySimilarBinding by viewBinding(R.id.container)
+    private val viewBinding by viewBinding(ActivitySimilarBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

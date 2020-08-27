@@ -24,7 +24,7 @@ import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.EdgesMarginItemDecoration
-import com.kirchhoff.movies.utils.binding.viewBinding
+import com.kirchhoff.movies.utils.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -36,7 +36,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     private val movie: UIMovie by lazy { arguments!!.getParcelable<UIMovie>(MOVIE_ARG)!! }
 
     private val vm by viewModel<MovieDetailsVM>()
-    private val viewBinding: FragmentMovieDetailsBinding by viewBinding()
+    private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -14,7 +14,7 @@ import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 import com.kirchhoff.movies.ui.utils.recyclerView.Paginator
 import com.kirchhoff.movies.ui.utils.recyclerView.decorations.GridMarginItemDecoration
-import com.kirchhoff.movies.utils.binding.viewBinding
+import com.kirchhoff.movies.utils.viewBinding
 
 abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragment(R.layout.fragment_paginated) {
 
@@ -23,7 +23,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
     abstract val vm: PaginatedScreenVM<T>
 
-    private val viewBinding: FragmentPaginatedBinding by viewBinding()
+    private val viewBinding by viewBinding(FragmentPaginatedBinding::bind)
     private lateinit var paginator: Paginator
 
     override fun onCreate(savedInstanceState: Bundle?) {

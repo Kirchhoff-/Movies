@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/background</item>
     </style>
 
     <style name="TextStyle" parent="@android:style/Widget.TextView">
@@ -79,6 +80,13 @@
     <style name="ReviewsList.Toolbar">
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <!-- Review details -->
+    <style name="ReviewDetails" />
+
+    <style name="ReviewDetails.TextView">
+        <item name="android:background">@color/background</item>
     </style>
 
     <!-- CreditsView -->

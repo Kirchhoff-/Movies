@@ -40,8 +40,10 @@ class PersonDetailsVM(private val personRepository: IPersonsRepository) : ViewMo
                 is Result.Exception -> _exception.postValue(result.toString())
             }
 
-            when (val creditsResult = personRepository.fetchPersonCredits(personId)) {
-                is Result.Success -> _personCredits.postValue(creditsResult.data)
+            if (result is Result.Success) {
+                when (val creditsResult = personRepository.fetchPersonCredits(personId)) {
+                    is Result.Success -> _personCredits.postValue(creditsResult.data)
+                }
             }
         }
     }

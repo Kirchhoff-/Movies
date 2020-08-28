@@ -30,6 +30,11 @@ sealed class Result<out T> {
             this.code = code
         }
 
+        constructor(code: Int) {
+            this.responseBody = null
+            this.code = code
+        }
+
         override fun toString(): String = "[ApiResponse.Failure $code]: $responseBody"
     }
 

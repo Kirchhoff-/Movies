@@ -21,3 +21,4 @@ jobs:
     - chmod +x ./gradlew
     - ./gradlew androidDependencies
     - ./gradlew ktlint
+    - ./gradlew lint

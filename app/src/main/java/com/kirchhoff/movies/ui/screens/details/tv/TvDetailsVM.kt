@@ -40,8 +40,10 @@ class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
                 is Result.Exception -> _exception.postValue(result.toString())
             }
 
-            when (val credits = tvRepository.fetchTvCredits(tvId)) {
-                is Result.Success -> _tvCredits.postValue(credits.data)
+            if (result is Result.Success) {
+                when (val credits = tvRepository.fetchTvCredits(tvId)) {
+                    is Result.Success -> _tvCredits.postValue(credits.data)
+                }
             }
         }
     }

@@ -44,12 +44,16 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel(
                 is Result.Exception -> _exception.postValue(result.toString())
             }
 
-            when (val trailersResult = movieRepository.fetchTrailersList(movieId)) {
-                is Result.Success -> _trailers.postValue(trailersResult.data.results)
+            if (result is Result.Success) {
+                when (val trailersResult = movieRepository.fetchTrailersList(movieId)) {
+                    is Result.Success -> _trailers.postValue(trailersResult.data.results)
+                }
             }
 
-            when (val creditsResult = movieRepository.fetchMovieCredits(movieId)) {
-                is Result.Success -> _movieCredits.postValue(creditsResult.data)
+            if (result is Result.Success) {
+                when (val creditsResult = movieRepository.fetchMovieCredits(movieId)) {
+                    is Result.Success -> _movieCredits.postValue(creditsResult.data)
+                }
             }
         }
     }

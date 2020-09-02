@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.di
 
+import com.kirchhoff.movies.mapper.core.CoreMapper
+import com.kirchhoff.movies.mapper.core.ICoreMapper
 import com.kirchhoff.movies.mapper.discover.DiscoverMapper
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
-import com.kirchhoff.movies.mapper.entertainment.EntertainmentMapper
-import com.kirchhoff.movies.mapper.entertainment.IEntertainmentMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.mapper.movie.MovieDetailsMapper
 import com.kirchhoff.movies.mapper.person.details.IPersonDetailsMapper
@@ -17,10 +17,10 @@ import com.kirchhoff.movies.mapper.tv.TvDetailsMapper
 import org.koin.dsl.module
 
 val mapperModule = module {
-    single<IEntertainmentMapper> { EntertainmentMapper() }
+    single<ICoreMapper> { CoreMapper() }
     single<IPersonDetailsMapper> { PersonDetailsMapper() }
-    single<IMovieDetailsMapper> { MovieDetailsMapper(entertainmentMapper = get()) }
-    single<ITvDetailsMapper> { TvDetailsMapper(entertainmentMapper = get()) }
+    single<IMovieDetailsMapper> { MovieDetailsMapper(coreMapper = get()) }
+    single<ITvDetailsMapper> { TvDetailsMapper(coreMapper = get()) }
     single<IReviewListMapper> { ReviewListMapper() }
     single<IDiscoverMapper> { DiscoverMapper() }
     single<IPersonsMapper> { PersonsMapper() }

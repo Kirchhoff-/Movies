@@ -81,6 +81,11 @@ dependencies {
     implementation libraries.timber
     implementation libraries.stetho
     implementation libraries.stethoOkHttp
+
+    testImplementation libraries.junit
+    testImplementation libraries.mockito
+    testImplementation libraries.coroutinesTest
+    testImplementation libraries.archTesting
 }
 
 def getLocalProperty(String propName) {

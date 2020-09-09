@@ -5,6 +5,15 @@ import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.person.IPersonsRepository
+import com.kirchhoff.movies.ui.screens.core.verifyFirstPageErrorState
+import com.kirchhoff.movies.ui.screens.core.verifyFirstPageExceptionState
+import com.kirchhoff.movies.ui.screens.core.verifyFirstPageSuccessState
+import com.kirchhoff.movies.ui.screens.core.verifyPaginatedErrorState
+import com.kirchhoff.movies.ui.screens.core.verifyPaginatedExceptionState
+import com.kirchhoff.movies.ui.screens.core.verifyPaginatedSuccessState
+import com.kirchhoff.movies.ui.screens.core.verifyRandomPageErrorState
+import com.kirchhoff.movies.ui.screens.core.verifyRandomPageExceptionState
+import com.kirchhoff.movies.ui.screens.core.verifyRandomPageSuccessState
 import com.kirchhoff.movies.utils.CoroutineRule
 import kotlin.random.Random
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -45,10 +54,7 @@ class PersonsVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == null)
+        vm.verifyFirstPageErrorState(ERROR)
         verifyRepository(FIRST_PAGE)
     }
 
@@ -58,10 +64,7 @@ class PersonsVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == null)
+        vm.verifyFirstPageExceptionState(EXCEPTION)
         verifyRepository(FIRST_PAGE)
     }
 
@@ -71,10 +74,7 @@ class PersonsVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_PERSON_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_PERSON_ANSWER)
         verifyRepository(FIRST_PAGE)
     }
 
@@ -84,10 +84,7 @@ class PersonsVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == null)
+        vm.verifyRandomPageErrorState(ERROR)
         verifyRepository(RANDOM_PAGE)
     }
 
@@ -97,10 +94,7 @@ class PersonsVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == null)
+        vm.verifyRandomPageExceptionState(EXCEPTION)
         verifyRepository(RANDOM_PAGE)
     }
 
@@ -110,10 +104,7 @@ class PersonsVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == RANDOM_PAGE_PERSON_ANSWER.data)
+        vm.verifyRandomPageSuccessState(RANDOM_PAGE_PERSON_ANSWER)
         verifyRepository(RANDOM_PAGE)
     }
 
@@ -124,18 +115,12 @@ class PersonsVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_PERSON_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_PERSON_ANSWER)
         verify(personsRepository).fetchPopularPersons(FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == FIRST_PAGE_PERSON_ANSWER.data)
+        vm.verifyPaginatedErrorState(FIRST_PAGE_PERSON_ANSWER, ERROR)
         verify(personsRepository).fetchPopularPersons(RANDOM_PAGE)
 
         verifyNoMoreInteractions(personsRepository)
@@ -148,18 +133,12 @@ class PersonsVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_PERSON_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_PERSON_ANSWER)
         verify(personsRepository).fetchPopularPersons(FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == FIRST_PAGE_PERSON_ANSWER.data)
+        vm.verifyPaginatedExceptionState(FIRST_PAGE_PERSON_ANSWER, EXCEPTION)
         verify(personsRepository).fetchPopularPersons(RANDOM_PAGE)
 
         verifyNoMoreInteractions(personsRepository)
@@ -172,18 +151,12 @@ class PersonsVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_PERSON_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_PERSON_ANSWER)
         verify(personsRepository).fetchPopularPersons(FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == RANDOM_PAGE_PERSON_ANSWER.data)
+        vm.verifyPaginatedSuccessState(RANDOM_PAGE_PERSON_ANSWER)
         verify(personsRepository).fetchPopularPersons(RANDOM_PAGE)
 
         verifyNoMoreInteractions(personsRepository)

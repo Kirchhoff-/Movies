@@ -6,6 +6,15 @@ import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import com.kirchhoff.movies.repository.tv.ITvRepository
+import com.kirchhoff.movies.ui.screens.core.verifyFirstPageErrorState
+import com.kirchhoff.movies.ui.screens.core.verifyFirstPageExceptionState
+import com.kirchhoff.movies.ui.screens.core.verifyFirstPageSuccessState
+import com.kirchhoff.movies.ui.screens.core.verifyPaginatedErrorState
+import com.kirchhoff.movies.ui.screens.core.verifyPaginatedExceptionState
+import com.kirchhoff.movies.ui.screens.core.verifyPaginatedSuccessState
+import com.kirchhoff.movies.ui.screens.core.verifyRandomPageErrorState
+import com.kirchhoff.movies.ui.screens.core.verifyRandomPageExceptionState
+import com.kirchhoff.movies.ui.screens.core.verifyRandomPageSuccessState
 import com.kirchhoff.movies.ui.screens.reviews.ReviewType
 import com.kirchhoff.movies.utils.CoroutineRule
 import kotlin.random.Random
@@ -48,10 +57,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == null)
+        vm.verifyFirstPageErrorState(ERROR)
         verifyMovieRepository(FIRST_PAGE)
     }
 
@@ -62,10 +68,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == null)
+        vm.verifyFirstPageExceptionState(EXCEPTION)
         verifyMovieRepository(FIRST_PAGE)
     }
 
@@ -76,10 +79,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verifyMovieRepository(FIRST_PAGE)
     }
 
@@ -90,10 +90,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == null)
+        vm.verifyRandomPageErrorState(ERROR)
         verifyMovieRepository(RANDOM_PAGE)
     }
 
@@ -104,10 +101,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == null)
+        vm.verifyRandomPageExceptionState(EXCEPTION)
         verifyMovieRepository(RANDOM_PAGE)
     }
 
@@ -118,10 +112,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == RANDOM_PAGE_ANSWER.data)
+        vm.verifyRandomPageSuccessState(RANDOM_PAGE_ANSWER)
         verifyMovieRepository(RANDOM_PAGE)
     }
 
@@ -133,18 +124,12 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verify(movieRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyPaginatedErrorState(FIRST_PAGE_ANSWER, ERROR)
         verify(movieRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
 
         verifyNoInteractions(tvRepository)
@@ -159,18 +144,12 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verify(movieRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyPaginatedExceptionState(FIRST_PAGE_ANSWER, EXCEPTION)
         verify(movieRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
 
         verifyNoInteractions(tvRepository)
@@ -185,18 +164,12 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verify(movieRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == RANDOM_PAGE_ANSWER.data)
+        vm.verifyPaginatedSuccessState(RANDOM_PAGE_ANSWER)
         verify(movieRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
 
         verifyNoInteractions(tvRepository)
@@ -210,10 +183,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == null)
+        vm.verifyFirstPageErrorState(ERROR)
         verifyTvRepository(FIRST_PAGE)
     }
 
@@ -224,10 +194,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == null)
+        vm.verifyFirstPageExceptionState(EXCEPTION)
         verifyTvRepository(FIRST_PAGE)
     }
 
@@ -238,10 +205,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.loading.value == false)
-        assert(vm.paginating.value == null)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verifyTvRepository(FIRST_PAGE)
     }
 
@@ -252,10 +216,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == null)
+        vm.verifyRandomPageErrorState(ERROR)
         verifyTvRepository(RANDOM_PAGE)
     }
 
@@ -266,10 +227,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == null)
+        vm.verifyRandomPageExceptionState(EXCEPTION)
         verifyTvRepository(RANDOM_PAGE)
     }
 
@@ -280,10 +238,7 @@ class ReviewsListVMTest {
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.loading.value == null)
-        assert(vm.paginating.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == RANDOM_PAGE_ANSWER.data)
+        vm.verifyRandomPageSuccessState(RANDOM_PAGE_ANSWER)
         verifyTvRepository(RANDOM_PAGE)
     }
 
@@ -295,18 +250,12 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verify(tvRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == ERROR.toString())
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyPaginatedErrorState(FIRST_PAGE_ANSWER, ERROR)
         verify(tvRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
 
         verifyNoInteractions(movieRepository)
@@ -321,18 +270,12 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verify(tvRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == EXCEPTION.toString())
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyPaginatedExceptionState(FIRST_PAGE_ANSWER, EXCEPTION)
         verify(tvRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
 
         verifyNoInteractions(movieRepository)
@@ -347,18 +290,12 @@ class ReviewsListVMTest {
 
         vm.fetchData(FIRST_PAGE)
 
-        assert(vm.paginating.value == null)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == FIRST_PAGE_ANSWER.data)
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
         verify(tvRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
-        assert(vm.paginating.value == false)
-        assert(vm.loading.value == false)
-        assert(vm.error.value == null)
-        assert(vm.data.value == RANDOM_PAGE_ANSWER.data)
+        vm.verifyPaginatedSuccessState(RANDOM_PAGE_ANSWER)
         verify(tvRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
 
         verifyNoInteractions(movieRepository)

@@ -30,7 +30,7 @@ import org.mockito.Mockito.verifyNoInteractions
 import org.mockito.Mockito.verifyNoMoreInteractions
 import org.mockito.junit.MockitoJUnitRunner
 
-@Suppress("EXPERIMENTAL_API_USAGE")
+@Suppress("EXPERIMENTAL_API_USAGE", "UNCHECKED_CAST")
 @RunWith(MockitoJUnitRunner::class)
 class ReviewsListVMTest {
 
@@ -52,266 +52,242 @@ class ReviewsListVMTest {
 
     @Test
     fun `verify error state after fetching first page for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(ERROR)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageErrorState(ERROR)
-        verifyMovieRepository(FIRST_PAGE)
+        verifyFirstPageErrorState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify exception state after fetching first page for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(EXCEPTION)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageExceptionState(EXCEPTION)
-        verifyMovieRepository(FIRST_PAGE)
+        verifyFirstPageExceptionState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify success state after fetching first page for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verifyMovieRepository(FIRST_PAGE)
+        verifyFirstPageSuccessState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify error state after fetching random page for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(ERROR)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyRandomPageErrorState(ERROR)
-        verifyMovieRepository(RANDOM_PAGE)
+        verifyRandomPageErrorState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify exception state after fetching random page for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(EXCEPTION)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyRandomPageExceptionState(EXCEPTION)
-        verifyMovieRepository(RANDOM_PAGE)
+        verifyRandomPageExceptionState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify success state after fetching random page for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(RANDOM_PAGE_ANSWER)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyRandomPageSuccessState(RANDOM_PAGE_ANSWER)
-        verifyMovieRepository(RANDOM_PAGE)
+        verifyRandomPageSuccessState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify success first loading and error after paginated loading for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(ERROR)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verify(movieRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyPaginatedErrorState(FIRST_PAGE_ANSWER, ERROR)
-        verify(movieRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
-
-        verifyNoInteractions(tvRepository)
-        verifyNoMoreInteractions(movieRepository)
+        verifyPaginatedErrorState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify success first loading and exception after paginated loading for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(EXCEPTION)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verify(movieRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyPaginatedExceptionState(FIRST_PAGE_ANSWER, EXCEPTION)
-        verify(movieRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
-
-        verifyNoInteractions(tvRepository)
-        verifyNoMoreInteractions(movieRepository)
+        verifyPaginatedExceptionState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify success first loading and success paginated loading after for movie reviews`() = runBlockingTest {
-        setupVM(MOVIE_REVIEWS)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-        `when`(movieRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(RANDOM_PAGE_ANSWER)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verify(movieRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyPaginatedSuccessState(RANDOM_PAGE_ANSWER)
-        verify(movieRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
-
-        verifyNoInteractions(tvRepository)
-        verifyNoMoreInteractions(movieRepository)
+        verifyPaginatedSuccessState(MOVIE_REVIEWS)
     }
 
     @Test
     fun `verify error state after fetching first page for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(ERROR)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageErrorState(ERROR)
-        verifyTvRepository(FIRST_PAGE)
+        verifyFirstPageErrorState(TV_REVIEWS)
     }
 
     @Test
     fun `verify exception state after fetching first page for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(EXCEPTION)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageExceptionState(EXCEPTION)
-        verifyTvRepository(FIRST_PAGE)
+        verifyFirstPageExceptionState(TV_REVIEWS)
     }
 
     @Test
     fun `verify success state after fetching first page for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verifyTvRepository(FIRST_PAGE)
+        verifyFirstPageSuccessState(TV_REVIEWS)
     }
 
     @Test
     fun `verify error state after fetching random page for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(ERROR)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyRandomPageErrorState(ERROR)
-        verifyTvRepository(RANDOM_PAGE)
+        verifyRandomPageErrorState(TV_REVIEWS)
     }
 
     @Test
     fun `verify exception state after fetching random page for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(EXCEPTION)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyRandomPageExceptionState(EXCEPTION)
-        verifyTvRepository(RANDOM_PAGE)
+        verifyRandomPageExceptionState(TV_REVIEWS)
     }
 
     @Test
     fun `verify success state after fetching random page for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(RANDOM_PAGE_ANSWER)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyRandomPageSuccessState(RANDOM_PAGE_ANSWER)
-        verifyTvRepository(RANDOM_PAGE)
+        verifyRandomPageSuccessState(TV_REVIEWS)
     }
 
     @Test
     fun `verify success first loading and error after paginated loading for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(ERROR)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verify(tvRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyPaginatedErrorState(FIRST_PAGE_ANSWER, ERROR)
-        verify(tvRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
-
-        verifyNoInteractions(movieRepository)
-        verifyNoMoreInteractions(tvRepository)
+        verifyPaginatedErrorState(TV_REVIEWS)
     }
 
     @Test
     fun `verify success first loading and exception after paginated loading for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(EXCEPTION)
-
-        vm.fetchData(FIRST_PAGE)
-
-        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verify(tvRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
-
-        vm.fetchData(RANDOM_PAGE)
-
-        vm.verifyPaginatedExceptionState(FIRST_PAGE_ANSWER, EXCEPTION)
-        verify(tvRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
-
-        verifyNoInteractions(movieRepository)
-        verifyNoMoreInteractions(tvRepository)
+        verifyPaginatedExceptionState(TV_REVIEWS)
     }
 
     @Test
     fun `verify success first loading and success paginated loading after for tv reviews`() = runBlockingTest {
-        setupVM(TV_REVIEWS)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, FIRST_PAGE)).thenReturn(FIRST_PAGE_ANSWER)
-        `when`(tvRepository.fetchReviewsList(DATA_ID, RANDOM_PAGE)).thenReturn(RANDOM_PAGE_ANSWER)
+        verifyPaginatedSuccessState(TV_REVIEWS)
+    }
+
+    private fun verifyFirstPageErrorState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, FIRST_PAGE, error = ERROR)
+
+        vm.fetchData(FIRST_PAGE)
+
+        vm.verifyFirstPageErrorState(ERROR)
+        verifyRepository(reviewType, FIRST_PAGE)
+    }
+
+    private fun verifyFirstPageExceptionState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, FIRST_PAGE, exception = EXCEPTION)
+
+        vm.fetchData(FIRST_PAGE)
+
+        vm.verifyFirstPageExceptionState(EXCEPTION)
+        verifyRepository(reviewType, FIRST_PAGE)
+    }
+
+    private fun verifyFirstPageSuccessState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, FIRST_PAGE, data = FIRST_PAGE_ANSWER)
 
         vm.fetchData(FIRST_PAGE)
 
         vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
-        verify(tvRepository).fetchReviewsList(DATA_ID, FIRST_PAGE)
+        verifyRepository(reviewType, FIRST_PAGE)
+    }
+
+    private fun verifyRandomPageErrorState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, RANDOM_PAGE, error = ERROR)
+
+        vm.fetchData(RANDOM_PAGE)
+
+        vm.verifyRandomPageErrorState(ERROR)
+        verifyRepository(reviewType, RANDOM_PAGE)
+    }
+
+    private fun verifyRandomPageExceptionState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, RANDOM_PAGE, exception = EXCEPTION)
+
+        vm.fetchData(RANDOM_PAGE)
+
+        vm.verifyRandomPageExceptionState(EXCEPTION)
+        verifyRepository(reviewType, RANDOM_PAGE)
+    }
+
+    private fun verifyRandomPageSuccessState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, RANDOM_PAGE, data = RANDOM_PAGE_ANSWER)
+
+        vm.fetchData(RANDOM_PAGE)
+
+        vm.verifyRandomPageSuccessState(RANDOM_PAGE_ANSWER)
+        verifyRepository(reviewType, RANDOM_PAGE)
+    }
+
+    private fun verifyPaginatedErrorState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, FIRST_PAGE, data = FIRST_PAGE_ANSWER)
+        mockRepository(reviewType, RANDOM_PAGE, error = ERROR)
+
+        vm.fetchData(FIRST_PAGE)
+
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
+        verifyRepository(reviewType, FIRST_PAGE)
+
+        vm.fetchData(RANDOM_PAGE)
+
+        vm.verifyPaginatedErrorState(FIRST_PAGE_ANSWER, ERROR)
+        verifyRepository(reviewType, RANDOM_PAGE)
+    }
+
+    private fun verifyPaginatedExceptionState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, FIRST_PAGE, data = FIRST_PAGE_ANSWER)
+        mockRepository(reviewType, RANDOM_PAGE, exception = EXCEPTION)
+
+        vm.fetchData(FIRST_PAGE)
+
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
+        verifyRepository(reviewType, FIRST_PAGE)
+
+        vm.fetchData(RANDOM_PAGE)
+
+        vm.verifyPaginatedExceptionState(FIRST_PAGE_ANSWER, EXCEPTION)
+        verifyRepository(reviewType, RANDOM_PAGE)
+    }
+
+    private fun verifyPaginatedSuccessState(reviewType: ReviewType) = runBlockingTest {
+        mockRepository(reviewType, FIRST_PAGE, data = FIRST_PAGE_ANSWER)
+        mockRepository(reviewType, RANDOM_PAGE, data = RANDOM_PAGE_ANSWER)
+
+        vm.fetchData(FIRST_PAGE)
+
+        vm.verifyFirstPageSuccessState(FIRST_PAGE_ANSWER)
+        verifyRepository(reviewType, FIRST_PAGE)
 
         vm.fetchData(RANDOM_PAGE)
 
         vm.verifyPaginatedSuccessState(RANDOM_PAGE_ANSWER)
-        verify(tvRepository).fetchReviewsList(DATA_ID, RANDOM_PAGE)
-
-        verifyNoInteractions(movieRepository)
-        verifyNoMoreInteractions(tvRepository)
+        verifyRepository(reviewType, RANDOM_PAGE)
     }
 
-    private fun verifyMovieRepository(page: Int) = runBlockingTest {
-        verify(movieRepository).fetchReviewsList(DATA_ID, page)
-        verifyNoInteractions(tvRepository)
-        verifyNoMoreInteractions(movieRepository)
+    private fun mockRepository(
+        reviewType: ReviewType,
+        page: Int,
+        error: Result.Error<*>? = null,
+        exception: Result.Exception<*>? = null,
+        data: Result.Success<*>? = null
+    ) = runBlockingTest {
+        val result = when {
+            error != null -> ERROR
+            exception != null -> EXCEPTION
+            data != null -> data
+            else -> error("Cant mock tv repository with such data")
+        }
+
+        when (reviewType) {
+            ReviewType.MOVIE -> {
+                setupVM(MOVIE_REVIEWS)
+                `when`(
+                    movieRepository.fetchReviewsList(
+                        DATA_ID,
+                        page
+                    )
+                ).thenReturn(result as Result<UIPaginated<UIReview>>?)
+            }
+            ReviewType.TV -> {
+                setupVM(TV_REVIEWS)
+                `when`(
+                    tvRepository.fetchReviewsList(
+                        DATA_ID,
+                        page
+                    )
+                ).thenReturn(result as Result<UIPaginated<UIReview>>?)
+            }
+        }
     }
 
-    private fun verifyTvRepository(page: Int) = runBlockingTest {
-        verify(tvRepository).fetchReviewsList(DATA_ID, page)
-        verifyNoInteractions(movieRepository)
-        verifyNoMoreInteractions(tvRepository)
+    private fun verifyRepository(reviewType: ReviewType, page: Int) = runBlockingTest {
+        when (reviewType) {
+            ReviewType.MOVIE -> {
+                verify(movieRepository).fetchReviewsList(DATA_ID, page)
+                verifyNoInteractions(tvRepository)
+                verifyNoMoreInteractions(movieRepository)
+            }
+            ReviewType.TV -> {
+                verify(tvRepository).fetchReviewsList(DATA_ID, page)
+                verifyNoInteractions(movieRepository)
+                verifyNoMoreInteractions(tvRepository)
+            }
+        }
     }
 
     companion object {

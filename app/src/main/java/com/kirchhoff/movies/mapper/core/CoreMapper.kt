@@ -22,7 +22,7 @@ class CoreMapper : BaseMapper(), ICoreMapper {
         UIEntertainmentPerson.Actor(
             actor.id,
             actor.name,
-            actor.profile_path,
+            actor.profilePath,
             actor.character
         )
 
@@ -30,7 +30,7 @@ class CoreMapper : BaseMapper(), ICoreMapper {
         UIEntertainmentPerson.Creator(
             creator.id,
             creator.name,
-            creator.profile_path,
+            creator.profilePath,
             creator.job
         )
 }

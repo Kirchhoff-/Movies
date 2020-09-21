@@ -18,13 +18,13 @@ class PersonsMapper : BaseMapper(), IPersonsMapper {
         UIPaginated(
             response.page,
             response.results.map { createUIPerson(it) },
-            response.total_pages
+            response.totalPages
         )
 
     private fun createUIPerson(person: NetworkPerson) =
         UIPerson(
             person.id,
             person.name,
-            person.profile_path
+            person.profilePath
         )
 }

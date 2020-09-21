@@ -35,13 +35,13 @@ class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IM
 
     private fun createUIMovieDetails(movieDetails: NetworkMovieDetails) =
         UIMovieDetails(
-            movieDetails.production_countries.map { createUICountry(it) },
+            movieDetails.productionCountries.map { createUICountry(it) },
             movieDetails.runtime,
             movieDetails.tagline,
             movieDetails.overview,
-            movieDetails.release_date,
-            movieDetails.vote_count,
-            movieDetails.vote_average,
+            movieDetails.releaseDate,
+            movieDetails.voteCount,
+            movieDetails.voteAverage,
             movieDetails.genres.map { coreMapper.createUIGenre(it) }
         )
 

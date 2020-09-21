@@ -1,8 +1,10 @@
 package com.kirchhoff.movies.data.network.main
 
+import com.google.gson.annotations.SerializedName
+
 data class NetworkTv(
-    val id: Int,
-    val poster_path: String?,
-    val backdrop_path: String?,
-    val name: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("poster_path") val posterPath: String?,
+    @SerializedName("backdrop_path") val backdropPath: String?,
+    @SerializedName("name") val name: String
 )

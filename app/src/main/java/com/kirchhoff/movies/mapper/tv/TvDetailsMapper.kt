@@ -24,13 +24,13 @@ class TvDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), ITvDe
 
     private fun createUITvDetails(tvDetails: NetworkTvDetails) =
         UITvDetails(
-            tvDetails.number_of_seasons,
-            tvDetails.number_of_episodes,
+            tvDetails.numberOfSeasons,
+            tvDetails.numberOfEpisodes,
             tvDetails.overview,
             tvDetails.status,
-            tvDetails.first_air_date,
-            tvDetails.vote_count,
-            tvDetails.vote_average,
+            tvDetails.firstAirDate,
+            tvDetails.voteCount,
+            tvDetails.voteAverage,
             tvDetails.genres.map { coreMapper.createUIGenre(it) }
         )
 }

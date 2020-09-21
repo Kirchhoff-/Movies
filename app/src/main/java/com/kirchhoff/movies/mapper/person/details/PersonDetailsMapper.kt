@@ -29,9 +29,9 @@ class PersonDetailsMapper : BaseMapper(),
     private fun createUIPersonDetails(personDetails: NetworkPersonDetails) =
         UIPersonDetails(
             personDetails.birthday,
-            personDetails.place_of_birth,
+            personDetails.placeOfBirth,
             personDetails.biography,
-            personDetails.also_known_as
+            personDetails.alsoKnownAs
         )
 
     private fun createUIPersonCredits(personCredits: NetworkPersonCredits) =
@@ -44,9 +44,9 @@ class PersonDetailsMapper : BaseMapper(),
         UIPersonCredit.Actor(
             castCredit.id,
             castCredit.title,
-            castCredit.poster_path,
-            castCredit.backdrop_path,
-            createMediaType(castCredit.media_type),
+            castCredit.posterPath,
+            castCredit.backdropPath,
+            createMediaType(castCredit.mediaType),
             castCredit.character
         )
 
@@ -54,9 +54,9 @@ class PersonDetailsMapper : BaseMapper(),
         UIPersonCredit.Creator(
             crewCredit.id,
             crewCredit.title,
-            crewCredit.poster_path,
-            crewCredit.backdrop_path,
-            createMediaType(crewCredit.media_type),
+            crewCredit.posterPath,
+            crewCredit.backdropPath,
+            createMediaType(crewCredit.mediaType),
             crewCredit.job
         )
 

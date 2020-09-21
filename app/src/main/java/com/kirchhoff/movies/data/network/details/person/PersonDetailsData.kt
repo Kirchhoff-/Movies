@@ -1,10 +1,12 @@
 package com.kirchhoff.movies.data.network.details.person
 
+import com.google.gson.annotations.SerializedName
+
 data class NetworkPersonDetails(
-    val birthday: String?,
-    val place_of_birth: String?,
-    val biography: String,
-    val also_known_as: List<String>?
+    @SerializedName("birthday") val birthday: String?,
+    @SerializedName("place_of_birth") val placeOfBirth: String?,
+    @SerializedName("biography") val biography: String,
+    @SerializedName("also_known_as") val alsoKnownAs: List<String>?
 )
 
 data class NetworkPersonCredits(
@@ -13,19 +15,19 @@ data class NetworkPersonCredits(
 )
 
 data class NetworkPersonCastCredit(
-    val id: Int,
-    val title: String?,
-    val character: String?,
-    val poster_path: String?,
-    val backdrop_path: String?,
-    val media_type: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("title") val title: String?,
+    @SerializedName("character") val character: String?,
+    @SerializedName("poster_path") val posterPath: String?,
+    @SerializedName("backdrop_patch") val backdropPath: String?,
+    @SerializedName("media_type") val mediaType: String
 )
 
 data class NetworkPersonCrewCredit(
-    val id: Int,
-    val title: String?,
-    val job: String,
-    val poster_path: String?,
-    val backdrop_path: String?,
-    val media_type: String
+    @SerializedName("id") val id: Int,
+    @SerializedName("title") val title: String?,
+    @SerializedName("job") val job: String,
+    @SerializedName("poster_path") val posterPath: String?,
+    @SerializedName("backdrop_path") val backdropPath: String?,
+    @SerializedName("media_type") val mediaType: String
 )

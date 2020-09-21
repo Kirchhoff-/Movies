@@ -19,7 +19,7 @@ class ReviewListMapper : BaseMapper(), IReviewListMapper {
         UIPaginated(
             response.page,
             response.results.map { createUIReview(it) },
-            response.total_pages
+            response.totalPages
         )
 
     private fun createUIReview(networkReview: NetworkReview) =

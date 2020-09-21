@@ -1,16 +1,17 @@
 package com.kirchhoff.movies.data.network.details.movie
 
+import com.google.gson.annotations.SerializedName
 import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
 
 class NetworkMovieDetails(
-    val production_countries: List<NetworkObjectWithName>,
-    val runtime: Int?,
-    val tagline: String?,
-    val overview: String,
-    val release_date: String?,
-    val vote_count: Int?,
-    val vote_average: Float?,
-    val genres: List<NetworkObjectWithName>
+    @SerializedName("production_countries") val productionCountries: List<NetworkObjectWithName>,
+    @SerializedName("runtime")val runtime: Int?,
+    @SerializedName("tagline") val tagline: String?,
+    @SerializedName("overview") val overview: String,
+    @SerializedName("release_date") val releaseDate: String?,
+    @SerializedName("vote_count") val voteCount: Int?,
+    @SerializedName("vote_average") val voteAverage: Float?,
+    @SerializedName("genres") val genres: List<NetworkObjectWithName>
 )
 
 data class NetworkTrailer(

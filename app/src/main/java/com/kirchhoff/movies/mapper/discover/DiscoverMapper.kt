@@ -27,29 +27,29 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
         UIPaginated(
             response.page,
             response.results.map { createUIMovie(it) },
-            response.total_pages
+            response.totalPages
         )
 
     private fun createUIDiscoverTvs(response: NetworkPaginated<NetworkTv>) =
         UIPaginated(
             response.page,
             response.results.map { createUITv(it) },
-            response.total_pages
+            response.totalPages
         )
 
     private fun createUIMovie(movie: NetworkMovie) =
         UIMovie(
             movie.id,
             movie.title,
-            movie.poster_path,
-            movie.backdrop_path
+            movie.posterPath,
+            movie.backdropPath
         )
 
     private fun createUITv(tv: NetworkTv) =
         UITv(
             tv.id,
             tv.name,
-            tv.poster_path,
-            tv.backdrop_path
+            tv.posterPath,
+            tv.backdropPath
         )
 }

@@ -3,7 +3,7 @@ package com.kirchhoff.movies.data.network.details.movie
 import com.google.gson.annotations.SerializedName
 import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
 
-class NetworkMovieDetails(
+data class NetworkMovieDetails(
     @SerializedName("production_countries") val productionCountries: List<NetworkObjectWithName>,
     @SerializedName("runtime")val runtime: Int?,
     @SerializedName("tagline") val tagline: String?,

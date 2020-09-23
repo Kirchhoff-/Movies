@@ -3,7 +3,7 @@ package com.kirchhoff.movies.data.network.details.tv
 import com.google.gson.annotations.SerializedName
 import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
 
-class NetworkTvDetails(
+data class NetworkTvDetails(
     @SerializedName("number_of_seasons") val numberOfSeasons: Int,
     @SerializedName("number_of_episodes") val numberOfEpisodes: Int,
     @SerializedName("overview") val overview: String,

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         vpMain.apply {
             adapter = MainPagerAdapter(supportFragmentManager)
-            offscreenPageLimit = 3
+            offscreenPageLimit = PAGE_COUNT
             addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
                 override fun onPageSelected(position: Int) {
                     navigationView.menu.getItem(position).isChecked = true
@@ -36,5 +36,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    companion object {
+        private const val PAGE_COUNT = 3
     }
 }

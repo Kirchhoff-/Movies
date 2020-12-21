@@ -1,3 +1,5 @@
 package com.kirchhoff.movies.data.network.core
 
-data class NetworkObjectWithName(val name: String)
+import com.google.gson.annotations.SerializedName
+
+data class NetworkObjectWithName(@SerializedName("name") val name: String)

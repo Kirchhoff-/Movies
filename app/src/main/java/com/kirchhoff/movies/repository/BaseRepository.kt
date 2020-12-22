@@ -2,6 +2,7 @@ package com.kirchhoff.movies.repository
 
 import retrofit2.Response
 
+@Suppress("TooGenericExceptionCaught")
 abstract class BaseRepository {
     suspend fun <T : Any> apiCall(call: suspend () -> Response<T>): Result<T> {
         return try {

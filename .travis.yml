@@ -22,5 +22,6 @@ jobs:
     script:
     - chmod +x ./gradlew
     - ./gradlew androidDependencies
-    - ./gradlew ktlint
     - ./gradlew lint
+    - ./gradlew ktlint
+    - ./gradlew detekt

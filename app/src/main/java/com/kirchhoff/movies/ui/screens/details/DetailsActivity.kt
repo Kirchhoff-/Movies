@@ -9,6 +9,7 @@ import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
+import com.kirchhoff.movies.ui.screens.details.fake.FakeFragment
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
@@ -48,7 +49,7 @@ class DetailsActivity : AppCompatActivity(R.layout.activity_with_fragment) {
 
     private fun openDetails(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
+            .replace(R.id.fragmentContainer, FakeFragment())
             .commit()
     }
 

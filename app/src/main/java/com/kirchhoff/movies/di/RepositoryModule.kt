@@ -2,6 +2,8 @@ package com.kirchhoff.movies.di
 
 import com.kirchhoff.movies.repository.discover.DiscoverRepository
 import com.kirchhoff.movies.repository.discover.IDiscoverRepository
+import com.kirchhoff.movies.repository.fake.FakeRepository
+import com.kirchhoff.movies.repository.fake.IFakeRepository
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import com.kirchhoff.movies.repository.movie.MovieRepository
 import com.kirchhoff.movies.repository.person.IPersonsRepository
@@ -39,5 +41,8 @@ val repositoryModule = module {
             reviewListMapper = get(),
             discoverMapper = get()
         )
+    }
+    single<IFakeRepository> {
+        FakeRepository()
     }
 }

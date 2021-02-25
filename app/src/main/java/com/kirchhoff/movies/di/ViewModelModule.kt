@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.di
 
+import com.kirchhoff.movies.ui.screens.details.fake.FakeVM
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsVM
 import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsVM
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsVM
@@ -18,6 +19,7 @@ val viewModelModule = module {
     viewModel { TvsVM(discoverRepository = get()) }
     viewModel { PersonsVM(personRepository = get()) }
     viewModel { MovieDetailsVM(movieRepository = get()) }
+    viewModel { FakeVM(get()) }
     viewModel { TvDetailsVM(tvRepository = get()) }
     viewModel { PersonDetailsVM(personRepository = get()) }
     viewModel { (dataId: Int, reviewType: ReviewType) ->
@@ -30,4 +32,5 @@ val viewModelModule = module {
     }
     viewModel { (movieId: Int) -> SimilarMoviesVM(movieId, movieRepository = get()) }
     viewModel { (tvId: Int) -> SimilarTvsVM(tvId, tvRepository = get()) }
+
 }

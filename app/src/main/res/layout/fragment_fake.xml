@@ -19,32 +19,32 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="Два параллельно"/>
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="Без одного await"/>
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="Без await"/>
         <Button
             android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="С одним exception"/>
         <Button
             android:id="@+id/button6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="С одним exception (try/catch блок)"/>
         <Button
             android:id="@+id/button7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="Supervisor job"/>
         <Button
             android:id="@+id/button8"
             android:layout_width="match_parent"

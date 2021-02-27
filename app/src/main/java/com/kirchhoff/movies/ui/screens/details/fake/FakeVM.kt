@@ -1,7 +1,6 @@
 package com.kirchhoff.movies.ui.screens.details.fake
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -213,10 +212,75 @@ class FakeVM(private val fakeRepository: IFakeRepository): ViewModel() {
     }
 
     private suspend fun asyncWithCatch(action: Deferred<String>): String {
-        /// return try {
-        return action.await()
-        // } catch (e: Exception) {
-        //     "Stub result"
+        return try {
+            return action.await()
+        } catch (e: Exception) {
+            "Stub result"
+        }
+    }
+
+    fun multipleAwait1() {
+        viewModelScope.launch {
+            supervisorScope {
+                val result1 = async { fakeRepository.task1(2000) }
+                val result2 = async { fakeRepository.exception1(5000) }
+
+                val res1 = asyncWithCatch(result1)
+                val res2 = asyncWithCatch(result2)
+
+                Log.e(
+                    "TAG",
+                    "ResultOne = ${res1}" + ", ResultTwo = ${res2}"
+                )
+            }
+        }
+    }
+
+    fun multipleAwait() {
+        viewModelScope.launch {
+            // supervisorScope {
+            val list = listOf(1, 2, 3, 4, 5, 6, 7)
+
+            list.map {
+                async(Dispatchers.IO) {
+                    try {
+                        fakeRepository.getInfo(it)
+                    } catch (e: Exception) {
+                        "asdf"
+                    }
+                }
+            }.awaitAll()
+                .filter { it != "asdf" }
+                .apply {
+                    Log.e("TAG", "apply")
+                    Log.e("TAG", "Result =  " + this)
+                }
+
+        }
         // }
+    }
+
+    fun multipleAwait2() {
+        viewModelScope.launch {
+            supervisorScope {
+                val list = listOf(1, 2, 3, 4, 5, 6, 7)
+
+                list.map {
+                    async(Dispatchers.IO) {
+                        try {
+                            fakeRepository.getInfo(it)
+                        } catch (e: Exception) {
+                            "asdf"
+                        }
+                    }.await()
+                }
+                    .filter { it != "asdf" }
+                    .apply {
+                        Log.e("TAG", "apply")
+                        Log.e("TAG", "Result =  " + this)
+                    }
+
+            }
+        }
     }
 }

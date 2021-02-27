@@ -28,6 +28,7 @@ class FakeFragment: BaseFragment(R.layout.fragment_fake) {
             button8.setOnClickListener { vm.example5() }
             button9.setOnClickListener { vm.example7() }
             button10.setOnClickListener { vm.example() }
+            button12.setOnClickListener { vm.multipleAwait2() }
         }
 
         vm.data.subscribe { viewBinding.button11.setText(it) }

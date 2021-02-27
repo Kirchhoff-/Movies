@@ -2,6 +2,7 @@ package com.kirchhoff.movies.repository.fake
 
 import android.util.Log
 import kotlinx.coroutines.delay
+import kotlin.random.Random
 
 class FakeRepository: IFakeRepository {
 
@@ -35,5 +36,17 @@ class FakeRepository: IFakeRepository {
 
         Log.e("TAG", "Throw error (exception task 2)")
         error("Error 2")
+    }
+
+    override suspend fun getInfo(id: Int): String {
+        Log.e("TAG", "Start get info, id = $id")
+
+        delay(Random.nextLong(2_000))
+
+        return if (id == 5) {
+            error("error")
+        } else {
+            id.toString()
+        }
     }
 }

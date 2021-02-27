@@ -5,4 +5,5 @@ interface IFakeRepository {
     suspend fun task2(delay: Long): String
     suspend fun exception1(delay: Long): String
     suspend fun exception2(delay: Long): String
+    suspend fun getInfo(id: Int): String
 }

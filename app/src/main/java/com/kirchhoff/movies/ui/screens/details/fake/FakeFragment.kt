@@ -18,7 +18,7 @@ class FakeFragment: BaseFragment(R.layout.fragment_fake) {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
-            button1.setOnClickListener {  }
+            button1.setOnClickListener { vm.first() }
         }
     }
 }

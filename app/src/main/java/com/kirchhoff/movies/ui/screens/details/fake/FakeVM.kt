@@ -1,6 +1,8 @@
 package com.kirchhoff.movies.ui.screens.details.fake
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.repository.fake.IFakeRepository
@@ -9,6 +11,8 @@ import kotlinx.coroutines.*
 class FakeVM(private val fakeRepository: IFakeRepository): ViewModel() {
 
     val supervisorJob = SupervisorJob()
+
+    val data: MutableLiveData<String> = MutableLiveData()
 
     //Последовательное выполнение
     fun first() {
@@ -162,8 +166,11 @@ class FakeVM(private val fakeRepository: IFakeRepository): ViewModel() {
         viewModelScope.launch {
             supervisorScope {
                 try {
-                    val result1 = launch { fakeRepository.task1(5000) }
-                    val result2 = launch { fakeRepository.exception1(2000) }
+                    val result1 = launch {
+                        data.value = "asdf"
+                        fakeRepository.task1(5000)
+                    }
+                    val result2 = launch { fakeRepository.task2(2000) }
 
                     // Log.e(
                     //     "TAG",
@@ -185,7 +192,10 @@ class FakeVM(private val fakeRepository: IFakeRepository): ViewModel() {
         viewModelScope.launch {
             supervisorScope {
                 try {
-                    val result1 = async { fakeRepository.exception1(2000) }
+                    val result1 = async {
+                        data.value = "asdf"
+                        fakeRepository.task1(2000)
+                    }
                     val result2 = async { fakeRepository.task2(5000) }
 
                     val res1 = asyncWithCatch(result1)

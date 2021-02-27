@@ -25,6 +25,8 @@ class FakeFragment: BaseFragment(R.layout.fragment_fake) {
             button5.setOnClickListener { vm.example2() }
             button6.setOnClickListener { vm.example3() }
             button7.setOnClickListener { vm.example4() }
+            button8.setOnClickListener { vm.example5() }
+            button9.setOnClickListener { vm.example7() }
         }
     }
 }

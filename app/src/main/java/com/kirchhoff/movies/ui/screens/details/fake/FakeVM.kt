@@ -93,4 +93,53 @@ class FakeVM(private val fakeRepository: IFakeRepository): ViewModel() {
             }
         }
     }
+
+    //Обработка ошибки с launch
+    fun example5() {
+        viewModelScope.launch {
+            try {
+                val resultOne = withContext(Dispatchers.IO) { fakeRepository.task1(3000) }
+                val resultTwo = withContext(Dispatchers.IO) { fakeRepository.exception2(2000) }
+
+                Log.e("TAG", "ResultOne = $resultOne" + ", ResultTwo = $resultTwo")
+            } catch (e:Exception) {
+                Log.e("TAG", "Handeled exception")
+            }
+        }
+    }
+
+    fun example6() {
+        viewModelScope.launch {
+            supervisorScope {
+                //Он здесь не ловит exception а ловит только когда вызываешь await
+              /*  try {
+                    val deffered = async { fakeRepository.exception1(3000) }
+                } catch (e: Exception) {
+                    Log.e("TAG", "Before await exception")
+                } */
+
+                //Оригинальный пример
+                val deffered = async { fakeRepository.exception1(3000) }
+                try {
+                    deffered.await()
+                } catch (e: Exception) {
+                    Log.e("TAG", "Handle exception")
+                }
+            }
+        }
+    }
+
+    //все равно будет exception
+    fun example7() {
+        viewModelScope.launch {
+            try {
+                val resultOne = launch(Dispatchers.IO) { fakeRepository.task1(3000) }
+                val resultTwo = launch(Dispatchers.IO) { fakeRepository.exception2(2000) }
+
+                Log.e("TAG", "ResultOne = $resultOne" + ", ResultTwo = $resultTwo")
+            } catch (e:Exception) {
+                Log.e("TAG", "Handeled exception")
+            }
+        }
+    }
 }

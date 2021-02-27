@@ -49,12 +49,12 @@
             android:id="@+id/button8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="exception with launch"/>
         <Button
             android:id="@+id/button9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stub text"/>
+            android:text="Async + Exception + Supervisor scope"/>
         <Button
             android:id="@+id/button10"
             android:layout_width="match_parent"

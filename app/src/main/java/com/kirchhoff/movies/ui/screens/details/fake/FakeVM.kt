@@ -137,9 +137,76 @@ class FakeVM(private val fakeRepository: IFakeRepository): ViewModel() {
                 val resultTwo = launch(Dispatchers.IO) { fakeRepository.exception2(2000) }
 
                 Log.e("TAG", "ResultOne = $resultOne" + ", ResultTwo = $resultTwo")
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 Log.e("TAG", "Handeled exception")
             }
         }
+    }
+
+    /* fun example() {
+         viewModelScope.launch {
+             try {
+                 supervisorScope {
+                     val result = async {
+                         val result = fakeRepository.exception1(3000)
+                         Log.e("TAG", "Result = $result")
+                     }
+                 }
+             } catch (e: Exception) {
+                 Log.e("TAG", "Handle exception")
+             }
+         }
+     } */
+
+    fun example() {
+        viewModelScope.launch {
+            supervisorScope {
+                try {
+                    val result1 = launch { fakeRepository.task1(5000) }
+                    val result2 = launch { fakeRepository.exception1(2000) }
+
+                    // Log.e(
+                    //     "TAG",
+                    //"ResultOne = ${result1.await()}" + ", ResultTwo = ${result2.await()}"
+                    //  )
+
+                    result1.join()
+                    result2.join()
+
+                    Log.e("TAG", "Finished")
+                } catch (e: Exception) {
+                    Log.e("TAG", "Exception")
+                }
+            }
+        }
+    }
+
+    fun ProgressExample() {
+        viewModelScope.launch {
+            supervisorScope {
+                try {
+                    val result1 = async { fakeRepository.exception1(2000) }
+                    val result2 = async { fakeRepository.task2(5000) }
+
+                    val res1 = asyncWithCatch(result1)
+                    val res2 = asyncWithCatch(result2)
+
+                    Log.e(
+                        "TAG",
+                        "ResultOne = ${res1}" + ", ResultTwo = ${res2}"
+                    )
+                } catch (e: Exception) {
+                    Log.e("TAG", "asdf")
+                }
+            }
+        }
+    }
+
+    private suspend fun asyncWithCatch(action: Deferred<String>): String {
+        /// return try {
+        return action.await()
+        // } catch (e: Exception) {
+        //     "Stub result"
+        // }
     }
 }

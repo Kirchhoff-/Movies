@@ -1,7 +1,7 @@
-package com.kirchhoff.movies.data.network.details.tv
+package com.kirchhoff.movies.networkdata.details.tv
 
 import com.google.gson.annotations.SerializedName
-import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
+import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName
 
 data class NetworkTvDetails(
     @SerializedName("number_of_seasons") val numberOfSeasons: Int,

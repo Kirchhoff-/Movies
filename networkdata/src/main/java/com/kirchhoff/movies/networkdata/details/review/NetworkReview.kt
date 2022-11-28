@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.data.network.details.review
+package com.kirchhoff.movies.networkdata.details.review
 
 data class NetworkReview(
     val author: String,

@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.network.services
 
-import com.kirchhoff.movies.data.network.core.NetworkPaginated
-import com.kirchhoff.movies.data.network.main.NetworkMovie
-import com.kirchhoff.movies.data.network.main.NetworkTv
+import com.kirchhoff.movies.networkdata.core.NetworkPaginated
+import com.kirchhoff.movies.networkdata.main.NetworkMovie
+import com.kirchhoff.movies.networkdata.main.NetworkTv
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

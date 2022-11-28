@@ -1,10 +1,10 @@
 package com.kirchhoff.movies.network.services
 
-import com.kirchhoff.movies.data.network.core.NetworkEntertainmentCredits
-import com.kirchhoff.movies.data.network.core.NetworkPaginated
-import com.kirchhoff.movies.data.network.details.review.NetworkReview
-import com.kirchhoff.movies.data.network.details.tv.NetworkTvDetails
-import com.kirchhoff.movies.data.network.main.NetworkTv
+import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
+import com.kirchhoff.movies.networkdata.core.NetworkPaginated
+import com.kirchhoff.movies.networkdata.details.review.NetworkReview
+import com.kirchhoff.movies.networkdata.details.tv.NetworkTvDetails
+import com.kirchhoff.movies.networkdata.main.NetworkTv
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

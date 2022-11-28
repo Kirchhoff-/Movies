@@ -1,0 +1,5 @@
+apply from: '../buildsystem/kotlin-module.gradle'
+
+dependencies {
+    implementation libraries.gson
+}

@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: '../buildsystem/dependencies.gradle'
+
+android {
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    lintOptions {
+        disable 'Typos', 'ContentDescription'
+        warningsAsErrors true
+    }
+}
+
+dependencies {
+    implementation libraries.kotlin
+}

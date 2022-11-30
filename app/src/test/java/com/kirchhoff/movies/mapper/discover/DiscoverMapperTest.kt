@@ -1,10 +1,10 @@
 package com.kirchhoff.movies.mapper.discover
 
-import com.kirchhoff.movies.data.network.core.NetworkPaginated
-import com.kirchhoff.movies.data.network.main.NetworkMovie
-import com.kirchhoff.movies.data.network.main.NetworkTv
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UITv
+import com.kirchhoff.movies.networkdata.core.NetworkPaginated
+import com.kirchhoff.movies.networkdata.main.NetworkMovie
+import com.kirchhoff.movies.networkdata.main.NetworkTv
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.utils.nextString
 import kotlin.random.Random

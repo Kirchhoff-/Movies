@@ -1,11 +1,11 @@
 package com.kirchhoff.movies.mapper.person.details
 
-import com.kirchhoff.movies.data.network.details.person.NetworkPersonCastCredit
-import com.kirchhoff.movies.data.network.details.person.NetworkPersonCredits
-import com.kirchhoff.movies.data.network.details.person.NetworkPersonCrewCredit
-import com.kirchhoff.movies.data.network.details.person.NetworkPersonDetails
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCastCredit
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCredits
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCrewCredit
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonDetails
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.utils.nextString
 import kotlin.random.Random

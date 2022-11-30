@@ -1,10 +1,5 @@
 package com.kirchhoff.movies.mapper.movie
 
-import com.kirchhoff.movies.data.network.core.NetworkEntertainmentCredits
-import com.kirchhoff.movies.data.network.core.NetworkObjectWithName
-import com.kirchhoff.movies.data.network.details.movie.NetworkMovieDetails
-import com.kirchhoff.movies.data.network.details.movie.NetworkTrailer
-import com.kirchhoff.movies.data.network.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.movie.UICountry
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
@@ -12,6 +7,11 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.mapper.core.ICoreMapper
+import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
+import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName
+import com.kirchhoff.movies.networkdata.details.movie.NetworkMovieDetails
+import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailer
+import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.repository.Result
 
 class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {

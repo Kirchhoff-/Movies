@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.mapper.person.main
 
-import com.kirchhoff.movies.data.network.core.NetworkPaginated
-import com.kirchhoff.movies.data.network.main.NetworkPerson
 import com.kirchhoff.movies.data.ui.main.UIPerson
+import com.kirchhoff.movies.networkdata.core.NetworkPaginated
+import com.kirchhoff.movies.networkdata.main.NetworkPerson
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.utils.nextString
 import kotlin.random.Random

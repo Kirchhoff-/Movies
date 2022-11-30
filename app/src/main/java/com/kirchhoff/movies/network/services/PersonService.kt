@@ -1,9 +1,8 @@
 package com.kirchhoff.movies.network.services
-
-import com.kirchhoff.movies.data.network.core.NetworkPaginated
-import com.kirchhoff.movies.data.network.details.person.NetworkPersonCredits
-import com.kirchhoff.movies.data.network.details.person.NetworkPersonDetails
-import com.kirchhoff.movies.data.network.main.NetworkPerson
+import com.kirchhoff.movies.networkdata.core.NetworkPaginated
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCredits
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonDetails
+import com.kirchhoff.movies.networkdata.main.NetworkPerson
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.data.network.core
+package com.kirchhoff.movies.networkdata.core
 
 import com.google.gson.annotations.SerializedName
 

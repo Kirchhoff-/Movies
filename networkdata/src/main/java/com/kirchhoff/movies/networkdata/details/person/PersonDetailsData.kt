@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.data.network.details.person
+package com.kirchhoff.movies.networkdata.details.person
 
 import com.google.gson.annotations.SerializedName
 

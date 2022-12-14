@@ -1,3 +1,6 @@
-include ':app'
-include ':networkdata'
+include ':app',
+        ':core',
+        ':networkdata',
+        ':voteview'
+
 rootProject.name='Movies'

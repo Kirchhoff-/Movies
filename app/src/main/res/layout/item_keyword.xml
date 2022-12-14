@@ -10,5 +10,6 @@
     android:padding="@dimen/keyword_item_padding"
     android:textColor="@color/text_main"
     android:textSize="14sp"
+    tools:ignore="Overdraw"
     tools:layout_gravity="center"
     tools:text="@tools:sample/first_names" />

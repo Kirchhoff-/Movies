@@ -4,8 +4,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.extensions.downloadPoster
-import com.kirchhoff.movies.extensions.inflate
+import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.extensions.inflate
 import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 

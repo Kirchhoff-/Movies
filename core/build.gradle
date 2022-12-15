@@ -1,1 +1,6 @@
 apply from: '../buildsystem/android-module.gradle'
+
+dependencies {
+    implementation libraries.glide
+    annotationProcessor libraries.glideCompiler
+}

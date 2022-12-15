@@ -3,8 +3,8 @@ package com.kirchhoff.movies.ui.screens.reviews.list.adapter
 import android.view.ViewGroup
 import android.widget.TextView
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.extensions.inflate
 import com.kirchhoff.movies.data.ui.details.review.UIReview
-import com.kirchhoff.movies.extensions.inflate
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 
 class ReviewVH(parent: ViewGroup) : BaseVH<UIReview>(parent.inflate(R.layout.item_review)) {

@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTvTitle"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <com.kirchhoff.movies.ui.views.VoteView
+    <com.kirchhoff.movies.voteview.VoteView
         android:id="@+id/voteView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.views
+package com.kirchhoff.movies.voteview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,6 @@ import android.widget.LinearLayout
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.view.isVisible
-import com.kirchhoff.movies.R
 
 class VoteView @JvmOverloads constructor(
     context: Context,
@@ -30,7 +29,7 @@ class VoteView @JvmOverloads constructor(
     fun displayRatingAndVoteCount(voteAverage: Float?, voteCount: Int?) {
         if (voteAverage != null) {
             rbRating.rating = voteAverage / 2
-            tvRating.text = resources.getString(R.string.rating_format, voteAverage)
+            tvRating.text = resources.getString(R.string.vote_view_rating_format, voteAverage)
         }
 
         if (voteCount != null) {

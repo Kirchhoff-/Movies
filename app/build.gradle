@@ -55,7 +55,7 @@ dependencies {
     implementation libraries.androidxMaterial
     implementation libraries.constraintLayout
     implementation libraries.flexbox
-    implementation libraries.ktx
+    implementation libraries.coreKtx
 
     implementation libraries.kotlin
     implementation libraries.coroutines
@@ -87,7 +87,9 @@ dependencies {
     testImplementation libraries.coroutinesTest
     testImplementation libraries.archTesting
 
+    implementation project(path: ':core')
     implementation project(path: ':networkdata')
+    implementation project(path: ':voteview')
 }
 
 def getLocalProperty(String propName) {

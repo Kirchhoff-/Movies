@@ -1,8 +1,11 @@
-package com.kirchhoff.movies.extensions
+package com.kirchhoff.movies.core.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+
+private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
+private const val YOUTUBE_POSTER_PATH = "https://img.youtube.com/vi/%s/0.jpg"
 
 fun ImageView.downloadPoster(path: String?) {
     path?.let {
@@ -16,7 +19,7 @@ fun ImageView.downloadAvatar(path: String?) {
     path?.let {
         Glide.with(context)
             .load(BASE_POSTER_PATH + path)
-            .apply(avatarOptions)
+            .apply(RequestOptions().centerCrop().circleCrop())
             .into(this)
     }
 }
@@ -28,8 +31,3 @@ fun ImageView.downloadYoutubePoster(path: String?) {
             .into(this)
     }
 }
-
-private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
-private const val YOUTUBE_POSTER_PATH = "https://img.youtube.com/vi/%s/0.jpg"
-
-private val avatarOptions: RequestOptions = RequestOptions().centerCrop().circleCrop()

@@ -7,6 +7,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.extensions.setTextOrGone
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
@@ -14,8 +16,6 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
-import com.kirchhoff.movies.extensions.downloadPoster
-import com.kirchhoff.movies.extensions.setTextOrGone
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
@@ -90,12 +90,11 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             tvOverview.text = movieDetails.overview
             tvReleaseDate.setTextOrGone(movieDetails.releaseDate)
             tvTagline.setTextOrGone(movieDetails.tagLine)
-            tvRuntime.setTextOrGone(
-                movieDetails.runtime, getString(
-                    R.string.movie_runtime_format,
-                    formatMovieRuntime(movieDetails.runtime),
-                    movieDetails.runtime
-                )
+            tvRuntime.isVisible = movieDetails.runtime != null
+            tvRuntime.text = getString(
+                R.string.movie_runtime_format,
+                formatMovieRuntime(movieDetails.runtime),
+                movieDetails.runtime
             )
 
             tvCountry.isVisible = movieDetails.productionCountries.isNotEmpty()

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.databinding.FragmentPaginatedBinding
-import com.kirchhoff.movies.extensions.getSizeFromRes
 import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
@@ -41,9 +40,9 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
             addItemDecoration(
                 GridMarginItemDecoration(
                     spanCount,
-                    getSizeFromRes(R.dimen.main_screen_item_top_margin),
-                    getSizeFromRes(R.dimen.main_screen_item_bottom_margin),
-                    getSizeFromRes(R.dimen.main_screen_item_edges_margin)
+                    resources.getDimensionPixelSize(R.dimen.main_screen_item_top_margin),
+                    resources.getDimensionPixelSize(R.dimen.main_screen_item_bottom_margin),
+                    resources.getDimensionPixelSize(R.dimen.main_screen_item_edges_margin)
                 )
             )
             addOnScrollListener(paginator)

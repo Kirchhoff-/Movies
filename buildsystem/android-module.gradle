@@ -20,6 +20,10 @@ android {
         jvmTarget = "1.8"
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     lintOptions {
         disable 'Typos', 'ContentDescription'
         warningsAsErrors true

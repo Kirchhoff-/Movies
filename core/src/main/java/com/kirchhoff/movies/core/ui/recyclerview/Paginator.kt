@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.utils.recyclerView
+package com.kirchhoff.movies.core.ui.recyclerview
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager

@@ -33,4 +33,5 @@ android {
 dependencies {
     implementation libraries.kotlin
     implementation libraries.coreKtx
+    implementation libraries.androidxMaterial
 }

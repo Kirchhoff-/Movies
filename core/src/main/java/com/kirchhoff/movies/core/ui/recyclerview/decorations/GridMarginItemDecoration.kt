@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.utils.recyclerView.decorations
+package com.kirchhoff.movies.core.ui.recyclerview.decorations
 
 import android.graphics.Rect
 import android.view.View

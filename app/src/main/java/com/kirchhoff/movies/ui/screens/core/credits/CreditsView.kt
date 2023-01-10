@@ -9,10 +9,10 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
+import com.kirchhoff.movies.core.ui.recyclerview.decorations.TopBottomMarginItemDecoration
 import com.kirchhoff.movies.ui.screens.core.credits.adapter.CreditsAdapter
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.ui.utils.recyclerView.decorations.EdgesMarginItemDecoration
-import com.kirchhoff.movies.ui.utils.recyclerView.decorations.TopBottomMarginItemDecoration
 
 class CreditsView @JvmOverloads constructor(
     context: Context,

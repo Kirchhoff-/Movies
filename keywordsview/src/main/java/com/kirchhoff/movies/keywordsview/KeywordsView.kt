@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.views.keywords
+package com.kirchhoff.movies.keywordsview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import com.kirchhoff.movies.R
-import com.kirchhoff.movies.ui.views.keywords.adapter.KeywordsListAdapter
+import com.kirchhoff.movies.keywordsview.adapter.KeywordsListAdapter
+import com.kirchhoff.movies.keywordsview.decorations.KeywordsItemDecoration
 
 class KeywordsView @JvmOverloads constructor(
     context: Context,
@@ -19,7 +19,7 @@ class KeywordsView @JvmOverloads constructor(
     private val keywordAdapter = KeywordsListAdapter()
 
     init {
-        var firstItemMarginEnabled: Boolean = false
+        var firstItemMarginEnabled = false
         context.theme.obtainStyledAttributes(attrs, R.styleable.KeywordsView, 0, 0).use {
             firstItemMarginEnabled = it.getBoolean(R.styleable.KeywordsView_firstItemMarginEnabled, false)
         }

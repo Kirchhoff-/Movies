@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivTvPoster" />
 
-    <com.kirchhoff.movies.ui.views.keywords.KeywordsView
+    <com.kirchhoff.movies.keywordsview.KeywordsView
         android:id="@+id/vKeywords"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.views.keywords.adapter
+package com.kirchhoff.movies.keywordsview.adapter
 
 import android.view.ViewGroup
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter

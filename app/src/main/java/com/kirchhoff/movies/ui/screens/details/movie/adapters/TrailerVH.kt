@@ -5,8 +5,8 @@ import android.widget.ImageView
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadYoutubePoster
 import com.kirchhoff.movies.core.extensions.inflate
+import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 
 class TrailerVH(parent: ViewGroup) : BaseVH<UITrailer>(parent.inflate(R.layout.item_trailer)) {
 

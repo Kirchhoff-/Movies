@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.setTextOrGone
+import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
@@ -22,8 +24,6 @@ import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.ui.utils.recyclerView.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.utils.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -53,9 +53,11 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
         with(viewBinding.content.rvTrailers) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            addItemDecoration(EdgesMarginItemDecoration(
+            addItemDecoration(
+                EdgesMarginItemDecoration(
                 resources.getDimensionPixelSize(R.dimen.trailer_item_margin)
-            ))
+            )
+            )
         }
 
         with(viewBinding.content) {

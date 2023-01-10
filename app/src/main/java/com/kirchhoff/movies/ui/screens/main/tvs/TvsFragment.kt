@@ -1,11 +1,11 @@
 package com.kirchhoff.movies.ui.screens.main.tvs
 
+import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),

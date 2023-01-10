@@ -5,8 +5,8 @@ import android.widget.ImageView
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadAvatar
 import com.kirchhoff.movies.core.extensions.inflate
+import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
 import com.kirchhoff.movies.data.ui.main.UIPerson
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
 
 class PersonVH(parent: ViewGroup) : BaseVH<UIPerson>(parent.inflate(R.layout.item_person)) {
 

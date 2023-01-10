@@ -2,13 +2,13 @@ package com.kirchhoff.movies.ui.screens.reviews.list
 
 import android.os.Bundle
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.reviews.ReviewType
 import com.kirchhoff.movies.ui.screens.reviews.details.ReviewDetailsFragment
 import com.kirchhoff.movies.ui.screens.reviews.list.adapter.ReviewsListAdapter
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

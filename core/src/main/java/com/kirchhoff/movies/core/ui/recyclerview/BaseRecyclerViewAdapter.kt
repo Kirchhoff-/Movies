@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.utils.recyclerView
+package com.kirchhoff.movies.core.ui.recyclerview
 
 import android.view.View
 import androidx.annotation.CallSuper

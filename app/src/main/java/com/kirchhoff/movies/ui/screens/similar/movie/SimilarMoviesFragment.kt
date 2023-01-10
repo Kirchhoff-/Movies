@@ -1,12 +1,12 @@
 package com.kirchhoff.movies.ui.screens.similar.movie
 
 import android.os.Bundle
+import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.movies.adapter.MoviesListAdapter
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseRecyclerViewAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

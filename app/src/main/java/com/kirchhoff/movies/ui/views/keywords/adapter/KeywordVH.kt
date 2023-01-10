@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.inflate
-import com.kirchhoff.movies.ui.utils.recyclerView.BaseVH
+import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
 
 class KeywordVH(parent: ViewGroup) : BaseVH<String>(parent.inflate(R.layout.item_keyword)) {
 

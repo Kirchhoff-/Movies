@@ -54,7 +54,6 @@ android {
 dependencies {
     implementation libraries.androidxMaterial
     implementation libraries.constraintLayout
-    implementation libraries.flexbox
     implementation libraries.coreKtx
 
     implementation libraries.kotlin
@@ -87,6 +86,7 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
     implementation project(path: ':voteview')
+    implementation project(path: ':keywordsview')
 }
 
 def getLocalProperty(String propName) {

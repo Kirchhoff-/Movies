@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.views.keywords
+package com.kirchhoff.movies.keywordsview.decorations
 
 import android.graphics.Rect
 import android.view.View

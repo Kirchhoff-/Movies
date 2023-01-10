@@ -112,7 +112,7 @@
         app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible">
 
-        <com.kirchhoff.movies.ui.views.keywords.KeywordsView
+        <com.kirchhoff.movies.keywordsview.KeywordsView
             android:id="@+id/vKeywords"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -12,12 +12,13 @@ import com.kirchhoff.movies.databinding.ActivityReviewBinding
 import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
 import com.kirchhoff.movies.utils.viewBinding
 
-class ReviewsActivity : AppCompatActivity(R.layout.activity_review) {
+class ReviewsActivity : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivityReviewBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(viewBinding.root)
 
         val reviewType: ReviewType =
             ReviewType.values()[intent.extras!!.getInt(REVIEW_TYPE_ARG)]

@@ -13,12 +13,13 @@ import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsFragment
 import com.kirchhoff.movies.utils.viewBinding
 
-class SimilarActivity : AppCompatActivity(R.layout.activity_similar) {
+class SimilarActivity : AppCompatActivity() {
 
     private val viewBinding by viewBinding(ActivitySimilarBinding::inflate)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(viewBinding.root)
 
         val similarType: SimilarType =
             SimilarType.values()[intent.extras!!.getInt(SIMILAR_TYPE_ARG)]

@@ -31,10 +31,4 @@
     <dimen name="trailer_item_height">150dp</dimen>
     <dimen name="trailer_item_margin">16dp</dimen>
     <dimen name="trailer_item_source_image_size">48dp</dimen>
-
-    <dimen name="credit_item_height">250dp</dimen>
-    <dimen name="credit_item_width">150dp</dimen>
-    <dimen name="credit_item_image_height">190dp</dimen>
-
-    <dimen name="credits_view_edges_margin">16dp</dimen>
 </resources>

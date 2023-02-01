@@ -87,6 +87,7 @@ dependencies {
     implementation project(path: ':networkdata')
     implementation project(path: ':voteview')
     implementation project(path: ':keywordsview')
+    implementation project(path: ':creditsview')
 }
 
 def getLocalProperty(String propName) {

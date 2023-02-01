@@ -5,7 +5,7 @@ import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.TextView
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.core.ui.BaseFragment
 
 class ReviewDetailsFragment : BaseFragment(R.layout.fragment_review_details) {
 

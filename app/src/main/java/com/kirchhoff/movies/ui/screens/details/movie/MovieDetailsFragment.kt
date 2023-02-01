@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.setTextOrGone
+import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
@@ -18,7 +19,6 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
-import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter

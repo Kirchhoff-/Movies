@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens
+package com.kirchhoff.movies.core.ui
 
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment

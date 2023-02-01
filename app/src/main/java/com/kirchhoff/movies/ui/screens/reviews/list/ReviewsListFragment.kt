@@ -28,6 +28,8 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     override val spanCount = SPAN_COUNT
 
+    override val emptyResultText = R.string.empty_reviews
+
     override fun onItemClick(item: UIReview) {
         requireActivity().supportFragmentManager
             .beginTransaction()

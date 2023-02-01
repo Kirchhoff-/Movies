@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.ui.screens.main.movies
 
+import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIMovie
@@ -18,6 +19,8 @@ class MoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
     override val threshold = MOVIES_THRESHOLD
 
     override val spanCount = SPAN_COUNT
+
+    override val emptyResultText = R.string.empty_movies
 
     companion object {
         private const val SPAN_COUNT = 2

@@ -19,6 +19,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
 
     abstract val threshold: Int
     abstract val spanCount: Int
+    abstract val emptyResultText: Int
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
     abstract val vm: PaginatedScreenVM<T>
 
@@ -34,6 +35,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewBinding.tvEmptyResult.setText(emptyResultText)
         viewBinding.rv.apply {
             layoutManager = GridLayoutManager(requireContext(), spanCount)
             adapter = listAdapter
@@ -53,6 +55,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
             paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
             data.subscribe(::obtainDataResponse)
             error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
+            showEmptyResult.subscribe(::obtainViewsVisibility)
         }
     }
 
@@ -65,5 +68,10 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
         listAdapter.addItems(response.results)
         paginator.totalPages = response.totalPages
         paginator.isLoading = false
+    }
+
+    private fun obtainViewsVisibility(isEmptyResult: Boolean) {
+        viewBinding.rv.isVisible = !isEmptyResult
+        viewBinding.tvEmptyResult.isVisible = isEmptyResult
     }
 }

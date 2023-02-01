@@ -30,6 +30,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvEmptyResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/text_main"
+        tools:text="No result"
+        tools:visibility="gone" />
+
     <ProgressBar
         android:id="@+id/pbLoading"
         android:layout_width="wrap_content"

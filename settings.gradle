@@ -2,6 +2,7 @@ include ':app',
         ':core',
         ':networkdata',
         ':voteview',
-        ':keywordsview'
+        ':keywordsview',
+        ':creditsview'
 
 rootProject.name='Movies'

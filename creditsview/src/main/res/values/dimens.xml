@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="credit_item_height">250dp</dimen>
+    <dimen name="credit_item_width">150dp</dimen>
+    <dimen name="credit_item_image_height">190dp</dimen>
+    <dimen name="credits_view_edges_margin">16dp</dimen>
+</resources>

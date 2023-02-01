@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.data.ui.core
 
-import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
+import com.kirchhoff.movies.creditsview.CreditsView
 
 data class UIEntertainmentCredits(
     val cast: List<UIEntertainmentPerson.Actor>?,

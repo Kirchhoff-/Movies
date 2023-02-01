@@ -6,13 +6,13 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
 import com.kirchhoff.movies.core.ui.recyclerview.Paginator
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.databinding.FragmentPaginatedBinding
-import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.utils.viewBinding
 
 abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragment(R.layout.fragment_paginated) {

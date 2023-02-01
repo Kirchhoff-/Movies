@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.data.ui.details.person.UIMediaType
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
@@ -14,7 +15,6 @@ import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
-import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.utils.viewBinding

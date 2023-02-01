@@ -5,13 +5,13 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
-import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity

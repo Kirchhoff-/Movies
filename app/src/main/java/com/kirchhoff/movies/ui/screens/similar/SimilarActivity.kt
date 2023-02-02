@@ -35,14 +35,14 @@ class SimilarActivity : AppCompatActivity() {
     private fun similarMovie() {
         val movie: UIMovie = intent.getParcelableExtra(MOVIE_ARG)!!
 
-        viewBinding.toolbar.title = getString(R.string.movies_like, movie.title)
+        viewBinding.toolbar.title = getString(R.string.similar_to_format, movie.title)
         openSimilar(SimilarMoviesFragment.newInstance(movie.id))
     }
 
     private fun similarTv() {
         val tv: UITv = intent.getParcelableExtra(TV_ARG)!!
 
-        viewBinding.toolbar.title = getString(R.string.tv_show_like, tv.name)
+        viewBinding.toolbar.title = getString(R.string.similar_to_format, tv.name)
         openSimilar(SimilarTvsFragment.newInstance(tv.id))
     }
 

@@ -35,7 +35,7 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = title
+        requireActivity().title = getString(R.string.review_list_title_format, title)
     }
 
     override fun onItemClick(item: UIReview) {

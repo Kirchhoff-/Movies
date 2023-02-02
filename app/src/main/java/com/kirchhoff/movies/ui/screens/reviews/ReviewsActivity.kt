@@ -31,18 +31,19 @@ class ReviewsActivity : AppCompatActivity() {
         viewBinding.toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
+    override fun setTitle(title: CharSequence?) {
+        super.setTitle(title)
+        viewBinding.toolbar.title = title
+    }
+
     private fun movieReview() {
         val movie: UIMovie = intent.getParcelableExtra(MOVIE_ARG)!!
-
-        viewBinding.toolbar.title = movie.title
-        openReviews(ReviewsListFragment.newInstance(movie.id, ReviewType.MOVIE))
+        openReviews(ReviewsListFragment.newInstance(movie.id, ReviewType.MOVIE, movie.title))
     }
 
     private fun tvReview() {
         val tv: UITv = intent.getParcelableExtra(TV_ARG)!!
-
-        viewBinding.toolbar.title = tv.name
-        openReviews(ReviewsListFragment.newInstance(tv.id, ReviewType.TV))
+        openReviews(ReviewsListFragment.newInstance(tv.id, ReviewType.TV, tv.name))
     }
 
     private fun openReviews(fragment: Fragment) {

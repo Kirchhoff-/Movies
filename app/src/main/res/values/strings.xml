@@ -16,6 +16,7 @@
     <string name="bio">Bio</string>
     <string name="no_information">No information</string>
     <string name="reviews">Reviews</string>
+    <string name="review_details_title_format">%1$s %2$s review</string>
     <string name="similar_movies">Similar Movies</string>
     <string name="similar_tv_shows">Similar Tv shows</string>
 

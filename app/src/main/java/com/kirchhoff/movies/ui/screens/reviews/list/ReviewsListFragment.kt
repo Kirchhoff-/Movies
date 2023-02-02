@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.ui.screens.reviews.list
 
 import android.os.Bundle
+import android.view.View
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
@@ -30,26 +31,37 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     override val emptyResultText = R.string.empty_reviews
 
+    private val title by lazy { arguments?.getString(REVIEW_TITLE_ARG).orEmpty() }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        requireActivity().title = title
+    }
+
     override fun onItemClick(item: UIReview) {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragmentContainer, ReviewDetailsFragment.newInstance(item.content))
+            .replace(R.id.fragmentContainer, ReviewDetailsFragment.newInstance(item, title))
             .addToBackStack(null)
             .commit()
     }
 
     companion object {
-        fun newInstance(id: Int, reviewType: ReviewType): ReviewsListFragment {
-            val fragment = ReviewsListFragment()
-            val arg = Bundle()
-            arg.putInt(ID_ARG, id)
-            arg.putInt(REVIEW_TYPE_ARG, reviewType.ordinal)
-            fragment.arguments = arg
-            return fragment
+        fun newInstance(
+            id: Int,
+            reviewType: ReviewType,
+            title: String?
+        ): ReviewsListFragment = ReviewsListFragment().apply {
+            arguments = Bundle().apply {
+                putInt(ID_ARG, id)
+                putInt(REVIEW_TYPE_ARG, reviewType.ordinal)
+                putString(REVIEW_TITLE_ARG, title)
+            }
         }
 
         private const val ID_ARG = "ID_ARG"
         private const val REVIEW_TYPE_ARG = "REVIEW_TYPE_ARG"
+        private const val REVIEW_TITLE_ARG = "REVIEW_TITLE_ARG"
         private const val SPAN_COUNT = 1
         private const val REVIEWS_THRESHOLD = 3
     }

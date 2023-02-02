@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.creditsview.CreditsView
@@ -37,6 +38,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         with(viewBinding) {
             ivBackdrop.downloadPoster(tv.backdropPath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            appbar.addTitleWithCollapsingListener(toolbar, tv.name.orEmpty())
         }
 
         with(viewBinding.content) {

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.setTextOrGone
 import com.kirchhoff.movies.core.ui.BaseFragment
@@ -49,6 +50,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         with(viewBinding) {
             ivBackdrop.downloadPoster(movie.backdropPath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            appbar.addTitleWithCollapsingListener(toolbar, movie.title.orEmpty())
         }
 
         with(viewBinding.content.rvTrailers) {

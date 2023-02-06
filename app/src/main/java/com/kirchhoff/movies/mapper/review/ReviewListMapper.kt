@@ -23,5 +23,9 @@ class ReviewListMapper : BaseMapper(), IReviewListMapper {
         )
 
     private fun createUIReview(networkReview: NetworkReview) =
-        UIReview(networkReview.author, networkReview.content)
+        UIReview(
+            networkReview.author,
+            networkReview.content,
+            networkReview.authorDetails.avatar
+        )
 }

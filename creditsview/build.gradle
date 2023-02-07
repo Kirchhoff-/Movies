@@ -1,0 +1,5 @@
+apply from: '../buildsystem/android-module.gradle'
+
+dependencies {
+    implementation project(path: ':core')
+}

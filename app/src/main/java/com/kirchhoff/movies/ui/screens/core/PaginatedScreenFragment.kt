@@ -6,19 +6,20 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
 import com.kirchhoff.movies.core.ui.recyclerview.Paginator
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.databinding.FragmentPaginatedBinding
-import com.kirchhoff.movies.ui.screens.BaseFragment
 import com.kirchhoff.movies.utils.viewBinding
 
 abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragment(R.layout.fragment_paginated) {
 
     abstract val threshold: Int
     abstract val spanCount: Int
+    abstract val emptyResultText: Int
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
     abstract val vm: PaginatedScreenVM<T>
 
@@ -34,6 +35,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewBinding.tvEmptyResult.setText(emptyResultText)
         viewBinding.rv.apply {
             layoutManager = GridLayoutManager(requireContext(), spanCount)
             adapter = listAdapter
@@ -53,6 +55,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
             paginating.subscribe { viewBinding.pbPaginate.isVisible = it }
             data.subscribe(::obtainDataResponse)
             error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
+            showEmptyResult.subscribe(::obtainViewsVisibility)
         }
     }
 
@@ -65,5 +68,10 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
         listAdapter.addItems(response.results)
         paginator.totalPages = response.totalPages
         paginator.isLoading = false
+    }
+
+    private fun obtainViewsVisibility(isEmptyResult: Boolean) {
+        viewBinding.rv.isVisible = !isEmptyResult
+        viewBinding.tvEmptyResult.isVisible = isEmptyResult
     }
 }

@@ -21,12 +21,16 @@ abstract class PaginatedScreenVM<T : UIPaginated<*>> : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
+    private val _showEmptyResult = MutableLiveData<Boolean>()
+    val showEmptyResult = _showEmptyResult
+
     private val _data = MutableLiveData<T>()
     val data: LiveData<T> = _data
 
     fun fetchData(page: Int) {
         if (page == 1) {
             _loading.postValue(true)
+            _showEmptyResult.postValue(false)
         } else {
             _paginating.postValue(true)
         }
@@ -41,7 +45,10 @@ abstract class PaginatedScreenVM<T : UIPaginated<*>> : ViewModel() {
             }
 
             when (result) {
-                is Result.Success -> _data.postValue(result.data)
+                is Result.Success -> {
+                    _data.postValue(result.data)
+                    _showEmptyResult.postValue(result.data.results.isEmpty() && page == 1)
+                }
                 else -> _error.postValue(result.toString())
             }
         }

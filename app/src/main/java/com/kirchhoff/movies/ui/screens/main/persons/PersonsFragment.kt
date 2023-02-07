@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.ui.screens.main.persons
 
+import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIPerson
@@ -18,6 +19,8 @@ class PersonsFragment : PaginatedScreenFragment<UIPerson, UIPaginated<UIPerson>>
     override val threshold = PERSONS_THRESHOLD
 
     override val spanCount = SPAN_COUNT
+
+    override val emptyResultText = R.string.empty_persons
 
     companion object {
         private const val SPAN_COUNT = 3

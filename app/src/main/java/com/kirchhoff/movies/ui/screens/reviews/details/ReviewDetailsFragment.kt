@@ -5,29 +5,35 @@ import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.TextView
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.ui.screens.BaseFragment
+import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.data.ui.details.review.UIReview
 
 class ReviewDetailsFragment : BaseFragment(R.layout.fragment_review_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val content = arguments!!.getString(CONTENT_ARG)!!
+        val review = arguments!!.getParcelable<UIReview>(REVIEW_ARG)!!
+        val title = arguments?.getString(TITLE_ARG)
 
         val tvReviewContent: TextView = view.findViewById(R.id.tvReviewContent)
         tvReviewContent.movementMethod = ScrollingMovementMethod()
-        tvReviewContent.text = content
+        tvReviewContent.text = review.content
+        requireActivity().title = getString(R.string.review_details_title_format, review.author, title)
     }
 
     companion object {
-        fun newInstance(content: String): ReviewDetailsFragment {
-            val fragment = ReviewDetailsFragment()
-            val arg = Bundle()
-            arg.putString(CONTENT_ARG, content)
-            fragment.arguments = arg
-            return fragment
+        fun newInstance(
+            review: UIReview,
+            title: String
+        ): ReviewDetailsFragment = ReviewDetailsFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(REVIEW_ARG, review)
+                putString(TITLE_ARG, title)
+            }
         }
 
-        private const val CONTENT_ARG = "REVIEW_ARG"
+        private const val REVIEW_ARG = "REVIEW_ARG"
+        private const val TITLE_ARG = "TITLE_ARG"
     }
 }

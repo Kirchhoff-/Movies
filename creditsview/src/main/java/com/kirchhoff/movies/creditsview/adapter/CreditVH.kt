@@ -1,13 +1,13 @@
-package com.kirchhoff.movies.ui.screens.core.credits.adapter
+package com.kirchhoff.movies.creditsview.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.inflate
 import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
-import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
+import com.kirchhoff.movies.creditsview.CreditsView
+import com.kirchhoff.movies.creditsview.R
 
 class CreditVH(parent: ViewGroup) : BaseVH<CreditsView.CreditsInfo>(parent.inflate(R.layout.item_credit)) {
 

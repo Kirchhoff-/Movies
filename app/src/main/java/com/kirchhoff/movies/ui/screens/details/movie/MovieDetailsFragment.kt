@@ -24,7 +24,7 @@ import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
-import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
+import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.utils.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -67,7 +67,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             ivMoviePoster.downloadPoster(movie.posterPath)
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { startActivity(ReviewsActivity.createReviewsIntent(requireContext(), movie)) }
-            tvSimilarMovies.setOnClickListener { startActivity(SimilarActivity.createSimilarMoviesIntent(requireContext(), movie)) }
+            tvSimilarMovies.setOnClickListener { openSimilarMoviesScreen(movie) }
             vCredits.setCastClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
             vCredits.setCrewClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
         }
@@ -162,6 +162,14 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
             hourFormat.format(minuteFormat.parse(runtime.toString()) as Date)
         }
+
+    private fun openSimilarMoviesScreen(movie: UIMovie) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, SimilarMoviesFragment.newInstance(movie.id, movie.title))
+            .addToBackStack(null)
+            .commit()
+    }
 
     private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {
         val person: UIPerson = when (creditsInfo) {

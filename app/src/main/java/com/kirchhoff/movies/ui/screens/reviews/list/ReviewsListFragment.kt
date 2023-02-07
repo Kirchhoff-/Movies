@@ -25,11 +25,13 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     override val listAdapter = ReviewsListAdapter(this)
 
-    override val threshold = REVIEWS_THRESHOLD
-
-    override val spanCount = SPAN_COUNT
-
-    override val emptyResultText = R.string.empty_reviews
+    override val configuration: Configuration = Configuration(
+        threshold = THRESHOLD,
+        spanCount = SPAN_COUNT,
+        emptyResultText = R.string.empty_reviews,
+        isToolbarVisible = false,
+        toolbarTitle = ""
+    )
 
     private val title by lazy { arguments?.getString(REVIEW_TITLE_ARG).orEmpty() }
 
@@ -63,6 +65,6 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
         private const val REVIEW_TYPE_ARG = "REVIEW_TYPE_ARG"
         private const val REVIEW_TITLE_ARG = "REVIEW_TITLE_ARG"
         private const val SPAN_COUNT = 1
-        private const val REVIEWS_THRESHOLD = 3
+        private const val THRESHOLD = 3
     }
 }

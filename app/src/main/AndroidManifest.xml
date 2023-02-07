@@ -24,8 +24,6 @@
         <activity android:name=".ui.screens.details.DetailsActivity" />
 
         <activity android:name=".ui.screens.reviews.ReviewsActivity" />
-
-        <activity android:name=".ui.screens.similar.SimilarActivity" />
     </application>
 
 </manifest>

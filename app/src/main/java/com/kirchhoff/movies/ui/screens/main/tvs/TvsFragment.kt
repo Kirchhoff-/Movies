@@ -16,15 +16,17 @@ class TvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
 
     override val listAdapter = TvsListAdapter(this)
 
-    override val threshold = TVS_THRESHOLD
-
-    override val spanCount = SPAN_COUNT
-
-    override val emptyResultText = R.string.empty_tw_shows
+    override val configuration: Configuration = Configuration(
+        threshold = THRESHOLD,
+        spanCount = SPAN_COUNT,
+        emptyResultText = R.string.empty_tw_shows,
+        isToolbarVisible = false,
+        toolbarTitle = ""
+    )
 
     companion object {
         private const val SPAN_COUNT = 1
-        private const val TVS_THRESHOLD = 3
+        private const val THRESHOLD = 3
     }
 
     override fun onItemClick(item: UITv) {

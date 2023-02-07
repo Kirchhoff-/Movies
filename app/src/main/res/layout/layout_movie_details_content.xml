@@ -147,7 +147,7 @@
         tools:listitem="@layout/item_trailer"
         tools:orientation="horizontal" />
 
-    <com.kirchhoff.movies.ui.screens.core.credits.CreditsView
+    <com.kirchhoff.movies.creditsview.CreditsView
         android:id="@+id/vCredits"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

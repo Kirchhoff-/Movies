@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.ui.screens.similar.tv
 
 import android.os.Bundle
+import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UITv
@@ -20,6 +21,8 @@ class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     override val threshold = TVS_THRESHOLD
 
     override val spanCount = SPAN_COUNT
+
+    override val emptyResultText = R.string.empty_similar_tv_shows
 
     override fun onItemClick(item: UITv) {
         startActivity(DetailsActivity.createTvDetailsIntent(requireContext(), item))

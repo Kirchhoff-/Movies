@@ -4,15 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.creditsview.CreditsView
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
-import com.kirchhoff.movies.ui.screens.BaseFragment
-import com.kirchhoff.movies.ui.screens.core.credits.CreditsView
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
@@ -37,6 +38,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         with(viewBinding) {
             ivBackdrop.downloadPoster(tv.backdropPath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            appbar.addTitleWithCollapsingListener(toolbar, tv.name.orEmpty())
         }
 
         with(viewBinding.content) {

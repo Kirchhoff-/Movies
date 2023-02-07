@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.ui.screens.similar.movie
 
 import android.os.Bundle
+import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIMovie
@@ -20,6 +21,8 @@ class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMov
     override val threshold = MOVIES_THRESHOLD
 
     override val spanCount = SPAN_COUNT
+
+    override val emptyResultText = R.string.empty_similar_movies
 
     override fun onItemClick(item: UIMovie) {
         startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), item))

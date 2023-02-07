@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.ui.screens.main.tvs
 
+import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.core.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UITv
@@ -18,6 +19,8 @@ class TvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     override val threshold = TVS_THRESHOLD
 
     override val spanCount = SPAN_COUNT
+
+    override val emptyResultText = R.string.empty_tw_shows
 
     companion object {
         private const val SPAN_COUNT = 1

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.core.credits
+package com.kirchhoff.movies.creditsview
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,11 +8,10 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.TopBottomMarginItemDecoration
-import com.kirchhoff.movies.ui.screens.core.credits.adapter.CreditsAdapter
+import com.kirchhoff.movies.creditsview.adapter.CreditsAdapter
 
 class CreditsView @JvmOverloads constructor(
     context: Context,

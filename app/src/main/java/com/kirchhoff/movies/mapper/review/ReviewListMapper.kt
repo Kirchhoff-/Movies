@@ -26,6 +26,7 @@ class ReviewListMapper : BaseMapper(), IReviewListMapper {
         UIReview(
             networkReview.author,
             networkReview.content,
-            networkReview.authorDetails.avatar
+            networkReview.authorDetails.avatar,
+            networkReview.authorDetails.rating
         )
 }

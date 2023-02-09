@@ -13,6 +13,7 @@ import com.kirchhoff.movies.core.extensions.setTextOrGone
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
+import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
@@ -25,7 +26,6 @@ import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
 import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
 import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
-import com.kirchhoff.movies.utils.viewBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

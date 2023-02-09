@@ -6,11 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.ActivityReviewBinding
 import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
-import com.kirchhoff.movies.utils.viewBinding
 
 class ReviewsActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.utils
+package com.kirchhoff.movies.core.ui.utils
 
 import android.view.LayoutInflater
 import android.view.View

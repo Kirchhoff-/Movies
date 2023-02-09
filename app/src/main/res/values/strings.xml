@@ -18,6 +18,7 @@
     <string name="reviews">Reviews</string>
     <string name="review_list_title_format">%s reviews</string>
     <string name="review_details_title_format">%1$s %2$s review</string>
+    <string name="review_rating_format">%d / 10</string>
     <string name="similar_movies">Similar Movies</string>
     <string name="similar_tv_shows">Similar Tv shows</string>
     <string name="similar_to_format">Similar to %s</string>

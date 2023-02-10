@@ -28,7 +28,7 @@ ext.versions = [
 
         glide              : '4.9.0',
 
-        timber             : '4.7.1',
+        timber             : '5.0.1',
         stetho             : '1.5.1',
 
         junit              : '4.13',

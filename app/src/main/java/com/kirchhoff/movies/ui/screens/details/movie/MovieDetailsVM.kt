@@ -10,6 +10,7 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel() {
 
@@ -47,12 +48,14 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel(
             if (result is Result.Success) {
                 when (val trailersResult = movieRepository.fetchTrailersList(movieId)) {
                     is Result.Success -> _trailers.postValue(trailersResult.data.results)
+                    else -> Timber.e(trailersResult.toString())
                 }
             }
 
             if (result is Result.Success) {
                 when (val creditsResult = movieRepository.fetchMovieCredits(movieId)) {
                     is Result.Success -> _movieCredits.postValue(creditsResult.data)
+                    else -> Timber.e(creditsResult.toString())
                 }
             }
         }

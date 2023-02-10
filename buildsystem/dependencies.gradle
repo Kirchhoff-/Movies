@@ -1,9 +1,9 @@
 ext.versions = [
-        androidGradlePlugin: '4.1.0',
+        androidGradlePlugin: '7.4.1',
         minSdk             : 21,
         targetSdk          : 29,
         compileSdk         : 29,
-        buildTools         : '29.0.3',
+        buildTools         : '33.0.2',
         versionCode        : 1,
         versionName        : '1.0',
 
@@ -12,7 +12,7 @@ ext.versions = [
         flexbox            : '2.0.1',
         coreKtx            : '1.3.0',
 
-        kotlin             : '1.4.0',
+        kotlin             : '1.8.10',
         coroutines         : '1.3.0',
 
         lifecycle          : '2.0.0',
@@ -81,7 +81,7 @@ ext.libraries = [
         junit             : "junit:junit:$versions.junit",
         mockito           : "org.mockito:mockito-inline:$versions.mockito",
         coroutinesTest    : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesTest",
-        archTesting       : "android.arch.core:core-testing:$versions.archTesting",
+        archTesting       : "androidx.arch.core:core-testing:$versions.archTesting",
 
         ktlint            : "com.pinterest:ktlint:$versions.ktlint"
 ]

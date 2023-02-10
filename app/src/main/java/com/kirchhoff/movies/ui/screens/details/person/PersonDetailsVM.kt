@@ -9,6 +9,7 @@ import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.person.IPersonsRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class PersonDetailsVM(private val personRepository: IPersonsRepository) : ViewModel() {
 
@@ -43,6 +44,7 @@ class PersonDetailsVM(private val personRepository: IPersonsRepository) : ViewMo
             if (result is Result.Success) {
                 when (val creditsResult = personRepository.fetchPersonCredits(personId)) {
                     is Result.Success -> _personCredits.postValue(creditsResult.data)
+                    else -> Timber.e(creditsResult.toString())
                 }
             }
         }

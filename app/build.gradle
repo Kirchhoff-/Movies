@@ -68,7 +68,6 @@ dependencies {
     implementation libraries.retrofitConverter
     implementation libraries.okHttpInterceptor
     implementation libraries.gson
-    implementation libraries.retrofitCoroutines
 
     implementation libraries.timber
     implementation libraries.stetho

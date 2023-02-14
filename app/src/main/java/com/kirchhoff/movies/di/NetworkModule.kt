@@ -1,7 +1,6 @@
 package com.kirchhoff.movies.di
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.kirchhoff.movies.BuildConfig
 import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
 import com.kirchhoff.movies.network.services.DiscoverService
@@ -26,7 +25,6 @@ val networkModule = module {
             .client(get<OkHttpClient>())
             .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
     }
 

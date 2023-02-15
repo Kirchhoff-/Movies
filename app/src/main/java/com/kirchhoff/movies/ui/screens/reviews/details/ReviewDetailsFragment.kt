@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.data.ui.details.review.UIReview
@@ -17,9 +18,12 @@ class ReviewDetailsFragment : BaseFragment(R.layout.fragment_review_details) {
         val title = arguments?.getString(TITLE_ARG)
 
         val tvReviewContent: TextView = view.findViewById(R.id.tvReviewContent)
+        val toolbarReviewDetails: Toolbar = view.findViewById(R.id.toolbarReviewDetails)
+
         tvReviewContent.movementMethod = ScrollingMovementMethod()
         tvReviewContent.text = review.content
-        requireActivity().title = getString(R.string.review_details_title_format, review.author, title)
+        toolbarReviewDetails.title = getString(R.string.review_details_title_format, review.author, title)
+        toolbarReviewDetails.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     companion object {

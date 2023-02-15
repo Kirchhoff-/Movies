@@ -16,7 +16,7 @@ import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
+import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -46,7 +46,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             ivTvPoster.downloadPoster(tv.posterPath)
             bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
             tvSimilarTv.setOnClickListener { openSimilarTvShowsScreen(tv) }
-            tvReviews.setOnClickListener { startActivity(ReviewsActivity.createTvIntent(requireContext(), tv)) }
+            tvReviews.setOnClickListener { openReviewsListScreen(tv) }
             vCredits.setCastClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
             vCredits.setCrewClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
         }
@@ -105,6 +105,14 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             content.groupException.isVisible = true
             content.tvException.text = exception
         }
+    }
+
+    private fun openReviewsListScreen(tv: UITv) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstanceForTvShow(tv.id, tv.name))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun openSimilarTvShowsScreen(tv: UITv) {

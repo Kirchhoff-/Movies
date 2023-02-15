@@ -29,7 +29,7 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
         threshold = THRESHOLD,
         spanCount = SPAN_COUNT,
         emptyResultText = R.string.empty_reviews,
-        isToolbarVisible = false,
+        isToolbarVisible = true,
         toolbarTitle = ""
     )
 
@@ -37,7 +37,7 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = getString(R.string.review_list_title_format, title)
+        displayTitle(getString(R.string.review_list_title_format, title))
     }
 
     override fun onItemClick(item: UIReview) {
@@ -49,7 +49,13 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
     }
 
     companion object {
-        fun newInstance(
+        fun newInstanceForMovie(id: Int, title: String?): ReviewsListFragment =
+            newInstance(id, ReviewType.MOVIE, title)
+
+        fun newInstanceForTvShow(id: Int, title: String?): ReviewsListFragment =
+            newInstance(id, ReviewType.TV, title)
+
+        private fun newInstance(
             id: Int,
             reviewType: ReviewType,
             title: String?

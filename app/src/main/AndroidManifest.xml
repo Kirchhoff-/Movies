@@ -26,10 +26,6 @@
         <activity
             android:name=".ui.screens.details.DetailsActivity"
             android:exported="false" />
-
-        <activity
-            android:name=".ui.screens.reviews.ReviewsActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

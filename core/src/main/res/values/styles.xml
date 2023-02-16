@@ -88,10 +88,4 @@
     <style name="ReviewDetails.TextView">
         <item name="android:background">@color/background</item>
     </style>
-
-    <!-- CreditsView -->
-    <style name="CreditsViewText">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/text_main</item>
-    </style>
 </resources>

@@ -8,10 +8,9 @@ class Paginator(
     var isLoading: Boolean = false,
     private val loadMore: (Int) -> Unit,
     private val threshold: Int = DEFAULT_THRESHOLD,
-    var totalPages: Int = 0
+    var totalPages: Int = 0,
+    var currentPage: Int = 0
 ) : RecyclerView.OnScrollListener() {
-
-    private var currentPage = 1
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
@@ -28,7 +27,7 @@ class Paginator(
             }
 
             if (visibleItemCount + threshold >= totalItemCount) {
-                loadMore(++currentPage)
+                loadMore(currentPage + 1)
                 isLoading = true
             }
         }

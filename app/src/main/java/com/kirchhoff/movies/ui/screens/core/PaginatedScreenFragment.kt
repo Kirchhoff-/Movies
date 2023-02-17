@@ -75,9 +75,12 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
     }
 
     private fun obtainDataResponse(response: T) {
-        listAdapter.addItems(response.results)
-        paginator.totalPages = response.totalPages
-        paginator.isLoading = false
+        if (paginator.currentPage < response.page) listAdapter.addItems(response.results)
+        paginator.apply {
+            currentPage = response.page
+            totalPages = response.totalPages
+            isLoading = false
+        }
     }
 
     private fun obtainViewsVisibility(isEmptyResult: Boolean) {

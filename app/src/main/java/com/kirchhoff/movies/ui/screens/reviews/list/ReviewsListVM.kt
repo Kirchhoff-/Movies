@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.ui.screens.reviews.list
 
-import com.kirchhoff.movies.data.ui.core.UIPaginated
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import com.kirchhoff.movies.repository.tv.ITvRepository

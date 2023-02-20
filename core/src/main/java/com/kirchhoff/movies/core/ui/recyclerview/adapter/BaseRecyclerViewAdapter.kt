@@ -1,8 +1,9 @@
-package com.kirchhoff.movies.core.ui.recyclerview
+package com.kirchhoff.movies.core.ui.recyclerview.adapter
 
 import android.view.View
 import androidx.annotation.CallSuper
 import androidx.recyclerview.widget.RecyclerView
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 
 abstract class BaseRecyclerViewAdapter<VH : BaseVH<T>, T>(
     private val items: MutableList<T> = mutableListOf(),

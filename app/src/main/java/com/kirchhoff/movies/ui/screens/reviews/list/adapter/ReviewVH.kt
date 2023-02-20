@@ -9,7 +9,7 @@ import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadAvatar
 import com.kirchhoff.movies.core.extensions.inflate
-import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 
 class ReviewVH(parent: ViewGroup) : BaseVH<UIReview>(parent.inflate(R.layout.item_review)) {

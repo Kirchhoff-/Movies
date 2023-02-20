@@ -11,7 +11,7 @@ import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.setTextOrGone
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView

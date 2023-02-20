@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.TopBottomMarginItemDecoration
 import com.kirchhoff.movies.creditsview.adapter.CreditsAdapter

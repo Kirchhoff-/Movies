@@ -2,7 +2,7 @@ package com.kirchhoff.movies.ui.screens.main.tvs
 
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter

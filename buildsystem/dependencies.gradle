@@ -4,8 +4,8 @@ ext.versions = [
         targetSdk          : 29,
         compileSdk         : 29,
         buildTools         : '33.0.2',
-        versionCode        : 1,
-        versionName        : '1.0',
+        versionCode        : 2,
+        versionName        : '1.2.0',
 
         material           : '1.1.0',
         constraintLayout   : '1.1.3',

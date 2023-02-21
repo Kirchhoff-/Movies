@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.ui.screens.main.tvs
 
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.data.ui.core.UIPaginated
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter
@@ -16,15 +16,17 @@ class TvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
 
     override val listAdapter = TvsListAdapter(this)
 
-    override val threshold = TVS_THRESHOLD
-
-    override val spanCount = SPAN_COUNT
-
-    override val emptyResultText = R.string.empty_tw_shows
+    override val configuration: Configuration = Configuration(
+        threshold = THRESHOLD,
+        spanCount = SPAN_COUNT,
+        emptyResultText = R.string.empty_tw_shows,
+        isToolbarVisible = false,
+        toolbarTitle = ""
+    )
 
     companion object {
         private const val SPAN_COUNT = 1
-        private const val TVS_THRESHOLD = 3
+        private const val THRESHOLD = 3
     }
 
     override fun onItemClick(item: UITv) {

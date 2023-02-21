@@ -7,5 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class UIReview(
     val author: String,
     val content: String,
-    val authorAvatar: String?
+    val authorAvatar: String?,
+    val rating: Int?
 ) : Parcelable

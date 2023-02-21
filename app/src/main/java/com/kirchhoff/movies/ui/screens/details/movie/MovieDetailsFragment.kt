@@ -11,8 +11,9 @@ import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.setTextOrGone
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
+import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
@@ -23,9 +24,8 @@ import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
-import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
-import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
-import com.kirchhoff.movies.utils.viewBinding
+import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
+import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -66,8 +66,8 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             tvMovieTitle.text = movie.title
             ivMoviePoster.downloadPoster(movie.posterPath)
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
-            tvReviews.setOnClickListener { startActivity(ReviewsActivity.createReviewsIntent(requireContext(), movie)) }
-            tvSimilarMovies.setOnClickListener { startActivity(SimilarActivity.createSimilarMoviesIntent(requireContext(), movie)) }
+            tvReviews.setOnClickListener { openReviewsListScreen(movie) }
+            tvSimilarMovies.setOnClickListener { openSimilarMoviesScreen(movie) }
             vCredits.setCastClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
             vCredits.setCrewClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
         }
@@ -162,6 +162,22 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
             hourFormat.format(minuteFormat.parse(runtime.toString()) as Date)
         }
+
+    private fun openReviewsListScreen(movie: UIMovie) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstanceForMovie(movie.id, movie.title))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun openSimilarMoviesScreen(movie: UIMovie) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, SimilarMoviesFragment.newInstance(movie.id, movie.title))
+            .addToBackStack(null)
+            .commit()
+    }
 
     private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {
         val person: UIPerson = when (creditsInfo) {

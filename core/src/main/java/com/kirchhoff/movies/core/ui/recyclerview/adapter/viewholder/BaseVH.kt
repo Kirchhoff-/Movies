@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.core.ui.recyclerview
+package com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

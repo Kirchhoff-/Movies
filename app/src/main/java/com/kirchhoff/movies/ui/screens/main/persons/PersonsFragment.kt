@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.ui.screens.main.persons
 
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.data.ui.core.UIPaginated
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
@@ -16,15 +16,17 @@ class PersonsFragment : PaginatedScreenFragment<UIPerson, UIPaginated<UIPerson>>
 
     override val listAdapter = PersonsListAdapter(this)
 
-    override val threshold = PERSONS_THRESHOLD
-
-    override val spanCount = SPAN_COUNT
-
-    override val emptyResultText = R.string.empty_persons
+    override val configuration: Configuration = Configuration(
+        threshold = THRESHOLD,
+        spanCount = SPAN_COUNT,
+        emptyResultText = R.string.empty_persons,
+        isToolbarVisible = false,
+        toolbarTitle = ""
+    )
 
     companion object {
         private const val SPAN_COUNT = 3
-        private const val PERSONS_THRESHOLD = SPAN_COUNT * 2
+        private const val THRESHOLD = SPAN_COUNT * 2
     }
 
     override fun onItemClick(item: UIPerson) {

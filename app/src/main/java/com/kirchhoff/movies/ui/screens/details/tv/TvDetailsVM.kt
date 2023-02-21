@@ -9,6 +9,7 @@ import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.tv.ITvRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
 
@@ -43,6 +44,7 @@ class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
             if (result is Result.Success) {
                 when (val credits = tvRepository.fetchTvCredits(tvId)) {
                     is Result.Success -> _tvCredits.postValue(credits.data)
+                    else -> Timber.e(credits.toString())
                 }
             }
         }

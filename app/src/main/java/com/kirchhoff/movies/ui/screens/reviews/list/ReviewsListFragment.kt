@@ -3,8 +3,8 @@ package com.kirchhoff.movies.ui.screens.reviews.list
 import android.os.Bundle
 import android.view.View
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.data.ui.core.UIPaginated
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.reviews.ReviewType
@@ -25,17 +25,19 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     override val listAdapter = ReviewsListAdapter(this)
 
-    override val threshold = REVIEWS_THRESHOLD
-
-    override val spanCount = SPAN_COUNT
-
-    override val emptyResultText = R.string.empty_reviews
+    override val configuration: Configuration = Configuration(
+        threshold = THRESHOLD,
+        spanCount = SPAN_COUNT,
+        emptyResultText = R.string.empty_reviews,
+        isToolbarVisible = true,
+        toolbarTitle = ""
+    )
 
     private val title by lazy { arguments?.getString(REVIEW_TITLE_ARG).orEmpty() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        requireActivity().title = getString(R.string.review_list_title_format, title)
+        displayTitle(getString(R.string.review_list_title_format, title))
     }
 
     override fun onItemClick(item: UIReview) {
@@ -47,7 +49,13 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
     }
 
     companion object {
-        fun newInstance(
+        fun newInstanceForMovie(id: Int, title: String?): ReviewsListFragment =
+            newInstance(id, ReviewType.MOVIE, title)
+
+        fun newInstanceForTvShow(id: Int, title: String?): ReviewsListFragment =
+            newInstance(id, ReviewType.TV, title)
+
+        private fun newInstance(
             id: Int,
             reviewType: ReviewType,
             title: String?
@@ -63,6 +71,6 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
         private const val REVIEW_TYPE_ARG = "REVIEW_TYPE_ARG"
         private const val REVIEW_TITLE_ARG = "REVIEW_TITLE_ARG"
         private const val SPAN_COUNT = 1
-        private const val REVIEWS_THRESHOLD = 3
+        private const val THRESHOLD = 3
     }
 }

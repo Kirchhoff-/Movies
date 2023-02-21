@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 apply from: '../buildsystem/dependencies.gradle'
 
@@ -28,10 +28,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
-    }
-
-    androidExtensions {
-        experimental = true
     }
 
     buildFeatures {
@@ -72,7 +68,6 @@ dependencies {
     implementation libraries.retrofitConverter
     implementation libraries.okHttpInterceptor
     implementation libraries.gson
-    implementation libraries.retrofitCoroutines
 
     implementation libraries.timber
     implementation libraries.stetho

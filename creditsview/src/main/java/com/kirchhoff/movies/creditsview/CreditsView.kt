@@ -4,14 +4,14 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.TopBottomMarginItemDecoration
 import com.kirchhoff.movies.creditsview.adapter.CreditsAdapter
+import com.kirchhoff.movies.creditsview.databinding.ViewCreditsBinding
 
 class CreditsView @JvmOverloads constructor(
     context: Context,
@@ -28,37 +28,30 @@ class CreditsView @JvmOverloads constructor(
     private val castAdapter = CreditsAdapter(CastCreditsClickListener())
     private val crewAdapter = CreditsAdapter(CrewCreditsClickListener())
 
-    private val tvCastCredits: TextView
-    private val tvCrewCredits: TextView
-    private val rvCastCredits: RecyclerView
-    private val rvCrewCredits: RecyclerView
+    private val binding = ViewCreditsBinding.inflate(LayoutInflater.from(context), this, true)
 
     private var castClickListener: ((CreditsInfo) -> Unit)? = null
     private var crewClickListener: ((CreditsInfo) -> Unit)? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_credits, this)
-
-        tvCastCredits = findViewById(R.id.tvCastCredits)
-        tvCrewCredits = findViewById(R.id.tvCrewCredits)
-        rvCastCredits = findViewById(R.id.rvCastCredits)
-        rvCrewCredits = findViewById(R.id.rvCrewCredits)
-
-        configRecyclerView(rvCastCredits, castAdapter)
-        configRecyclerView(rvCrewCredits, crewAdapter)
+        configRecyclerView(binding.rvCastCredits, castAdapter)
+        configRecyclerView(binding.rvCrewCredits, crewAdapter)
     }
 
     fun displayItems(castCredits: List<CreditsInfo>?, crewCredits: List<CreditsInfo>?) {
-        if (!castCredits.isNullOrEmpty()) {
-            tvCastCredits.isVisible = true
-            rvCastCredits.isVisible = true
-            castAdapter.addItems(castCredits)
-        }
+        with(binding) {
+            if (!castCredits.isNullOrEmpty()) {
+                tvCastCredits.isVisible = true
+                rvCastCredits.isVisible = true
+                castAdapter.addItems(castCredits)
+            }
 
-        if (!crewCredits.isNullOrEmpty()) {
-            tvCrewCredits.isVisible = true
-            rvCrewCredits.isVisible = true
-            crewAdapter.addItems(crewCredits)
+            if (!crewCredits.isNullOrEmpty()) {
+                tvCrewCredits.isVisible = true
+                rvCrewCredits.isVisible = true
+                crewAdapter.addItems(crewCredits)
+            }
         }
     }
 

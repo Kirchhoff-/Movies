@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
 import com.kirchhoff.movies.data.ui.details.person.UIMediaType
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
@@ -17,7 +18,6 @@ import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.utils.viewBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {

@@ -7,6 +7,7 @@ import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
@@ -15,9 +16,8 @@ import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import com.kirchhoff.movies.ui.screens.details.DetailsActivity
-import com.kirchhoff.movies.ui.screens.reviews.ReviewsActivity
-import com.kirchhoff.movies.ui.screens.similar.SimilarActivity
-import com.kirchhoff.movies.utils.viewBinding
+import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
+import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
@@ -45,8 +45,8 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             tvTvTitle.text = tv.name
             ivTvPoster.downloadPoster(tv.posterPath)
             bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
-            tvSimilarTv.setOnClickListener { startActivity(SimilarActivity.createSimilarTvIntent(requireContext(), tv)) }
-            tvReviews.setOnClickListener { startActivity(ReviewsActivity.createTvIntent(requireContext(), tv)) }
+            tvSimilarTv.setOnClickListener { openSimilarTvShowsScreen(tv) }
+            tvReviews.setOnClickListener { openReviewsListScreen(tv) }
             vCredits.setCastClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
             vCredits.setCrewClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
         }
@@ -105,6 +105,22 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             content.groupException.isVisible = true
             content.tvException.text = exception
         }
+    }
+
+    private fun openReviewsListScreen(tv: UITv) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstanceForTvShow(tv.id, tv.name))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun openSimilarTvShowsScreen(tv: UITv) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, SimilarTvsFragment.newInstance(tv.id, tv.name))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {

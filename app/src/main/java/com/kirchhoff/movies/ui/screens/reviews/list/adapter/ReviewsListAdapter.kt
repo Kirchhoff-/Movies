@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.ui.screens.reviews.list.adapter
 
 import android.view.ViewGroup
-import com.kirchhoff.movies.core.ui.recyclerview.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.core.ui.recyclerview.BaseVH
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 
 class ReviewsListAdapter(clickListener: OnItemClickListener<UIReview>) :

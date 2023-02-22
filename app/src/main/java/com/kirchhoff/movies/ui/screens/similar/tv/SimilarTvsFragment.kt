@@ -15,7 +15,7 @@ import org.koin.core.parameter.parametersOf
 class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
-    override val vm: SimilarTvsVM by viewModel { parametersOf(arguments!!.getInt(TV_ID_ARG)) }
+    override val vm: SimilarTvsVM by viewModel { parametersOf(requireArguments().getInt(TV_ID_ARG)) }
 
     override val listAdapter = TvsListAdapter(this)
 
@@ -29,7 +29,7 @@ class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayTitle(requireContext().getString(R.string.similar_to_format, arguments?.getString(TV_NAME_ARG)))
+        displayTitle(requireContext().getString(R.string.similar_to_format, requireArguments().getString(TV_NAME_ARG)))
     }
 
     override fun onItemClick(item: UITv) {

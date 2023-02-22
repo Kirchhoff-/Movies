@@ -22,7 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
 
-    private val tv: UITv by lazy { arguments!!.getParcelable<UITv>(TV_ARG)!! }
+    private val tv: UITv by lazy { requireArguments().getParcelable(TV_ARG)!! }
 
     private val vm by viewModel<TvDetailsVM>()
     private val viewBinding by viewBinding(FragmentTvDetailsBinding::bind)

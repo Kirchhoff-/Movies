@@ -14,8 +14,8 @@ class ReviewDetailsFragment : BaseFragment(R.layout.fragment_review_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val review = arguments!!.getParcelable<UIReview>(REVIEW_ARG)!!
-        val title = arguments?.getString(TITLE_ARG)
+        val review = requireArguments().getParcelable<UIReview>(REVIEW_ARG)!!
+        val title = requireArguments().getString(TITLE_ARG)
 
         val tvReviewContent: TextView = view.findViewById(R.id.tvReviewContent)
         val toolbarReviewDetails: Toolbar = view.findViewById(R.id.toolbarReviewDetails)

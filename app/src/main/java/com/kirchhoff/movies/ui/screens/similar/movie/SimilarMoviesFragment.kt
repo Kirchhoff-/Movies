@@ -15,7 +15,7 @@ import org.koin.core.parameter.parametersOf
 class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UIMovie> {
 
-    override val vm: SimilarMoviesVM by viewModel { parametersOf(arguments!!.getInt(MOVIE_ID_ARG)) }
+    override val vm: SimilarMoviesVM by viewModel { parametersOf(requireArguments().getInt(MOVIE_ID_ARG)) }
 
     override val listAdapter = MoviesListAdapter(this)
 
@@ -29,7 +29,7 @@ class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMov
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayTitle(requireContext().getString(R.string.similar_to_format, arguments?.getString(MOVIE_TITLE_ARG)))
+        displayTitle(requireContext().getString(R.string.similar_to_format, requireArguments().getString(MOVIE_TITLE_ARG)))
     }
 
     override fun onItemClick(item: UIMovie) {

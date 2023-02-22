@@ -34,7 +34,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
-    private val movie: UIMovie by lazy { arguments!!.getParcelable<UIMovie>(MOVIE_ARG)!! }
+    private val movie: UIMovie by lazy { requireArguments().getParcelable(MOVIE_ARG)!! }
 
     private val vm by viewModel<MovieDetailsVM>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)

@@ -22,7 +22,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
-    private val person: UIPerson by lazy { arguments!!.getParcelable<UIPerson>(PERSON_ARG)!! }
+    private val person: UIPerson by lazy { requireArguments().getParcelable(PERSON_ARG)!! }
 
     private val vm by viewModel<PersonDetailsVM>()
     private val viewBinding by viewBinding(FragmentPersonDetailsBinding::bind)

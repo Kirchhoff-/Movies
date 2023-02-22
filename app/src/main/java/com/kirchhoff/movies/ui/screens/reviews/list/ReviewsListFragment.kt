@@ -18,8 +18,8 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     override val vm: ReviewsListVM by viewModel {
         parametersOf(
-            arguments!!.getInt(ID_ARG),
-            ReviewType.values()[arguments!!.getInt(REVIEW_TYPE_ARG)]
+            requireArguments().getInt(ID_ARG),
+            ReviewType.values()[requireArguments().getInt(REVIEW_TYPE_ARG)]
         )
     }
 
@@ -33,7 +33,7 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
         toolbarTitle = ""
     )
 
-    private val title by lazy { arguments?.getString(REVIEW_TITLE_ARG).orEmpty() }
+    private val title by lazy { requireArguments().getString(REVIEW_TITLE_ARG).orEmpty() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

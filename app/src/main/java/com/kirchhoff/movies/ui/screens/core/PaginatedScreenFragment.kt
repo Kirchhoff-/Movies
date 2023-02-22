@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
+import com.kirchhoff.movies.core.ui.recyclerview.Paginator
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
-import com.kirchhoff.movies.core.ui.recyclerview.Paginator
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.GridMarginItemDecoration
 import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.databinding.FragmentPaginatedBinding

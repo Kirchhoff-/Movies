@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.repository.movie
 
+import com.kirchhoff.movies.core.repository.BaseRepository
+import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
@@ -10,8 +12,6 @@ import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.mapper.review.IReviewListMapper
 import com.kirchhoff.movies.network.services.MovieService
-import com.kirchhoff.movies.repository.BaseRepository
-import com.kirchhoff.movies.repository.Result
 
 class MovieRepository(
     private val movieService: MovieService,

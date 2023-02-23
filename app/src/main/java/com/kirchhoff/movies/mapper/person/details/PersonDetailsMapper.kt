@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.mapper.person.details
 
+import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.details.person.UIMediaType
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
@@ -9,7 +10,6 @@ import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCastCredit
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCrewCredit
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonDetails
-import com.kirchhoff.movies.repository.Result
 
 class PersonDetailsMapper : BaseMapper(),
     IPersonDetailsMapper {

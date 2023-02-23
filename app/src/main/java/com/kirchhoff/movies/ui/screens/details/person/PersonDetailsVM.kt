@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
-import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.person.IPersonsRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber

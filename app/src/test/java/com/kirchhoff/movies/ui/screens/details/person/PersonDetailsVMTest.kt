@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.ui.screens.details.person
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
-import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.person.IPersonsRepository
 import com.kirchhoff.movies.utils.CoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi

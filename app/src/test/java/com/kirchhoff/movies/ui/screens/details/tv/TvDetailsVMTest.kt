@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.ui.screens.details.tv
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
-import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.tv.ITvRepository
 import com.kirchhoff.movies.utils.CoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi

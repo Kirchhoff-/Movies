@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.repository
+package com.kirchhoff.movies.core.repository
 
 import retrofit2.Response
 

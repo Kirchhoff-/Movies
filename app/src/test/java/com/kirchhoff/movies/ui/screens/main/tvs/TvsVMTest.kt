@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.ui.screens.main.tvs
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.kirchhoff.movies.data.ui.core.UIPaginated
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.discover.IDiscoverRepository

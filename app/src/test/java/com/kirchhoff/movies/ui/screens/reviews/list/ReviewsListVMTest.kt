@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.ui.screens.reviews.list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.kirchhoff.movies.data.ui.core.UIPaginated
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.details.review.UIReview
 import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
@@ -298,7 +298,7 @@ class ReviewsListVMTest {
         private val RANDOM_PAGE = Random.nextInt(1, 100)
         private val ERROR = Result.Error<UIPaginated<UIReview>>(777)
         private val EXCEPTION = Result.Exception<UIPaginated<UIReview>>(Exception("Reviews exception"))
-        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIReview("First author name", "First review content")), Int.MAX_VALUE))
-        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(2, listOf(UIReview("Random author name", "Random review content")), Int.MAX_VALUE))
+        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIReview("First author name", "First review content", "", 1)), Int.MAX_VALUE))
+        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(2, listOf(UIReview("Random author name", "Random review content", "", 10)), Int.MAX_VALUE))
     }
 }

@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.mapper
 
-import com.kirchhoff.movies.repository.Result
+import com.kirchhoff.movies.core.repository.Result
 
 abstract class BaseMapper {
     protected fun <T, R> mapErrorOrException(result: Result<T>): Result<R> =

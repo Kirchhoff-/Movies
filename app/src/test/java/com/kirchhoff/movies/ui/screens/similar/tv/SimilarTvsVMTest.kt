@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.ui.screens.similar.tv
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UITv
-import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.tv.ITvRepository
 import com.kirchhoff.movies.ui.screens.core.verifyFirstPageErrorState
 import com.kirchhoff.movies.ui.screens.core.verifyFirstPageExceptionState

@@ -5,6 +5,10 @@ dependencies {
     implementation libraries.liveData
     implementation libraries.viewModel
 
+    implementation libraries.retrofit
+    implementation libraries.retrofitConverter
+    implementation libraries.okHttpInterceptor
+
     implementation libraries.glide
     annotationProcessor libraries.glideCompiler
 }

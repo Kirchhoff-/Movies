@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.ui.screens.core
 
 import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenVM
 
 fun PaginatedScreenVM<*>.verifyFirstPageErrorState(errorResult: Result.Error<*>) {
     assert(loading.value == false)

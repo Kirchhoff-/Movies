@@ -1,11 +1,10 @@
-package com.kirchhoff.movies.ui.screens.core
+package com.kirchhoff.movies.core.ui.paginated
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import kotlinx.coroutines.launch
 
 abstract class PaginatedScreenVM<T : UIPaginated<*>> : ViewModel() {

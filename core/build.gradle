@@ -1,14 +1,7 @@
 apply from: '../buildsystem/android-module.gradle'
 
 dependencies {
-    implementation libraries.lifecycle
-    implementation libraries.liveData
-    implementation libraries.viewModel
-
-    implementation libraries.retrofit
-    implementation libraries.retrofitConverter
-    implementation libraries.okHttpInterceptor
-
-    implementation libraries.glide
-    annotationProcessor libraries.glideCompiler
+    implementation libs.bundles.architectureComponents
+    implementation libs.bundles.internet
+    implementation libs.glide
 }

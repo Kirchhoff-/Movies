@@ -54,7 +54,6 @@ dependencies {
 
     implementation libraries.kotlin
     implementation libraries.coroutines
-    implementation libraries.coroutinesAndroid
 
     implementation libraries.lifecycle
     implementation libraries.liveData

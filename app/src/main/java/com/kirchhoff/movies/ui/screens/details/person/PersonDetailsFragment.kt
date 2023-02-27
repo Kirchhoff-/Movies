@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
@@ -38,6 +39,7 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         with(viewBinding) {
             ivBackdrop.downloadPoster(person.profilePath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            appbar.addTitleWithCollapsingListener(toolbar, person.name)
         }
 
         with(viewBinding.content) {

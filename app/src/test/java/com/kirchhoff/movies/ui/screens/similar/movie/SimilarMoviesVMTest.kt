@@ -173,7 +173,7 @@ class SimilarMoviesVMTest {
         private val RANDOM_PAGE = Random.nextInt(1, 100)
         private val ERROR = Result.Error<UIPaginated<UIMovie>>(444)
         private val EXCEPTION = Result.Exception<UIPaginated<UIMovie>>(Exception("Similar movie exception"))
-        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(1, "First movie title", null, null)), Int.MAX_VALUE))
-        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(2, "Random movie title", null, null)), Int.MAX_VALUE))
+        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(1, "First movie title", null, null, null)), Int.MAX_VALUE))
+        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(2, "Random movie title", null, null, null)), Int.MAX_VALUE))
     }
 }

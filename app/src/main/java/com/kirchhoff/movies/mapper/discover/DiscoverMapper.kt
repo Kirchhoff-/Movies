@@ -42,7 +42,8 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
             movie.id,
             movie.title,
             movie.posterPath,
-            movie.backdropPath
+            movie.backdropPath,
+            movie.voteAverage
         )
 
     private fun createUITv(tv: NetworkTv) =

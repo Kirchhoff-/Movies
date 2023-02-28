@@ -115,7 +115,8 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
                         creditsInfo.id,
                         creditsInfo.title,
                         creditsInfo.posterPath,
-                        creditsInfo.backdropPath
+                        creditsInfo.backdropPath,
+                        null
                     )
                 )
                 UIMediaType.TV -> TvDetailsFragment.newInstance(

@@ -171,8 +171,8 @@ class MoviesVMTest {
         private val ERROR = Result.Error<UIPaginated<UIMovie>>(111)
         private val EXCEPTION = Result.Exception<UIPaginated<UIMovie>>(Exception("Movies mock exception"))
         private val RANDOM_PAGE = Random.nextInt(1, 100)
-        private val FIRST_PAGE_MOVIE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(1, "First movie title", null, null)), Int.MAX_VALUE))
-        private val RANDOM_PAGE_MOVIE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(2, "Random movie title", null, null)), Int.MAX_VALUE))
+        private val FIRST_PAGE_MOVIE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(1, "First movie title", null, null, null)), Int.MAX_VALUE))
+        private val RANDOM_PAGE_MOVIE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(2, "Random movie title", null, null, null)), Int.MAX_VALUE))
         private const val FIRST_PAGE = 1
     }
 }

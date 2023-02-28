@@ -161,7 +161,8 @@ class DiscoverMapperTest {
             Random.nextInt(),
             Random.nextString(),
             posterPath,
-            backdropPath
+            backdropPath,
+            Random.nextFloat()
         )
 
     private fun assertMovies(networkMovie: NetworkMovie, uiMovie: UIMovie) {

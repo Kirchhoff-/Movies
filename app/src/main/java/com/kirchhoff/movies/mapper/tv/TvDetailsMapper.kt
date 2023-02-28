@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.mapper.tv
 
+import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
-import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.mapper.core.ICoreMapper
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.details.tv.NetworkTvDetails

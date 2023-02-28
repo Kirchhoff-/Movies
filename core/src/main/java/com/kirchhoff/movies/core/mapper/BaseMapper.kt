@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.mapper
+package com.kirchhoff.movies.core.mapper
 
 import com.kirchhoff.movies.core.repository.Result
 

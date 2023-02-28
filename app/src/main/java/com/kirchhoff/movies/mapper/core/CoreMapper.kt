@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.mapper.core
 
+import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.core.UIGenre
-import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentPerson
 import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName

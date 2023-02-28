@@ -1,12 +1,12 @@
 package com.kirchhoff.movies.mapper.movie
 
+import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.movie.UICountry
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
-import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.mapper.core.ICoreMapper
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName

@@ -63,6 +63,8 @@ dependencies {
     implementation libs.timber
     implementation libs.bundles.stethoLogs
 
+    debugImplementation libs.leakCanary
+
     testImplementation libs.bundles.tests
 
     implementation project(path: ':core')

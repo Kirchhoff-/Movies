@@ -67,9 +67,9 @@ dependencies {
 
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
-    implementation project(path: ':voteview')
-    implementation project(path: ':keywordsview')
-    implementation project(path: ':creditsview')
+    implementation project(path: ':view:voteview')
+    implementation project(path: ':view:keywordsview')
+    implementation project(path: ':view:creditsview')
 }
 
 def getLocalProperty(String propName) {

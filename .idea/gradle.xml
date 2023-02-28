@@ -13,10 +13,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/creditsview" />
-            <option value="$PROJECT_DIR$/keywordsview" />
             <option value="$PROJECT_DIR$/networkdata" />
-            <option value="$PROJECT_DIR$/voteview" />
+            <option value="$PROJECT_DIR$/view" />
+            <option value="$PROJECT_DIR$/view/creditsview" />
+            <option value="$PROJECT_DIR$/view/keywordsview" />
+            <option value="$PROJECT_DIR$/view/voteview" />
           </set>
         </option>
       </GradleProjectSettings>

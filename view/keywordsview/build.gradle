@@ -1,4 +1,4 @@
-apply from: '../buildsystem/android-module.gradle'
+apply from: '../../buildsystem/android-module.gradle'
 
 dependencies {
     implementation project(path: ':core')

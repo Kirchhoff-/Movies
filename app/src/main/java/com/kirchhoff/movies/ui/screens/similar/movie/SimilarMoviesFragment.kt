@@ -8,7 +8,7 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.ui.screens.core.movies.adapter.MoviesListAdapter
-import com.kirchhoff.movies.ui.screens.details.DetailsActivity
+import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -33,7 +33,11 @@ class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMov
     }
 
     override fun onItemClick(item: UIMovie) {
-        startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), item))
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, MovieDetailsFragment.newInstance(item))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

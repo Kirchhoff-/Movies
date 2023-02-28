@@ -8,7 +8,7 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter
-import com.kirchhoff.movies.ui.screens.details.DetailsActivity
+import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -33,7 +33,11 @@ class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     }
 
     override fun onItemClick(item: UITv) {
-        startActivity(DetailsActivity.createTvDetailsIntent(requireContext(), item))
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, TvDetailsFragment.newInstance(item))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

@@ -69,6 +69,7 @@ dependencies {
 
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
+    implementation project(path: ':screen:review')
     implementation project(path: ':view:voteview')
     implementation project(path: ':view:keywordsview')
     implementation project(path: ':view:creditsview')

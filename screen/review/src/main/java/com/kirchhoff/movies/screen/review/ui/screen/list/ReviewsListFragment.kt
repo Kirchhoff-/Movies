@@ -1,16 +1,20 @@
-package com.kirchhoff.movies.ui.screens.reviews.list
+package com.kirchhoff.movies.screen.review.ui.screen.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.data.ui.details.review.UIReview
-import com.kirchhoff.movies.ui.screens.reviews.ReviewType
-import com.kirchhoff.movies.ui.screens.reviews.details.ReviewDetailsFragment
-import com.kirchhoff.movies.ui.screens.reviews.list.adapter.ReviewsListAdapter
+import com.kirchhoff.movies.screen.review.R
+import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.reviewModule
+import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
+import com.kirchhoff.movies.screen.review.ui.screen.details.ReviewDetailsFragment
+import com.kirchhoff.movies.screen.review.ui.screen.list.adapter.ReviewsListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
 class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIReview>>(),
@@ -35,9 +39,19 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
 
     private val title by lazy { requireArguments().getString(REVIEW_TITLE_ARG).orEmpty() }
 
+    override fun onAttach(context: Context) {
+        loadKoinModules(reviewModule)
+        super.onAttach(context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         displayTitle(getString(R.string.review_list_title_format, title))
+    }
+
+    override fun onDestroy() {
+        unloadKoinModules(reviewModule)
+        super.onDestroy()
     }
 
     override fun onItemClick(item: UIReview) {

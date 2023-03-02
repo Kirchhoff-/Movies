@@ -22,9 +22,9 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
+import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
 import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsFragment
-import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import java.text.SimpleDateFormat
 import java.util.Date

@@ -28,7 +28,6 @@ val repositoryModule = module {
         MovieRepository(
             movieService = get(),
             movieDetailsMapper = get(),
-            reviewListMapper = get(),
             discoverMapper = get()
         )
     }
@@ -36,7 +35,6 @@ val repositoryModule = module {
         TvRepository(
             tvService = get(),
             tvDetailsMapper = get(),
-            reviewListMapper = get(),
             discoverMapper = get()
         )
     }

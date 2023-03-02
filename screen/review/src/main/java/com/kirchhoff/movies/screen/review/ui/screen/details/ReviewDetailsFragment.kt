@@ -1,13 +1,13 @@
-package com.kirchhoff.movies.ui.screens.reviews.details
+package com.kirchhoff.movies.screen.review.ui.screen.details
 
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.View
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
-import com.kirchhoff.movies.data.ui.details.review.UIReview
-import com.kirchhoff.movies.databinding.FragmentReviewDetailsBinding
+import com.kirchhoff.movies.screen.review.R
+import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.databinding.FragmentReviewDetailsBinding
 
 class ReviewDetailsFragment : BaseFragment(R.layout.fragment_review_details) {
 

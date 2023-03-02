@@ -81,11 +81,4 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@color/white</item>
     </style>
-
-    <!-- Review details -->
-    <style name="ReviewDetails" />
-
-    <style name="ReviewDetails.TextView">
-        <item name="android:background">@color/background</item>
-    </style>
 </resources>

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.reviews.list.adapter
+package com.kirchhoff.movies.screen.review.ui.screen.list.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -6,11 +6,11 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.isVisible
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.downloadAvatar
 import com.kirchhoff.movies.core.extensions.inflate
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
-import com.kirchhoff.movies.data.ui.details.review.UIReview
+import com.kirchhoff.movies.screen.review.R
+import com.kirchhoff.movies.screen.review.data.UIReview
 
 class ReviewVH(parent: ViewGroup) : BaseVH<UIReview>(parent.inflate(R.layout.item_review)) {
 

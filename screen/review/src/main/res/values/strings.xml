@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="review_list_title_format">%s reviews</string>
+    <string name="review_rating_format">%d / 10</string>
+    <string name="review_details_title_format">%1$s %2$s review</string>
+    <string name="empty_reviews">There are no reviews</string>
+</resources>

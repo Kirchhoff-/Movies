@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.review.data
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UIReview(

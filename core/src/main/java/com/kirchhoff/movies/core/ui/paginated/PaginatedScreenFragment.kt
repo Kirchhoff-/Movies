@@ -41,9 +41,9 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
                 addItemDecoration(
                     GridMarginItemDecoration(
                         configuration.spanCount,
-                        resources.getDimensionPixelSize(R.dimen.main_screen_item_top_margin),
-                        resources.getDimensionPixelSize(R.dimen.main_screen_item_bottom_margin),
-                        resources.getDimensionPixelSize(R.dimen.main_screen_item_edges_margin)
+                        resources.getDimensionPixelSize(R.dimen.paginated_screen_item_top_margin),
+                        resources.getDimensionPixelSize(R.dimen.paginated_screen_item_bottom_margin),
+                        resources.getDimensionPixelSize(R.dimen.paginated_screen_item_edges_margin)
                     )
                 )
                 addOnScrollListener(paginator)

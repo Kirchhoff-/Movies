@@ -9,9 +9,9 @@
 
     <dimen name="person_item_image_size">96dp</dimen>
 
-    <dimen name="main_screen_item_top_margin">16dp</dimen>
-    <dimen name="main_screen_item_bottom_margin">8dp</dimen>
-    <dimen name="main_screen_item_edges_margin">8dp</dimen>
+    <dimen name="paginated_screen_item_top_margin">16dp</dimen>
+    <dimen name="paginated_screen_item_bottom_margin">8dp</dimen>
+    <dimen name="paginated_screen_item_edges_margin">8dp</dimen>
 
     <dimen name="details_screen_edges_margin">16dp</dimen>
     <dimen name="details_screen_top_margin">8dp</dimen>

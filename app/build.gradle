@@ -4,14 +4,14 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion libs.versions.compileSdk.get().toInteger()
     buildToolsVersion libs.versions.buildTools.get()
 
     defaultConfig {
         applicationId "com.kirchhoff.movies"
         minSdkVersion libs.versions.minSdk.get()
         targetSdkVersion libs.versions.targetSdk.get()
-        versionCode 2
+        versionCode libs.versions.versionCode.get().toInteger()
         versionName libs.versions.versionName.get()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

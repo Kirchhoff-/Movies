@@ -10,7 +10,7 @@
         android:id="@+id/toolbarReviewDetails"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:theme="@style/ReviewsList.Toolbar"
+        android:theme="@style/ToolbarStyle"
         app:navigationIcon="@drawable/ic_arrow_back" />
 
     <TextView

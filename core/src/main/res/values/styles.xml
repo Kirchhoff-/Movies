@@ -17,6 +17,11 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="ToolbarStyle">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
     <!-- Movie details -->
     <style name="MovieDetails" />
 
@@ -72,13 +77,5 @@
     <style name="PersonDetails.SupportText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_hint</item>
-    </style>
-
-    <!-- Reviews list -->
-    <style name="ReviewsList" />
-
-    <style name="ReviewsList.Toolbar">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">@color/white</item>
     </style>
 </resources>

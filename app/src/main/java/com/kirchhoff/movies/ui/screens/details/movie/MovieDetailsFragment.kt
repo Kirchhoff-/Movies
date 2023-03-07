@@ -22,9 +22,9 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
-import com.kirchhoff.movies.ui.screens.details.DetailsActivity
+import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
-import com.kirchhoff.movies.ui.screens.reviews.list.ReviewsListFragment
+import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsFragment
 import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -34,7 +34,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
-    private val movie: UIMovie by lazy { arguments!!.getParcelable<UIMovie>(MOVIE_ARG)!! }
+    private val movie: UIMovie by lazy { requireArguments().getParcelable(MOVIE_ARG)!! }
 
     private val vm by viewModel<MovieDetailsVM>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)
@@ -68,8 +68,8 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { openReviewsListScreen(movie) }
             tvSimilarMovies.setOnClickListener { openSimilarMoviesScreen(movie) }
-            vCredits.setCastClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
-            vCredits.setCrewClickListener { creditsInfo -> startPersonDetailsActivity(creditsInfo) }
+            vCredits.setCastClickListener { openPersonDetailsScreen(it) }
+            vCredits.setCrewClickListener { openPersonDetailsScreen(it) }
         }
 
         with(vm) {
@@ -179,13 +179,17 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             .commit()
     }
 
-    private fun startPersonDetailsActivity(creditsInfo: CreditsView.CreditsInfo) {
+    private fun openPersonDetailsScreen(creditsInfo: CreditsView.CreditsInfo) {
         val person: UIPerson = when (creditsInfo) {
             is UIEntertainmentPerson -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
             else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
         }
 
-        startActivity(DetailsActivity.createPersonDetailsIntent(requireContext(), person))
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, PersonDetailsFragment.newInstance(person))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

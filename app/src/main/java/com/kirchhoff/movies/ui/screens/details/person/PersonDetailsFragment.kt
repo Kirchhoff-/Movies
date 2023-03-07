@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
@@ -17,12 +18,13 @@ import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
-import com.kirchhoff.movies.ui.screens.details.DetailsActivity
+import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
+import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
-    private val person: UIPerson by lazy { arguments!!.getParcelable<UIPerson>(PERSON_ARG)!! }
+    private val person: UIPerson by lazy { requireArguments().getParcelable(PERSON_ARG)!! }
 
     private val vm by viewModel<PersonDetailsVM>()
     private val viewBinding by viewBinding(FragmentPersonDetailsBinding::bind)
@@ -38,13 +40,14 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         with(viewBinding) {
             ivBackdrop.downloadPoster(person.profilePath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            appbar.addTitleWithCollapsingListener(toolbar, person.name)
         }
 
         with(viewBinding.content) {
             tvPersonName.text = person.name
             bRetry.setOnClickListener { vm.loadPersonDetails(person.id) }
-            vCredits.setCastClickListener { creditsInfo -> startEntertainmentActivity(creditsInfo) }
-            vCredits.setCrewClickListener { creditsInfo -> startEntertainmentActivity(creditsInfo) }
+            vCredits.setCastClickListener { openMovieOrTvShowScreen(it) }
+            vCredits.setCrewClickListener { openMovieOrTvShowScreen(it) }
         }
 
         with(vm) {
@@ -104,18 +107,33 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         }
     }
 
-    private fun startEntertainmentActivity(creditsInfo: CreditsView.CreditsInfo) {
+    private fun openMovieOrTvShowScreen(creditsInfo: CreditsView.CreditsInfo) {
         if (creditsInfo is UIPersonCredit) {
-            when (creditsInfo.mediaType) {
-                UIMediaType.MOVIE -> {
-                    val uiMovie = UIMovie(creditsInfo.id, creditsInfo.title, creditsInfo.posterPath, creditsInfo.backdropPath)
-                    startActivity(DetailsActivity.createMovieDetailsIntent(requireContext(), uiMovie))
-                }
-                UIMediaType.TV -> {
-                    val uiTv = UITv(creditsInfo.id, creditsInfo.title, creditsInfo.posterPath, creditsInfo.backdropPath)
-                    startActivity(DetailsActivity.createTvDetailsIntent(requireContext(), uiTv))
-                }
+            val fragment = when (creditsInfo.mediaType) {
+                UIMediaType.MOVIE -> MovieDetailsFragment.newInstance(
+                    UIMovie(
+                        creditsInfo.id,
+                        creditsInfo.title,
+                        creditsInfo.posterPath,
+                        creditsInfo.backdropPath,
+                        null
+                    )
+                )
+                UIMediaType.TV -> TvDetailsFragment.newInstance(
+                    UITv(
+                        creditsInfo.id,
+                        creditsInfo.title,
+                        creditsInfo.posterPath,
+                        creditsInfo.backdropPath
+                    )
+                )
             }
+
+            requireActivity().supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
+                .commit()
         }
     }
 

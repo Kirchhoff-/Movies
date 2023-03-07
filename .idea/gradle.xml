@@ -4,17 +4,24 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="delegatedBuild" value="false" />
-        <option name="testRunner" value="PLATFORM" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="Android Studio java home" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/networkdata" />
+            <option value="$PROJECT_DIR$/screen" />
+            <option value="$PROJECT_DIR$/screen/review" />
+            <option value="$PROJECT_DIR$/view" />
+            <option value="$PROJECT_DIR$/view/creditsview" />
+            <option value="$PROJECT_DIR$/view/keywordsview" />
+            <option value="$PROJECT_DIR$/view/voteview" />
           </set>
         </option>
-        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

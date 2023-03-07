@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.ui.screens.similar.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.kirchhoff.movies.data.ui.core.UIPaginated
+import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIMovie
-import com.kirchhoff.movies.repository.Result
 import com.kirchhoff.movies.repository.movie.IMovieRepository
 import com.kirchhoff.movies.ui.screens.core.verifyFirstPageErrorState
 import com.kirchhoff.movies.ui.screens.core.verifyFirstPageExceptionState
@@ -173,7 +173,7 @@ class SimilarMoviesVMTest {
         private val RANDOM_PAGE = Random.nextInt(1, 100)
         private val ERROR = Result.Error<UIPaginated<UIMovie>>(444)
         private val EXCEPTION = Result.Exception<UIPaginated<UIMovie>>(Exception("Similar movie exception"))
-        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(1, "First movie title", null, null)), Int.MAX_VALUE))
-        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(2, "Random movie title", null, null)), Int.MAX_VALUE))
+        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(1, "First movie title", null, null, null)), Int.MAX_VALUE))
+        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UIMovie(2, "Random movie title", null, null, null)), Int.MAX_VALUE))
     }
 }

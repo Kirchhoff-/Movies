@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/ic_today"
+        app:drawableStartCompat="@drawable/ic_today"
         app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
         app:layout_constraintTop_toBottomOf="@+id/voteView"
         tools:text="24 November 1992" />
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/ic_access_time"
+        app:drawableStartCompat="@drawable/ic_access_time"
         app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
         app:layout_constraintTop_toBottomOf="@+id/tvReleaseDate"
         tools:text="1:45 / 105 min" />
@@ -80,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/ic_public"
+        app:drawableStartCompat="@drawable/ic_public"
         app:layout_constraintStart_toEndOf="@+id/ivMoviePoster"
         app:layout_constraintTop_toBottomOf="@+id/tvRuntime"
         tools:text="Production Country" />

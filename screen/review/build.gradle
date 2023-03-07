@@ -1,0 +1,13 @@
+apply from: '../../buildsystem/android-module.gradle'
+
+apply plugin: 'kotlin-parcelize'
+
+dependencies {
+    implementation project(path: ':core')
+    implementation project(path: ':networkdata')
+
+    implementation libs.bundles.internet
+    implementation libs.bundles.di
+
+    implementation libs.constraintLayout
+}

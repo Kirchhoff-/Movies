@@ -16,16 +16,12 @@
     <string name="bio">Bio</string>
     <string name="no_information">No information</string>
     <string name="reviews">Reviews</string>
-    <string name="review_list_title_format">%s reviews</string>
-    <string name="review_details_title_format">%1$s %2$s review</string>
-    <string name="review_rating_format">%d / 10</string>
     <string name="similar_movies">Similar Movies</string>
     <string name="similar_tv_shows">Similar Tv shows</string>
     <string name="similar_to_format">Similar to %s</string>
 
     <string name="movie_runtime_format">%1$s / %2$d min</string>
 
-    <string name="empty_reviews">There are no reviews</string>
     <string name="empty_movies">Can\'t load movies</string>
     <string name="empty_tw_shows">Can\'t load tv shows</string>
     <string name="empty_persons">Can\'t load persons</string>

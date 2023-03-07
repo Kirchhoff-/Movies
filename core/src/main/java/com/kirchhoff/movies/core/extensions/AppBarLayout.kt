@@ -8,9 +8,7 @@ fun AppBarLayout.addTitleWithCollapsingListener(
     toolbar: Toolbar,
     title: String
 ) {
-    addOnOffsetChangedListener(
-        AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-           toolbar.title = if (abs(verticalOffset) - totalScrollRange == 0) title else ""
-        }
-    )
+    addOnOffsetChangedListener { _, verticalOffset ->
+        toolbar.title = if (abs(verticalOffset) - totalScrollRange == 0) title else ""
+    }
 }

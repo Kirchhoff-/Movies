@@ -2,19 +2,17 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
-apply from: '../buildsystem/dependencies.gradle'
-
 
 android {
-    compileSdkVersion versions.compileSdk
-    buildToolsVersion versions.buildTools
+    compileSdkVersion libs.versions.compileSdk.get().toInteger()
+    buildToolsVersion libs.versions.buildTools.get()
 
     defaultConfig {
         applicationId "com.kirchhoff.movies"
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
-        versionCode versions.versionCode
-        versionName versions.versionName
+        minSdkVersion libs.versions.minSdk.get()
+        targetSdkVersion libs.versions.targetSdk.get()
+        versionCode libs.versions.versionCode.get().toInteger()
+        versionName libs.versions.versionName.get()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/\""
@@ -48,41 +46,33 @@ android {
 }
 
 dependencies {
-    implementation libraries.androidxMaterial
-    implementation libraries.constraintLayout
-    implementation libraries.coreKtx
+    implementation libs.material
+    implementation libs.constraintLayout
+    implementation libs.coreKtx
 
-    implementation libraries.kotlin
-    implementation libraries.coroutines
-    implementation libraries.coroutinesAndroid
+    implementation libs.kotlin
+    implementation libs.coroutines
 
-    implementation libraries.lifecycle
-    implementation libraries.liveData
-    implementation libraries.viewModel
+    implementation libs.bundles.architectureComponents
 
-    implementation libraries.koin
-    implementation libraries.koinScope
-    implementation libraries.koinViewModel
+    implementation libs.bundles.di
 
-    implementation libraries.retrofit
-    implementation libraries.retrofitConverter
-    implementation libraries.okHttpInterceptor
-    implementation libraries.gson
+    implementation libs.bundles.internet
+    implementation libs.gson
 
-    implementation libraries.timber
-    implementation libraries.stetho
-    implementation libraries.stethoOkHttp
+    implementation libs.timber
+    implementation libs.bundles.stethoLogs
 
-    testImplementation libraries.junit
-    testImplementation libraries.mockito
-    testImplementation libraries.coroutinesTest
-    testImplementation libraries.archTesting
+    debugImplementation libs.leakCanary
+
+    testImplementation libs.bundles.tests
 
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
-    implementation project(path: ':voteview')
-    implementation project(path: ':keywordsview')
-    implementation project(path: ':creditsview')
+    implementation project(path: ':screen:review')
+    implementation project(path: ':view:voteview')
+    implementation project(path: ':view:keywordsview')
+    implementation project(path: ':view:creditsview')
 }
 
 def getLocalProperty(String propName) {

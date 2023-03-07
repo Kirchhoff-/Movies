@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     tools:layout_gravity="center"
-    tools:layout_height="wrap_content"
-    tools:layout_margin="16dp"
     tools:layout_width="200dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/movie_item_poster_height"
-        card_view:cardCornerRadius="@dimen/movie_item_corner_radius">
+        app:cardCornerRadius="@dimen/movie_item_corner_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/ivMoviePoster"
@@ -28,13 +29,27 @@
         android:id="@+id/tvMovieTitle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/movie_item_title_height"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="4dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
         android:textColor="@color/text_main"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
         tools:text="Film title" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tvMovieRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_movie_rating"
+        android:elevation="10dp"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="9.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

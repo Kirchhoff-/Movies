@@ -3,19 +3,19 @@ package com.kirchhoff.movies.ui.screens.similar.tv
 import android.os.Bundle
 import android.view.View
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.main.UITv
-import com.kirchhoff.movies.ui.screens.core.PaginatedScreenFragment
 import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter
-import com.kirchhoff.movies.ui.screens.details.DetailsActivity
+import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
-    override val vm: SimilarTvsVM by viewModel { parametersOf(arguments!!.getInt(TV_ID_ARG)) }
+    override val vm: SimilarTvsVM by viewModel { parametersOf(requireArguments().getInt(TV_ID_ARG)) }
 
     override val listAdapter = TvsListAdapter(this)
 
@@ -29,11 +29,15 @@ class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayTitle(requireContext().getString(R.string.similar_to_format, arguments?.getString(TV_NAME_ARG)))
+        displayTitle(requireContext().getString(R.string.similar_to_format, requireArguments().getString(TV_NAME_ARG)))
     }
 
     override fun onItemClick(item: UITv) {
-        startActivity(DetailsActivity.createTvDetailsIntent(requireContext(), item))
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, TvDetailsFragment.newInstance(item))
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -15,6 +15,11 @@
         <item name="android:padding">10dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="ToolbarStyle">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 
     <!-- Movie details -->
@@ -72,20 +77,5 @@
     <style name="PersonDetails.SupportText">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_hint</item>
-    </style>
-
-    <!-- Reviews list -->
-    <style name="ReviewsList" />
-
-    <style name="ReviewsList.Toolbar">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">@color/white</item>
-    </style>
-
-    <!-- Review details -->
-    <style name="ReviewDetails" />
-
-    <style name="ReviewDetails.TextView">
-        <item name="android:background">@color/background</item>
     </style>
 </resources>

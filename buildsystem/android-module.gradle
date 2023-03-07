@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply from: '../buildsystem/dependencies.gradle'
 
 android {
 
-    compileSdkVersion versions.compileSdk
+    compileSdkVersion libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        minSdkVersion libs.versions.minSdk.get()
+        targetSdkVersion libs.versions.targetSdk.get()
     }
 
     compileOptions {
@@ -31,7 +30,9 @@ android {
 }
 
 dependencies {
-    implementation libraries.kotlin
-    implementation libraries.coreKtx
-    implementation libraries.androidxMaterial
+    implementation libs.kotlin
+    implementation libs.coreKtx
+    implementation libs.material
+
+    debugImplementation libs.leakCanary
 }

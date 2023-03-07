@@ -1,13 +1,13 @@
 package com.kirchhoff.movies.mapper.discover
 
+import com.kirchhoff.movies.core.mapper.BaseMapper
+import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UITv
-import com.kirchhoff.movies.mapper.BaseMapper
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
 import com.kirchhoff.movies.networkdata.main.NetworkTv
-import com.kirchhoff.movies.repository.Result
 
 class DiscoverMapper : BaseMapper(), IDiscoverMapper {
 
@@ -42,7 +42,8 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
             movie.id,
             movie.title,
             movie.posterPath,
-            movie.backdropPath
+            movie.backdropPath,
+            movie.voteAverage
         )
 
     private fun createUITv(tv: NetworkTv) =

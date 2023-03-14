@@ -17,7 +17,7 @@ coroutines = "1.6.4"
 
 lifecycle = "2.0.0"
 liveData = "2.2.0-beta01"
-viewModel = "2.1.0"
+viewModel = "2.6.0"
 
 retrofit = "2.9.0"
 okhttp = "4.10.0"

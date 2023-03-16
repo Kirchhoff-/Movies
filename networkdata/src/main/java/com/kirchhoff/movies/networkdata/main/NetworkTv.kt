@@ -6,5 +6,6 @@ data class NetworkTv(
     @SerializedName("id") val id: Int,
     @SerializedName("poster_path") val posterPath: String?,
     @SerializedName("backdrop_path") val backdropPath: String?,
-    @SerializedName("name") val name: String
+    @SerializedName("name") val name: String,
+    @SerializedName("vote_average") val voteAverage: Float?
 )

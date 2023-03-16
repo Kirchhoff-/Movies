@@ -43,7 +43,7 @@
         android:id="@+id/tvMovieRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_movie_rating"
+        android:background="@drawable/background_rating"
         android:elevation="10dp"
         android:padding="8dp"
         android:textColor="@color/white"

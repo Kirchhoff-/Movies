@@ -39,14 +39,12 @@
         app:layout_constraintTop_toBottomOf="@id/cardView"
         tools:text="Film title" />
 
-    <TextView
+    <com.kirchhoff.movies.keywordsview.RatingTextView
         android:id="@+id/tvMovieRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_rating"
         android:elevation="10dp"
         android:padding="8dp"
-        android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

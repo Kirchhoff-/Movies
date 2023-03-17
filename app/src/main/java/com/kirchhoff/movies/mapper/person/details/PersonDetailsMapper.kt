@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.mapper.person.details
 
+import app.moviebase.tmdb.model.TmdbPersonDetail
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.details.person.UIMediaType
@@ -9,12 +10,11 @@ import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCastCredit
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCrewCredit
-import com.kirchhoff.movies.networkdata.details.person.NetworkPersonDetails
 
 class PersonDetailsMapper : BaseMapper(),
     IPersonDetailsMapper {
 
-    override fun createUIPersonDetails(personDetailsResult: Result<NetworkPersonDetails>): Result<UIPersonDetails> =
+    override fun createUIPersonDetails(personDetailsResult: Result<TmdbPersonDetail>): Result<UIPersonDetails> =
         when (personDetailsResult) {
             is Result.Success -> Result.Success(createUIPersonDetails(personDetailsResult.data))
             else -> mapErrorOrException(personDetailsResult)
@@ -26,7 +26,7 @@ class PersonDetailsMapper : BaseMapper(),
             else -> mapErrorOrException(personCreditsResult)
         }
 
-    private fun createUIPersonDetails(personDetails: NetworkPersonDetails) =
+    private fun createUIPersonDetails(personDetails: TmdbPersonDetail) =
         UIPersonDetails(
             personDetails.birthday,
             personDetails.placeOfBirth,

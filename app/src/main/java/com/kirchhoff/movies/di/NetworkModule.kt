@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.di
 
+import app.moviebase.tmdb.Tmdb3
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.kirchhoff.movies.BuildConfig
 import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
@@ -35,4 +36,6 @@ val networkModule = module {
     single { get<Retrofit>().create(MovieService::class.java) }
 
     single { get<Retrofit>().create(TvService::class.java) }
+
+    single { Tmdb3(BuildConfig.API_KEY) }
 }

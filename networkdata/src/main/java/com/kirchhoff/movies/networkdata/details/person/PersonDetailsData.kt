@@ -2,13 +2,6 @@ package com.kirchhoff.movies.networkdata.details.person
 
 import com.google.gson.annotations.SerializedName
 
-data class NetworkPersonDetails(
-    @SerializedName("birthday") val birthday: String?,
-    @SerializedName("place_of_birth") val placeOfBirth: String?,
-    @SerializedName("biography") val biography: String,
-    @SerializedName("also_known_as") val alsoKnownAs: List<String>?
-)
-
 data class NetworkPersonCredits(
     val cast: List<NetworkPersonCastCredit>?,
     val crew: List<NetworkPersonCrewCredit>?

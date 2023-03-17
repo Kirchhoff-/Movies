@@ -35,6 +35,16 @@
             android:layout_marginBottom="8dp"
             tools:text="TV title" />
 
+        <com.kirchhoff.movies.keywordsview.RatingTextView
+            android:id="@+id/tvTvRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:padding="8dp"
+            android:textSize="20sp"
+            android:layout_gravity="top|end"
+            tools:text="9.5" />
+
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

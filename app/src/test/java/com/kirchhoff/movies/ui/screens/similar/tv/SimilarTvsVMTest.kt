@@ -173,7 +173,7 @@ class SimilarTvsVMTest {
         private val ERROR = Result.Error<UIPaginated<UITv>>(333)
         private val EXCEPTION = Result.Exception<UIPaginated<UITv>>(Exception("Similar tv exception"))
         private val RANDOM_PAGE = Random.nextInt(1, 100)
-        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "First tv name", null, null)), Int.MAX_VALUE))
-        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "Random tv name", null, null)), Int.MAX_VALUE))
+        private val FIRST_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "First tv name", null, null, null)), Int.MAX_VALUE))
+        private val RANDOM_PAGE_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "Random tv name", null, null, null)), Int.MAX_VALUE))
     }
 }

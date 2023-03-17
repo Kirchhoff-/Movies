@@ -177,7 +177,8 @@ class DiscoverMapperTest {
             Random.nextInt(),
             posterPath,
             backdropPath,
-            Random.nextString()
+            Random.nextString(),
+            Random.nextFloat()
         )
 
     private fun assertTvs(networkTv: NetworkTv, uiTv: UITv) {

@@ -29,7 +29,7 @@ class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayTitle(requireContext().getString(R.string.similar_to_format, requireArguments().getString(TV_NAME_ARG)))
+        displayTitle(getString(R.string.similar_to_format, requireArguments().getString(TV_NAME_ARG)))
     }
 
     override fun onItemClick(item: UITv) {

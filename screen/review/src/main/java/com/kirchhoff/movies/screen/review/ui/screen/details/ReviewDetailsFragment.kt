@@ -23,7 +23,7 @@ class ReviewDetailsFragment : BaseFragment(R.layout.fragment_review_details) {
             tvReviewContent.movementMethod = ScrollingMovementMethod()
             tvReviewContent.text = review.content
             toolbarReviewDetails.title = getString(R.string.review_details_title_format, review.author, title)
-            toolbarReviewDetails.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            toolbarReviewDetails.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
         }
     }
 

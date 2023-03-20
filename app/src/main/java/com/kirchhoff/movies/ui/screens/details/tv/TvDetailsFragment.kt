@@ -37,7 +37,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
 
         with(viewBinding) {
             ivBackdrop.downloadPoster(tv.backdropPath)
-            toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             appbar.addTitleWithCollapsingListener(toolbar, tv.name.orEmpty())
         }
 

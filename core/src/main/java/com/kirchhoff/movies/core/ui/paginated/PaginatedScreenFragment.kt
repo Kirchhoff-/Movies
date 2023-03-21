@@ -51,7 +51,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
             toolbar.apply {
                 isVisible = configuration.isToolbarVisible
                 title = configuration.toolbarTitle
-                setNavigationOnClickListener { requireActivity().onBackPressed() }
+                setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             }
         }
 

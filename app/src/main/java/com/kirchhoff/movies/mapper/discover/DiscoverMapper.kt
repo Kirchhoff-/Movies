@@ -51,6 +51,7 @@ class DiscoverMapper : BaseMapper(), IDiscoverMapper {
             tv.id,
             tv.name,
             tv.posterPath,
-            tv.backdropPath
+            tv.backdropPath,
+            tv.voteAverage
         )
 }

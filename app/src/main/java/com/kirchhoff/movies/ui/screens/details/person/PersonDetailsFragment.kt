@@ -39,7 +39,7 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
         with(viewBinding) {
             ivBackdrop.downloadPoster(person.profilePath)
-            toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+            toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
             appbar.addTitleWithCollapsingListener(toolbar, person.name)
         }
 
@@ -124,7 +124,8 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
                         creditsInfo.id,
                         creditsInfo.title,
                         creditsInfo.posterPath,
-                        creditsInfo.backdropPath
+                        creditsInfo.backdropPath,
+                        null
                     )
                 )
             }

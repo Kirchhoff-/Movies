@@ -171,8 +171,8 @@ class TvsVMTest {
         private val ERROR = Result.Error<UIPaginated<UITv>>(222)
         private val EXCEPTION = Result.Exception<UIPaginated<UITv>>(Exception("TV mock exception"))
         private val RANDOM_PAGE = Random.nextInt(1, 100)
-        private val FIRST_PAGE_TV_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "First tv name", null, null)), Int.MAX_VALUE))
-        private val RANDOM_PAGE_TV_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "Random tv name", null, null)), Int.MAX_VALUE))
+        private val FIRST_PAGE_TV_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "First tv name", null, null, null)), Int.MAX_VALUE))
+        private val RANDOM_PAGE_TV_ANSWER = Result.Success(UIPaginated(1, listOf(UITv(1, "Random tv name", null, null, null)), Int.MAX_VALUE))
         private const val FIRST_PAGE = 1
     }
 }

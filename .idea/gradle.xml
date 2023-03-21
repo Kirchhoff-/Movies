@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/view" />
             <option value="$PROJECT_DIR$/view/creditsview" />
             <option value="$PROJECT_DIR$/view/keywordsview" />
+            <option value="$PROJECT_DIR$/view/ratingtextview" />
             <option value="$PROJECT_DIR$/view/voteview" />
           </set>
         </option>

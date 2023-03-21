@@ -29,7 +29,7 @@ class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMov
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayTitle(requireContext().getString(R.string.similar_to_format, requireArguments().getString(MOVIE_TITLE_ARG)))
+        displayTitle(getString(R.string.similar_to_format, requireArguments().getString(MOVIE_TITLE_ARG)))
     }
 
     override fun onItemClick(item: UIMovie) {

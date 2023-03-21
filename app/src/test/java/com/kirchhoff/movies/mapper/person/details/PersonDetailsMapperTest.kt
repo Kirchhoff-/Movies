@@ -1,12 +1,12 @@
 package com.kirchhoff.movies.mapper.person.details
 
+import app.moviebase.tmdb.model.TmdbPersonDetail
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCastCredit
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCrewCredit
-import com.kirchhoff.movies.networkdata.details.person.NetworkPersonDetails
 import com.kirchhoff.movies.utils.nextString
 import kotlin.random.Random
 import org.junit.Assert.assertEquals
@@ -27,7 +27,7 @@ class PersonDetailsMapperTest {
 
     @Test
     fun `verify creating person details from error`() {
-        val networkError = Result.Error<NetworkPersonDetails>(errorCode)
+        val networkError = Result.Error<TmdbPersonDetail>(errorCode)
 
         val expectedError = personDetailsMapper.createUIPersonDetails(networkError)
 
@@ -38,7 +38,7 @@ class PersonDetailsMapperTest {
 
     @Test
     fun `verify creating person details from exception`() {
-        val networkException = Result.Exception<NetworkPersonDetails>(exceptionMessage)
+        val networkException = Result.Exception<TmdbPersonDetail>(exceptionMessage)
 
         val expectedException = personDetailsMapper.createUIPersonDetails(networkException)
 
@@ -48,16 +48,16 @@ class PersonDetailsMapperTest {
 
     @Test
     fun `verify creating person details from network person details`() {
-        verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, null, null))
+        verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, null, emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, null, emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, null, listOf(Random.nextString(), Random.nextString())))
-        verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, Random.nextString(), null))
+        verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, Random.nextString(), emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, Random.nextString(), emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(null, Random.nextString(), listOf(Random.nextString(), Random.nextString())))
-        verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), null, null))
+        verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), null, emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), null, emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), null, listOf(Random.nextString(), Random.nextString())))
-        verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), Random.nextString(), null))
+        verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), Random.nextString(), emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), Random.nextString(), emptyList()))
         verifyPersonDetailsResults(createNetworkPersonDetailsResult(Random.nextString(), Random.nextString(), listOf(Random.nextString(), Random.nextString())))
     }
@@ -152,18 +152,21 @@ class PersonDetailsMapperTest {
     private fun createNetworkPersonDetailsResult(
         birthday: String?,
         placeOfBirth: String?,
-        alsoKnownAs: List<String>?
+        alsoKnownAs: List<String>
     ) = Result.Success(
-        NetworkPersonDetails(
-            birthday,
-            placeOfBirth,
-            Random.nextString(),
-            alsoKnownAs
+        TmdbPersonDetail(
+            id = Random.nextInt(),
+            name = Random.nextString(),
+            popularity = Random.nextFloat(),
+            birthday = birthday,
+            placeOfBirth = placeOfBirth,
+            biography = Random.nextString(),
+            alsoKnownAs = alsoKnownAs
         )
     )
 
     private fun verifyPersonDetailsResults(
-        networkResult: Result<NetworkPersonDetails>
+        networkResult: Result<TmdbPersonDetail>
     ) {
         val uiResult = personDetailsMapper.createUIPersonDetails(networkResult)
         assertTrue(networkResult is Result.Success)
@@ -172,7 +175,7 @@ class PersonDetailsMapperTest {
     }
 
     private fun assertPersonDetails(
-        networkPersonDetails: NetworkPersonDetails,
+        networkPersonDetails: TmdbPersonDetail,
         uiPersonDetails: UIPersonDetails
     ) {
         assertEquals(uiPersonDetails.birthday, networkPersonDetails.birthday)

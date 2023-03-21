@@ -16,4 +16,11 @@ abstract class BaseRepository {
             Result.Exception(ex)
         }
     }
+
+    suspend fun <T : Any> tmdbApiCall(call: suspend () -> T): Result<T> =
+        try {
+            Result.Success(call.invoke())
+        } catch (ex: Exception) {
+            Result.Exception(ex)
+        }
 }

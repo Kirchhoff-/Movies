@@ -21,7 +21,8 @@ val repositoryModule = module {
         PersonsRepository(
             personService = get(),
             personMapper = get(),
-            personDetailsMapper = get()
+            personDetailsMapper = get(),
+            tmdbApi = get()
         )
     }
     single<IMovieRepository> {

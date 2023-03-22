@@ -10,7 +10,12 @@ versionCode = "4"
 material = "1.1.0"
 constraintLayout = "2.1.4"
 flexbox = "3.0.0"
-coreKtx = "1.3.0"
+coreKtx = "1.6.0"
+
+composeCompiler = "1.4.3"
+compose = "1.3.0"
+appCompat = "1.6.1"
+activityCompose = "1.3.1"
 
 kotlin = "1.8.10"
 coroutines = "1.6.4"
@@ -45,6 +50,7 @@ plugin-buildTools = { module = "com.android.tools.build:gradle", version.ref = "
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 
+appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
 flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
@@ -81,9 +87,16 @@ archTesting = { module = "androidx.arch.core:core-testing", version.ref = "archT
 
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 
+composeMaterial = { module = "androidx.compose.material:material", version.ref = "compose" }
+activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+composeUI = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+composeUITooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+composeFoundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+
 [bundles]
 architectureComponents = ["lifecycle", "liveData", "viewModel"]
 internet = ["retrofit", "retrofitConverter", "okHttpInterceptor"]
 di = ["koin", "koinScope", "koinViewModel"]
 tests = ["junit", "mockito", "coroutinesTest", "archTesting"]
 stethoLogs = ["stetho", "stethoOkHttp"]
+compose = ["composeMaterial", "activityCompose", "composeUI", "composeUITooling", "composeFoundation"]

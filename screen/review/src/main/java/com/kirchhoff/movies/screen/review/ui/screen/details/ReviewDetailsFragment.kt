@@ -1,29 +1,27 @@
 package com.kirchhoff.movies.screen.review.ui.screen.details
 
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.core.ui.utils.viewBinding
-import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
-import com.kirchhoff.movies.screen.review.databinding.FragmentReviewDetailsBinding
 
-class ReviewDetailsFragment : BaseFragment(R.layout.fragment_review_details) {
+class ReviewDetailsFragment : BaseFragment() {
 
-    private val viewBinding by viewBinding(FragmentReviewDetailsBinding::bind)
+    private val review by lazy { requireArguments().getParcelable<UIReview>(REVIEW_ARG)!! }
+    private val title by lazy { requireArguments().getString(TITLE_ARG).orEmpty() }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val review = requireArguments().getParcelable<UIReview>(REVIEW_ARG)!!
-        val title = requireArguments().getString(TITLE_ARG)
-
-        with(viewBinding) {
-            tvReviewContent.movementMethod = ScrollingMovementMethod()
-            tvReviewContent.text = review.content
-            toolbarReviewDetails.title = getString(R.string.review_details_title_format, review.author, title)
-            toolbarReviewDetails.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = ComposeView(requireContext()).apply {
+        setContent {
+            ReviewDetailsUI(title = title, review = review) {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 

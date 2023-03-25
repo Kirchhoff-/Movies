@@ -5,7 +5,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kirchhoff.movies.core.R
 
-private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
+const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
 private const val YOUTUBE_POSTER_PATH = "https://img.youtube.com/vi/%s/0.jpg"
 
 fun ImageView.downloadPoster(path: String?) {

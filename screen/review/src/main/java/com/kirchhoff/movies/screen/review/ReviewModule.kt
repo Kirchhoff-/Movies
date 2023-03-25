@@ -5,8 +5,8 @@ import com.kirchhoff.movies.screen.review.mapper.ReviewListMapper
 import com.kirchhoff.movies.screen.review.network.ReviewService
 import com.kirchhoff.movies.screen.review.repository.IReviewRepository
 import com.kirchhoff.movies.screen.review.repository.ReviewRepository
-import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
-import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListVM
+import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
+import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -23,10 +23,9 @@ internal val reviewModule = module {
         )
     }
 
-    viewModel { (dataId: Int, reviewType: ReviewType) ->
-        ReviewsListVM(
-            dataId,
-            reviewType,
+    viewModel { (args: ReviewsListArgs) ->
+        ReviewsListViewModel(
+            args = args,
             reviewRepository = get()
         )
     }

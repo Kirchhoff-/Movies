@@ -1,7 +1,9 @@
 package com.kirchhoff.movies.core.ui.paginated
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
@@ -13,21 +15,31 @@ import com.kirchhoff.movies.core.ui.recyclerview.Paginator
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.GridMarginItemDecoration
-import com.kirchhoff.movies.core.ui.utils.viewBinding
 
-abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragment(R.layout.fragment_paginated) {
+abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragment() {
 
     abstract val configuration: Configuration
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
     abstract val vm: PaginatedScreenVM<T>
 
-    private val viewBinding by viewBinding(FragmentPaginatedBinding::bind)
+    private var _viewBinding: FragmentPaginatedBinding? = null
+    private val viewBinding get() = _viewBinding!!
+
     private lateinit var paginator: Paginator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         paginator = Paginator(loadMore = { loadData(it) }, threshold = configuration.threshold)
         loadData(1)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _viewBinding = FragmentPaginatedBinding.inflate(inflater, container, false)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,6 +74,12 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
             error.subscribe { Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show() }
             showEmptyResult.subscribe(::obtainViewsVisibility)
         }
+    }
+
+    override fun onDestroyView() {
+        viewBinding.rv.adapter = null
+        super.onDestroyView()
+        _viewBinding = null
     }
 
     protected fun displayTitle(title: String) {

@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
@@ -24,7 +25,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
-    private val person: UIPerson by lazy { requireArguments().getParcelable(PERSON_ARG)!! }
+    private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
 
     private val vm by viewModel<PersonDetailsVM>()
     private val viewBinding by viewBinding(FragmentPersonDetailsBinding::bind)

@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
@@ -22,7 +23,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
 
-    private val tv: UITv by lazy { requireArguments().getParcelable(TV_ARG)!! }
+    private val tv: UITv by lazy { requireArguments().getParcelableExtra(TV_ARG)!! }
 
     private val vm by viewModel<TvDetailsVM>()
     private val viewBinding by viewBinding(FragmentTvDetailsBinding::bind)

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.extensions.setTextOrGone
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
@@ -34,7 +35,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
-    private val movie: UIMovie by lazy { requireArguments().getParcelable(MOVIE_ARG)!! }
+    private val movie: UIMovie by lazy { requireArguments().getParcelableExtra(MOVIE_ARG)!! }
 
     private val vm by viewModel<MovieDetailsVM>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)

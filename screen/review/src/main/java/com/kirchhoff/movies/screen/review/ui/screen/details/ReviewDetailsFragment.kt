@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.review.data.UIReview
 
 class ReviewDetailsFragment : BaseFragment() {
 
-    private val review by lazy { requireArguments().getParcelable<UIReview>(REVIEW_ARG)!! }
+    private val review by lazy { requireArguments().getParcelableExtra<UIReview>(REVIEW_ARG)!! }
     private val title by lazy { requireArguments().getString(TITLE_ARG).orEmpty() }
 
     override fun onCreateView(

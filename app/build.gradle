@@ -54,6 +54,8 @@ dependencies {
     implementation libs.kotlin
     implementation libs.coroutines
 
+    implementation libs.pagerIndicator
+
     implementation libs.bundles.architectureComponents
 
     implementation libs.bundles.di

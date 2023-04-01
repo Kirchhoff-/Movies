@@ -9,13 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -28,11 +23,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
 
-@SuppressWarnings("LongMethod")
 @Composable
 internal fun ReviewListUI(
     screenState: ReviewsListScreenState,
@@ -45,24 +40,9 @@ internal fun ReviewListUI(
     var errorMessage by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        TopAppBar(
-            title = {
-                Text(
-                    text = stringResource(R.string.review_list_title_format, screenState.title),
-                    color = colorResource(R.color.white)
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = { onBackPressed.invoke() }) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        tint = colorResource(R.color.white),
-                        contentDescription = ""
-                    )
-                }
-            },
-            backgroundColor = colorResource(R.color.colorPrimary)
-        )
+        MoviesToolbar(title = stringResource(R.string.review_list_title_format, screenState.title)) {
+            onBackPressed.invoke()
+        }
 
         Box(modifier = Modifier.fillMaxSize()) {
             this@Column.AnimatedVisibility(visible = screenState.reviewsVisible) {

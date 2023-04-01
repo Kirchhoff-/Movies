@@ -34,6 +34,8 @@ koin = "2.0.1"
 coil = "2.3.0"
 coilCompose = "2.2.2"
 
+pagerIndicator = "1.2.4"
+
 timber = "5.0.1"
 stetho = "1.6.0"
 
@@ -76,6 +78,8 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+
+pagerIndicator = { module = "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator", version.ref = "pagerIndicator" }
 
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }

@@ -10,4 +10,5 @@ dependencies {
     implementation libs.bundles.di
 
     implementation libs.constraintLayout
+    implementation libs.coilCompose
 }

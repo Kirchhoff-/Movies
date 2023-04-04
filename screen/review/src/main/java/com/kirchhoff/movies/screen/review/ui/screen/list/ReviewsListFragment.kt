@@ -2,51 +2,62 @@ package com.kirchhoff.movies.screen.review.ui.screen.list
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
-import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
+import android.view.ViewGroup
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.ComposeView
+import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.reviewModule
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.details.ReviewDetailsFragment
-import com.kirchhoff.movies.screen.review.ui.screen.list.adapter.ReviewsListAdapter
+import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
+import com.kirchhoff.movies.screen.review.ui.screen.list.ui.ReviewListUI
+import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIReview>>(),
-    BaseRecyclerViewAdapter.OnItemClickListener<UIReview> {
+class ReviewsListFragment : BaseFragment() {
 
-    override val vm: ReviewsListVM by viewModel {
-        parametersOf(
-            requireArguments().getInt(ID_ARG),
-            ReviewType.values()[requireArguments().getInt(REVIEW_TYPE_ARG)]
-        )
+    private val args by lazy {
+        requireArguments().getParcelable<ReviewsListArgs>(REVIEW_ARGS)
+            ?: error("Should proved arguments for NewReviewsListFragment class")
     }
 
-    override val listAdapter = ReviewsListAdapter(this)
-
-    override val configuration: Configuration = Configuration(
-        threshold = THRESHOLD,
-        spanCount = SPAN_COUNT,
-        emptyResultText = R.string.empty_reviews,
-        isToolbarVisible = true,
-        toolbarTitle = ""
-    )
-
-    private val title by lazy { requireArguments().getString(REVIEW_TITLE_ARG).orEmpty() }
+    private val viewModel: ReviewsListViewModel by viewModel {
+        parametersOf(args)
+    }
 
     override fun onAttach(context: Context) {
         loadKoinModules(reviewModule)
         super.onAttach(context)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        displayTitle(getString(R.string.review_list_title_format, title))
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.loadReviews()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = ComposeView(requireContext()).apply {
+        setContent {
+            val screenState by viewModel.screenState.observeAsState()
+
+            ReviewListUI(
+                screenState ?: error("Can't build UI without state"),
+                onLoadMore = { viewModel.loadReviews() },
+                onReviewClick = { onReviewClick(it) },
+                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
+            )
+        }
     }
 
     override fun onDestroy() {
@@ -54,10 +65,10 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
         super.onDestroy()
     }
 
-    override fun onItemClick(item: UIReview) {
+    private fun onReviewClick(review: UIReview) {
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragmentContainer, ReviewDetailsFragment.newInstance(item, title))
+            .replace(R.id.fragmentContainer, ReviewDetailsFragment.newInstance(review, args.title))
             .addToBackStack(null)
             .commit()
     }
@@ -75,16 +86,17 @@ class ReviewsListFragment : PaginatedScreenFragment<UIReview, UIPaginated<UIRevi
             title: String?
         ): ReviewsListFragment = ReviewsListFragment().apply {
             arguments = Bundle().apply {
-                putInt(ID_ARG, id)
-                putInt(REVIEW_TYPE_ARG, reviewType.ordinal)
-                putString(REVIEW_TITLE_ARG, title)
+                putParcelable(
+                    REVIEW_ARGS,
+                    ReviewsListArgs(
+                        id = id,
+                        title = title.orEmpty(),
+                        reviewType = reviewType
+                    )
+                )
             }
         }
 
-        private const val ID_ARG = "ID_ARG"
-        private const val REVIEW_TYPE_ARG = "REVIEW_TYPE_ARG"
-        private const val REVIEW_TITLE_ARG = "REVIEW_TITLE_ARG"
-        private const val SPAN_COUNT = 1
-        private const val THRESHOLD = 3
+        private const val REVIEW_ARGS = "REVIEW_ARGS"
     }
 }

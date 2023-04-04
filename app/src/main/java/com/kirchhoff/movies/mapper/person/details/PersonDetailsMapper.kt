@@ -6,10 +6,13 @@ import com.kirchhoff.movies.data.ui.details.person.UIMediaType
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
+import com.kirchhoff.movies.data.ui.details.person.UIPersonImage
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCastCredit
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCrewCredit
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonDetails
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonImage
+import com.kirchhoff.movies.networkdata.details.person.NetworkPersonImages
 
 class PersonDetailsMapper : BaseMapper(),
     IPersonDetailsMapper {
@@ -24,6 +27,16 @@ class PersonDetailsMapper : BaseMapper(),
         when (personCreditsResult) {
             is Result.Success -> Result.Success(createUIPersonCredits(personCreditsResult.data))
             else -> mapErrorOrException(personCreditsResult)
+        }
+
+    override fun createUIPersonImages(personImagesResult: Result<NetworkPersonImages>): Result<List<UIPersonImage>> =
+        when (personImagesResult) {
+            is Result.Success -> Result.Success(
+                personImagesResult.data.images
+                    .filter { it.filePath != null }
+                    .map { createPersonImage(it) }
+            )
+            else -> mapErrorOrException(personImagesResult)
         }
 
     private fun createUIPersonDetails(personDetails: NetworkPersonDetails) =
@@ -66,4 +79,7 @@ class PersonDetailsMapper : BaseMapper(),
             value.equals(UIMediaType.TV.name, true) -> UIMediaType.TV
             else -> error("Unknown media type = $value")
         }
+
+    private fun createPersonImage(image: NetworkPersonImage) =
+        UIPersonImage(image.filePath.orEmpty())
 }

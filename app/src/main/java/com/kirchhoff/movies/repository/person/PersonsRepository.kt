@@ -5,6 +5,7 @@ import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
+import com.kirchhoff.movies.data.ui.details.person.UIPersonImage
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.mapper.person.details.IPersonDetailsMapper
 import com.kirchhoff.movies.mapper.person.main.IPersonsMapper
@@ -33,5 +34,10 @@ class PersonsRepository(
             personService.fetchPersonCredits(
                 personId
             )
+        })
+
+    override suspend fun fetchPersonImages(personId: Int): Result<List<UIPersonImage>> =
+        personDetailsMapper.createUIPersonImages(apiCall {
+            personService.fetchPersonImages(personId)
         })
 }

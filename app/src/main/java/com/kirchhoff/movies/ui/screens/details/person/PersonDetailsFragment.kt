@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
@@ -14,20 +15,24 @@ import com.kirchhoff.movies.data.ui.details.person.UIMediaType
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
+import com.kirchhoff.movies.data.ui.details.person.UIPersonImage
 import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
+import com.kirchhoff.movies.ui.screens.details.person.adapter.PersonDetailsImagesAdapter
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
 
-    private val person: UIPerson by lazy { requireArguments().getParcelable(PERSON_ARG)!! }
+    private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
 
     private val vm by viewModel<PersonDetailsVM>()
     private val viewBinding by viewBinding(FragmentPersonDetailsBinding::bind)
+
+    private var imagesAdapter: PersonDetailsImagesAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +58,7 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         with(vm) {
             personDetails.subscribe(::handlePersonDetails)
             personCredits.subscribe(::handlePersonCredits)
+            personImages.subscribe(::handlePersonImages)
             loading.subscribe(::handleLoading)
             error.subscribe(::handleError)
             exception.subscribe(::handleException)
@@ -78,6 +84,20 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         with(viewBinding.content.vCredits) {
             isVisible = true
             displayItems(personCredits.cast, personCredits.crew)
+        }
+    }
+
+    private fun handlePersonImages(personImages: List<UIPersonImage>) {
+        if (imagesAdapter == null) {
+            with(viewBinding) {
+                imagesAdapter = PersonDetailsImagesAdapter(this@PersonDetailsFragment, personImages)
+
+                ivBackdrop.isVisible = false
+                vpImages.isVisible = true
+                tabLayout.isVisible = true
+                vpImages.adapter = imagesAdapter
+                tabLayout.attachToPager(vpImages)
+            }
         }
     }
 

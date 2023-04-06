@@ -7,7 +7,7 @@ import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.mapper.IReviewListMapper
 import com.kirchhoff.movies.screen.review.network.ReviewService
 
-class ReviewRepository(
+internal class ReviewRepository(
     private val reviewService: ReviewService,
     private val reviewMapper: IReviewListMapper
 ) : BaseRepository(), IReviewRepository {

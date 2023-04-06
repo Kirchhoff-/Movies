@@ -7,7 +7,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ReviewService {
+internal interface ReviewService {
     @GET("/3/movie/{movie_id}/reviews")
     suspend fun movieReviews(
         @Path("movie_id") id: Int,

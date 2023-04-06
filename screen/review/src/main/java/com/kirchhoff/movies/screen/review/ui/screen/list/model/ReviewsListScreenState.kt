@@ -2,7 +2,7 @@ package com.kirchhoff.movies.screen.review.ui.screen.list.model
 
 import com.kirchhoff.movies.screen.review.data.UIReview
 
-data class ReviewsListScreenState(
+internal data class ReviewsListScreenState(
     val title: String,
     val reviewsList: List<UIReview>,
     val errorMessage: String,

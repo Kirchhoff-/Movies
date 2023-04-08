@@ -1,7 +1,9 @@
-package com.kirchhoff.movies.ui.screens.details.person
+package com.kirchhoff.movies.ui.screens.details.person.ui.screen.details
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
@@ -9,7 +11,6 @@ import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.creditsview.CreditsView
 import com.kirchhoff.movies.data.ui.details.person.UIMediaType
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredit
@@ -21,22 +22,34 @@ import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
-import com.kirchhoff.movies.ui.screens.details.person.adapter.PersonDetailsImagesAdapter
+import com.kirchhoff.movies.ui.screens.details.person.ui.screen.images.PersonImagesFragment
+import com.kirchhoff.movies.ui.screens.details.person.ui.view.adapter.PersonImageAdapter
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
+class PersonDetailsFragment : BaseFragment() {
 
     private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
 
     private val vm by viewModel<PersonDetailsVM>()
-    private val viewBinding by viewBinding(FragmentPersonDetailsBinding::bind)
 
-    private var imagesAdapter: PersonDetailsImagesAdapter? = null
+    private var _viewBinding: FragmentPersonDetailsBinding? = null
+    private val viewBinding get() = _viewBinding!!
+
+    private var imagesAdapter: PersonImageAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm.loadPersonDetails(person.id)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _viewBinding = FragmentPersonDetailsBinding.inflate(inflater, container, false)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,6 +78,12 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
         }
     }
 
+    override fun onDestroyView() {
+        viewBinding.vpImages.adapter = null
+        super.onDestroyView()
+        _viewBinding = null
+    }
+
     private fun handlePersonDetails(personDetails: UIPersonDetails) {
         with(viewBinding.content) {
             groupData.isVisible = true
@@ -88,16 +107,19 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
     }
 
     private fun handlePersonImages(personImages: List<UIPersonImage>) {
-        if (imagesAdapter == null) {
-            with(viewBinding) {
-                imagesAdapter = PersonDetailsImagesAdapter(this@PersonDetailsFragment, personImages)
+        with(viewBinding) {
+            val imagesUrls = personImages.map { it.url }
+            imagesAdapter = PersonImageAdapter(
+                this@PersonDetailsFragment,
+                imagesUrls
+            ) { openPersonImagesFragment(imagesUrls) }
 
-                ivBackdrop.isVisible = false
-                vpImages.isVisible = true
-                tabLayout.isVisible = true
-                vpImages.adapter = imagesAdapter
-                tabLayout.attachToPager(vpImages)
-            }
+            vpImages.adapter = imagesAdapter
+            tabLayout.attachToPager(vpImages)
+
+            ivBackdrop.isVisible = personImages.isEmpty()
+            vpImages.isVisible = personImages.isNotEmpty()
+            tabLayout.isVisible = personImages.isNotEmpty()
         }
     }
 
@@ -156,6 +178,17 @@ class PersonDetailsFragment : BaseFragment(R.layout.fragment_person_details) {
                 .addToBackStack(null)
                 .commit()
         }
+    }
+
+    private fun openPersonImagesFragment(imagesUrls: List<String>) {
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.fragmentContainer,
+                PersonImagesFragment.newInstance(imagesUrls, viewBinding.vpImages.currentItem)
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {

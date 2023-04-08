@@ -5,7 +5,7 @@ import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.data.ui.main.UIPerson
-import com.kirchhoff.movies.ui.screens.details.person.PersonDetailsFragment
+import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsFragment
 import com.kirchhoff.movies.ui.screens.main.persons.adapter.PersonsListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 

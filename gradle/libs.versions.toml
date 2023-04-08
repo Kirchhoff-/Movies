@@ -1,5 +1,5 @@
 [versions]
-buildToolsPlugin = "7.4.1"
+buildToolsPlugin = "7.4.2"
 minSdk = "21"
 targetSdk = "33"
 compileSdk = "33"

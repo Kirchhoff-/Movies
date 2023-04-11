@@ -5,15 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.review.data.UIReview
-import com.kirchhoff.movies.screen.review.repository.IReviewRepository
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
+import com.kirchhoff.movies.screen.review.usecase.IReviewUseCase
 import kotlinx.coroutines.launch
 
 internal class ReviewsListViewModel(
     private val args: ReviewsListArgs,
-    private val reviewRepository: IReviewRepository
+    private val useCase: IReviewUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<ReviewsListScreenState> = MutableLiveData()
@@ -47,8 +47,8 @@ internal class ReviewsListViewModel(
                 )
 
                 val reviewsResult = when (args.reviewType) {
-                    ReviewType.MOVIE -> reviewRepository.fetchMovieReviews(args.id, currentPage + 1)
-                    ReviewType.TV -> reviewRepository.fetchTvReviews(args.id, currentPage + 1)
+                    ReviewType.MOVIE -> useCase.fetchMovieReviews(args.id, currentPage + 1)
+                    ReviewType.TV -> useCase.fetchTvReviews(args.id, currentPage + 1)
                 }
                 when (reviewsResult) {
                     is Result.Success -> {

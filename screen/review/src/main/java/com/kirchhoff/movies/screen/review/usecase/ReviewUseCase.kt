@@ -9,7 +9,7 @@ import com.kirchhoff.movies.screen.review.repository.IReviewRepository
 internal class ReviewUseCase(
     private val reviewRepository: IReviewRepository,
     private val reviewMapper: IReviewListMapper
-): IReviewUseCase {
+) : IReviewUseCase {
 
     override suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>> =
         reviewMapper.createUIReviewList(reviewRepository.fetchMovieReviews(movieId, page))

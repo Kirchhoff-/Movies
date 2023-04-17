@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
     tools:layout_gravity="center"
-    tools:src="@tools:sample/avatars">
+    android:orientation="vertical"
+    tools:src="@tools:sample/avatars"
+    tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:id="@+id/ivAvatar"
@@ -16,4 +18,15 @@
         tools:layout_gravity="center"
         tools:src="@tools:sample/avatars" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:gravity="center"
+        android:textColor="@color/text_main"
+        android:textSize="16sp"
+        tools:text="John Doe" />
+
+</LinearLayout>

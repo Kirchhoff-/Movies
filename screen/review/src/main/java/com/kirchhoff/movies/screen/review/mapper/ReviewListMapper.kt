@@ -7,7 +7,7 @@ import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.details.review.NetworkReview
 import com.kirchhoff.movies.screen.review.data.UIReview
 
-class ReviewListMapper : BaseMapper(), IReviewListMapper {
+internal class ReviewListMapper : BaseMapper(), IReviewListMapper {
 
     override fun createUIReviewList(reviewsListResponse: Result<NetworkPaginated<NetworkReview>>): Result<UIPaginated<UIReview>> =
         when (reviewsListResponse) {

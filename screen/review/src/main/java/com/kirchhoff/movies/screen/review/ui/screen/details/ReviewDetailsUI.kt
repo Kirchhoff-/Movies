@@ -19,7 +19,7 @@ import com.kirchhoff.movies.screen.review.data.UIReview
 
 @SuppressWarnings("MagicNumber")
 @Composable
-fun ReviewDetailsUI(
+internal fun ReviewDetailsUI(
     title: String,
     review: UIReview,
     onBackPressed: () -> Unit

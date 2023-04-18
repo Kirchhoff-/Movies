@@ -27,4 +27,6 @@
     <string name="empty_persons">Can\'t load persons</string>
     <string name="empty_similar_movies">There are no similar movies</string>
     <string name="empty_similar_tv_shows">There are no similar tv shows</string>
+
+    <string name="person_images_title_format">%1$d / %2$d</string>
 </resources>

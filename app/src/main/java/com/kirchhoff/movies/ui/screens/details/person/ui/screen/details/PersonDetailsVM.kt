@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.details.person
+package com.kirchhoff.movies.ui.screens.details.person.ui.screen.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

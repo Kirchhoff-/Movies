@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UIReview(
+internal data class UIReview(
     val author: String,
     val content: String,
     val authorAvatar: String?,

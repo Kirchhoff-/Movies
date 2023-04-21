@@ -1,12 +1,12 @@
-package com.kirchhoff.movies.data.ui.main
+package com.kirchhoff.movies.core.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UITv(
+data class UIMovie(
     val id: Int,
-    val name: String?,
+    val title: String?,
     val posterPath: String?,
     val backdropPath: String?,
     val voteAverage: Float?

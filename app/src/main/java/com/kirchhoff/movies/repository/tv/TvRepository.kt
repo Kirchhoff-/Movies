@@ -1,11 +1,11 @@
 package com.kirchhoff.movies.repository.tv
 
+import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
-import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
 import com.kirchhoff.movies.mapper.tv.ITvDetailsMapper
 import com.kirchhoff.movies.network.services.TvService

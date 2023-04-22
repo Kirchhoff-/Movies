@@ -1,12 +1,12 @@
 package com.kirchhoff.movies.repository.person
 
+import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.data.ui.details.person.UIPersonImage
-import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.mapper.person.details.IPersonDetailsMapper
 import com.kirchhoff.movies.mapper.person.main.IPersonsMapper
 import com.kirchhoff.movies.network.services.PersonService

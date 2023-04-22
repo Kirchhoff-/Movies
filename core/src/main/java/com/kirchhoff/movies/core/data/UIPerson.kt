@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.data.ui.main
+package com.kirchhoff.movies.core.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

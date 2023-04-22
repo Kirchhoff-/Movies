@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.ui.screens.main.persons
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.repository.person.IPersonsRepository
 import com.kirchhoff.movies.ui.screens.core.verifyFirstPageErrorState
 import com.kirchhoff.movies.ui.screens.core.verifyFirstPageExceptionState

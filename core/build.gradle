@@ -3,5 +3,6 @@ apply from: '../buildsystem/android-module.gradle'
 dependencies {
     implementation libs.bundles.architectureComponents
     implementation libs.bundles.internet
+    implementation libs.bundles.di
     implementation libs.coil
 }

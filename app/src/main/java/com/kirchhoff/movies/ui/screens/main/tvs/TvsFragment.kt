@@ -6,7 +6,6 @@ import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.ui.screens.core.tvs.adapter.TvsListAdapter
-import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
@@ -30,10 +29,6 @@ class TvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     }
 
     override fun onItemClick(item: UITv) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, TvDetailsFragment.newInstance(item))
-            .addToBackStack(null)
-            .commit()
+        router.openTvDetailsScreen(item)
     }
 }

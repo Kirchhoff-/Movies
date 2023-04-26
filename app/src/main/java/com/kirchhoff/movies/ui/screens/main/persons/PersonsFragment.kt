@@ -5,7 +5,6 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsFragment
 import com.kirchhoff.movies.ui.screens.main.persons.adapter.PersonsListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -30,10 +29,6 @@ class PersonsFragment : PaginatedScreenFragment<UIPerson, UIPaginated<UIPerson>>
     }
 
     override fun onItemClick(item: UIPerson) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, PersonDetailsFragment.newInstance(item))
-            .addToBackStack(null)
-            .commit()
+        router.openPersonDetailsScreen(item)
     }
 }

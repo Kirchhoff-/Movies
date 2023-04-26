@@ -21,10 +21,7 @@ import com.kirchhoff.movies.data.ui.details.person.UIPersonCredits
 import com.kirchhoff.movies.data.ui.details.person.UIPersonDetails
 import com.kirchhoff.movies.data.ui.details.person.UIPersonImage
 import com.kirchhoff.movies.databinding.FragmentPersonDetailsBinding
-import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.images.PersonImagesFragment
 import com.kirchhoff.movies.ui.screens.details.person.ui.view.adapter.PersonImageAdapter
-import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PersonDetailsFragment : BaseFragment() {
@@ -151,8 +148,8 @@ class PersonDetailsFragment : BaseFragment() {
 
     private fun openMovieOrTvShowScreen(creditsInfo: CreditsView.CreditsInfo) {
         if (creditsInfo is UIPersonCredit) {
-            val fragment = when (creditsInfo.mediaType) {
-                UIMediaType.MOVIE -> MovieDetailsFragment.newInstance(
+            if (creditsInfo.mediaType == UIMediaType.MOVIE) {
+                router.openMovieDetailsScreen(
                     UIMovie(
                         creditsInfo.id,
                         creditsInfo.title,
@@ -161,7 +158,8 @@ class PersonDetailsFragment : BaseFragment() {
                         null
                     )
                 )
-                UIMediaType.TV -> TvDetailsFragment.newInstance(
+            } else if (creditsInfo.mediaType == UIMediaType.TV) {
+                router.openTvDetailsScreen(
                     UITv(
                         creditsInfo.id,
                         creditsInfo.title,
@@ -171,24 +169,11 @@ class PersonDetailsFragment : BaseFragment() {
                     )
                 )
             }
-
-            requireActivity().supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .addToBackStack(null)
-                .commit()
         }
     }
 
     private fun openPersonImagesFragment(imagesUrls: List<String>) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                PersonImagesFragment.newInstance(imagesUrls, viewBinding.vpImages.currentItem)
-            )
-            .addToBackStack(null)
-            .commit()
+        router.openPersonImagesScreen(imagesUrls, viewBinding.vpImages.currentItem)
     }
 
     companion object {

@@ -23,10 +23,7 @@ import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
-import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsFragment
-import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -165,19 +162,11 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
 
     private fun openReviewsListScreen(movie: UIMovie) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstanceForMovie(movie.id, movie.title))
-            .addToBackStack(null)
-            .commit()
+        router.openReviewsListScreen(movie)
     }
 
     private fun openSimilarMoviesScreen(movie: UIMovie) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, SimilarMoviesFragment.newInstance(movie.id, movie.title))
-            .addToBackStack(null)
-            .commit()
+        router.openSimilarMoviesScreen(movie)
     }
 
     private fun openPersonDetailsScreen(creditsInfo: CreditsView.CreditsInfo) {
@@ -186,11 +175,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
         }
 
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, PersonDetailsFragment.newInstance(person))
-            .addToBackStack(null)
-            .commit()
+        router.openPersonDetailsScreen(person)
     }
 
     companion object {

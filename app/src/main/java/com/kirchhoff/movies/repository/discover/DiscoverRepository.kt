@@ -2,10 +2,10 @@ package com.kirchhoff.movies.repository.discover
 
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
 import com.kirchhoff.movies.network.services.DiscoverService
 
 class DiscoverRepository(

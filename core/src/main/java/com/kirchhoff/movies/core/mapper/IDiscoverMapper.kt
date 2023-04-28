@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.mapper.discover
+package com.kirchhoff.movies.core.mapper
 
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UITv

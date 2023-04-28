@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.di
 
+import com.kirchhoff.movies.core.mapper.DiscoverMapper
+import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.mapper.core.CoreMapper
 import com.kirchhoff.movies.mapper.core.ICoreMapper
-import com.kirchhoff.movies.mapper.discover.DiscoverMapper
-import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.mapper.movie.MovieDetailsMapper
 import com.kirchhoff.movies.mapper.person.details.IPersonDetailsMapper

@@ -1,8 +1,7 @@
-package com.kirchhoff.movies.mapper.discover
+package com.kirchhoff.movies.core.mapper
 
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UITv
-import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated

@@ -32,7 +32,7 @@ gson = "2.10.1"
 koin = "2.0.1"
 
 coil = "2.3.0"
-coilCompose = "2.2.2"
+coilCompose = "2.3.0"
 
 pagerIndicator = "1.2.4"
 

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName
 
 data class NetworkMovieDetails(
-    @SerializedName("production_countries") val productionCountries: List<NetworkObjectWithName>,
+    @SerializedName("production_countries") val productionCountries: List<NetworkCountry>,
     @SerializedName("runtime")val runtime: Int?,
     @SerializedName("tagline") val tagline: String?,
     @SerializedName("overview") val overview: String,
@@ -20,3 +20,8 @@ data class NetworkTrailer(
 )
 
 data class NetworkTrailersList(val results: List<NetworkTrailer>)
+
+data class NetworkCountry(
+    @SerializedName("iso_3166_1") val id: String,
+    @SerializedName("name") val name: String
+)

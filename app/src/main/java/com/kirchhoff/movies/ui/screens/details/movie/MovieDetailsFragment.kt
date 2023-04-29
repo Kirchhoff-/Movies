@@ -68,6 +68,10 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             tvSimilarMovies.setOnClickListener { openSimilarMoviesScreen(movie) }
             vCredits.setCastClickListener { openPersonDetailsScreen(it) }
             vCredits.setCrewClickListener { openPersonDetailsScreen(it) }
+            tvCountry.setOnClickListener {
+                val countryId = it.tag as? String ?: error("Should set countryId as tag for this TextView")
+                openMoviesByCountryScreen(countryId, tvCountry.text.toString())
+            }
         }
 
         with(vm) {
@@ -101,7 +105,9 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
             tvCountry.isVisible = movieDetails.productionCountries.isNotEmpty()
             if (movieDetails.productionCountries.isNotEmpty()) {
-                tvCountry.text = movieDetails.productionCountries.first().name
+                val country = movieDetails.productionCountries.first()
+                tvCountry.text = country.name
+                tvCountry.tag = country.id
             }
 
             voteView.displayRatingAndVoteCount(movieDetails.voteAverage, movieDetails.voteCount)
@@ -176,6 +182,10 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
 
         router.openPersonDetailsScreen(person)
+    }
+
+    private fun openMoviesByCountryScreen(countryId: String, countryName: String) {
+        router.openMoviesByCountryScreen(countryId, countryName)
     }
 
     companion object {

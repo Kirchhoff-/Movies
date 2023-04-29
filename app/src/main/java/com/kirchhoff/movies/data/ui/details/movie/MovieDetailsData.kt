@@ -20,4 +20,4 @@ data class UITrailer(
 
 data class UITrailersList(val results: List<UITrailer>)
 
-data class UICountry(val name: String)
+data class UICountry(val id: String, val name: String)

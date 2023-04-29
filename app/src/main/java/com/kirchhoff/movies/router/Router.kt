@@ -7,6 +7,7 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.router.IRouter
+import com.kirchhoff.movies.screen.country.ui.screen.movie.MoviesByCountryFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsFragment
@@ -51,6 +52,10 @@ class Router(private val activity: AppCompatActivity) : IRouter {
 
     override fun openReviewsListScreen(tv: UITv) {
         replaceFragment(ReviewsListFragment.newInstanceForTvShow(tv.id, tv.name))
+    }
+
+    override fun openMoviesByCountryScreen(countryId: String, countryName: String) {
+        replaceFragment(MoviesByCountryFragment.newInstance(countryId, countryName))
     }
 
     private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {

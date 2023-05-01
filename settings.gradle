@@ -6,6 +6,7 @@ include ':app',
         ':view:creditsview',
         ':view:ratingtextview',
         ':screen:review',
-        ':screen:country'
+        ':screen:country',
+        ':screen:person'
 
 rootProject.name='Movies'

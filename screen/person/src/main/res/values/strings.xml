@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="person_images_title_format">%1$d / %2$d</string>
+    <string name="person_no_information">No information</string>
+    <string name="person_born">Born</string>
+    <string name="person_birthplace">Birthplace</string>
+    <string name="person_bio">Bio</string>
+    <string name="person_retry">Retry</string>
+    <string name="person_empty_persons">Can\'t load persons</string>
+</resources>

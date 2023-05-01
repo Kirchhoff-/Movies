@@ -8,10 +8,10 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.router.IRouter
 import com.kirchhoff.movies.screen.country.ui.screen.movie.MoviesByCountryFragment
+import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragment
+import com.kirchhoff.movies.screen.person.ui.screen.images.PersonImagesFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsFragment
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.images.PersonImagesFragment
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import com.kirchhoff.movies.ui.screens.main.MainFragment
 import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment

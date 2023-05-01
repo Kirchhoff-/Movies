@@ -6,12 +6,12 @@ import com.kirchhoff.movies.mapper.core.CoreMapper
 import com.kirchhoff.movies.mapper.core.ICoreMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.mapper.movie.MovieDetailsMapper
-import com.kirchhoff.movies.mapper.person.details.IPersonDetailsMapper
-import com.kirchhoff.movies.mapper.person.details.PersonDetailsMapper
-import com.kirchhoff.movies.mapper.person.main.IPersonsMapper
-import com.kirchhoff.movies.mapper.person.main.PersonsMapper
 import com.kirchhoff.movies.mapper.tv.ITvDetailsMapper
 import com.kirchhoff.movies.mapper.tv.TvDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.details.IPersonDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.details.PersonDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.main.IPersonsMapper
+import com.kirchhoff.movies.screen.person.mapper.main.PersonsMapper
 import org.koin.dsl.module
 
 val mapperModule = module {

@@ -1,10 +1,10 @@
 package com.kirchhoff.movies.di
 
+import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsVM
+import com.kirchhoff.movies.screen.person.ui.screen.list.PersonsVM
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsVM
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsVM
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsVM
 import com.kirchhoff.movies.ui.screens.main.movies.MoviesVM
-import com.kirchhoff.movies.ui.screens.main.persons.PersonsVM
 import com.kirchhoff.movies.ui.screens.main.tvs.TvsVM
 import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesVM
 import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsVM

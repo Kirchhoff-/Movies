@@ -9,7 +9,7 @@ import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.mapper.core.ICoreMapper
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
-import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName
+import com.kirchhoff.movies.networkdata.details.movie.NetworkCountry
 import com.kirchhoff.movies.networkdata.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailer
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailersList
@@ -51,5 +51,5 @@ class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IM
     private fun createUITrailer(trailer: NetworkTrailer) =
         UITrailer(trailer.site, trailer.key)
 
-    private fun createUICountry(item: NetworkObjectWithName) = UICountry(item.name)
+    private fun createUICountry(item: NetworkCountry) = UICountry(item.id, item.name)
 }

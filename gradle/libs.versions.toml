@@ -4,8 +4,8 @@ minSdk = "21"
 targetSdk = "33"
 compileSdk = "33"
 buildTools = "33.0.2"
-versionName = "1.6.0"
-versionCode = "6"
+versionName = "1.7.0"
+versionCode = "7"
 
 material = "1.8.0"
 constraintLayout = "2.1.4"
@@ -23,7 +23,7 @@ coroutines = "1.6.4"
 
 lifecycle = "2.2.0"
 liveData = "2.6.0"
-viewModel = "2.6.0"
+viewModel = "2.6.1"
 
 retrofit = "2.9.0"
 okhttp = "4.10.0"
@@ -32,7 +32,7 @@ gson = "2.10.1"
 koin = "2.0.1"
 
 coil = "2.3.0"
-coilCompose = "2.2.2"
+coilCompose = "2.3.0"
 
 pagerIndicator = "1.2.4"
 

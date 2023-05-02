@@ -11,10 +11,6 @@
     <string name="tv_first_air_date_format">First Air Date: %s</string>
     <string name="tv_status_format">Status: %s</string>
 
-    <string name="born">Born</string>
-    <string name="birthplace">Birthplace</string>
-    <string name="bio">Bio</string>
-    <string name="no_information">No information</string>
     <string name="reviews">Reviews</string>
     <string name="similar_movies">Similar Movies</string>
     <string name="similar_tv_shows">Similar Tv shows</string>
@@ -24,9 +20,6 @@
 
     <string name="empty_movies">Can\'t load movies</string>
     <string name="empty_tw_shows">Can\'t load tv shows</string>
-    <string name="empty_persons">Can\'t load persons</string>
     <string name="empty_similar_movies">There are no similar movies</string>
     <string name="empty_similar_tv_shows">There are no similar tv shows</string>
-
-    <string name="person_images_title_format">%1$d / %2$d</string>
 </resources>

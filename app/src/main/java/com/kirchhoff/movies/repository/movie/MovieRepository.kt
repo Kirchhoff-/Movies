@@ -1,13 +1,13 @@
 package com.kirchhoff.movies.repository.movie
 
+import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
-import com.kirchhoff.movies.data.ui.main.UIMovie
-import com.kirchhoff.movies.mapper.discover.IDiscoverMapper
 import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
 import com.kirchhoff.movies.network.services.MovieService
 

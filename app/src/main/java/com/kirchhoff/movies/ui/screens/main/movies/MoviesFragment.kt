@@ -1,12 +1,11 @@
 package com.kirchhoff.movies.ui.screens.main.movies
 
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.data.ui.main.UIMovie
 import com.kirchhoff.movies.ui.screens.core.movies.adapter.MoviesListAdapter
-import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
@@ -30,10 +29,6 @@ class MoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
     }
 
     override fun onItemClick(item: UIMovie) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, MovieDetailsFragment.newInstance(item))
-            .addToBackStack(null)
-            .commit()
+        router.openMovieDetailsScreen(item)
     }
 }

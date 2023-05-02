@@ -7,6 +7,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
@@ -20,13 +22,8 @@ import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
-import com.kirchhoff.movies.data.ui.main.UIMovie
-import com.kirchhoff.movies.data.ui.main.UIPerson
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
-import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.ui.screens.details.movie.adapters.TrailersListAdapter
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsFragment
-import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -71,6 +68,10 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             tvSimilarMovies.setOnClickListener { openSimilarMoviesScreen(movie) }
             vCredits.setCastClickListener { openPersonDetailsScreen(it) }
             vCredits.setCrewClickListener { openPersonDetailsScreen(it) }
+            tvCountry.setOnClickListener {
+                val countryId = it.tag as? String ?: error("Should set countryId as tag for this TextView")
+                openMoviesByCountryScreen(countryId, tvCountry.text.toString())
+            }
         }
 
         with(vm) {
@@ -104,7 +105,9 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
             tvCountry.isVisible = movieDetails.productionCountries.isNotEmpty()
             if (movieDetails.productionCountries.isNotEmpty()) {
-                tvCountry.text = movieDetails.productionCountries.first().name
+                val country = movieDetails.productionCountries.first()
+                tvCountry.text = country.name
+                tvCountry.tag = country.id
             }
 
             voteView.displayRatingAndVoteCount(movieDetails.voteAverage, movieDetails.voteCount)
@@ -165,19 +168,11 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
 
     private fun openReviewsListScreen(movie: UIMovie) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstanceForMovie(movie.id, movie.title))
-            .addToBackStack(null)
-            .commit()
+        router.openReviewsListScreen(movie)
     }
 
     private fun openSimilarMoviesScreen(movie: UIMovie) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, SimilarMoviesFragment.newInstance(movie.id, movie.title))
-            .addToBackStack(null)
-            .commit()
+        router.openSimilarMoviesScreen(movie)
     }
 
     private fun openPersonDetailsScreen(creditsInfo: CreditsView.CreditsInfo) {
@@ -186,11 +181,11 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
         }
 
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, PersonDetailsFragment.newInstance(person))
-            .addToBackStack(null)
-            .commit()
+        router.openPersonDetailsScreen(person)
+    }
+
+    private fun openMoviesByCountryScreen(countryId: String, countryName: String) {
+        router.openMoviesByCountryScreen(countryId, countryName)
     }
 
     companion object {

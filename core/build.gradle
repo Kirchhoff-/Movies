@@ -1,7 +1,10 @@
 apply from: '../buildsystem/android-module.gradle'
 
 dependencies {
+    implementation project(path: ':networkdata')
+
     implementation libs.bundles.architectureComponents
     implementation libs.bundles.internet
+    implementation libs.bundles.di
     implementation libs.coil
 }

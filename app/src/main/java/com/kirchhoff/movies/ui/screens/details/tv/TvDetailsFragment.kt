@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.data.UIPerson
+import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
@@ -13,12 +15,7 @@ import com.kirchhoff.movies.creditsview.CreditsView
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
-import com.kirchhoff.movies.data.ui.main.UIPerson
-import com.kirchhoff.movies.data.ui.main.UITv
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
-import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
-import com.kirchhoff.movies.ui.screens.details.person.ui.screen.details.PersonDetailsFragment
-import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
@@ -109,19 +106,11 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     }
 
     private fun openReviewsListScreen(tv: UITv) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, ReviewsListFragment.newInstanceForTvShow(tv.id, tv.name))
-            .addToBackStack(null)
-            .commit()
+        router.openReviewsListScreen(tv)
     }
 
     private fun openSimilarTvShowsScreen(tv: UITv) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, SimilarTvsFragment.newInstance(tv.id, tv.name))
-            .addToBackStack(null)
-            .commit()
+        router.openSimilarTvShowsScreen(tv)
     }
 
     private fun openPersonDetailsScreen(creditsInfo: CreditsView.CreditsInfo) {
@@ -130,11 +119,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
         }
 
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, PersonDetailsFragment.newInstance(person))
-            .addToBackStack(null)
-            .commit()
+        router.openPersonDetailsScreen(person)
     }
 
     companion object {

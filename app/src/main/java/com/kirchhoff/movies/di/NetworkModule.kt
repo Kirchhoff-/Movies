@@ -5,8 +5,8 @@ import com.kirchhoff.movies.BuildConfig
 import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
 import com.kirchhoff.movies.network.services.DiscoverService
 import com.kirchhoff.movies.network.services.MovieService
-import com.kirchhoff.movies.network.services.PersonService
 import com.kirchhoff.movies.network.services.TvService
+import com.kirchhoff.movies.screen.person.network.PersonService
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit

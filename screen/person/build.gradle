@@ -1,0 +1,16 @@
+apply from: '../../buildsystem/android-module.gradle'
+
+dependencies {
+    implementation project(path: ':core')
+    implementation project(path: ':networkdata')
+    implementation project(path: ':view:creditsview')
+    implementation project(path: ':view:keywordsview')
+
+    implementation libs.bundles.internet
+    implementation libs.bundles.di
+
+    implementation libs.pagerIndicator
+    implementation libs.constraintLayout
+
+    implementation libs.timber
+}

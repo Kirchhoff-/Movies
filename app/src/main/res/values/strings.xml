@@ -14,12 +14,9 @@
     <string name="reviews">Reviews</string>
     <string name="similar_movies">Similar Movies</string>
     <string name="similar_tv_shows">Similar Tv shows</string>
-    <string name="similar_to_format">Similar to %s</string>
 
     <string name="movie_runtime_format">%1$s / %2$d min</string>
 
     <string name="empty_movies">Can\'t load movies</string>
     <string name="empty_tw_shows">Can\'t load tv shows</string>
-    <string name="empty_similar_movies">There are no similar movies</string>
-    <string name="empty_similar_tv_shows">There are no similar tv shows</string>
 </resources>

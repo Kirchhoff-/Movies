@@ -27,15 +27,13 @@ val repositoryModule = module {
     single<IMovieRepository> {
         MovieRepository(
             movieService = get(),
-            movieDetailsMapper = get(),
-            discoverMapper = get()
+            movieDetailsMapper = get()
         )
     }
     single<ITvRepository> {
         TvRepository(
             tvService = get(),
-            tvDetailsMapper = get(),
-            discoverMapper = get()
+            tvDetailsMapper = get()
         )
     }
 }

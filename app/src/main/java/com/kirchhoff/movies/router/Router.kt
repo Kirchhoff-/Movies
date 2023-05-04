@@ -11,11 +11,11 @@ import com.kirchhoff.movies.screen.country.ui.screen.movie.MoviesByCountryFragme
 import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragment
 import com.kirchhoff.movies.screen.person.ui.screen.images.PersonImagesFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
+import com.kirchhoff.movies.screen.similar.ui.screen.movie.SimilarMoviesFragment
+import com.kirchhoff.movies.screen.similar.ui.screen.tv.viewmodel.SimilarTvsFragment
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import com.kirchhoff.movies.ui.screens.main.MainFragment
-import com.kirchhoff.movies.ui.screens.similar.movie.SimilarMoviesFragment
-import com.kirchhoff.movies.ui.screens.similar.tv.SimilarTvsFragment
 
 class Router(private val activity: AppCompatActivity) : IRouter {
     override fun openDiscoverScreen() {

@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.data.ui.details.tv
 
-import com.kirchhoff.movies.data.ui.core.UIGenre
+import com.kirchhoff.movies.core.data.UIGenre
 
 data class UITvDetails(
     val numberOfSeasons: Int,

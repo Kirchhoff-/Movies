@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.data.ui.details.movie
 
-import com.kirchhoff.movies.data.ui.core.UIGenre
+import com.kirchhoff.movies.core.data.UIGenre
 
 data class UIMovieDetails(
     val productionCountries: List<UICountry>,

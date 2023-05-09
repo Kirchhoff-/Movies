@@ -13,7 +13,7 @@ import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.creditsview.CreditsView
+import com.kirchhoff.movies.creditsview.data.CreditsInfo
 import com.kirchhoff.movies.screen.person.R
 import com.kirchhoff.movies.screen.person.data.UIMediaType
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
@@ -61,8 +61,7 @@ class PersonDetailsFragment : BaseFragment() {
         with(viewBinding.content) {
             tvPersonName.text = person.name
             bRetry.setOnClickListener { vm.loadPersonDetails(person.id) }
-            vCredits.setCastClickListener { openMovieOrTvShowScreen(it) }
-            vCredits.setCrewClickListener { openMovieOrTvShowScreen(it) }
+            vCredits.itemClickListener { openMovieOrTvShowScreen(it) }
         }
 
         with(vm) {
@@ -99,7 +98,24 @@ class PersonDetailsFragment : BaseFragment() {
     private fun handlePersonCredits(personCredits: UIPersonCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
-            displayItems(personCredits.cast, personCredits.crew)
+            display(
+                personCredits.cast?.map {
+                    CreditsInfo(
+                        id = it.id,
+                        title = it.title,
+                        description = it.character,
+                        imagePath = it.posterPath
+                    )
+                },
+                personCredits.crew?.map {
+                    CreditsInfo(
+                        id = it.id,
+                        title = it.title,
+                        description = it.job,
+                        imagePath = it.posterPath
+                    )
+                }
+            )
         }
     }
 
@@ -146,29 +162,28 @@ class PersonDetailsFragment : BaseFragment() {
         }
     }
 
-    private fun openMovieOrTvShowScreen(creditsInfo: CreditsView.CreditsInfo) {
-        if (creditsInfo is UIPersonCredit) {
-            if (creditsInfo.mediaType == UIMediaType.MOVIE) {
-                router.openMovieDetailsScreen(
-                    UIMovie(
-                        creditsInfo.id,
-                        creditsInfo.title,
-                        creditsInfo.posterPath,
-                        creditsInfo.backdropPath,
-                        null
-                    )
+    private fun openMovieOrTvShowScreen(id: Int) {
+        val credit: UIPersonCredit = vm.personCredits.value?.findCredit(id) ?: error("Can't find person credits with id = $id")
+        if (credit.mediaType == UIMediaType.MOVIE) {
+            router.openMovieDetailsScreen(
+                UIMovie(
+                    credit.id,
+                    credit.title,
+                    credit.posterPath,
+                    credit.backdropPath,
+                    null
                 )
-            } else if (creditsInfo.mediaType == UIMediaType.TV) {
-                router.openTvDetailsScreen(
-                    UITv(
-                        creditsInfo.id,
-                        creditsInfo.title,
-                        creditsInfo.posterPath,
-                        creditsInfo.backdropPath,
-                        null
-                    )
+            )
+        } else if (credit.mediaType == UIMediaType.TV) {
+            router.openTvDetailsScreen(
+                UITv(
+                    credit.id,
+                    credit.title,
+                    credit.posterPath,
+                    credit.backdropPath,
+                    null
                 )
-            }
+            )
         }
     }
 
@@ -189,6 +204,7 @@ class PersonDetailsFragment : BaseFragment() {
     }
 
     private fun TextView.setTextOrNoInfo(txt: String?) {
-        text = if (!txt.isNullOrEmpty()) txt else resources.getString(R.string.person_no_information)
+        text =
+            if (!txt.isNullOrEmpty()) txt else resources.getString(R.string.person_no_information)
     }
 }

@@ -7,10 +7,12 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.TopBottomMarginItemDecoration
 import com.kirchhoff.movies.creditsview.adapter.CreditsAdapter
+import com.kirchhoff.movies.creditsview.data.CreditsInfo
 import com.kirchhoff.movies.creditsview.databinding.ViewCreditsBinding
 
 class CreditsView @JvmOverloads constructor(
@@ -19,19 +21,12 @@ class CreditsView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    interface CreditsInfo {
-        fun title(): String?
-        fun description(): String?
-        fun imagePath(): String?
-    }
-
     private val castAdapter = CreditsAdapter(CastCreditsClickListener())
     private val crewAdapter = CreditsAdapter(CrewCreditsClickListener())
 
     private val binding = ViewCreditsBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private var castClickListener: ((CreditsInfo) -> Unit)? = null
-    private var crewClickListener: ((CreditsInfo) -> Unit)? = null
+    private var creditItemClickListener: ((Int) -> Unit)? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_credits, this)
@@ -39,28 +34,33 @@ class CreditsView @JvmOverloads constructor(
         configRecyclerView(binding.rvCrewCredits, crewAdapter)
     }
 
-    fun displayItems(castCredits: List<CreditsInfo>?, crewCredits: List<CreditsInfo>?) {
+    fun display(castCredits: List<CreditsInfo>?, crewCredits: List<CreditsInfo>?) {
+        displayCredits(castCredits, crewCredits)
+    }
+
+    fun display(credits: UIEntertainmentCredits) {
+        displayCredits(
+            credits.cast?.map { CreditsInfo(it) },
+            credits.crew?.map { CreditsInfo(it) }
+        )
+    }
+
+    fun itemClickListener(listener: (Int) -> Unit) {
+        creditItemClickListener = listener
+    }
+
+    private fun displayCredits(castCredits: List<CreditsInfo>?, crewCredits: List<CreditsInfo>?) {
         with(binding) {
-            if (!castCredits.isNullOrEmpty()) {
-                tvCastCredits.isVisible = true
-                rvCastCredits.isVisible = true
-                castAdapter.addItems(castCredits)
-            }
+            val castCreditsVisible = !castCredits.isNullOrEmpty()
+            tvCastCredits.isVisible = castCreditsVisible
+            rvCastCredits.isVisible = castCreditsVisible
+            castCredits?.let { castAdapter.addItems(it) }
 
-            if (!crewCredits.isNullOrEmpty()) {
-                tvCrewCredits.isVisible = true
-                rvCrewCredits.isVisible = true
-                crewAdapter.addItems(crewCredits)
-            }
+            val crewCreditsVisible = !crewCredits.isNullOrEmpty()
+            tvCrewCredits.isVisible = crewCreditsVisible
+            rvCrewCredits.isVisible = crewCreditsVisible
+            crewCredits?.let { crewAdapter.addItems(it) }
         }
-    }
-
-    fun setCastClickListener(castClickListener: (CreditsInfo) -> Unit) {
-        this.castClickListener = castClickListener
-    }
-
-    fun setCrewClickListener(crewClickListener: (CreditsInfo) -> Unit) {
-        this.crewClickListener = crewClickListener
     }
 
     private fun configRecyclerView(recyclerView: RecyclerView, creditsAdapter: RecyclerView.Adapter<*>) {
@@ -80,13 +80,13 @@ class CreditsView @JvmOverloads constructor(
 
     private inner class CastCreditsClickListener : BaseRecyclerViewAdapter.OnItemClickListener<CreditsInfo> {
         override fun onItemClick(item: CreditsInfo) {
-            castClickListener?.invoke(item)
+            creditItemClickListener?.invoke(item.id)
         }
     }
 
     private inner class CrewCreditsClickListener : BaseRecyclerViewAdapter.OnItemClickListener<CreditsInfo> {
         override fun onItemClick(item: CreditsInfo) {
-            crewClickListener?.invoke(item)
+            creditItemClickListener?.invoke(item.id)
         }
     }
 }

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
@@ -11,9 +13,6 @@ import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
-import com.kirchhoff.movies.creditsview.CreditsView
-import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
-import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -45,8 +44,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
             bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
             tvSimilarTv.setOnClickListener { openSimilarTvShowsScreen(tv) }
             tvReviews.setOnClickListener { openReviewsListScreen(tv) }
-            vCredits.setCastClickListener { openPersonDetailsScreen(it) }
-            vCredits.setCrewClickListener { openPersonDetailsScreen(it) }
+            vCredits.itemClickListener { openPersonDetailsScreen(it) }
         }
 
         with(vm) {
@@ -75,7 +73,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     private fun handleTvCredits(tvCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
-            displayItems(tvCredits.cast, tvCredits.crew)
+            display(tvCredits)
         }
     }
 
@@ -113,13 +111,9 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         router.openSimilarTvShowsScreen(tv)
     }
 
-    private fun openPersonDetailsScreen(creditsInfo: CreditsView.CreditsInfo) {
-        val person: UIPerson = when (creditsInfo) {
-            is UIEntertainmentPerson -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
-            else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
-        }
-
-        router.openPersonDetailsScreen(person)
+    private fun openPersonDetailsScreen(id: Int) {
+        val person: UIEntertainmentPerson = vm.tvCredits.value?.findPerson(id) ?: error("Can't find person with id = $id")
+        router.openPersonDetailsScreen(UIPerson(person))
     }
 
     companion object {

@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.mapper.movie
 
+import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.movie.UICountry
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer

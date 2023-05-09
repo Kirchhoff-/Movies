@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.mapper.movie
 
+import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailersList
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits

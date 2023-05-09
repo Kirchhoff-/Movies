@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.repository.tv
 
+import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
 import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 
 interface ITvRepository {

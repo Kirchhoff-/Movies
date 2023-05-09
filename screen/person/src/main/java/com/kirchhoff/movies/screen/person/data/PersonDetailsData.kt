@@ -1,7 +1,5 @@
 package com.kirchhoff.movies.screen.person.data
 
-import com.kirchhoff.movies.creditsview.CreditsView
-
 data class UIPersonDetails(
     val birthday: String?,
     val placeOfBirth: String?,
@@ -12,7 +10,10 @@ data class UIPersonDetails(
 data class UIPersonCredits(
     val cast: List<UIPersonCredit.Actor>?,
     val crew: List<UIPersonCredit.Creator>?
-)
+) {
+    fun findCredit(id: Int): UIPersonCredit? =
+        cast?.find { it.id == id } ?: crew?.find { it.id == id }
+}
 
 sealed class UIPersonCredit(
     val id: Int,
@@ -28,11 +29,7 @@ sealed class UIPersonCredit(
         backdropPath: String?,
         mediaType: UIMediaType,
         val character: String?
-    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType), CreditsView.CreditsInfo {
-        override fun title() = title
-        override fun description() = character
-        override fun imagePath() = posterPath
-    }
+    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType)
 
     class Creator(
         id: Int,
@@ -41,11 +38,7 @@ sealed class UIPersonCredit(
         backdropPath: String?,
         mediaType: UIMediaType,
         val job: String
-    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType), CreditsView.CreditsInfo {
-        override fun title() = title
-        override fun description() = job
-        override fun imagePath() = posterPath
-    }
+    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType)
 }
 
 enum class UIMediaType { MOVIE, TV }

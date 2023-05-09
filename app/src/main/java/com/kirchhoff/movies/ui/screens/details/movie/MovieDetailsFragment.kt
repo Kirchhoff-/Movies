@@ -7,6 +7,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.R
+import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
@@ -17,9 +19,6 @@ import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.core.ui.utils.viewBinding
-import com.kirchhoff.movies.creditsview.CreditsView
-import com.kirchhoff.movies.data.ui.core.UIEntertainmentCredits
-import com.kirchhoff.movies.data.ui.core.UIEntertainmentPerson
 import com.kirchhoff.movies.data.ui.details.movie.UIMovieDetails
 import com.kirchhoff.movies.data.ui.details.movie.UITrailer
 import com.kirchhoff.movies.databinding.FragmentMovieDetailsBinding
@@ -66,8 +65,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { openReviewsListScreen(movie) }
             tvSimilarMovies.setOnClickListener { openSimilarMoviesScreen(movie) }
-            vCredits.setCastClickListener { openPersonDetailsScreen(it) }
-            vCredits.setCrewClickListener { openPersonDetailsScreen(it) }
+            vCredits.itemClickListener { openPersonDetailsScreen(it) }
             tvCountry.setOnClickListener {
                 val countryId = it.tag as? String ?: error("Should set countryId as tag for this TextView")
                 openMoviesByCountryScreen(countryId, tvCountry.text.toString())
@@ -153,7 +151,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     private fun handleMovieCredits(movieCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
-            displayItems(movieCredits.cast, movieCredits.crew)
+            display(movieCredits)
         }
     }
 
@@ -175,13 +173,9 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         router.openSimilarMoviesScreen(movie)
     }
 
-    private fun openPersonDetailsScreen(creditsInfo: CreditsView.CreditsInfo) {
-        val person: UIPerson = when (creditsInfo) {
-            is UIEntertainmentPerson -> UIPerson(creditsInfo.id, creditsInfo.name, creditsInfo.profilePath)
-            else -> error("Can't create UIPerson from creditsInfo = $creditsInfo")
-        }
-
-        router.openPersonDetailsScreen(person)
+    private fun openPersonDetailsScreen(id: Int) {
+        val person: UIEntertainmentPerson = vm.movieCredits.value?.findPerson(id) ?: error("Can't find person with id = $id")
+        router.openPersonDetailsScreen(UIPerson(person))
     }
 
     private fun openMoviesByCountryScreen(countryId: String, countryName: String) {

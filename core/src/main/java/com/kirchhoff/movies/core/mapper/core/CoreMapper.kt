@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.mapper.core
+package com.kirchhoff.movies.core.mapper.core
 
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson

@@ -13,8 +13,8 @@ import com.kirchhoff.movies.screen.person.ui.screen.images.PersonImagesFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.screen.similar.ui.screen.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.screen.similar.ui.screen.tv.viewmodel.SimilarTvsFragment
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.TvShowDetailsFragment
 import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
-import com.kirchhoff.movies.ui.screens.details.tv.TvDetailsFragment
 import com.kirchhoff.movies.ui.screens.main.MainFragment
 
 class Router(private val activity: AppCompatActivity) : IRouter {
@@ -27,7 +27,7 @@ class Router(private val activity: AppCompatActivity) : IRouter {
     }
 
     override fun openTvDetailsScreen(tv: UITv) {
-        replaceFragment(TvDetailsFragment.newInstance(tv))
+        replaceFragment(TvShowDetailsFragment.newInstance(tv))
     }
 
     override fun openPersonDetailsScreen(person: UIPerson) {

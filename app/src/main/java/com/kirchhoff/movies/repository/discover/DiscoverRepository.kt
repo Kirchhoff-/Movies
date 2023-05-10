@@ -1,7 +1,6 @@
 package com.kirchhoff.movies.repository.discover
 
 import com.kirchhoff.movies.core.data.UIMovie
-import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
@@ -16,10 +15,5 @@ class DiscoverRepository(
     override suspend fun fetchMovies(page: Int): Result<UIPaginated<UIMovie>> =
         discoverMapper.createUIDiscoverMovieList(apiCall {
             discoverService.fetchDiscoverMovie(page)
-        })
-
-    override suspend fun fetchTvs(page: Int): Result<UIPaginated<UITv>> =
-        discoverMapper.createUIDiscoverTvList(apiCall {
-            discoverService.fetchDiscoverTv(page)
         })
 }

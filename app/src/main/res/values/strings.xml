@@ -6,17 +6,10 @@
     <string name="retry">Retry</string>
     <string name="trailers">Trailers</string>
 
-    <string name="tv_seasons_format">Seasons: %d</string>
-    <string name="tv_episodes_format">Episodes: %d</string>
-    <string name="tv_first_air_date_format">First Air Date: %s</string>
-    <string name="tv_status_format">Status: %s</string>
-
     <string name="reviews">Reviews</string>
     <string name="similar_movies">Similar Movies</string>
-    <string name="similar_tv_shows">Similar Tv shows</string>
 
     <string name="movie_runtime_format">%1$s / %2$d min</string>
 
     <string name="empty_movies">Can\'t load movies</string>
-    <string name="empty_tw_shows">Can\'t load tv shows</string>
 </resources>

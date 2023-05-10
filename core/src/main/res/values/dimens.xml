@@ -4,9 +4,6 @@
     <dimen name="movie_item_title_height">40dp</dimen>
     <dimen name="movie_item_corner_radius">8dp</dimen>
 
-    <dimen name="tv_item_height">250dp</dimen>
-    <dimen name="tv_item_corner_radius">8dp</dimen>
-
     <dimen name="person_item_image_size">96dp</dimen>
 
     <dimen name="paginated_screen_item_top_margin">16dp</dimen>
@@ -20,13 +17,13 @@
     <dimen name="movie_details_poster_height">175dp</dimen>
     <dimen name="movie_details_info_text_drawable_padding">4dp</dimen>
 
-    <dimen name="tv_details_poster_width">120dp</dimen>
-    <dimen name="tv_details_poster_height">175dp</dimen>
-
     <dimen name="person_details_keywords_padding">8dp</dimen>
 
     <dimen name="trailer_item_width">200dp</dimen>
     <dimen name="trailer_item_height">150dp</dimen>
     <dimen name="trailer_item_margin">16dp</dimen>
     <dimen name="trailer_item_source_image_size">48dp</dimen>
+
+    <dimen name="tv_item_height">250dp</dimen>
+    <dimen name="tv_item_corner_radius">8dp</dimen>
 </resources>

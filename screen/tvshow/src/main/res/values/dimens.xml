@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="tv_item_height">250dp</dimen>
-    <dimen name="tv_item_corner_radius">8dp</dimen>
-
     <dimen name="tv_details_poster_width">120dp</dimen>
     <dimen name="tv_details_poster_height">175dp</dimen>
 </resources>

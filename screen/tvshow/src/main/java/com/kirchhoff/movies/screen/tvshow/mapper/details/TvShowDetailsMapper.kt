@@ -1,16 +1,17 @@
-package com.kirchhoff.movies.mapper.tv
+package com.kirchhoff.movies.screen.tvshow.mapper.details
 
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.mapper.core.ICoreMapper
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.details.tv.NetworkTvDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 
-class TvDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), ITvDetailsMapper {
+class TvShowDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(),
+    ITvShowDetailsMapper {
 
-    override fun createUITvDetails(tvDetailsResult: Result<NetworkTvDetails>): Result<UITvDetails> =
+    override fun createUITvDetails(tvDetailsResult: Result<NetworkTvDetails>): Result<UITvShowDetails> =
         when (tvDetailsResult) {
             is Result.Success -> Result.Success(createUITvDetails(tvDetailsResult.data))
             else -> mapErrorOrException(tvDetailsResult)
@@ -18,12 +19,17 @@ class TvDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), ITvDe
 
     override fun createUIEntertainmentCredits(tvCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits> =
         when (tvCreditsResult) {
-            is Result.Success -> Result.Success(coreMapper.createUIEntertainmentCredits(tvCreditsResult.data))
+            is Result.Success -> Result.Success(
+                coreMapper.createUIEntertainmentCredits(
+                    tvCreditsResult.data
+                )
+            )
+
             else -> mapErrorOrException(tvCreditsResult)
         }
 
     private fun createUITvDetails(tvDetails: NetworkTvDetails) =
-        UITvDetails(
+        UITvShowDetails(
             tvDetails.numberOfSeasons,
             tvDetails.numberOfEpisodes,
             tvDetails.overview,

@@ -1,9 +1,8 @@
-package com.kirchhoff.movies.ui.screens.details.tv
+package com.kirchhoff.movies.screen.tvshow.ui.screen.details
 
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIPerson
@@ -13,16 +12,17 @@ import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
-import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
-import com.kirchhoff.movies.databinding.FragmentTvDetailsBinding
+import com.kirchhoff.movies.screen.tvshow.R
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.databinding.FragmentTvShowDetailsBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
+class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
 
     private val tv: UITv by lazy { requireArguments().getParcelableExtra(TV_ARG)!! }
 
-    private val vm by viewModel<TvDetailsVM>()
-    private val viewBinding by viewBinding(FragmentTvDetailsBinding::bind)
+    private val vm by viewModel<TvShowDetailsVM>()
+    private val viewBinding by viewBinding(FragmentTvShowDetailsBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,7 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
         }
     }
 
-    private fun handleTvDetailsData(tvDetails: UITvDetails) {
+    private fun handleTvDetailsData(tvDetails: UITvShowDetails) {
         with(viewBinding.content) {
             groupData.isVisible = true
 
@@ -117,8 +117,8 @@ class TvDetailsFragment : BaseFragment(R.layout.fragment_tv_details) {
     }
 
     companion object {
-        fun newInstance(tv: UITv): TvDetailsFragment {
-            val fragment = TvDetailsFragment()
+        fun newInstance(tv: UITv): TvShowDetailsFragment {
+            val fragment = TvShowDetailsFragment()
             val arg = Bundle()
             arg.putParcelable(TV_ARG, tv)
             fragment.arguments = arg

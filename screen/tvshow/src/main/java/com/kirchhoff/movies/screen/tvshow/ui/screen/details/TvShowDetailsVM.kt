@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.ui.screens.details.tv
+package com.kirchhoff.movies.screen.tvshow.ui.screen.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.data.ui.details.tv.UITvDetails
-import com.kirchhoff.movies.repository.tv.ITvRepository
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
+class TvShowDetailsVM(private val tvRepository: ITvShowRepository) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -22,8 +22,8 @@ class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
     private val _exception = MutableLiveData<String>()
     val exception: LiveData<String> = _exception
 
-    private val _tvDetails = MutableLiveData<UITvDetails>()
-    val tvDetails: LiveData<UITvDetails> = _tvDetails
+    private val _tvDetails = MutableLiveData<UITvShowDetails>()
+    val tvDetails: LiveData<UITvShowDetails> = _tvDetails
 
     private val _tvCredits = MutableLiveData<UIEntertainmentCredits>()
     val tvCredits: LiveData<UIEntertainmentCredits> = _tvCredits
@@ -42,7 +42,7 @@ class TvDetailsVM(private val tvRepository: ITvRepository) : ViewModel() {
             }
 
             if (result is Result.Success) {
-                when (val credits = tvRepository.fetchTvCredits(tvId)) {
+                when (val credits = tvRepository.fetchCredits(tvId)) {
                     is Result.Success -> _tvCredits.postValue(credits.data)
                     else -> Timber.e(credits.toString())
                 }

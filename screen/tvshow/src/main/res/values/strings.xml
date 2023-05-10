@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tv_seasons_format">Seasons: %d</string>
+    <string name="tv_episodes_format">Episodes: %d</string>
+    <string name="tv_first_air_date_format">First Air Date: %s</string>
+    <string name="tv_status_format">Status: %s</string>
+    <string name="empty_tw_shows">Can\'t load tv shows</string>
+    <string name="similar_tv_shows">Similar Tv shows</string>
+</resources>

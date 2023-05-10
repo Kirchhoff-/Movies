@@ -1,16 +1,16 @@
-package com.kirchhoff.movies.ui.screens.core.tvs.adapter
+package com.kirchhoff.movies.screen.tvshow.ui.screen.list.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.inflate
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.keywordsview.RatingTextView
+import com.kirchhoff.movies.screen.tvshow.R
 
-class TvVH(parent: ViewGroup) : BaseVH<UITv>(parent.inflate(R.layout.item_tv)) {
+class TvShowVH(parent: ViewGroup) : BaseVH<UITv>(parent.inflate(R.layout.item_tv_show)) {
 
     private val ivTvPoster: ImageView = itemView.findViewById(R.id.ivTvPoster)
     private val tvTvTitle: TextView = itemView.findViewById(R.id.tvTvTitle)

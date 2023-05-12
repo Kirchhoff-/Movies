@@ -4,8 +4,8 @@ import com.kirchhoff.movies.core.mapper.DiscoverMapper
 import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.mapper.core.CoreMapper
 import com.kirchhoff.movies.core.mapper.core.ICoreMapper
-import com.kirchhoff.movies.mapper.movie.IMovieDetailsMapper
-import com.kirchhoff.movies.mapper.movie.MovieDetailsMapper
+import com.kirchhoff.movies.screen.movie.mapper.details.IMovieDetailsMapper
+import com.kirchhoff.movies.screen.movie.mapper.details.MovieDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.details.IPersonDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.details.PersonDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.main.IPersonsMapper

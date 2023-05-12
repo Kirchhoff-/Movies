@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movie_trailers">Trailers</string>
+    <string name="movie_similar_movies">Similar Movies</string>
+    <string name="movie_reviews">Reviews</string>
+    <string name="movie_retry">Retry</string>
+    <string name="movie_runtime_format">%1$s / %2$d min</string>
+    <string name="movie_empty_movies">Can\'t load movies</string>
+</resources>

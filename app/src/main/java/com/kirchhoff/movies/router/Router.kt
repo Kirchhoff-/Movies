@@ -8,13 +8,13 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.router.IRouter
 import com.kirchhoff.movies.screen.country.ui.screen.movie.MoviesByCountryFragment
+import com.kirchhoff.movies.screen.movie.ui.screen.details.MovieDetailsFragment
 import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragment
 import com.kirchhoff.movies.screen.person.ui.screen.images.PersonImagesFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.screen.similar.ui.screen.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.screen.similar.ui.screen.tv.viewmodel.SimilarTvsFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.TvShowDetailsFragment
-import com.kirchhoff.movies.ui.screens.details.movie.MovieDetailsFragment
 import com.kirchhoff.movies.ui.screens.main.MainFragment
 
 class Router(private val activity: AppCompatActivity) : IRouter {

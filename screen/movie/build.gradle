@@ -1,0 +1,15 @@
+apply from: '../../buildsystem/android-module.gradle'
+
+dependencies {
+    implementation project(path: ':core')
+    implementation project(path: ':networkdata')
+    implementation project(path: ':view:voteview')
+    implementation project(path: ':view:keywordsview')
+    implementation project(path: ':view:creditsview')
+    implementation project(path: ':view:ratingtextview')
+
+    implementation libs.bundles.internet
+    implementation libs.bundles.di
+
+    implementation libs.timber
+}

@@ -70,6 +70,7 @@ dependencies {
 
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
+    implementation project(path: ':screen:movie')
     implementation project(path: ':screen:tvshow')
     implementation project(path: ':screen:review')
     implementation project(path: ':screen:country')

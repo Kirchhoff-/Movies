@@ -21,12 +21,17 @@ import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
 import com.kirchhoff.movies.screen.person.databinding.FragmentPersonDetailsBinding
+import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.ui.view.adapter.PersonImageAdapter
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class PersonDetailsFragment : BaseFragment() {
 
     private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
+
+    private val personRouter: IPersonRouter by inject { parametersOf(requireActivity()) }
 
     private val vm by viewModel<PersonDetailsVM>()
 
@@ -188,7 +193,7 @@ class PersonDetailsFragment : BaseFragment() {
     }
 
     private fun openPersonImagesFragment(imagesUrls: List<String>) {
-        router.openPersonImagesScreen(imagesUrls, viewBinding.vpImages.currentItem)
+        personRouter.openImagesScreen(imagesUrls, viewBinding.vpImages.currentItem)
     }
 
     companion object {

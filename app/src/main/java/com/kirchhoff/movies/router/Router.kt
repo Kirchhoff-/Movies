@@ -10,7 +10,6 @@ import com.kirchhoff.movies.core.router.IRouter
 import com.kirchhoff.movies.screen.country.ui.screen.movie.MoviesByCountryFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.details.MovieDetailsFragment
 import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragment
-import com.kirchhoff.movies.screen.person.ui.screen.images.PersonImagesFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.screen.similar.ui.screen.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.screen.similar.ui.screen.tv.viewmodel.SimilarTvsFragment
@@ -32,10 +31,6 @@ class Router(private val activity: AppCompatActivity) : IRouter {
 
     override fun openPersonDetailsScreen(person: UIPerson) {
         replaceFragment(PersonDetailsFragment.newInstance(person))
-    }
-
-    override fun openPersonImagesScreen(imagesUrls: List<String>, currentPosition: Int) {
-        replaceFragment(PersonImagesFragment.newInstance(imagesUrls, currentPosition))
     }
 
     override fun openSimilarMoviesScreen(movie: UIMovie) {

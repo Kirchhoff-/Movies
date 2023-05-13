@@ -9,7 +9,6 @@ interface IRouter {
     fun openMovieDetailsScreen(movie: UIMovie)
     fun openTvDetailsScreen(tv: UITv)
     fun openPersonDetailsScreen(person: UIPerson)
-    fun openPersonImagesScreen(imagesUrls: List<String>, currentPosition: Int)
     fun openSimilarMoviesScreen(movie: UIMovie)
     fun openSimilarTvShowsScreen(tv: UITv)
     fun openReviewsListScreen(movie: UIMovie)

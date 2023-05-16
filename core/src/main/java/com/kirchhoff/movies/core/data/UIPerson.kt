@@ -8,4 +8,6 @@ data class UIPerson(
     val id: Int,
     val name: String,
     val profilePath: String?
-) : Parcelable
+) : Parcelable {
+    constructor(person: UIEntertainmentPerson) : this(person.id, person.name, person.profilePath)
+}

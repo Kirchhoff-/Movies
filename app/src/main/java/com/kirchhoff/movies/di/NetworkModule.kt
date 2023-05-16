@@ -3,10 +3,8 @@ package com.kirchhoff.movies.di
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.kirchhoff.movies.BuildConfig
 import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
-import com.kirchhoff.movies.network.services.DiscoverService
-import com.kirchhoff.movies.network.services.MovieService
-import com.kirchhoff.movies.network.services.TvService
-import com.kirchhoff.movies.screen.person.network.PersonService
+import com.kirchhoff.movies.screen.movie.network.MovieService
+import com.kirchhoff.movies.screen.tvshow.network.TvShowService
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -28,11 +26,7 @@ val networkModule = module {
             .build()
     }
 
-    single { get<Retrofit>().create(DiscoverService::class.java) }
-
-    single { get<Retrofit>().create(PersonService::class.java) }
-
     single { get<Retrofit>().create(MovieService::class.java) }
 
-    single { get<Retrofit>().create(TvService::class.java) }
+    single { get<Retrofit>().create(TvShowService::class.java) }
 }

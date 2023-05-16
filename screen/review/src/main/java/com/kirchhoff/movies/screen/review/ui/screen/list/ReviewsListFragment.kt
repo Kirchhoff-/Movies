@@ -9,14 +9,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.reviewModule
+import com.kirchhoff.movies.screen.review.router.IReviewRouter
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
-import com.kirchhoff.movies.screen.review.ui.screen.details.ReviewDetailsFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.ReviewListUI
 import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -28,6 +28,8 @@ class ReviewsListFragment : BaseFragment() {
         requireArguments().getParcelable<ReviewsListArgs>(REVIEW_ARGS)
             ?: error("Should proved arguments for NewReviewsListFragment class")
     }
+
+    private val reviewRouter: IReviewRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: ReviewsListViewModel by viewModel {
         parametersOf(args)
@@ -66,11 +68,7 @@ class ReviewsListFragment : BaseFragment() {
     }
 
     private fun onReviewClick(review: UIReview) {
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, ReviewDetailsFragment.newInstance(review, args.title))
-            .addToBackStack(null)
-            .commit()
+        reviewRouter.openDetailsScreen(review, args.title)
     }
 
     companion object {

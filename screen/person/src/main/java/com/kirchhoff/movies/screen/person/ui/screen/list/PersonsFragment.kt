@@ -1,12 +1,16 @@
 package com.kirchhoff.movies.screen.person.ui.screen.list
 
+import android.content.Context
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.screen.person.R
+import com.kirchhoff.movies.screen.person.personModule
 import com.kirchhoff.movies.screen.person.ui.screen.list.adapter.PersonsListAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class PersonsFragment : PaginatedScreenFragment<UIPerson, UIPaginated<UIPerson>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UIPerson> {
@@ -22,6 +26,16 @@ class PersonsFragment : PaginatedScreenFragment<UIPerson, UIPaginated<UIPerson>>
         isToolbarVisible = false,
         toolbarTitle = ""
     )
+
+    override fun onAttach(context: Context) {
+        loadKoinModules(personModule)
+        super.onAttach(context)
+    }
+
+    override fun onDestroy() {
+        unloadKoinModules(personModule)
+        super.onDestroy()
+    }
 
     companion object {
         private const val SPAN_COUNT = 3

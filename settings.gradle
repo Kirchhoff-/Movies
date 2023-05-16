@@ -5,8 +5,11 @@ include ':app',
         ':view:keywordsview',
         ':view:creditsview',
         ':view:ratingtextview',
+        ':screen:movie',
+        ':screen:tvshow',
         ':screen:review',
         ':screen:country',
-        ':screen:person'
+        ':screen:person',
+        ':screen:similar'
 
 rootProject.name='Movies'

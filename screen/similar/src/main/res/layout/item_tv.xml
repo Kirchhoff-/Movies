@@ -25,24 +25,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="8dp"
+            android:paddingVertical="8dp"
+            android:background="@color/grey_text_background"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="2"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp"
             tools:text="TV title" />
 
         <com.kirchhoff.movies.keywordsview.RatingTextView
             android:id="@+id/tvTvRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
             android:elevation="10dp"
             android:padding="8dp"
             android:textSize="20sp"
-            android:layout_gravity="top|end"
             tools:text="9.5" />
 
     </androidx.cardview.widget.CardView>

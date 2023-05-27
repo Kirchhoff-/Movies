@@ -5,7 +5,7 @@ apply plugin: 'kotlin-parcelize'
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
-    implementation project(path: ':view:keywordsview')
+    implementation project(path: ':view:linkifytext')
 
     implementation libs.bundles.internet
     implementation libs.bundles.di

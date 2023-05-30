@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -16,6 +17,8 @@ import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.databinding.FragmentTvShowDetailsBinding
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
 
@@ -23,6 +26,11 @@ class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
 
     private val vm by viewModel<TvShowDetailsVM>()
     private val viewBinding by viewBinding(FragmentTvShowDetailsBinding::bind)
+
+    override fun onAttach(context: Context) {
+        loadKoinModules(tvShowDetailsModule)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +62,11 @@ class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
             error.subscribe(::handleError)
             exception.subscribe(::handleException)
         }
+    }
+
+    override fun onDestroy() {
+        unloadKoinModules(tvShowDetailsModule)
+        super.onDestroy()
     }
 
     private fun handleTvDetailsData(tvDetails: UITvShowDetails) {

@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.details
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -22,12 +23,16 @@ import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.databinding.FragmentMovieDetailsBinding
+import com.kirchhoff.movies.screen.movie.movieDetailsModule
 import com.kirchhoff.movies.screen.movie.ui.screen.details.adapter.MovieTrailerListAdapter
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
+@SuppressWarnings("TooManyFunctions")
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
@@ -35,6 +40,11 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
     private val vm by viewModel<MovieDetailsVM>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)
+
+    override fun onAttach(context: Context) {
+        loadKoinModules(movieDetailsModule)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +91,11 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             exception.subscribe(::handleException)
             trailers.subscribe(::handleTrailers)
         }
+    }
+
+    override fun onDestroy() {
+        unloadKoinModules(movieDetailsModule)
+        super.onDestroy()
     }
 
     override fun onItemClick(item: UITrailer) {

@@ -21,6 +21,11 @@ class TvShowRepository(
             tvService.fetchDiscoverList(page)
         })
 
+    override suspend fun fetchSimilarTvShows(tvId: Int, page: Int): Result<UIPaginated<UITv>> =
+        discoverMapper.createUIDiscoverTvList(apiCall {
+            tvService.fetchSimilarTvShows(tvId, page)
+        })
+
     override suspend fun fetchDetails(tvId: Int): Result<UITvShowDetails> =
         tvDetailsMapper.createUITvDetails(apiCall {
             tvService.fetchDetails(tvId)

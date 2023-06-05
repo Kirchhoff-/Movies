@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.tvshow.ui.screen.list.adapter
+package com.kirchhoff.movies.screen.tvshow.ui.view.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,7 +10,7 @@ import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.keywordsview.RatingTextView
 import com.kirchhoff.movies.screen.tvshow.R
 
-class TvShowVH(parent: ViewGroup) : BaseVH<UITv>(parent.inflate(R.layout.item_tv_show)) {
+class TvShowViewHolder(parent: ViewGroup) : BaseVH<UITv>(parent.inflate(R.layout.item_tv_show)) {
 
     private val ivTvPoster: ImageView = itemView.findViewById(R.id.ivTvPoster)
     private val tvTvTitle: TextView = itemView.findViewById(R.id.tvTvTitle)

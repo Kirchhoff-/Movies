@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.tvShowModule
-import com.kirchhoff.movies.screen.tvshow.ui.screen.list.adapter.TvShowListAdapter
+import com.kirchhoff.movies.screen.tvshow.ui.view.adapter.TvShowAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -17,7 +17,7 @@ class TvShowListFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
 
     override val vm by viewModel<TvShowListVM>()
 
-    override val listAdapter = TvShowListAdapter(this)
+    override val listAdapter = TvShowAdapter(this)
 
     override val configuration: Configuration = Configuration(
         threshold = THRESHOLD,

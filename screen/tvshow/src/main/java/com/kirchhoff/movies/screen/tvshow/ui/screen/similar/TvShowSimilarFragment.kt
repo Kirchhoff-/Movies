@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.similar.ui.screen.tv.viewmodel
+package com.kirchhoff.movies.screen.tvshow.ui.screen.similar
 
 import android.content.Context
 import android.os.Bundle
@@ -7,42 +7,40 @@ import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
-import com.kirchhoff.movies.screen.similar.R
-import com.kirchhoff.movies.screen.similar.similarModule
-import com.kirchhoff.movies.screen.similar.ui.screen.tv.viewmodel.adapter.SimilarTvsAdapter
-import com.kirchhoff.movies.screen.similar.ui.screen.tv.viewmodel.viewmodel.SimilarTvsViewModel
+import com.kirchhoff.movies.screen.tvshow.R
+import com.kirchhoff.movies.screen.tvshow.ui.view.adapter.TvShowAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
+class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
-    override val vm: SimilarTvsViewModel by viewModel { parametersOf(requireArguments().getInt(TV_ID_ARG)) }
+    override val vm: TvShowSimilarViewModel by viewModel { parametersOf(requireArguments().getInt(TV_ID_ARG)) }
 
-    override val listAdapter = SimilarTvsAdapter(this)
+    override val listAdapter = TvShowAdapter(this)
 
     override val configuration: Configuration = Configuration(
         threshold = THRESHOLD,
         spanCount = SPAN_COUNT,
-        emptyResultText = R.string.empty_similar_tv_shows,
+        emptyResultText = R.string.tv_show_empty_similar,
         isToolbarVisible = true,
         toolbarTitle = ""
     )
 
     override fun onAttach(context: Context) {
-        loadKoinModules(similarModule)
+        loadKoinModules(tvShowSimilarModule)
         super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayTitle(getString(R.string.similar_to_format, requireArguments().getString(TV_NAME_ARG)))
+        displayTitle(getString(R.string.tv_show_similar_to_format, requireArguments().getString(TV_NAME_ARG)))
     }
 
     override fun onDestroy() {
-        unloadKoinModules(similarModule)
+        unloadKoinModules(tvShowSimilarModule)
         super.onDestroy()
     }
 
@@ -51,8 +49,8 @@ class SimilarTvsFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     }
 
     companion object {
-        fun newInstance(tvId: Int, tvName: String?): SimilarTvsFragment =
-            SimilarTvsFragment().apply {
+        fun newInstance(tvId: Int, tvName: String?): TvShowSimilarFragment =
+            TvShowSimilarFragment().apply {
                 arguments = Bundle().apply {
                     putInt(TV_ID_ARG, tvId)
                     putString(TV_NAME_ARG, tvName)

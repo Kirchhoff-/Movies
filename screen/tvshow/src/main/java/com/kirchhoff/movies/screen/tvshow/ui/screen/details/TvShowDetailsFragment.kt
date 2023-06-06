@@ -64,9 +64,9 @@ class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         unloadKoinModules(tvShowDetailsModule)
-        super.onDestroy()
+        super.onDestroyView()
     }
 
     private fun handleTvDetailsData(tvDetails: UITvShowDetails) {

@@ -1,6 +1,5 @@
-package com.kirchhoff.movies.screen.movie
+package com.kirchhoff.movies.screen.movie.ui.screen.details
 
-import com.kirchhoff.movies.screen.movie.ui.screen.details.MovieDetailsVM
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

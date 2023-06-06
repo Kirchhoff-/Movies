@@ -39,9 +39,9 @@ class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>()
         displayTitle(getString(R.string.tv_show_similar_to_format, requireArguments().getString(TV_NAME_ARG)))
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         unloadKoinModules(tvShowSimilarModule)
-        super.onDestroy()
+        super.onDestroyView()
     }
 
     override fun onItemClick(item: UITv) {

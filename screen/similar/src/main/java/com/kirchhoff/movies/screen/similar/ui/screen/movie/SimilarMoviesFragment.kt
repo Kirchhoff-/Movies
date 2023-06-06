@@ -41,9 +41,9 @@ class SimilarMoviesFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMov
         displayTitle(getString(R.string.similar_to_format, requireArguments().getString(MOVIE_TITLE_ARG)))
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         unloadKoinModules(similarModule)
-        super.onDestroy()
+        super.onDestroyView()
     }
 
     override fun onItemClick(item: UIMovie) {

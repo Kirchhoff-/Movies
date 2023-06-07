@@ -27,6 +27,11 @@ class MovieRepository(
             movieService.fetchDetails(movieId)
         })
 
+    override suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>> =
+        discoverMapper.createUIDiscoverMovieList(apiCall {
+            movieService.fetchSimilarMovies(movieId, page)
+        })
+
     override suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList> =
         movieDetailsMapper.createUITrailersList(apiCall {
             movieService.fetchTrailersList(movieId)

@@ -10,6 +10,7 @@ import com.kirchhoff.movies.screen.movie.data.UITrailersList
 interface IMovieRepository {
     suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchDetails(movieId: Int): Result<UIMovieDetails>
+    suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList>
     suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits>
 }

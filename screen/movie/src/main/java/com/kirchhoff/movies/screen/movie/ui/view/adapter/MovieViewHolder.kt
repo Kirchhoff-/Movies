@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.movie.ui.screen.list.adapter
+package com.kirchhoff.movies.screen.movie.ui.view.adapter
 
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,7 +10,7 @@ import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.keywordsview.RatingTextView
 import com.kirchhoff.movies.screen.movie.R
 
-class MovieVH(parent: ViewGroup) : BaseVH<UIMovie>(parent.inflate(R.layout.item_movie)) {
+class MovieViewHolder(parent: ViewGroup) : BaseVH<UIMovie>(parent.inflate(R.layout.item_movie)) {
 
     private val ivMoviePoster: ImageView = itemView.findViewById(R.id.ivMoviePoster)
     private val tvMovieTitle: TextView = itemView.findViewById(R.id.tvMovieTitle)

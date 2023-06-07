@@ -9,9 +9,9 @@ import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.router.IRouter
 import com.kirchhoff.movies.screen.country.ui.screen.movie.MoviesByCountryFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.details.MovieDetailsFragment
+import com.kirchhoff.movies.screen.movie.ui.screen.similar.MovieSimilarFragment
 import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
-import com.kirchhoff.movies.screen.similar.ui.screen.movie.SimilarMoviesFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.TvShowDetailsFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.similar.TvShowSimilarFragment
 import com.kirchhoff.movies.ui.screens.main.MainFragment
@@ -34,7 +34,7 @@ class Router(private val activity: AppCompatActivity) : IRouter {
     }
 
     override fun openSimilarMoviesScreen(movie: UIMovie) {
-        replaceFragment(SimilarMoviesFragment.newInstance(movie.id, movie.title))
+        replaceFragment(MovieSimilarFragment.newInstance(movie.id, movie.title))
     }
 
     override fun openSimilarTvShowsScreen(tv: UITv) {

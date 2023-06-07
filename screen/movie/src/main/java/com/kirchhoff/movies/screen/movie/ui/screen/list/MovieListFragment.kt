@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.movieModule
-import com.kirchhoff.movies.screen.movie.ui.screen.list.adapter.MovieListAdapter
+import com.kirchhoff.movies.screen.movie.ui.view.adapter.MovieAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -17,7 +17,7 @@ class MovieListFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>
 
     override val vm by viewModel<MovieListVM>()
 
-    override val listAdapter = MovieListAdapter(this)
+    override val listAdapter = MovieAdapter(this)
 
     override val configuration: Configuration = Configuration(
         threshold = THRESHOLD,

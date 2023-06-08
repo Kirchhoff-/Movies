@@ -23,6 +23,12 @@ interface MovieService {
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
 
+    @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
+    suspend fun fetchByCountry(
+        @Query("with_origin_country") countryId: String,
+        @Query("page") page: Int
+    ): Response<NetworkPaginated<NetworkMovie>>
+
     @GET("/3/movie/{movie_id}/videos")
     suspend fun fetchTrailersList(@Path("movie_id") id: Int): Response<NetworkTrailersList>
 

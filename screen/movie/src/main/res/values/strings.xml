@@ -8,4 +8,6 @@
     <string name="movie_empty_movies">Can\'t load movies</string>
     <string name="movie_empty_similar_movies">There are no similar movies</string>
     <string name="movie_similar_to_format">Similar to %s</string>
+    <string name="movie_cant_get_movies_by_country">Can\'t get movies from country</string>
+    <string name="movie_movies_from_country_format">Movies from %s</string>
 </resources>

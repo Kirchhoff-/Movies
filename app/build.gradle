@@ -73,7 +73,6 @@ dependencies {
     implementation project(path: ':screen:movie')
     implementation project(path: ':screen:tvshow')
     implementation project(path: ':screen:review')
-    implementation project(path: ':screen:country')
     implementation project(path: ':screen:person')
     implementation project(path: ':view:voteview')
     implementation project(path: ':view:keywordsview')

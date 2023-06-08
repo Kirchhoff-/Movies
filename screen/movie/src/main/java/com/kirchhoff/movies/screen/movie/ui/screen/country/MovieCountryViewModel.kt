@@ -1,15 +1,15 @@
-package com.kirchhoff.movies.screen.country.ui.screen.movie.viewmodel
+package com.kirchhoff.movies.screen.movie.ui.screen.country
 
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenVM
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.screen.country.usecase.IMoviesByCountryUseCase
+import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 
-class MoviesByCountryViewModel(
+class MovieCountryViewModel(
     private val countryId: String,
-    private val moviesByCountryUseCase: IMoviesByCountryUseCase
+    private val movieRepository: IMovieRepository
 ) : PaginatedScreenVM<UIPaginated<UIMovie>>() {
     override suspend fun loadData(page: Int): Result<UIPaginated<UIMovie>> =
-        moviesByCountryUseCase.fetchMovies(countryId, page)
+        movieRepository.fetchByCountry(countryId, page)
 }

@@ -9,7 +9,6 @@ include ':app',
         ':screen:movie',
         ':screen:tvshow',
         ':screen:review',
-        ':screen:country',
         ':screen:person'
 
 rootProject.name='Movies'

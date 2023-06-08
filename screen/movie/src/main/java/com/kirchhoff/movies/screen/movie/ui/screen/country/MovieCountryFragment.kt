@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.country.ui.screen.movie
+package com.kirchhoff.movies.screen.movie.ui.screen.country
 
 import android.content.Context
 import android.os.Bundle
@@ -8,35 +8,33 @@ import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
-import com.kirchhoff.movies.screen.country.R
-import com.kirchhoff.movies.screen.country.moviesByCountryModule
-import com.kirchhoff.movies.screen.country.ui.screen.movie.adapter.MoviesByCountryAdapter
-import com.kirchhoff.movies.screen.country.ui.screen.movie.viewmodel.MoviesByCountryViewModel
+import com.kirchhoff.movies.screen.movie.R
+import com.kirchhoff.movies.screen.movie.ui.view.adapter.MovieAdapter
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class MoviesByCountryFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
+class MovieCountryFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UIMovie> {
 
-    override val vm: MoviesByCountryViewModel by viewModel {
+    override val vm: MovieCountryViewModel by viewModel {
         parametersOf(requireArguments().getString(COUNTRY_ID_ARG))
     }
 
     override val listAdapter: BaseRecyclerViewAdapter<BaseVH<UIMovie>, UIMovie> =
-        MoviesByCountryAdapter(this)
+        MovieAdapter(this)
 
     override val configuration: Configuration = Configuration(
         threshold = THRESHOLD,
         spanCount = SPAN_COUNT,
-        emptyResultText = R.string.cant_get_movies_by_country,
+        emptyResultText = R.string.movie_cant_get_movies_by_country,
         isToolbarVisible = true,
         toolbarTitle = ""
     )
 
     override fun onAttach(context: Context) {
-        loadKoinModules(moviesByCountryModule)
+        loadKoinModules(movieCountryModule)
         super.onAttach(context)
     }
 
@@ -44,7 +42,7 @@ class MoviesByCountryFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIM
         super.onViewCreated(view, savedInstanceState)
         displayTitle(
             getString(
-                R.string.movies_from_country_format, requireArguments().getString(
+                R.string.movie_movies_from_country_format, requireArguments().getString(
                     COUNTRY_NAME_ARG
                 )
             )
@@ -52,7 +50,7 @@ class MoviesByCountryFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIM
     }
 
     override fun onDestroy() {
-        unloadKoinModules(moviesByCountryModule)
+        unloadKoinModules(movieCountryModule)
         super.onDestroy()
     }
 
@@ -61,8 +59,8 @@ class MoviesByCountryFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIM
     }
 
     companion object {
-        fun newInstance(countryId: String, countryName: String): MoviesByCountryFragment =
-            MoviesByCountryFragment().apply {
+        fun newInstance(countryId: String, countryName: String): MovieCountryFragment =
+            MovieCountryFragment().apply {
                 arguments = Bundle().apply {
                     putString(COUNTRY_ID_ARG, countryId)
                     putString(COUNTRY_NAME_ARG, countryName)

@@ -13,6 +13,12 @@ interface TvShowService {
     @GET("/3/discover/tv?language=en&sort_by=popularity.desc")
     suspend fun fetchDiscoverList(@Query("page") page: Int): Response<NetworkPaginated<NetworkTv>>
 
+    @GET("/3/tv/{tv_id}/similar")
+    suspend fun fetchSimilarTvShows(
+        @Path("tv_id") id: Int,
+        @Query("page") page: Int
+    ): Response<NetworkPaginated<NetworkTv>>
+
     @GET("/3/tv/{tv_id}")
     suspend fun fetchDetails(@Path("tv_id") id: Int): Response<NetworkTvDetails>
 

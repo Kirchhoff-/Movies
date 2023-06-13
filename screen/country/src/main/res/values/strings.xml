@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="cant_get_movies_by_country">Can\'t get movies from country</string>
-    <string name="movies_from_country_format">Movies from %s</string>
-</resources>

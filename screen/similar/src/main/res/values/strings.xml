@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="empty_similar_movies">There are no similar movies</string>
-    <string name="empty_similar_tv_shows">There are no similar tv shows</string>
-    <string name="similar_to_format">Similar to %s</string>
-</resources>

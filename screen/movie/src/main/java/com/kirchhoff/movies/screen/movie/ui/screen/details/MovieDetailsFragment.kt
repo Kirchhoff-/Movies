@@ -23,7 +23,6 @@ import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.databinding.FragmentMovieDetailsBinding
-import com.kirchhoff.movies.screen.movie.movieDetailsModule
 import com.kirchhoff.movies.screen.movie.ui.screen.details.adapter.MovieTrailerListAdapter
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -93,9 +92,9 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         unloadKoinModules(movieDetailsModule)
-        super.onDestroy()
+        super.onDestroyView()
     }
 
     override fun onItemClick(item: UITrailer) {

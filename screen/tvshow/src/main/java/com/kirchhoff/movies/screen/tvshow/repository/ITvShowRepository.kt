@@ -8,6 +8,7 @@ import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 
 interface ITvShowRepository {
     suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UITv>>
+    suspend fun fetchSimilarTvShows(tvId: Int, page: Int): Result<UIPaginated<UITv>>
     suspend fun fetchDetails(tvId: Int): Result<UITvShowDetails>
     suspend fun fetchCredits(tvId: Int): Result<UIEntertainmentCredits>
 }

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.keywordsview.adapter.KeywordsListAdapter
+import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
 import com.kirchhoff.movies.keywordsview.decorations.KeywordsItemDecoration
 
 class KeywordsView @JvmOverloads constructor(
@@ -16,7 +18,9 @@ class KeywordsView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
-    private val keywordAdapter = KeywordsListAdapter()
+    private val keywordAdapter = KeywordsListAdapter(KeywordClickListener())
+
+    private var keywordItemClickListener: ((KeywordsViewData) -> Unit)? = null
 
     init {
         var firstItemMarginEnabled = false
@@ -42,7 +46,18 @@ class KeywordsView @JvmOverloads constructor(
         adapter = keywordAdapter
     }
 
-    fun displayItems(items: List<String>) {
+    fun displayItems(items: List<KeywordsViewData>) {
         keywordAdapter.addItems(items)
+    }
+
+    @Suppress("unused")
+    fun itemClickListener(listener: (KeywordsViewData) -> Unit) {
+        keywordItemClickListener = listener
+    }
+
+    private inner class KeywordClickListener : BaseRecyclerViewAdapter.OnItemClickListener<KeywordsViewData> {
+        override fun onItemClick(item: KeywordsViewData) {
+            keywordItemClickListener?.invoke(item)
+        }
     }
 }

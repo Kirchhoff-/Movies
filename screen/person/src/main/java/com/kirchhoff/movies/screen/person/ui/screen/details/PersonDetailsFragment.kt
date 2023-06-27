@@ -14,6 +14,7 @@ import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.creditsview.data.CreditsInfo
+import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
 import com.kirchhoff.movies.screen.person.R
 import com.kirchhoff.movies.screen.person.data.UIMediaType
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
@@ -93,9 +94,9 @@ class PersonDetailsFragment : BaseFragment() {
             tvBirthplace.setTextOrNoInfo(personDetails.placeOfBirth)
             tvBio.setTextOrNoInfo(personDetails.biography)
 
-            personDetails.alsoKnownAs?.let {
+            personDetails.alsoKnownAs?.let { alsoKnownAs ->
                 cvAlsoKnowAs.isVisible = true
-                vKeywords.displayItems(it)
+                vKeywords.displayItems(alsoKnownAs.map { KeywordsViewData(it, it) })
             }
         }
     }

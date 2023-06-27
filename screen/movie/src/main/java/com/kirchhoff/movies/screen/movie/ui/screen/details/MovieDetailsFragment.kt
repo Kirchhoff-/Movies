@@ -19,6 +19,7 @@ import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDecoration
 import com.kirchhoff.movies.core.ui.utils.viewBinding
+import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
@@ -124,7 +125,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             }
 
             voteView.displayRatingAndVoteCount(movieDetails.voteAverage, movieDetails.voteCount)
-            vKeywords.displayItems(movieDetails.genres.map { it.name })
+            vKeywords.displayItems(movieDetails.genres.map { KeywordsViewData(it.name, it.name) })
         }
     }
 

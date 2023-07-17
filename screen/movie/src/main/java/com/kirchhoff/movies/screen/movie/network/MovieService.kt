@@ -34,4 +34,10 @@ interface MovieService {
 
     @GET("/3/movie/{movie_id}/credits")
     suspend fun fetchMovieCredits(@Path("movie_id") id: Int): Response<NetworkEntertainmentCredits>
+
+    @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
+    suspend fun fetchByGenre(
+        @Query("with_genres") genre: String,
+        @Query("page") page: Int
+    ): Response<NetworkPaginated<NetworkMovie>>
 }

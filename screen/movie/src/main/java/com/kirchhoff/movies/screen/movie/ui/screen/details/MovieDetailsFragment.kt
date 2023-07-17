@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
@@ -24,19 +25,24 @@ import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.databinding.FragmentMovieDetailsBinding
+import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.adapter.MovieTrailerListAdapter
+import org.koin.android.ext.android.inject
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+import org.koin.core.parameter.parametersOf
 
 @SuppressWarnings("TooManyFunctions")
 class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
     private val movie: UIMovie by lazy { requireArguments().getParcelableExtra(MOVIE_ARG)!! }
+
+    private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
 
     private val vm by viewModel<MovieDetailsVM>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)
@@ -80,6 +86,9 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
                 val countryId =
                     it.tag as? String ?: error("Should set countryId as tag for this TextView")
                 openMoviesByCountryScreen(countryId, tvCountry.text.toString())
+            }
+            vKeywords.itemClickListener { keywordsViewData ->
+                openMoviesByGenreScreen(UIGenre(keywordsViewData.id, keywordsViewData.displayedValue))
             }
         }
 
@@ -125,7 +134,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             }
 
             voteView.displayRatingAndVoteCount(movieDetails.voteAverage, movieDetails.voteCount)
-            vKeywords.displayItems(movieDetails.genres.map { KeywordsViewData(it.name, it.name) })
+            vKeywords.displayItems(movieDetails.genres.map { KeywordsViewData(it.id, it.name) })
         }
     }
 
@@ -159,7 +168,8 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         if (trailersList.isNotEmpty()) {
             with(viewBinding.content) {
                 groupTrailers.isVisible = true
-                rvTrailers.adapter = MovieTrailerListAdapter(trailersList, this@MovieDetailsFragment)
+                rvTrailers.adapter =
+                    MovieTrailerListAdapter(trailersList, this@MovieDetailsFragment)
             }
         }
     }
@@ -197,6 +207,10 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
     private fun openMoviesByCountryScreen(countryId: String, countryName: String) {
         router.openMoviesByCountryScreen(countryId, countryName)
+    }
+
+    private fun openMoviesByGenreScreen(genre: UIGenre) {
+        movieRouter.openMoviesByGenreScreen(genre)
     }
 
     companion object {

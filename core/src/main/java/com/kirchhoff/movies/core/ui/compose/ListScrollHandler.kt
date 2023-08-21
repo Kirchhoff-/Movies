@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.review.ui.screen.list.ui
+package com.kirchhoff.movies.core.ui.compose
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
@@ -9,7 +9,7 @@ import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
-internal fun ReviewsListScrollHandler(
+fun ListScrollHandler(
     listState: LazyListState,
     threshold: Int = 3,
     onLoadMore: () -> Unit

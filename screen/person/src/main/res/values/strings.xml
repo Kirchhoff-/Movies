@@ -6,5 +6,4 @@
     <string name="person_birthplace">Birthplace</string>
     <string name="person_bio">Bio</string>
     <string name="person_retry">Retry</string>
-    <string name="person_empty_persons">Can\'t load persons</string>
 </resources>

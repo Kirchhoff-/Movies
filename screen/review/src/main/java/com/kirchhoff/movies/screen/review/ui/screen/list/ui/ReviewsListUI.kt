@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.kirchhoff.movies.core.ui.compose.ListScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
@@ -57,7 +58,7 @@ internal fun ReviewListUI(
                         }
                     }
                 }
-                ReviewsListScrollHandler(listState = listState) {
+                ListScrollHandler(listState = listState) {
                     onLoadMore()
                 }
             }

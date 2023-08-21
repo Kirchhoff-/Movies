@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListFragment
-import com.kirchhoff.movies.screen.person.ui.screen.list.PersonsFragment
+import com.kirchhoff.movies.screen.person.ui.screen.list.PersonListFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.TvShowListFragment
 
 class MainPagerAdapter(fm: FragmentManager) :
@@ -14,7 +14,7 @@ class MainPagerAdapter(fm: FragmentManager) :
         return when (position) {
             0 -> MovieListFragment()
             1 -> TvShowListFragment()
-            else -> PersonsFragment()
+            else -> PersonListFragment()
         }
     }
 

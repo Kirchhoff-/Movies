@@ -196,7 +196,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     }
 
     private fun openSimilarMoviesScreen(movie: UIMovie) {
-        router.openSimilarMoviesScreen(movie)
+        movieRouter.openSimilarMoviesScreen(movie)
     }
 
     private fun openPersonDetailsScreen(id: Int) {
@@ -206,7 +206,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     }
 
     private fun openMoviesByCountryScreen(countryId: String, countryName: String) {
-        router.openMoviesByCountryScreen(countryId, countryName)
+        movieRouter.openMoviesByCountryScreen(countryId, countryName)
     }
 
     private fun openMoviesByGenreScreen(genre: UIGenre) {

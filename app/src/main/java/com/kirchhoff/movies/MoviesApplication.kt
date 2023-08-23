@@ -1,7 +1,6 @@
 package com.kirchhoff.movies
 
 import android.app.Application
-import com.facebook.stetho.Stetho
 import com.kirchhoff.movies.di.mapperModule
 import com.kirchhoff.movies.di.networkModule
 import org.koin.android.ext.koin.androidContext
@@ -19,17 +18,6 @@ class MoviesApplication : Application() {
             modules(mapperModule)
         }
 
-        initStetho()
-        initTimber()
-    }
-
-    private fun initStetho() {
-        if (BuildConfig.DEBUG) {
-            Stetho.initializeWithDefaults(this)
-        }
-    }
-
-    private fun initTimber() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }

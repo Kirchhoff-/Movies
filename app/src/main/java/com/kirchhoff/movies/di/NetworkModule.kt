@@ -1,6 +1,5 @@
 package com.kirchhoff.movies.di
 
-import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.kirchhoff.movies.BuildConfig
 import com.kirchhoff.movies.network.interceptors.ApiKeyInterceptor
 import okhttp3.OkHttpClient
@@ -11,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 val networkModule = module {
     single {
         OkHttpClient.Builder()
-            .addInterceptor(StethoInterceptor())
             .addInterceptor(ApiKeyInterceptor())
             .build()
     }

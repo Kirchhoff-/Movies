@@ -10,4 +10,6 @@
     <color name="text_main">#000000</color>
     <color name="text_hint">#757575</color>
     <color name="grey_text_background">#66000000</color>
+    <color name="link_color">#00BCD4</color>
+    <color name="yellow">#EEC94D</color>
 </resources>

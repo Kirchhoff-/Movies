@@ -27,6 +27,7 @@ import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.adapter.MovieTrailerListAdapter
+import com.kirchhoff.movies.screen.movie.ui.screen.details.view.similar.MovieDetailsSimilarMoviesView
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -80,7 +81,6 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             ivMoviePoster.downloadPoster(movie.posterPath)
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { openReviewsListScreen(movie) }
-            tvSimilarMovies.setOnClickListener { openSimilarMoviesScreen(movie) }
             vCredits.itemClickListener { openPersonDetailsScreen(it) }
             tvCountry.setOnClickListener {
                 val countryId =
@@ -90,6 +90,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             vKeywords.itemClickListener { keywordsViewData ->
                 openMoviesByGenreScreen(UIGenre(keywordsViewData.id, keywordsViewData.displayedValue))
             }
+            vSimilarMovies.itemClickListener(SimilarMoviesItemClickListener())
         }
 
         with(vm) {
@@ -99,6 +100,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             error.subscribe(::handleError)
             exception.subscribe(::handleException)
             trailers.subscribe(::handleTrailers)
+            similarMovies.subscribe(::handleSimilarMovies)
         }
     }
 
@@ -174,6 +176,10 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         }
     }
 
+    private fun handleSimilarMovies(similarMovies: List<UIMovie>) {
+        viewBinding.content.vSimilarMovies.displayMovies(similarMovies)
+    }
+
     private fun handleMovieCredits(movieCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
@@ -195,10 +201,6 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         router.openReviewsListScreen(movie)
     }
 
-    private fun openSimilarMoviesScreen(movie: UIMovie) {
-        movieRouter.openSimilarMoviesScreen(movie)
-    }
-
     private fun openPersonDetailsScreen(id: Int) {
         val person: UIEntertainmentPerson =
             vm.movieCredits.value?.findPerson(id) ?: error("Can't find person with id = $id")
@@ -211,6 +213,17 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
     private fun openMoviesByGenreScreen(genre: UIGenre) {
         movieRouter.openMoviesByGenreScreen(genre)
+    }
+
+    private inner class SimilarMoviesItemClickListener : MovieDetailsSimilarMoviesView.ItemClickListener {
+        override fun onSeeAllClick() {
+            movieRouter.openSimilarMoviesScreen(movie)
+        }
+
+        override fun onMovieClick(movie: UIMovie) {
+            unloadKoinModules(movieDetailsModule)
+            router.openMovieDetailsScreen(movie)
+        }
     }
 
     companion object {

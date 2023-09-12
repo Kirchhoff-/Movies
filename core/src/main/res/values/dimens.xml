@@ -4,8 +4,6 @@
     <dimen name="movie_item_title_height">40dp</dimen>
     <dimen name="movie_item_corner_radius">8dp</dimen>
 
-    <dimen name="person_item_image_size">96dp</dimen>
-
     <dimen name="paginated_screen_item_top_margin">16dp</dimen>
     <dimen name="paginated_screen_item_bottom_margin">8dp</dimen>
     <dimen name="paginated_screen_item_edges_margin">8dp</dimen>

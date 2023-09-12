@@ -46,4 +46,9 @@ class MovieRepository(
         movieDetailsMapper.createUIEntertainmentCredits(apiCall {
             movieService.fetchMovieCredits(movieId)
         })
+
+    override suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>> =
+        discoverMapper.createUIDiscoverMovieList(apiCall {
+            movieService.fetchByGenre(genre, page)
+        })
 }

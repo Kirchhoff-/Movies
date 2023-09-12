@@ -14,4 +14,5 @@ interface IMovieRepository {
     suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList>
     suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits>
+    suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>>
 }

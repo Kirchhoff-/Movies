@@ -1,3 +1,10 @@
 package com.kirchhoff.movies.core.data
 
-data class UIGenre(val name: String)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class UIGenre(
+    val id: String,
+    val name: String
+) : Parcelable

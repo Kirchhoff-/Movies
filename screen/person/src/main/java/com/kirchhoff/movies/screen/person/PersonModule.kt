@@ -11,7 +11,7 @@ import com.kirchhoff.movies.screen.person.repository.PersonsRepository
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.router.PersonRouter
 import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsVM
-import com.kirchhoff.movies.screen.person.ui.screen.list.PersonsVM
+import com.kirchhoff.movies.screen.person.ui.screen.list.viewmodel.PersonListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -35,7 +35,7 @@ val personModule = module {
         )
     }
 
-    viewModel { PersonsVM(personRepository = get()) }
+    viewModel { PersonListViewModel(personRepository = get()) }
 
     viewModel { PersonDetailsVM(personRepository = get()) }
 }

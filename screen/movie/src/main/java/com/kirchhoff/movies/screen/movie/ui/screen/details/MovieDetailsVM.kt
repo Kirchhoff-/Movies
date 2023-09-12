@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
@@ -30,6 +31,9 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel(
 
     private val _movieCredits = MutableLiveData<UIEntertainmentCredits>()
     val movieCredits: LiveData<UIEntertainmentCredits> = _movieCredits
+
+    private val _similarMovies = MutableLiveData<List<UIMovie>>()
+    val similarMovies: LiveData<List<UIMovie>> = _similarMovies
 
     fun loadMovieDetails(movieId: Int) {
         _loading.postValue(true)
@@ -57,6 +61,19 @@ class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel(
                     else -> {}
                 }
             }
+
+            val similarMoviesResult = movieRepository.fetchSimilarMovies(movieId = movieId, 1)
+            val resultSimilarMoviesList = if (
+                similarMoviesResult is Result.Success &&
+                similarMoviesResult.data.results.isNotEmpty()
+            ) {
+                similarMoviesResult.data.results.subList(0, SIMILAR_MOVIES_AMOUNT)
+            } else emptyList()
+            _similarMovies.postValue(resultSimilarMoviesList)
         }
+    }
+
+    private companion object {
+        const val SIMILAR_MOVIES_AMOUNT = 10
     }
 }

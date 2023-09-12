@@ -160,14 +160,11 @@
         app:layout_constraintVertical_bias="0.0"
         tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/tvSimilarMovies"
-        style="@style/MovieDetails.TextWithArrow"
+    <com.kirchhoff.movies.screen.movie.ui.screen.details.view.similar.MovieDetailsSimilarMoviesView
+        android:id="@+id/vSimilarMovies"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:padding="@dimen/details_screen_edges_margin"
-        android:text="@string/movie_similar_movies"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vCredits" />
@@ -177,12 +174,11 @@
         style="@style/MovieDetails.TextWithArrow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:padding="@dimen/details_screen_edges_margin"
         android:text="@string/movie_reviews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSimilarMovies" />
+        app:layout_constraintTop_toBottomOf="@+id/vSimilarMovies" />
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -231,7 +227,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="ivMoviePoster, tvReleaseDate, tvRuntime, tvCountry, tvTagline, tvOverview, tvReviews, tvSimilarMovies, voteView"
+        app:constraint_referenced_ids="ivMoviePoster, tvReleaseDate, tvRuntime, tvCountry, tvTagline, tvOverview, tvReviews, vSimilarMovies, voteView"
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group

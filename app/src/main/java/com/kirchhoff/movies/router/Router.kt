@@ -7,9 +7,7 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.router.IRouter
-import com.kirchhoff.movies.screen.movie.ui.screen.country.MovieCountryFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.details.MovieDetailsFragment
-import com.kirchhoff.movies.screen.movie.ui.screen.similar.MovieSimilarFragment
 import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragment
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.TvShowDetailsFragment
@@ -33,10 +31,6 @@ class Router(private val activity: AppCompatActivity) : IRouter {
         replaceFragment(PersonDetailsFragment.newInstance(person))
     }
 
-    override fun openSimilarMoviesScreen(movie: UIMovie) {
-        replaceFragment(MovieSimilarFragment.newInstance(movie.id, movie.title))
-    }
-
     override fun openSimilarTvShowsScreen(tv: UITv) {
         replaceFragment(TvShowSimilarFragment.newInstance(tv.id, tv.name))
     }
@@ -47,10 +41,6 @@ class Router(private val activity: AppCompatActivity) : IRouter {
 
     override fun openReviewsListScreen(tv: UITv) {
         replaceFragment(ReviewsListFragment.newInstanceForTvShow(tv.id, tv.name))
-    }
-
-    override fun openMoviesByCountryScreen(countryId: String, countryName: String) {
-        replaceFragment(MovieCountryFragment.newInstance(countryId, countryName))
     }
 
     private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {

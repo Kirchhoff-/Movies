@@ -16,7 +16,7 @@ class CoreMapper : BaseMapper(), ICoreMapper {
             credits.crew?.map { createUIEntertainmentCreator(it) }
         )
 
-    override fun createUIGenre(item: NetworkObjectWithName) = UIGenre(item.name)
+    override fun createUIGenre(item: NetworkObjectWithName) = UIGenre(item.id, item.name)
 
     private fun createUIEntertainmentActor(actor: NetworkEntertainmentPerson.Actor) =
         UIEntertainmentPerson.Actor(

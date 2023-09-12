@@ -13,6 +13,7 @@ import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
+import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.databinding.FragmentTvShowDetailsBinding
@@ -79,7 +80,7 @@ class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
             tvStatus.text = resources.getString(R.string.tv_status_format, tvDetails.status)
             tvOverview.text = tvDetails.overview
             voteView.displayRatingAndVoteCount(tvDetails.voteAverage, tvDetails.voteCount)
-            vKeywords.displayItems(tvDetails.genres.map { it.name })
+            vKeywords.displayItems(tvDetails.genres.map { KeywordsViewData(it.name, it.name) })
         }
     }
 

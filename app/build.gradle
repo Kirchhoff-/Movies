@@ -62,7 +62,6 @@ dependencies {
     implementation libs.gson
 
     implementation libs.timber
-    implementation libs.bundles.stethoLogs
 
     debugImplementation libs.leakCanary
 

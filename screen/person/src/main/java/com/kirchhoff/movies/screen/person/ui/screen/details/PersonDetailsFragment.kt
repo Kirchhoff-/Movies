@@ -1,5 +1,9 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +31,7 @@ import com.kirchhoff.movies.screen.person.ui.view.adapter.PersonImageAdapter
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import timber.log.Timber
 
 class PersonDetailsFragment : BaseFragment() {
 
@@ -68,6 +73,8 @@ class PersonDetailsFragment : BaseFragment() {
             tvPersonName.text = person.name
             bRetry.setOnClickListener { vm.loadPersonDetails(person.id) }
             vCredits.itemClickListener { openMovieOrTvShowScreen(it) }
+            tvBirthplace.setOnClickListener { openBirthplace(tvBirthplace.text.toString()) }
+            tvBirthplace.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         }
 
         with(vm) {
@@ -195,6 +202,15 @@ class PersonDetailsFragment : BaseFragment() {
 
     private fun openPersonImagesFragment(imagesUrls: List<String>) {
         personRouter.openImagesScreen(imagesUrls, viewBinding.vpImages.currentItem)
+    }
+
+    private fun openBirthplace(birthplace: String) {
+        try {
+            val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$birthplace"))
+            startActivity(mapIntent)
+        } catch (e: ActivityNotFoundException) {
+            Timber.e("Can't find map application")
+        }
     }
 
     companion object {

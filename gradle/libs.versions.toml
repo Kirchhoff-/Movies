@@ -7,7 +7,7 @@ buildTools = "33.0.2"
 versionName = "1.10.0"
 versionCode = "10"
 
-material = "1.8.0"
+material = "1.9.0"
 constraintLayout = "2.1.4"
 flexbox = "3.0.0"
 coreKtx = "1.9.0"

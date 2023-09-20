@@ -51,14 +51,14 @@ internal fun PersonListItemUI(
                 .clip(CircleShape),
             model = BASE_POSTER_PATH + person.profilePath,
             contentScale = ContentScale.Crop,
-            placeholder = painterResource(R.drawable.ic_account_circle),
-            error = painterResource(R.drawable.ic_account_circle),
+            placeholder = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
+            error = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
             contentDescription = ""
         )
         Spacer(Modifier.height(4.dp))
         Text(
             text = person.name,
-            color = colorResource(R.color.text_main),
+            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
             fontSize = 16.sp,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis

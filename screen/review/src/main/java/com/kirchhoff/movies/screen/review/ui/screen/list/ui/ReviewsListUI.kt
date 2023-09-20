@@ -74,7 +74,7 @@ internal fun ReviewListUI(
             ) {
                 Text(
                     text = stringResource(R.string.empty_reviews),
-                    color = colorResource(R.color.text_main)
+                    color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
                 )
             }
         }

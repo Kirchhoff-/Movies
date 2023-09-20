@@ -71,7 +71,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             addItemDecoration(
                 EdgesMarginItemDecoration(
-                    resources.getDimensionPixelSize(R.dimen.trailer_item_margin)
+                    resources.getDimensionPixelSize(com.kirchhoff.movies.core.R.dimen.trailer_item_margin)
                 )
             )
         }

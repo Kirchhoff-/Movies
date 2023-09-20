@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.review.router
 
 import androidx.appcompat.app.AppCompatActivity
-import com.kirchhoff.movies.screen.review.R
+import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.ui.screen.details.ReviewDetailsFragment
 

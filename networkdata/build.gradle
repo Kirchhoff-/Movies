@@ -1,5 +1,9 @@
 apply from: '../buildsystem/kotlin-module.gradle'
 
+android {
+    namespace "com.kirchhoff.movies.networkdata"
+}
+
 dependencies {
     implementation libs.gson
 }

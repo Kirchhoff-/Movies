@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.screen.movie.router
 
 import androidx.appcompat.app.AppCompatActivity
+import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
-import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.ui.screen.country.MovieCountryFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.genre.MovieListByGenreFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.similar.MovieSimilarFragment

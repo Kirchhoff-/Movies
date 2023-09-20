@@ -29,7 +29,6 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.keywordsview.RatingText
-import com.kirchhoff.movies.screen.movie.R
 
 @SuppressWarnings("MagicNumber")
 @Composable
@@ -76,7 +75,7 @@ internal fun MovieListByGenreListItemUI(
             modifier = Modifier.height(50.dp),
             textAlign = TextAlign.Center,
             text = movie.title.orEmpty(),
-            color = colorResource(R.color.text_main),
+            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
             fontSize = 16.sp,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis

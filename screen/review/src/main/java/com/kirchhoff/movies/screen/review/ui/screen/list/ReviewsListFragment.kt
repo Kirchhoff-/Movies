@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.reviewModule
@@ -24,10 +25,7 @@ import org.koin.core.parameter.parametersOf
 
 class ReviewsListFragment : BaseFragment() {
 
-    private val args by lazy {
-        requireArguments().getParcelable<ReviewsListArgs>(REVIEW_ARGS)
-            ?: error("Should proved arguments for NewReviewsListFragment class")
-    }
+    private val args: ReviewsListArgs by lazy { requireArguments().getParcelableExtra(REVIEW_ARGS)!! }
 
     private val reviewRouter: IReviewRouter by inject { parametersOf(requireActivity()) }
 

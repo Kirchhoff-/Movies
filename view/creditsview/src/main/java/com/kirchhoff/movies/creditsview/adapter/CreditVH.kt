@@ -3,7 +3,7 @@ package com.kirchhoff.movies.creditsview.adapter
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.kirchhoff.movies.core.extensions.downloadPoster
+import com.kirchhoff.movies.core.extensions.downloadAvatar
 import com.kirchhoff.movies.core.extensions.inflate
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.creditsview.R
@@ -16,7 +16,7 @@ class CreditVH(parent: ViewGroup) : BaseVH<CreditsInfo>(parent.inflate(R.layout.
     private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
 
     override fun bind(item: CreditsInfo) {
-        ivImage.downloadPoster(item.imagePath)
+        ivImage.downloadAvatar(item.imagePath)
         tvTitle.text = item.title
         tvDescription.text = item.description
     }

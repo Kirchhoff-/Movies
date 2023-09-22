@@ -45,7 +45,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
     private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
 
-    private val vm by viewModel<MovieDetailsVM>()
+    private val vm by viewModel<MovieDetailsViewModel>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)
 
     override fun onAttach(context: Context) {

@@ -20,7 +20,7 @@ abstract class PaginatedScreenFragment<Data, T : UIPaginated<Data>> : BaseFragme
 
     abstract val configuration: Configuration
     abstract val listAdapter: BaseRecyclerViewAdapter<BaseVH<Data>, Data>
-    abstract val vm: PaginatedScreenVM<T>
+    abstract val vm: PaginatedScreenViewModel<T>
 
     private var _viewBinding: FragmentPaginatedBinding? = null
     private val viewBinding get() = _viewBinding!!

@@ -39,7 +39,7 @@ class PersonDetailsFragment : BaseFragment() {
 
     private val personRouter: IPersonRouter by inject { parametersOf(requireActivity()) }
 
-    private val vm by viewModel<PersonDetailsVM>()
+    private val vm by viewModel<PersonDetailsViewModel>()
 
     private var _viewBinding: FragmentPersonDetailsBinding? = null
     private val viewBinding get() = _viewBinding!!

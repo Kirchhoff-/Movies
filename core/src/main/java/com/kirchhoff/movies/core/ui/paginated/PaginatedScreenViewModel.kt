@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.repository.Result
 import kotlinx.coroutines.launch
 
-abstract class PaginatedScreenVM<T : UIPaginated<*>> : ViewModel() {
+abstract class PaginatedScreenViewModel<T : UIPaginated<*>> : ViewModel() {
 
     protected abstract suspend fun loadData(page: Int): Result<T>
 

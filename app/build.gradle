@@ -67,6 +67,7 @@ dependencies {
     debugImplementation libs.leakCanary
 
     testImplementation libs.bundles.tests
+    testImplementation libs.konsist
 
     implementation project(path: ':core')
     implementation project(path: ':networkdata')

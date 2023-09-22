@@ -25,7 +25,7 @@ class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
 
     private val tv: UITv by lazy { requireArguments().getParcelableExtra(TV_ARG)!! }
 
-    private val vm by viewModel<TvShowDetailsVM>()
+    private val vm by viewModel<TvShowDetailsViewModel>()
     private val viewBinding by viewBinding(FragmentTvShowDetailsBinding::bind)
 
     override fun onAttach(context: Context) {

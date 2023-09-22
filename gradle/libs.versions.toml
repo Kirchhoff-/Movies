@@ -23,7 +23,7 @@ kotlin = "1.8.21"
 coroutines = "1.6.4"
 
 lifecycle = "2.2.0"
-liveData = "2.6.0"
+liveData = "2.6.2"
 viewModel = "2.6.1"
 
 retrofit = "2.9.0"

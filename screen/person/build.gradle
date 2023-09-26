@@ -1,5 +1,9 @@
 apply from: '../../buildsystem/android-module.gradle'
 
+android {
+    namespace "com.kirchhoff.movies.screen.person"
+}
+
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':networkdata')

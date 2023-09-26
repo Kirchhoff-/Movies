@@ -1,5 +1,9 @@
 apply from: '../../buildsystem/android-module.gradle'
 
+android {
+    namespace "com.kirchhoff.movies.screen.movie"
+}
+
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
@@ -12,6 +16,7 @@ dependencies {
     implementation libs.bundles.di
 
     implementation libs.constraintLayout
+    implementation libs.coilCompose
 
     implementation libs.timber
 }

@@ -15,7 +15,7 @@ import org.koin.core.context.unloadKoinModules
 class MovieListFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UIMovie> {
 
-    override val vm by viewModel<MovieListVM>()
+    override val vm by viewModel<MovieListViewModel>()
 
     override val listAdapter = MovieAdapter(this)
 

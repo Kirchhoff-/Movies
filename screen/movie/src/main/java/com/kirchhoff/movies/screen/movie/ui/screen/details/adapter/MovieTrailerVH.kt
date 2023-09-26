@@ -17,9 +17,9 @@ class MovieTrailerVH(parent: ViewGroup) : BaseVH<UITrailer>(parent.inflate(R.lay
         ivTrailerPoster.downloadYoutubePoster(item.key)
 
         val resultIcon = if (item.site.equals(YOUTUBE, true)) {
-            R.drawable.ic_youtube
+            com.kirchhoff.movies.core.R.drawable.ic_youtube
         } else {
-            R.drawable.ic_play_arrow
+            com.kirchhoff.movies.core.R.drawable.ic_play_arrow
         }
         ivTrailerSourceIcon.setImageResource(resultIcon)
     }

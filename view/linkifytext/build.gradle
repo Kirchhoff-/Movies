@@ -1,1 +1,5 @@
 apply from: '../../buildsystem/android-module.gradle'
+
+android {
+    namespace "com.kirchhoff.movies.linkifytext"
+}

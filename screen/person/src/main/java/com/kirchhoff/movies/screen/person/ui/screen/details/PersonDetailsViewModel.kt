@@ -12,7 +12,7 @@ import com.kirchhoff.movies.screen.person.repository.IPersonsRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class PersonDetailsVM(private val personRepository: IPersonsRepository) : ViewModel() {
+class PersonDetailsViewModel(private val personRepository: IPersonsRepository) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading

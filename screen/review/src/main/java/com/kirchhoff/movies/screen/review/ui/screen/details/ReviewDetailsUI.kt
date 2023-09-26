@@ -40,7 +40,7 @@ internal fun ReviewDetailsUI(
         LinkifyText(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(R.color.background))
+                .background(colorResource(com.kirchhoff.movies.core.R.color.background))
                 .padding(
                     top = textPadding,
                     start = textPadding,
@@ -48,7 +48,7 @@ internal fun ReviewDetailsUI(
                 )
                 .verticalScroll(scroll),
             text = review.content,
-            color = colorResource(R.color.text_hint),
+            color = colorResource(com.kirchhoff.movies.core.R.color.text_hint),
             fontSize = textSize
         )
     }

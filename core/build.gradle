@@ -1,5 +1,9 @@
 apply from: '../buildsystem/android-module.gradle'
 
+android {
+    namespace "com.kirchhoff.movies.core"
+}
+
 dependencies {
     implementation project(path: ':networkdata')
 

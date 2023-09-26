@@ -45,7 +45,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
 
     private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
 
-    private val vm by viewModel<MovieDetailsVM>()
+    private val vm by viewModel<MovieDetailsViewModel>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)
 
     override fun onAttach(context: Context) {
@@ -71,7 +71,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             addItemDecoration(
                 EdgesMarginItemDecoration(
-                    resources.getDimensionPixelSize(R.dimen.trailer_item_margin)
+                    resources.getDimensionPixelSize(com.kirchhoff.movies.core.R.dimen.trailer_item_margin)
                 )
             )
         }

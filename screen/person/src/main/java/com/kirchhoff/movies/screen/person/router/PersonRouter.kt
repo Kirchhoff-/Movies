@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.person.router
 
 import androidx.appcompat.app.AppCompatActivity
-import com.kirchhoff.movies.screen.person.R
+import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.screen.person.ui.screen.images.PersonImagesFragment
 
 class PersonRouter(private val activity: AppCompatActivity) : IPersonRouter {

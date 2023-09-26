@@ -11,6 +11,5 @@
     <string name="movie_cant_get_movies_by_country">Can\'t get movies from country</string>
     <string name="movie_movies_from_country_format">Movies from %s</string>
     <string name="movie_movies_with_genre_format">Movies with a genre: %s</string>
-    <string name="movie_no_results">No results</string>
     <string name="movie_see_all">See all</string>
 </resources>

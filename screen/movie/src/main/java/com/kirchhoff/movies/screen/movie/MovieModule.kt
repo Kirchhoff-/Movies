@@ -8,7 +8,7 @@ import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import com.kirchhoff.movies.screen.movie.repository.MovieRepository
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.router.MovieRouter
-import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListVM
+import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -30,5 +30,5 @@ val movieModule = module {
         )
     }
 
-    viewModel { MovieListVM(movieRepository = get()) }
+    viewModel { MovieListViewModel(movieRepository = get()) }
 }

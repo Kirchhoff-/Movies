@@ -12,7 +12,7 @@ import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import kotlinx.coroutines.launch
 
-class MovieDetailsVM(private val movieRepository: IMovieRepository) : ViewModel() {
+class MovieDetailsViewModel(private val movieRepository: IMovieRepository) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading

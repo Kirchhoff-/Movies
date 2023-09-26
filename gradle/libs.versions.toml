@@ -1,16 +1,16 @@
 [versions]
-buildToolsPlugin = "7.4.2"
+buildToolsPlugin = "8.1.1"
 minSdk = "21"
-targetSdk = "33"
-compileSdk = "33"
+targetSdk = "34"
+compileSdk = "34"
 buildTools = "33.0.2"
-versionName = "1.10.0"
-versionCode = "10"
+versionName = "1.12.0"
+versionCode = "12"
 
-material = "1.8.0"
+material = "1.9.0"
 constraintLayout = "2.1.4"
 flexbox = "3.0.0"
-coreKtx = "1.9.0"
+coreKtx = "1.12.0"
 
 composeCompiler = "1.4.7"
 compose = "1.3.0"
@@ -23,7 +23,7 @@ kotlin = "1.8.21"
 coroutines = "1.6.4"
 
 lifecycle = "2.2.0"
-liveData = "2.6.0"
+liveData = "2.6.2"
 viewModel = "2.6.1"
 
 retrofit = "2.9.0"
@@ -49,6 +49,7 @@ archTesting = "2.1.0"
 
 ktlint = "0.36.0"
 detekt = "1.12.0"
+konsist = "0.12.1"
 
 [libraries]
 plugin-buildTools = { module = "com.android.tools.build:gradle", version.ref = "buildToolsPlugin" }
@@ -94,6 +95,7 @@ coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ver
 archTesting = { module = "androidx.arch.core:core-testing", version.ref = "archTesting" }
 
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
+konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 
 composeMaterial = { module = "androidx.compose.material:material", version.ref = "compose" }
 activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }

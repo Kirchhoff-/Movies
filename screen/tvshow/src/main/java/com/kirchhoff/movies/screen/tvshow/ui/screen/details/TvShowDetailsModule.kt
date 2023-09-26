@@ -4,5 +4,5 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val tvShowDetailsModule = module {
-    viewModel { TvShowDetailsVM(tvRepository = get()) }
+    viewModel { TvShowDetailsViewModel(tvRepository = get()) }
 }

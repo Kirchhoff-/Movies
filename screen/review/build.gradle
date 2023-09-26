@@ -2,6 +2,10 @@ apply from: '../../buildsystem/android-module.gradle'
 
 apply plugin: 'kotlin-parcelize'
 
+android {
+    namespace "com.kirchhoff.movies.screen.review"
+}
+
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':networkdata')

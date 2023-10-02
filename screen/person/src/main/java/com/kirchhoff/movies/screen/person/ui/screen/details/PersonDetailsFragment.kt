@@ -117,7 +117,8 @@ class PersonDetailsFragment : BaseFragment() {
                         id = it.id,
                         title = it.title,
                         description = it.character,
-                        imagePath = it.posterPath
+                        imagePath = it.posterPath,
+                        placeholderImageResources = com.kirchhoff.movies.core.R.drawable.ic_empty_movie
                     )
                 },
                 personCredits.crew?.map {
@@ -125,7 +126,8 @@ class PersonDetailsFragment : BaseFragment() {
                         id = it.id,
                         title = it.title,
                         description = it.job,
-                        imagePath = it.posterPath
+                        imagePath = it.posterPath,
+                        placeholderImageResources = com.kirchhoff.movies.core.R.drawable.ic_empty_movie
                     )
                 }
             )

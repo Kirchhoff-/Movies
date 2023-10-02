@@ -12,14 +12,14 @@ constraintLayout = "2.1.4"
 flexbox = "3.0.0"
 coreKtx = "1.12.0"
 
-composeCompiler = "1.4.7"
+composeCompiler = "1.5.3"
 compose = "1.3.0"
 composeFoundation = "1.4.3"
 appCompat = "1.6.1"
 activityCompose = "1.3.1"
 composeLiveData = '1.4.3'
 
-kotlin = "1.8.21"
+kotlin = "1.9.10"
 coroutines = "1.6.4"
 
 lifecycle = "2.2.0"

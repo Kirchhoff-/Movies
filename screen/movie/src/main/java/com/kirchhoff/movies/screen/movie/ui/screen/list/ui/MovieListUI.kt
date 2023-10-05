@@ -1,8 +1,7 @@
-package com.kirchhoff.movies.screen.movie.ui.screen.genre.ui
+package com.kirchhoff.movies.screen.movie.ui.screen.list.ui
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,13 +26,12 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.ui.compose.LazyStaggeredGridScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.ui.screen.genre.model.MovieListByGenreScreenState
+import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState
 
-@OptIn(ExperimentalFoundationApi::class)
 @SuppressWarnings("MagicNumber")
 @Composable
-internal fun MovieListByGenreUI(
-    screenState: MovieListByGenreScreenState,
+internal fun MovieListUI(
+    screenState: MovieListScreenState,
     onLoadMore: () -> Unit,
     onMovieClick: (UIMovie) -> Unit,
     onBackPressed: () -> Unit
@@ -43,7 +41,7 @@ internal fun MovieListByGenreUI(
     var errorMessage by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        MoviesToolbar(title = stringResource(id = R.string.movie_movies_with_genre_format, screenState.genre)) {
+        MoviesToolbar(title = stringResource(id = screenState.titleId, screenState.titleArgs)) {
             onBackPressed.invoke()
         }
 
@@ -55,7 +53,7 @@ internal fun MovieListByGenreUI(
                 items(
                     count = screenState.movieList.size,
                     itemContent = {
-                        MovieListByGenreListItemUI(
+                        MovieListItemUI(
                             screenState.movieList[it],
                             onMovieClick
                         )
@@ -91,9 +89,9 @@ internal fun MovieListByGenreUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun MovieListByGenreUIPreview() {
-    MovieListByGenreUI(
-        screenState = MovieListByGenreScreenState(
+internal fun MovieListUIPreview() {
+    MovieListUI(
+        screenState = MovieListScreenState(
             movieList = listOf(
                 UIMovie(
                     id = 0,
@@ -110,7 +108,8 @@ internal fun MovieListByGenreUIPreview() {
                     voteAverage = 9.9f
                 )
             ),
-            genre = "Action",
+            titleId = R.string.movie_movies_with_genre_format,
+            titleArgs = "Action",
             errorMessage = "Some error message",
             loadingVisible = true,
             paginationVisible = false

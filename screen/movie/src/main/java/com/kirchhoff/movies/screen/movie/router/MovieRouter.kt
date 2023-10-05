@@ -4,15 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
-import com.kirchhoff.movies.screen.movie.ui.screen.country.MovieCountryFragment
-import com.kirchhoff.movies.screen.movie.ui.screen.genre.MovieListByGenreFragment
-import com.kirchhoff.movies.screen.movie.ui.screen.similar.MovieSimilarFragment
+import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListFragment
 
 class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
 
     override fun openMoviesByGenreScreen(genre: UIGenre) {
         activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, MovieListByGenreFragment.newInstance(genre))
+            .replace(R.id.fragmentContainer, MovieListFragment.byGenre(genre))
             .addToBackStack(null)
             .commit()
     }
@@ -21,7 +19,7 @@ class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
         activity.supportFragmentManager.beginTransaction()
             .replace(
                 R.id.fragmentContainer,
-                MovieCountryFragment.newInstance(countryId, countryName)
+                MovieListFragment.byCountry(countryId, countryName)
             )
             .addToBackStack(null)
             .commit()
@@ -31,7 +29,7 @@ class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
         activity.supportFragmentManager.beginTransaction()
             .replace(
                 R.id.fragmentContainer,
-                MovieSimilarFragment.newInstance(movie.id, movie.title)
+                MovieListFragment.similarWith(movie)
             )
             .addToBackStack(null)
             .commit()

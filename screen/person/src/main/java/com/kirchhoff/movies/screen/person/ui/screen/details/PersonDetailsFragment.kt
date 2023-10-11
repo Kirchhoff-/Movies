@@ -101,9 +101,9 @@ class PersonDetailsFragment : BaseFragment() {
             tvBirthplace.setTextOrNoInfo(personDetails.placeOfBirth)
             tvBio.setTextOrNoInfo(personDetails.biography)
 
-            personDetails.alsoKnownAs?.let { alsoKnownAs ->
+            if (!personDetails.alsoKnownAs.isNullOrEmpty()) {
                 cvAlsoKnowAs.isVisible = true
-                vKeywords.displayItems(alsoKnownAs.map { KeywordsViewData(it, it) })
+                vKeywords.displayItems(personDetails.alsoKnownAs.map { KeywordsViewData(it, it) })
             }
         }
     }
@@ -117,7 +117,8 @@ class PersonDetailsFragment : BaseFragment() {
                         id = it.id,
                         title = it.title,
                         description = it.character,
-                        imagePath = it.posterPath
+                        imagePath = it.posterPath,
+                        placeholderImageResources = com.kirchhoff.movies.core.R.drawable.ic_empty_movie
                     )
                 },
                 personCredits.crew?.map {
@@ -125,7 +126,8 @@ class PersonDetailsFragment : BaseFragment() {
                         id = it.id,
                         title = it.title,
                         description = it.job,
-                        imagePath = it.posterPath
+                        imagePath = it.posterPath,
+                        placeholderImageResources = com.kirchhoff.movies.core.R.drawable.ic_empty_movie
                     )
                 }
             )

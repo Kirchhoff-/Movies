@@ -34,7 +34,7 @@ android {
     }
 
     lintOptions {
-        disable 'ContentDescription', 'GradleDependency'
+        disable 'ContentDescription', 'GradleDependency', 'AndroidGradlePluginVersion'
         warningsAsErrors true
     }
 

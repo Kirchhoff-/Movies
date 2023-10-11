@@ -22,7 +22,10 @@ fun PersonImagesUI(
     startPosition: Int,
     onBackPressed: () -> Unit
 ) {
-    val pagerState = rememberPagerState(initialPage = startPosition)
+    val pagerState = rememberPagerState(
+        initialPage = startPosition,
+        pageCount = { imagesUrls.size }
+    )
     val currentTitle = stringResource(
         R.string.person_images_title_format,
         pagerState.currentPage + 1,
@@ -34,7 +37,6 @@ fun PersonImagesUI(
 
         HorizontalPager(
             modifier = Modifier.fillMaxSize(),
-            pageCount = imagesUrls.size,
             beyondBoundsPageCount = 2,
             state = pagerState
         ) { page -> AsyncImage(

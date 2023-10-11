@@ -16,7 +16,7 @@ class CreditVH(parent: ViewGroup) : BaseVH<CreditsInfo>(parent.inflate(R.layout.
     private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
 
     override fun bind(item: CreditsInfo) {
-        ivImage.downloadAvatar(item.imagePath)
+        ivImage.downloadAvatar(item.imagePath, item.placeholderImageResources)
         tvTitle.text = item.title
         tvDescription.text = item.description
     }

@@ -2,6 +2,7 @@ package com.kirchhoff.movies
 
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
+import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSealedModifier
 import com.lemonappdev.konsist.api.ext.list.withAllParentsOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assert
@@ -29,6 +30,7 @@ class ArchitectureTests {
     fun `interfaces (not service and listener) should start with 'I'`() {
         Konsist.scopeFromProject()
             .interfaces()
+            .withoutSealedModifier()
             .filterNot { it.hasNameEndingWith("Service") }
             .filterNot { it.hasNameEndingWith("Listener") }
             .assert { it.hasNameStartingWith("I") }

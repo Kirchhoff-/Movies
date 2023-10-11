@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.movie.ui.screen.genre.ui
+package com.kirchhoff.movies.screen.movie.ui.screen.list.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -32,7 +32,7 @@ import com.kirchhoff.movies.keywordsview.RatingText
 
 @SuppressWarnings("MagicNumber")
 @Composable
-internal fun MovieListByGenreListItemUI(
+internal fun MovieListItemUI(
     movie: UIMovie,
     onMovieClick: (UIMovie) -> Unit
 ) {
@@ -86,7 +86,7 @@ internal fun MovieListByGenreListItemUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun MovieListByGenreListItemUIPreview() {
+internal fun MovieListItemUIPreview() {
     val movie = UIMovie(
         id = 100,
         title = "Super movie",
@@ -94,5 +94,5 @@ internal fun MovieListByGenreListItemUIPreview() {
         backdropPath = null,
         voteAverage = 9.5f
     )
-    MovieListByGenreListItemUI(movie) {}
+    MovieListItemUI(movie) {}
 }

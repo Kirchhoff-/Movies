@@ -1,30 +1,33 @@
-package com.kirchhoff.movies.screen.movie.ui.screen.genre.viewmodel
+package com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.ui.paginated.UIPaginated
+import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
-import com.kirchhoff.movies.screen.movie.ui.screen.genre.model.MovieListByGenreScreenState
+import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListType
+import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState
 import kotlinx.coroutines.launch
 
-internal class MovieListByGenreViewModel(
-    private val genre: UIGenre,
+internal class MovieListViewModel(
+    private val type: MovieListType,
     private val movieRepository: IMovieRepository
 ) : ViewModel() {
 
-    val screenState: MutableLiveData<MovieListByGenreScreenState> = MutableLiveData()
+    val screenState: MutableLiveData<MovieListScreenState> = MutableLiveData()
 
     private var currentPage: Int = 0
     private var totalPages: Int = Int.MAX_VALUE
     private var isLoading: Boolean = false
 
     init {
-        screenState.value = MovieListByGenreScreenState(
+        screenState.value = MovieListScreenState(
             movieList = emptyList(),
-            genre = genre.name,
+            titleId = createTitleId(),
+            titleArgs = createTitleArgs(),
             errorMessage = "",
             loadingVisible = false,
             paginationVisible = false
@@ -43,7 +46,7 @@ internal class MovieListByGenreViewModel(
                     paginationVisible = paginationVisible
                 )
 
-                when (val result = movieRepository.fetchByGenre(genre.id, currentPage + 1)) {
+                when (val result = fetchMovieList()) {
                     is Result.Success -> {
                         totalPages = result.data.totalPages
                         currentPage = result.data.page
@@ -70,5 +73,23 @@ internal class MovieListByGenreViewModel(
                 isLoading = false
             }
         }
+    }
+
+    private fun createTitleId(): Int = when (type) {
+        is MovieListType.Genre -> R.string.movie_movies_with_genre_format
+        is MovieListType.Country -> R.string.movie_movies_from_country_format
+        is MovieListType.Similar -> R.string.movie_similar_to_format
+    }
+
+    private fun createTitleArgs(): Any = when (type) {
+        is MovieListType.Genre -> type.genre.name
+        is MovieListType.Country -> type.countryName
+        is MovieListType.Similar -> type.movie.title.orEmpty()
+    }
+
+    private suspend fun fetchMovieList(): Result<UIPaginated<UIMovie>> = when (type) {
+        is MovieListType.Genre -> movieRepository.fetchByGenre(type.genre.id, currentPage + 1)
+        is MovieListType.Country -> movieRepository.fetchByCountry(type.countryId, currentPage + 1)
+        is MovieListType.Similar -> movieRepository.fetchSimilarMovies(type.movie.id, currentPage + 1)
     }
 }

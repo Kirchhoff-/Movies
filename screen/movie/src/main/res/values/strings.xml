@@ -12,4 +12,6 @@
     <string name="movie_movies_from_country_format">Movies from %s</string>
     <string name="movie_movies_with_genre_format">Movies with a genre: %s</string>
     <string name="movie_see_all">See all</string>
+    <string name="movie_images">Images</string>
+    <string name="movie_images_format">%s images</string>
 </resources>

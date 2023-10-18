@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.screen.movie.repository
 
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.repository.BaseRepository
@@ -10,9 +11,11 @@ import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.mapper.details.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
+import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
 
-class MovieRepository(
+internal class MovieRepository(
     private val movieService: MovieService,
+    private val movieImagesStorage: IMovieImagesStorage,
     private val movieDetailsMapper: IMovieDetailsMapper,
     private val discoverMapper: IDiscoverMapper
 ) : BaseRepository(), IMovieRepository {
@@ -51,4 +54,22 @@ class MovieRepository(
         discoverMapper.createUIDiscoverMovieList(apiCall {
             movieService.fetchByGenre(genre, page)
         })
+
+    override suspend fun fetchImages(movieId: Int): Result<List<UIImage>> {
+        val localImages = movieImagesStorage.fetchImages(movieId)
+
+        return if (localImages != null) {
+            Result.Success(localImages)
+        } else {
+            val result = movieDetailsMapper.createUIImages(apiCall {
+                movieService.fetchImages(movieId)
+            })
+
+            if (result is Result.Success) {
+                movieImagesStorage.updateImages(movieId, result.data)
+            }
+
+            result
+        }
+    }
 }

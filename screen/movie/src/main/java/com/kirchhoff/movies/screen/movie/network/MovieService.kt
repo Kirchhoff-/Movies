@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.screen.movie.network
 
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
+import com.kirchhoff.movies.networkdata.core.NetworkImagesResponse
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailersList
@@ -40,4 +41,7 @@ interface MovieService {
         @Query("with_genres") genre: String,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/{movie_id}/images?language=en")
+    suspend fun fetchImages(@Path("movie_id") id: Int): Response<NetworkImagesResponse>
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIGenre
+import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
@@ -27,6 +28,7 @@ import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.adapter.MovieTrailerListAdapter
+import com.kirchhoff.movies.screen.movie.ui.screen.details.view.images.MovieDetailsImagesView
 import com.kirchhoff.movies.screen.movie.ui.screen.details.view.similar.MovieDetailsSimilarMoviesView
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -88,9 +90,15 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
                 openMoviesByCountryScreen(countryId, tvCountry.text.toString())
             }
             vKeywords.itemClickListener { keywordsViewData ->
-                openMoviesByGenreScreen(UIGenre(keywordsViewData.id, keywordsViewData.displayedValue))
+                openMoviesByGenreScreen(
+                    UIGenre(
+                        keywordsViewData.id,
+                        keywordsViewData.displayedValue
+                    )
+                )
             }
             vSimilarMovies.itemClickListener(SimilarMoviesItemClickListener())
+            vImages.itemClickListener(ImagesClickListener())
         }
 
         with(vm) {
@@ -101,6 +109,7 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
             exception.subscribe(::handleException)
             trailers.subscribe(::handleTrailers)
             similarMovies.subscribe(::handleSimilarMovies)
+            images.subscribe(::handleImages)
         }
     }
 
@@ -180,6 +189,10 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         viewBinding.content.vSimilarMovies.displayMovies(similarMovies)
     }
 
+    private fun handleImages(images: List<UIImage>) {
+        viewBinding.content.vImages.displayImages(images)
+    }
+
     private fun handleMovieCredits(movieCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
@@ -215,7 +228,8 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         movieRouter.openMoviesByGenreScreen(genre)
     }
 
-    private inner class SimilarMoviesItemClickListener : MovieDetailsSimilarMoviesView.ItemClickListener {
+    private inner class SimilarMoviesItemClickListener :
+        MovieDetailsSimilarMoviesView.ItemClickListener {
         override fun onSeeAllClick() {
             movieRouter.openSimilarMoviesScreen(movie)
         }
@@ -223,6 +237,16 @@ class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
         override fun onMovieClick(movie: UIMovie) {
             unloadKoinModules(movieDetailsModule)
             router.openMovieDetailsScreen(movie)
+        }
+    }
+
+    private inner class ImagesClickListener : MovieDetailsImagesView.ItemClickListener {
+        override fun onSeeAllClick() {
+            movieRouter.openImagesScreen(movie)
+        }
+
+        override fun onImageClick(imagePath: String) {
+            movieRouter.openImage(imagePath)
         }
     }
 

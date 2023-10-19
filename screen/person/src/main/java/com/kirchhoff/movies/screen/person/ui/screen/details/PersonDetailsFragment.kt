@@ -29,7 +29,7 @@ import com.kirchhoff.movies.screen.person.databinding.FragmentPersonDetailsBindi
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.ui.view.adapter.PersonImageAdapter
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 

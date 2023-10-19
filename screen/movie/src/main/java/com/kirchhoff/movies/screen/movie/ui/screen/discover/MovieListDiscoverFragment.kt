@@ -8,7 +8,7 @@ import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.movieModule
 import com.kirchhoff.movies.screen.movie.ui.view.adapter.MovieAdapter
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 

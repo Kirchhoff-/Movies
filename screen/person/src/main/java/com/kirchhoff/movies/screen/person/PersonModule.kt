@@ -12,7 +12,7 @@ import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.router.PersonRouter
 import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsViewModel
 import com.kirchhoff.movies.screen.person.ui.screen.list.viewmodel.PersonListViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

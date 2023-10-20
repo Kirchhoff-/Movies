@@ -12,13 +12,8 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragmen
 import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.TvShowDetailsFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.similar.TvShowSimilarFragment
-import com.kirchhoff.movies.ui.screens.main.MainFragment
 
 class Router(private val activity: AppCompatActivity) : IRouter {
-    override fun openDiscoverScreen() {
-        replaceFragment(MainFragment.newInstance(), false)
-    }
-
     override fun openMovieDetailsScreen(movie: UIMovie) {
         replaceFragment(MovieDetailsFragment.newInstance(movie))
     }

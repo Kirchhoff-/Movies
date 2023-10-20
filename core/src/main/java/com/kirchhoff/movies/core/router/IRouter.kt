@@ -5,7 +5,6 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 
 interface IRouter {
-    fun openDiscoverScreen()
     fun openMovieDetailsScreen(movie: UIMovie)
     fun openTvDetailsScreen(tv: UITv)
     fun openPersonDetailsScreen(person: UIPerson)

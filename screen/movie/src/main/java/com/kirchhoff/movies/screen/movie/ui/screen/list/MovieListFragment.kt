@@ -38,6 +38,7 @@ class MovieListFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.updateTitle()
         viewModel.loadMovieList()
     }
 

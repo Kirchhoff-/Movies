@@ -1,12 +1,11 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.list.model
 
-import androidx.annotation.StringRes
 import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.utils.StringValue
 
 internal data class MovieListScreenState(
     val movieList: List<UIMovie>,
-    @StringRes val titleId: Int,
-    val titleArgs: Any,
+    val title: StringValue,
     val errorMessage: String,
     val loadingVisible: Boolean,
     val paginationVisible: Boolean

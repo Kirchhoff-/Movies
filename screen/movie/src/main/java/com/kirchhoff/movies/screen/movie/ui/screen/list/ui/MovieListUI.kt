@@ -20,11 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.ui.compose.LazyStaggeredGridScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState
 
@@ -41,7 +41,7 @@ internal fun MovieListUI(
     var errorMessage by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        MoviesToolbar(title = stringResource(id = screenState.titleId, screenState.titleArgs)) {
+        MoviesToolbar(title = screenState.title.asString(context)) {
             onBackPressed.invoke()
         }
 
@@ -108,8 +108,7 @@ internal fun MovieListUIPreview() {
                     voteAverage = 9.9f
                 )
             ),
-            titleId = R.string.movie_movies_with_genre_format,
-            titleArgs = "Action",
+            title = StringValue.IdText(R.string.movie_movies_with_genre_format, "Action"),
             errorMessage = "Some error message",
             loadingVisible = true,
             paginationVisible = false

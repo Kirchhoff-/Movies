@@ -10,7 +10,7 @@ import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.keywordsview.RatingTextView
 import com.kirchhoff.movies.screen.movie.R
 
-class MovieViewHolder(parent: ViewGroup) : BaseVH<UIMovie>(parent.inflate(R.layout.item_movie)) {
+internal class MovieViewHolder(parent: ViewGroup) : BaseVH<UIMovie>(parent.inflate(R.layout.item_movie)) {
 
     private val ivMoviePoster: ImageView = itemView.findViewById(R.id.ivMoviePoster)
     private val tvMovieTitle: TextView = itemView.findViewById(R.id.tvMovieTitle)

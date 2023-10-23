@@ -8,7 +8,7 @@ import com.kirchhoff.movies.screen.movie.ui.screen.image.MovieImageFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.images.MovieImagesFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListFragment
 
-class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
+internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
 
     override fun openMoviesByGenreScreen(genre: UIGenre) {
         activity.supportFragmentManager.beginTransaction()

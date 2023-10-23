@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val personModule = module {
+internal val personModule = module {
     single { get<Retrofit>().create(PersonService::class.java) }
 
     single<IPersonRouter> { (activity: AppCompatActivity) ->

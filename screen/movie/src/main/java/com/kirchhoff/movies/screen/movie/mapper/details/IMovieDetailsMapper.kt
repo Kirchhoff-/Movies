@@ -10,7 +10,7 @@ import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
-interface IMovieDetailsMapper {
+internal interface IMovieDetailsMapper {
     fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieDetails>
     fun createUIEntertainmentCredits(movieCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits>
     fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<UITrailersList>

@@ -40,7 +40,7 @@ import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
 @SuppressWarnings("TooManyFunctions")
-class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
+internal class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
     private val movie: UIMovie by lazy { requireArguments().getParcelableExtra(MOVIE_ARG)!! }

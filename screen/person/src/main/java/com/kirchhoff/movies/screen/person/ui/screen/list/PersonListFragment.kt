@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-class PersonListFragment : BaseFragment() {
+internal class PersonListFragment : BaseFragment() {
 
     private val viewModel: PersonListViewModel by viewModel()
 

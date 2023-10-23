@@ -17,7 +17,7 @@ import com.kirchhoff.movies.screen.person.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PersonImagesUI(
+internal fun PersonImagesUI(
     imagesUrls: List<String>,
     startPosition: Int,
     onBackPressed: () -> Unit
@@ -51,7 +51,7 @@ fun PersonImagesUI(
 
 @Preview
 @Composable
-fun PersonImagesUIPreview() {
+internal fun PersonImagesUIPreview() {
     PersonImagesUI(
         imagesUrls = listOf("", ""),
         startPosition = 0,

@@ -16,7 +16,7 @@ import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
-class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
+internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
     override fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieDetails> =
         when (movieDetailsResult) {
             is Result.Success -> Result.Success(createUIMovieDetails(movieDetailsResult.data))

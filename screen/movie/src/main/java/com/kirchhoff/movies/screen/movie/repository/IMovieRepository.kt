@@ -8,7 +8,7 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
-interface IMovieRepository {
+internal interface IMovieRepository {
     suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchDetails(movieId: Int): Result<UIMovieDetails>
     suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>>

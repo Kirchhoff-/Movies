@@ -33,7 +33,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class PersonDetailsFragment : BaseFragment() {
+internal class PersonDetailsFragment : BaseFragment() {
 
     private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
 

@@ -1,13 +1,13 @@
 package com.kirchhoff.movies.screen.person.data
 
-data class UIPersonDetails(
+internal data class UIPersonDetails(
     val birthday: String?,
     val placeOfBirth: String?,
     val biography: String,
     val alsoKnownAs: List<String>?
 )
 
-data class UIPersonCredits(
+internal data class UIPersonCredits(
     val cast: List<UIPersonCredit.Actor>?,
     val crew: List<UIPersonCredit.Creator>?
 ) {
@@ -15,7 +15,7 @@ data class UIPersonCredits(
         cast?.find { it.id == id } ?: crew?.find { it.id == id }
 }
 
-sealed class UIPersonCredit(
+internal sealed class UIPersonCredit(
     val id: Int,
     val title: String?,
     val posterPath: String?,
@@ -41,4 +41,4 @@ sealed class UIPersonCredit(
     ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType)
 }
 
-enum class UIMediaType { MOVIE, TV }
+internal enum class UIMediaType { MOVIE, TV }

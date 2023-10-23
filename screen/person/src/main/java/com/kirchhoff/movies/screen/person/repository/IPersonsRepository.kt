@@ -7,7 +7,7 @@ import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
 
-interface IPersonsRepository {
+internal interface IPersonsRepository {
     suspend fun fetchPopularPersons(page: Int): Result<UIPaginated<UIPerson>>
     suspend fun fetchPersonDetail(personId: Int): Result<UIPersonDetails>
     suspend fun fetchPersonCredits(personId: Int): Result<UIPersonCredits>

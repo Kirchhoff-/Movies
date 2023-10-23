@@ -10,7 +10,7 @@ import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.screen.movie.R
 import java.text.DecimalFormat
 
-class MovieDetailsSimilarMovieVH(parent: ViewGroup) :
+internal class MovieDetailsSimilarMovieVH(parent: ViewGroup) :
     BaseVH<UIMovie>(parent.inflate(R.layout.item_movie_details_similar_movie)) {
 
     private val ratingFormat = DecimalFormat("#.0")

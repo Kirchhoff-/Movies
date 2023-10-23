@@ -7,35 +7,41 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.router.IRouter
-import com.kirchhoff.movies.screen.movie.ui.screen.details.MovieDetailsFragment
-import com.kirchhoff.movies.screen.person.ui.screen.details.PersonDetailsFragment
-import com.kirchhoff.movies.screen.review.ui.screen.list.ReviewsListFragment
-import com.kirchhoff.movies.screen.tvshow.ui.screen.details.TvShowDetailsFragment
-import com.kirchhoff.movies.screen.tvshow.ui.screen.similar.TvShowSimilarFragment
+import com.kirchhoff.movies.screen.movie.IMovieFacade
+import com.kirchhoff.movies.screen.person.IPersonFacade
+import com.kirchhoff.movies.screen.review.IReviewFacade
+import com.kirchhoff.movies.screen.tvshow.ITvShowFacade
 
-class Router(private val activity: AppCompatActivity) : IRouter {
+class Router(
+    private val activity: AppCompatActivity,
+    private val movieFacade: IMovieFacade,
+    private val tvShowFacade: ITvShowFacade,
+    private val personFacade: IPersonFacade,
+    private val reviewFacade: IReviewFacade
+) : IRouter {
+
     override fun openMovieDetailsScreen(movie: UIMovie) {
-        replaceFragment(MovieDetailsFragment.newInstance(movie))
+        replaceFragment(movieFacade.movieDetails(movie))
     }
 
     override fun openTvDetailsScreen(tv: UITv) {
-        replaceFragment(TvShowDetailsFragment.newInstance(tv))
+        replaceFragment(tvShowFacade.tvShowDetails(tv))
     }
 
     override fun openPersonDetailsScreen(person: UIPerson) {
-        replaceFragment(PersonDetailsFragment.newInstance(person))
+        replaceFragment(personFacade.personDetails(person))
     }
 
     override fun openSimilarTvShowsScreen(tv: UITv) {
-        replaceFragment(TvShowSimilarFragment.newInstance(tv.id, tv.name))
+        replaceFragment(tvShowFacade.similarTvShow(tv.id, tv.name))
     }
 
     override fun openReviewsListScreen(movie: UIMovie) {
-        replaceFragment(ReviewsListFragment.newInstanceForMovie(movie.id, movie.title))
+        replaceFragment(reviewFacade.movieReview(movie.id, movie.title))
     }
 
     override fun openReviewsListScreen(tv: UITv) {
-        replaceFragment(ReviewsListFragment.newInstanceForTvShow(tv.id, tv.name))
+        replaceFragment(reviewFacade.tvShowReview(tv.id, tv.name))
     }
 
     private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {

@@ -10,7 +10,7 @@ import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.mapper.details.ITvShowDetailsMapper
 import com.kirchhoff.movies.screen.tvshow.network.TvShowService
 
-class TvShowRepository(
+internal class TvShowRepository(
     private val tvService: TvShowService,
     private val tvDetailsMapper: ITvShowDetailsMapper,
     private val discoverMapper: IDiscoverMapper

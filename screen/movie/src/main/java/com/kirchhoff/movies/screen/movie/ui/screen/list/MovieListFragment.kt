@@ -20,7 +20,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class MovieListFragment : BaseFragment() {
+internal class MovieListFragment : BaseFragment() {
 
     private val type: MovieListType by lazy {
         requireArguments().getParcelableExtra(TYPE_ARG)

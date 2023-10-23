@@ -1,6 +1,7 @@
 package com.kirchhoff.movies
 
 import android.app.Application
+import com.kirchhoff.movies.di.facadeModule
 import com.kirchhoff.movies.di.mapperModule
 import com.kirchhoff.movies.di.networkModule
 import org.koin.android.ext.koin.androidContext
@@ -16,6 +17,7 @@ class MoviesApplication : Application() {
             androidContext(this@MoviesApplication)
             modules(networkModule)
             modules(mapperModule)
+            modules(facadeModule)
         }
 
         if (BuildConfig.DEBUG) {

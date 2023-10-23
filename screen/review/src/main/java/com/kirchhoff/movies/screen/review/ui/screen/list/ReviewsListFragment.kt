@@ -23,7 +23,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class ReviewsListFragment : BaseFragment() {
+internal class ReviewsListFragment : BaseFragment() {
 
     private val args: ReviewsListArgs by lazy { requireArguments().getParcelableExtra(REVIEW_ARGS)!! }
 

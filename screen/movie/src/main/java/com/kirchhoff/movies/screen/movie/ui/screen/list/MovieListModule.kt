@@ -4,7 +4,7 @@ import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewM
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val movieListModule = module {
+internal val movieListModule = module {
     viewModel { (type: MovieListType) ->
         MovieListViewModel(
             type = type,

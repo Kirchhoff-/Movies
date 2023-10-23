@@ -14,7 +14,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
+internal class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
     override val vm: TvShowSimilarViewModel by viewModel { parametersOf(requireArguments().getInt(TV_ID_ARG)) }

@@ -11,7 +11,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface MovieService {
+internal interface MovieService {
     @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
     suspend fun fetchDiscoverList(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
 

@@ -7,6 +7,11 @@ import org.koin.dsl.module
 
 val dashboardModule = module {
     single<IDashboardRouter> { (activity: AppCompatActivity) ->
-        DashboardRouter(activity)
+        DashboardRouter(
+            activity,
+            movieFacade = get(),
+            tvShowFacade = get(),
+            personFacade = get()
+        )
     }
 }

@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val movieModule = module {
+internal val movieModule = module {
     single { get<Retrofit>().create(MovieService::class.java) }
 
     single<IMovieRouter> { (activity: AppCompatActivity) ->

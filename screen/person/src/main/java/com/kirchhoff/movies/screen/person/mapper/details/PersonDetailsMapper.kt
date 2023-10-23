@@ -14,7 +14,7 @@ import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
 
-class PersonDetailsMapper : BaseMapper(),
+internal class PersonDetailsMapper : BaseMapper(),
     IPersonDetailsMapper {
 
     override fun createUIPersonDetails(personDetailsResult: Result<NetworkPersonDetails>): Result<UIPersonDetails> =

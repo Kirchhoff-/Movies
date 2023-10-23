@@ -2,7 +2,6 @@ package com.kirchhoff.movies.screen.person.ui.screen.list.ui
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,7 +24,6 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.ui.compose.LazyStaggeredGridScrollHandler
 import com.kirchhoff.movies.screen.person.ui.screen.list.model.PersonListScreenState
 
-@OptIn(ExperimentalFoundationApi::class)
 @SuppressWarnings("MagicNumber")
 @Composable
 internal fun PersonListUI(

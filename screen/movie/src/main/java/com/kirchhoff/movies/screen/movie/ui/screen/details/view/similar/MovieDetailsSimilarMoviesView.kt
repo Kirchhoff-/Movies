@@ -15,7 +15,7 @@ import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.databinding.ViewMovieDetailsSimilarMoviesBinding
 import com.kirchhoff.movies.screen.movie.ui.screen.details.view.similar.adapter.MovieDetailsSimilarMovieAdapter
 
-class MovieDetailsSimilarMoviesView @JvmOverloads constructor(
+internal class MovieDetailsSimilarMoviesView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

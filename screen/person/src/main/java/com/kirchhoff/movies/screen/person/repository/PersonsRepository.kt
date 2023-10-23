@@ -11,7 +11,7 @@ import com.kirchhoff.movies.screen.person.mapper.details.IPersonDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.main.IPersonsMapper
 import com.kirchhoff.movies.screen.person.network.PersonService
 
-class PersonsRepository(
+internal class PersonsRepository(
     private val personService: PersonService,
     private val personMapper: IPersonsMapper,
     private val personDetailsMapper: IPersonDetailsMapper

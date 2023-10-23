@@ -38,7 +38,7 @@ internal class MovieListViewModel(
         val title = when (type) {
             is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, type.genre.name)
             is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, type.countryName)
-            is MovieListType.Similar -> StringValue.IdText(R.string.movie_similar_to_format, type.movie.title.orEmpty())
+            is MovieListType.Similar -> StringValue.IdText(R.string.movie_similar_to_format, type.movie.title)
         }
 
         screenState.value = screenState.value?.copy(title = title)

@@ -74,7 +74,7 @@ internal fun MovieListItemUI(
         Text(
             modifier = Modifier.height(50.dp),
             textAlign = TextAlign.Center,
-            text = movie.title.orEmpty(),
+            text = movie.title,
             color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
             fontSize = 16.sp,
             maxLines = 2,

@@ -19,7 +19,7 @@ internal class MovieImagesViewModel(
 
     init {
         screenState.value = MovieImagesScreenState(
-            title = movie.title.orEmpty(),
+            title = movie.title,
             image = emptyList()
         )
     }

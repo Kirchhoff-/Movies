@@ -17,14 +17,14 @@ internal data class UIPersonCredits(
 
 internal sealed class UIPersonCredit(
     val id: Int,
-    val title: String?,
+    val title: String,
     val posterPath: String?,
     val backdropPath: String?,
     val mediaType: UIMediaType
 ) {
     class Actor(
         id: Int,
-        title: String?,
+        title: String,
         posterPath: String?,
         backdropPath: String?,
         mediaType: UIMediaType,
@@ -33,7 +33,7 @@ internal sealed class UIPersonCredit(
 
     class Creator(
         id: Int,
-        title: String?,
+        title: String,
         posterPath: String?,
         backdropPath: String?,
         mediaType: UIMediaType,

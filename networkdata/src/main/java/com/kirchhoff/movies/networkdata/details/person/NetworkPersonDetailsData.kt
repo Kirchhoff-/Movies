@@ -17,6 +17,7 @@ data class NetworkPersonCredits(
 data class NetworkPersonCastCredit(
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String?,
+    @SerializedName("name") val name: String?,
     @SerializedName("character") val character: String?,
     @SerializedName("poster_path") val posterPath: String?,
     @SerializedName("backdrop_patch") val backdropPath: String?,
@@ -26,6 +27,7 @@ data class NetworkPersonCastCredit(
 data class NetworkPersonCrewCredit(
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String?,
+    @SerializedName("name") val name: String?,
     @SerializedName("job") val job: String,
     @SerializedName("poster_path") val posterPath: String?,
     @SerializedName("backdrop_path") val backdropPath: String?,

@@ -66,7 +66,7 @@ internal class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_detai
         with(viewBinding) {
             ivBackdrop.downloadPoster(movie.backdropPath)
             toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
-            appbar.addTitleWithCollapsingListener(toolbar, movie.title.orEmpty())
+            appbar.addTitleWithCollapsingListener(toolbar, movie.title)
         }
 
         with(viewBinding.content.rvTrailers) {

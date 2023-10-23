@@ -56,7 +56,7 @@ internal class PersonDetailsMapper : BaseMapper(),
     private fun createUIPersonActor(castCredit: NetworkPersonCastCredit) =
         UIPersonCredit.Actor(
             castCredit.id,
-            castCredit.title,
+            castCredit.title ?: castCredit.name ?: error("Wrong network data"),
             castCredit.posterPath,
             castCredit.backdropPath,
             createMediaType(castCredit.mediaType),
@@ -66,7 +66,7 @@ internal class PersonDetailsMapper : BaseMapper(),
     private fun createUIPersonCreator(crewCredit: NetworkPersonCrewCredit) =
         UIPersonCredit.Creator(
             crewCredit.id,
-            crewCredit.title,
+            crewCredit.title ?: crewCredit.name ?: error("Wrong network data"),
             crewCredit.posterPath,
             crewCredit.backdropPath,
             createMediaType(crewCredit.mediaType),

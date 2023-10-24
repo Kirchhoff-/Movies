@@ -6,6 +6,12 @@ import org.koin.dsl.module
 
 val routerModule = module {
     single<IRouter> { (activity: AppCompatActivity) ->
-        Router(activity)
+        Router(
+            activity = activity,
+            movieFacade = get(),
+            tvShowFacade = get(),
+            personFacade = get(),
+            reviewFacade = get()
+        )
     }
 }

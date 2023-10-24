@@ -8,7 +8,7 @@ import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.person.databinding.FragmentPersonImageBinding
 
-class PersonImageFragment : BaseFragment() {
+internal class PersonImageFragment : BaseFragment() {
 
     private var _viewBinding: FragmentPersonImageBinding? = null
     private val viewBinding get() = _viewBinding!!

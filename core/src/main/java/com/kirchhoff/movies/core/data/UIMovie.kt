@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UIMovie(
     val id: Int,
-    val title: String?,
+    val title: String,
     val posterPath: String?,
     val backdropPath: String?,
     val voteAverage: Float?

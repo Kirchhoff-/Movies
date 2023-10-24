@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface TvShowService {
+internal interface TvShowService {
     @GET("/3/discover/tv?language=en&sort_by=popularity.desc")
     suspend fun fetchDiscoverList(@Query("page") page: Int): Response<NetworkPaginated<NetworkTv>>
 

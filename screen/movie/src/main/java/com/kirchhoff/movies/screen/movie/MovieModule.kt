@@ -8,12 +8,14 @@ import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import com.kirchhoff.movies.screen.movie.repository.MovieRepository
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.router.MovieRouter
+import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
+import com.kirchhoff.movies.screen.movie.storage.MovieImagesStorage
 import com.kirchhoff.movies.screen.movie.ui.screen.discover.MovieListDiscoverViewModel
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val movieModule = module {
+internal val movieModule = module {
     single { get<Retrofit>().create(MovieService::class.java) }
 
     single<IMovieRouter> { (activity: AppCompatActivity) ->
@@ -22,9 +24,12 @@ val movieModule = module {
 
     single<IMovieDetailsMapper> { MovieDetailsMapper(coreMapper = get()) }
 
+    single<IMovieImagesStorage> { MovieImagesStorage() }
+
     single<IMovieRepository> {
         MovieRepository(
             movieService = get(),
+            movieImagesStorage = get(),
             movieDetailsMapper = get(),
             discoverMapper = get()
         )

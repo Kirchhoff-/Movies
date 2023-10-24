@@ -8,7 +8,7 @@ import com.kirchhoff.movies.core.ui.recyclerview.adapter.viewholder.BaseVH
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 
-class MovieTrailerVH(parent: ViewGroup) : BaseVH<UITrailer>(parent.inflate(R.layout.item_trailer)) {
+internal class MovieTrailerVH(parent: ViewGroup) : BaseVH<UITrailer>(parent.inflate(R.layout.item_trailer)) {
 
     private val ivTrailerPoster: ImageView = itemView.findViewById(R.id.ivTrailerPoster)
     private val ivTrailerSourceIcon: ImageView = itemView.findViewById(R.id.ivTrailerSourceIcon)

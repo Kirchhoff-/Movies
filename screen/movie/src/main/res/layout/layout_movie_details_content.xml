@@ -169,6 +169,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/vCredits" />
 
+    <com.kirchhoff.movies.screen.movie.ui.screen.details.view.images.MovieDetailsImagesView
+        android:id="@+id/vImages"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSimilarMovies" />
+
     <TextView
         android:id="@+id/tvReviews"
         style="@style/MovieDetails.TextWithArrow"
@@ -178,7 +187,7 @@
         android:text="@string/movie_reviews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vSimilarMovies" />
+        app:layout_constraintTop_toBottomOf="@+id/vImages" />
 
     <ProgressBar
         android:id="@+id/pbLoading"
@@ -227,7 +236,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="ivMoviePoster, tvReleaseDate, tvRuntime, tvCountry, tvTagline, tvOverview, tvReviews, vSimilarMovies, voteView"
+        app:constraint_referenced_ids="ivMoviePoster, tvReleaseDate, tvRuntime, tvCountry, tvTagline, tvOverview, tvReviews, vSimilarMovies, voteView, vImages"
         tools:visibility="visible" />
 
     <androidx.constraintlayout.widget.Group

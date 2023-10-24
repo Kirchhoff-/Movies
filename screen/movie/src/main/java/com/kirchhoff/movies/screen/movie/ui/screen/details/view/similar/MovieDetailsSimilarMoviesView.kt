@@ -15,7 +15,7 @@ import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.databinding.ViewMovieDetailsSimilarMoviesBinding
 import com.kirchhoff.movies.screen.movie.ui.screen.details.view.similar.adapter.MovieDetailsSimilarMovieAdapter
 
-class MovieDetailsSimilarMoviesView @JvmOverloads constructor(
+internal class MovieDetailsSimilarMoviesView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -33,11 +33,11 @@ class MovieDetailsSimilarMoviesView @JvmOverloads constructor(
             rvSimilarMovies.apply {
                 adapter = this@MovieDetailsSimilarMoviesView.adapter
                 layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-                addItemDecoration(EdgesMarginItemDecoration(resources.getDimensionPixelSize(R.dimen.movie_details_similar_movie_edges_margin)))
+                addItemDecoration(EdgesMarginItemDecoration(resources.getDimensionPixelSize(R.dimen.movie_details_list_edges_margin)))
                 addItemDecoration(
                     TopBottomMarginItemDecoration(
-                        resources.getDimensionPixelSize(R.dimen.movie_details_similar_movie_edges_margin),
-                        resources.getDimensionPixelSize(R.dimen.movie_details_similar_movie_edges_margin)
+                        resources.getDimensionPixelSize(R.dimen.movie_details_list_edges_margin),
+                        resources.getDimensionPixelSize(R.dimen.movie_details_list_edges_margin)
                     )
                 )
                 isNestedScrollingEnabled = false

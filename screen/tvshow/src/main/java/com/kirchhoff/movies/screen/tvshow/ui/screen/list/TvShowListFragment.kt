@@ -8,11 +8,11 @@ import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.tvShowModule
 import com.kirchhoff.movies.screen.tvshow.ui.view.adapter.TvShowAdapter
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-class TvShowListFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
+internal class TvShowListFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
     override val vm by viewModel<TvShowListViewModel>()

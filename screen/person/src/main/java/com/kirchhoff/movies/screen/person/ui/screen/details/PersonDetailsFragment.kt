@@ -29,11 +29,11 @@ import com.kirchhoff.movies.screen.person.databinding.FragmentPersonDetailsBindi
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.ui.view.adapter.PersonImageAdapter
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-class PersonDetailsFragment : BaseFragment() {
+internal class PersonDetailsFragment : BaseFragment() {
 
     private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
 

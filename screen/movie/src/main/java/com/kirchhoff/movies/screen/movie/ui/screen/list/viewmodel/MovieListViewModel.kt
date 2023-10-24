@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
+import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListType
@@ -26,12 +27,21 @@ internal class MovieListViewModel(
     init {
         screenState.value = MovieListScreenState(
             movieList = emptyList(),
-            titleId = createTitleId(),
-            titleArgs = createTitleArgs(),
+            title = StringValue.Empty,
             errorMessage = "",
             loadingVisible = false,
             paginationVisible = false
         )
+    }
+
+    fun updateTitle() {
+        val title = when (type) {
+            is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, type.genre.name)
+            is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, type.countryName)
+            is MovieListType.Similar -> StringValue.IdText(R.string.movie_similar_to_format, type.movie.title)
+        }
+
+        screenState.value = screenState.value?.copy(title = title)
     }
 
     fun loadMovieList() {
@@ -73,18 +83,6 @@ internal class MovieListViewModel(
                 isLoading = false
             }
         }
-    }
-
-    private fun createTitleId(): Int = when (type) {
-        is MovieListType.Genre -> R.string.movie_movies_with_genre_format
-        is MovieListType.Country -> R.string.movie_movies_from_country_format
-        is MovieListType.Similar -> R.string.movie_similar_to_format
-    }
-
-    private fun createTitleArgs(): Any = when (type) {
-        is MovieListType.Genre -> type.genre.name
-        is MovieListType.Country -> type.countryName
-        is MovieListType.Similar -> type.movie.title.orEmpty()
     }
 
     private suspend fun fetchMovieList(): Result<UIPaginated<UIMovie>> = when (type) {

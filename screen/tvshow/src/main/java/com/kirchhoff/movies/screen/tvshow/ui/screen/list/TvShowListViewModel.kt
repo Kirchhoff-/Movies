@@ -5,6 +5,6 @@ import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenViewModel
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 
-class TvShowListViewModel(private val discoverRepository: ITvShowRepository) : PaginatedScreenViewModel<UIPaginated<UITv>>() {
+internal class TvShowListViewModel(private val discoverRepository: ITvShowRepository) : PaginatedScreenViewModel<UIPaginated<UITv>>() {
     override suspend fun loadData(page: Int) = discoverRepository.fetchDiscoverList(page)
 }

@@ -1,5 +1,5 @@
 package com.kirchhoff.movies.screen.person.router
 
-interface IPersonRouter {
+internal interface IPersonRouter {
     fun openImagesScreen(imagesUrls: List<String>, currentPosition: Int)
 }

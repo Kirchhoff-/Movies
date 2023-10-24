@@ -3,7 +3,7 @@ package com.kirchhoff.movies.screen.person.ui.view.adapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class PersonImageAdapter(
+internal class PersonImageAdapter(
     fragment: Fragment,
     private val imagesUrls: List<String>,
     private val imageClickListener: (() -> Unit)?

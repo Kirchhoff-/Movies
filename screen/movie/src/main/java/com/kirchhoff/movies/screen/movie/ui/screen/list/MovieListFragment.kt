@@ -15,12 +15,12 @@ import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.list.ui.MovieListUI
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class MovieListFragment : BaseFragment() {
+internal class MovieListFragment : BaseFragment() {
 
     private val type: MovieListType by lazy {
         requireArguments().getParcelableExtra(TYPE_ARG)
@@ -38,6 +38,7 @@ class MovieListFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.updateTitle()
         viewModel.loadMovieList()
     }
 

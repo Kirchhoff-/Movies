@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkPerson
 
-class PersonsMapper : BaseMapper(), IPersonsMapper {
+internal class PersonsMapper : BaseMapper(), IPersonsMapper {
     override fun createUIPersons(persons: Result<NetworkPaginated<NetworkPerson>>): Result<UIPaginated<UIPerson>> =
         when (persons) {
             is Result.Success -> Result.Success(createUIPersons(persons.data))

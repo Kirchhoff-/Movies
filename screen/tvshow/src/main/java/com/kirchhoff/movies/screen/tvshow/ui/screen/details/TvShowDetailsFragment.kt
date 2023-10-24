@@ -17,11 +17,11 @@ import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.databinding.FragmentTvShowDetailsBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
+internal class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
 
     private val tv: UITv by lazy { requireArguments().getParcelableExtra(TV_ARG)!! }
 

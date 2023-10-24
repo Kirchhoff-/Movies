@@ -11,7 +11,7 @@ import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class TvShowDetailsViewModel(private val tvRepository: ITvShowRepository) : ViewModel() {
+internal class TvShowDetailsViewModel(private val tvRepository: ITvShowRepository) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading

@@ -5,7 +5,7 @@ import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenViewModel
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 
-class MovieListDiscoverViewModel(private val movieRepository: IMovieRepository) :
+internal class MovieListDiscoverViewModel(private val movieRepository: IMovieRepository) :
     PaginatedScreenViewModel<UIPaginated<UIMovie>>() {
     override suspend fun loadData(page: Int) = movieRepository.fetchDiscoverList(page)
 }

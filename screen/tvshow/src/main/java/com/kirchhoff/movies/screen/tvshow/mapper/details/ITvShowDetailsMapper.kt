@@ -6,7 +6,7 @@ import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.details.tv.NetworkTvDetails
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 
-interface ITvShowDetailsMapper {
+internal interface ITvShowDetailsMapper {
     fun createUITvDetails(tvDetailsResult: Result<NetworkTvDetails>): Result<UITvShowDetails>
     fun createUIEntertainmentCredits(tvCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits>
 }

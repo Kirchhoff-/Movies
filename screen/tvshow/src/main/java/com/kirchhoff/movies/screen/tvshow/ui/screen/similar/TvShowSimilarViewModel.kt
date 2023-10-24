@@ -5,7 +5,7 @@ import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenViewModel
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 
-class TvShowSimilarViewModel(
+internal class TvShowSimilarViewModel(
     private val tvId: Int,
     private val tvShowRepository: ITvShowRepository
 ) : PaginatedScreenViewModel<UIPaginated<UITv>>() {

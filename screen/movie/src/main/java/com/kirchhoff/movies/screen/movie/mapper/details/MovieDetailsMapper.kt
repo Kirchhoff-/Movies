@@ -1,10 +1,12 @@
 package com.kirchhoff.movies.screen.movie.mapper.details
 
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.mapper.core.ICoreMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
+import com.kirchhoff.movies.networkdata.core.NetworkImagesResponse
 import com.kirchhoff.movies.networkdata.details.movie.NetworkCountry
 import com.kirchhoff.movies.networkdata.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailer
@@ -14,7 +16,7 @@ import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
-class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
+internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
     override fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieDetails> =
         when (movieDetailsResult) {
             is Result.Success -> Result.Success(createUIMovieDetails(movieDetailsResult.data))
@@ -31,6 +33,12 @@ class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IM
         when (trailersListResult) {
             is Result.Success -> Result.Success(createUITrailerList(trailersListResult.data))
             else -> mapErrorOrException(trailersListResult)
+        }
+
+    override fun createUIImages(imagesResponseResult: Result<NetworkImagesResponse>): Result<List<UIImage>> =
+        when (imagesResponseResult) {
+            is Result.Success -> Result.Success(imagesResponseResult.data.combinedImages().map { coreMapper.createUIImage(it) })
+            else -> mapErrorOrException(imagesResponseResult)
         }
 
     private fun createUIMovieDetails(movieDetails: NetworkMovieDetails) =

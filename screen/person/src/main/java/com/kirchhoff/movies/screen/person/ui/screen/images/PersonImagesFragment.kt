@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import com.kirchhoff.movies.core.ui.BaseFragment
 
-class PersonImagesFragment : BaseFragment() {
+internal class PersonImagesFragment : BaseFragment() {
 
     private val imagesUrls by lazy {
         requireArguments().getStringArrayList(IMAGES_URLS_ARG)

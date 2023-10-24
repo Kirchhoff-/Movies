@@ -18,12 +18,12 @@ import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.ReviewListUI
 import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-class ReviewsListFragment : BaseFragment() {
+internal class ReviewsListFragment : BaseFragment() {
 
     private val args: ReviewsListArgs by lazy { requireArguments().getParcelableExtra(REVIEW_ARGS)!! }
 

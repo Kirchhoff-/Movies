@@ -14,7 +14,7 @@ import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
 
-class PersonDetailsMapper : BaseMapper(),
+internal class PersonDetailsMapper : BaseMapper(),
     IPersonDetailsMapper {
 
     override fun createUIPersonDetails(personDetailsResult: Result<NetworkPersonDetails>): Result<UIPersonDetails> =
@@ -56,7 +56,7 @@ class PersonDetailsMapper : BaseMapper(),
     private fun createUIPersonActor(castCredit: NetworkPersonCastCredit) =
         UIPersonCredit.Actor(
             castCredit.id,
-            castCredit.title,
+            castCredit.title ?: castCredit.name ?: error("Wrong network data"),
             castCredit.posterPath,
             castCredit.backdropPath,
             createMediaType(castCredit.mediaType),
@@ -66,7 +66,7 @@ class PersonDetailsMapper : BaseMapper(),
     private fun createUIPersonCreator(crewCredit: NetworkPersonCrewCredit) =
         UIPersonCredit.Creator(
             crewCredit.id,
-            crewCredit.title,
+            crewCredit.title ?: crewCredit.name ?: error("Wrong network data"),
             crewCredit.posterPath,
             crewCredit.backdropPath,
             createMediaType(crewCredit.mediaType),

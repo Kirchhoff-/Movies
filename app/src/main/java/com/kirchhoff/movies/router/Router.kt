@@ -33,7 +33,7 @@ class Router(
     }
 
     override fun openSimilarTvShowsScreen(tv: UITv) {
-        replaceFragment(tvShowFacade.similarTvShow(tv.id, tv.name))
+        replaceFragment(tvShowFacade.similarTvShow(tv))
     }
 
     override fun openReviewsListScreen(movie: UIMovie) {

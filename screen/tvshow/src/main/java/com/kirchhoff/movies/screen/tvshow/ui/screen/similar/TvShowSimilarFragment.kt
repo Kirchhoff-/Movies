@@ -15,7 +15,8 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-internal class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
+internal class TvShowSimilarFragment :
+    PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
     private val tvShow: UITv by lazy {

@@ -91,12 +91,14 @@ internal fun ReviewItem(
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(Modifier.height(8.dp))
-            if (review.rating != null) Text(
-                stringResource(
-                    R.string.review_rating_format,
-                    review.rating
+            if (review.rating != null) {
+                Text(
+                    stringResource(
+                        R.string.review_rating_format,
+                        review.rating
+                    )
                 )
-            )
+            }
         }
     }
 }

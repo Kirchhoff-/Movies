@@ -30,17 +30,18 @@ import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.adapter.MovieTrailerListAdapter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.view.images.MovieDetailsImagesView
 import com.kirchhoff.movies.screen.movie.ui.screen.details.view.similar.MovieDetailsSimilarMoviesView
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @SuppressWarnings("TooManyFunctions")
-internal class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
+internal class MovieDetailsFragment :
+    BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
     private val movie: UIMovie by lazy { requireArguments().getParcelableExtra(MOVIE_ARG)!! }

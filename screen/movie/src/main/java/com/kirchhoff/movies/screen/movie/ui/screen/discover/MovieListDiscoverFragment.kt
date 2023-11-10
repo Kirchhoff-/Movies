@@ -12,7 +12,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-internal class MovieListDiscoverFragment : PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
+internal class MovieListDiscoverFragment :
+    PaginatedScreenFragment<UIMovie, UIPaginated<UIMovie>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UIMovie> {
 
     override val vm by viewModel<MovieListDiscoverViewModel>()

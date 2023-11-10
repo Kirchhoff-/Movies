@@ -10,7 +10,7 @@ abstract class BaseRecyclerViewAdapter<VH : BaseVH<T>, T>(
     private val itemClickListener: OnItemClickListener<T>? = null
 ) : RecyclerView.Adapter<VH>() {
 
-    private val internalListener = View.OnClickListener { view: View -> Unit
+    private val internalListener = View.OnClickListener { view: View ->
         itemClickListener?.let {
             val position = view.tag as Int
             val item = items[position]

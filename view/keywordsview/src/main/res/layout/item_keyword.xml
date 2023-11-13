@@ -4,7 +4,7 @@
     android:id="@+id/tvKeyword"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_text_view_keyword"
+    android:background="@drawable/rounded_text_view_with_stroke"
     android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/keyword_item_padding_horizontal"

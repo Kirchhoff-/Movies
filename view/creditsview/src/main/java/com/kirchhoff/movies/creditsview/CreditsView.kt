@@ -53,11 +53,13 @@ class CreditsView @JvmOverloads constructor(
         with(binding) {
             val castCreditsVisible = !castCredits.isNullOrEmpty()
             tvCastCredits.isVisible = castCreditsVisible
+            tvSeeAllCastCredits.isVisible = castCreditsVisible
             rvCastCredits.isVisible = castCreditsVisible
             castCredits?.let { castAdapter.addItems(it) }
 
             val crewCreditsVisible = !crewCredits.isNullOrEmpty()
             tvCrewCredits.isVisible = crewCreditsVisible
+            tvSeeAllCrewCredits.isVisible = crewCreditsVisible
             rvCrewCredits.isVisible = crewCreditsVisible
             crewCredits?.let { crewAdapter.addItems(it) }
         }

@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/networkdata" />
             <option value="$PROJECT_DIR$/screen" />
+            <option value="$PROJECT_DIR$/screen/credits" />
             <option value="$PROJECT_DIR$/screen/movie" />
             <option value="$PROJECT_DIR$/screen/person" />
             <option value="$PROJECT_DIR$/screen/review" />

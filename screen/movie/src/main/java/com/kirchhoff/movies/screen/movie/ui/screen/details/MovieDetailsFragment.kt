@@ -197,7 +197,7 @@ internal class MovieDetailsFragment :
     private fun handleMovieCredits(movieCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
-            display(movieCredits)
+            display(movieCredits, true)
         }
     }
 

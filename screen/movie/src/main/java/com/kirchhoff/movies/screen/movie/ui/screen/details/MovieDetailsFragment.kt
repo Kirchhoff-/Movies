@@ -85,6 +85,8 @@ internal class MovieDetailsFragment :
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { openReviewsListScreen(movie) }
             vCredits.itemClickListener { openPersonDetailsScreen(it) }
+            vCredits.castSeeAllClickListener { openCastCreditsScreen() }
+            vCredits.crewSeeAllClickListener { openCrewCreditsScreen() }
             tvCountry.setOnClickListener {
                 val countryId =
                     it.tag as? String ?: error("Should set countryId as tag for this TextView")
@@ -219,6 +221,14 @@ internal class MovieDetailsFragment :
         val person: UIEntertainmentPerson =
             vm.movieCredits.value?.findPerson(id) ?: error("Can't find person with id = $id")
         router.openPersonDetailsScreen(UIPerson(person))
+    }
+
+    private fun openCastCreditsScreen() {
+        router.openCastCreditsScreen()
+    }
+
+    private fun openCrewCreditsScreen() {
+        router.openCrewCreditsScreen()
     }
 
     private fun openMoviesByCountryScreen(countryId: String, countryName: String) {

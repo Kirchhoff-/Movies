@@ -7,6 +7,7 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.router.IRouter
+import com.kirchhoff.movies.screen.credits.ICreditsFacade
 import com.kirchhoff.movies.screen.movie.IMovieFacade
 import com.kirchhoff.movies.screen.person.IPersonFacade
 import com.kirchhoff.movies.screen.review.IReviewFacade
@@ -17,7 +18,8 @@ class Router(
     private val movieFacade: IMovieFacade,
     private val tvShowFacade: ITvShowFacade,
     private val personFacade: IPersonFacade,
-    private val reviewFacade: IReviewFacade
+    private val reviewFacade: IReviewFacade,
+    private val creditsFacade: ICreditsFacade
 ) : IRouter {
 
     override fun openMovieDetailsScreen(movie: UIMovie) {
@@ -42,6 +44,14 @@ class Router(
 
     override fun openReviewsListScreen(tv: UITv) {
         replaceFragment(reviewFacade.tvShowReview(tv.id, tv.name))
+    }
+
+    override fun openCastCreditsScreen() {
+        replaceFragment(creditsFacade.castCredits())
+    }
+
+    override fun openCrewCreditsScreen() {
+        replaceFragment(creditsFacade.crewCredits())
     }
 
     private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {

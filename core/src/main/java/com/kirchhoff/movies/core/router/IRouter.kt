@@ -11,4 +11,6 @@ interface IRouter {
     fun openSimilarTvShowsScreen(tv: UITv)
     fun openReviewsListScreen(movie: UIMovie)
     fun openReviewsListScreen(tv: UITv)
+    fun openCastCreditsScreen()
+    fun openCrewCreditsScreen()
 }

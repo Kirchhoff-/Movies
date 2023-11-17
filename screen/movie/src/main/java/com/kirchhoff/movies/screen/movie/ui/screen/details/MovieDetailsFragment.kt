@@ -224,7 +224,8 @@ internal class MovieDetailsFragment :
     }
 
     private fun openCastCreditsScreen() {
-        router.openCastCreditsScreen()
+        val actors = vm.movieCredits.value?.cast ?: error("There are no actors for this movie = $id")
+        router.openCastCreditsScreen(actors)
     }
 
     private fun openCrewCreditsScreen() {

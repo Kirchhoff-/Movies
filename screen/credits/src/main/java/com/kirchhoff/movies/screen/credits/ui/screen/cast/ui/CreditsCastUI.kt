@@ -1,15 +1,17 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.cast.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.model.CreditsCastScreenState
+import kotlin.random.Random
 
 @Composable
 internal fun CreditsCastUI(
@@ -23,4 +25,32 @@ internal fun CreditsCastUI(
             onBackPressed.invoke()
         }
     }
+
+    LazyColumn(modifier = Modifier.fillMaxSize()) {
+        items(
+            count = screenState.actors.size,
+            itemContent = {
+                CreditsCastItemUI(screenState.actors[it])
+            }
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun CreditsCastUIPreview() {
+    CreditsCastUI(
+        screenState = CreditsCastScreenState(
+            actors = listOf(
+                UIEntertainmentPerson.Actor(
+                    id = Random.nextInt(),
+                    name = "John",
+                    profilePath = null,
+                    character = "Batman"
+                )
+            ),
+            title = StringValue.Empty
+        ),
+        onBackPressed = {}
+    )
 }

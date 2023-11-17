@@ -8,14 +8,14 @@ import com.kirchhoff.movies.screen.credits.R
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.model.CreditsCastScreenState
 
 internal class CreditsCastViewModel(
-    private val actors: List<UIEntertainmentPerson.Actor>
+    actors: List<UIEntertainmentPerson.Actor>
 ) : ViewModel() {
 
     val screenState: MutableLiveData<CreditsCastScreenState> = MutableLiveData()
 
     init {
         screenState.value = CreditsCastScreenState(
-            actors = emptyList(),
+            actors = actors,
             title = StringValue.IdText(R.string.credits_all_cast)
         )
     }

@@ -8,4 +8,5 @@ dependencies {
   implementation project(path: ':core')
 
   implementation libs.bundles.di
+  implementation libs.coilCompose
 }

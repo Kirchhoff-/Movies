@@ -13,5 +13,5 @@ interface IRouter {
     fun openReviewsListScreen(movie: UIMovie)
     fun openReviewsListScreen(tv: UITv)
     fun openCastCreditsScreen(actors: List<UIEntertainmentPerson.Actor>)
-    fun openCrewCreditsScreen()
+    fun openCrewCreditsScreen(creators: List<UIEntertainmentPerson.Creator>)
 }

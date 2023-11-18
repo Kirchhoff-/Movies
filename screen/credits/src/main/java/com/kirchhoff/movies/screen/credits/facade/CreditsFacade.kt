@@ -11,5 +11,6 @@ class CreditsFacade : ICreditsFacade {
     override fun castCredits(actors: List<UIEntertainmentPerson.Actor>): Fragment =
         CreditsCastFragment.newInstance(actors)
 
-    override fun crewCredits(): Fragment = CreditsCrewFragment()
+    override fun crewCredits(creators: List<UIEntertainmentPerson.Creator>): Fragment =
+        CreditsCrewFragment.newInstance(creators)
 }

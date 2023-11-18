@@ -51,8 +51,8 @@ class Router(
         replaceFragment(creditsFacade.castCredits(actors))
     }
 
-    override fun openCrewCreditsScreen() {
-        replaceFragment(creditsFacade.crewCredits())
+    override fun openCrewCreditsScreen(creators: List<UIEntertainmentPerson.Creator>) {
+        replaceFragment(creditsFacade.crewCredits(creators))
     }
 
     private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {

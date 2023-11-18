@@ -229,7 +229,8 @@ internal class MovieDetailsFragment :
     }
 
     private fun openCrewCreditsScreen() {
-        router.openCrewCreditsScreen()
+        val creators = vm.movieCredits.value?.crew ?: error("There are no creators for this movie = $id")
+        router.openCrewCreditsScreen(creators)
     }
 
     private fun openMoviesByCountryScreen(countryId: String, countryName: String) {

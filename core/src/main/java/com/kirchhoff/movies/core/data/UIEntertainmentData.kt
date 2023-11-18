@@ -24,10 +24,11 @@ sealed class UIEntertainmentPerson(
         val character: String?
     ) : UIEntertainmentPerson(id, name, profilePath), Parcelable
 
+    @Parcelize
     data class Creator(
         override val id: Int,
         override val name: String,
         override val profilePath: String?,
         val job: String?
-    ) : UIEntertainmentPerson(id, name, profilePath)
+    ) : UIEntertainmentPerson(id, name, profilePath), Parcelable
 }

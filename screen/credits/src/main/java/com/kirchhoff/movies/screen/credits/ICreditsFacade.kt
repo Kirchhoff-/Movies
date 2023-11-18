@@ -5,5 +5,5 @@ import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 
 interface ICreditsFacade {
     fun castCredits(actors: List<UIEntertainmentPerson.Actor>): Fragment
-    fun crewCredits(): Fragment
+    fun crewCredits(creators: List<UIEntertainmentPerson.Creator>): Fragment
 }

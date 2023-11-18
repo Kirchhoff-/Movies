@@ -12,7 +12,7 @@ import org.koin.dsl.module
 internal val creditsCrewModule = module {
     single<ICreditsCrewListFactory> { CreditsCrewListFactory() }
 
-    single<ICreditsCrewUseCase> { CreditsCrewUseCase(creditsCrewUseCase = get()) }
+    single<ICreditsCrewUseCase> { CreditsCrewUseCase(creditsCrewListFactory = get()) }
 
     viewModel { (creators: List<UIEntertainmentPerson.Creator>) ->
         CreditsCrewViewModel(

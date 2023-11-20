@@ -1,21 +1,48 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewScreenState
 
 @Composable
 internal fun CreditsCrewUI(
-    screenState: CreditsCrewScreenState
+    screenState: CreditsCrewScreenState,
+    onBackPressed: () -> Unit
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-            .background(Color.Cyan)
-    ) {
+   val context = LocalContext.current
 
+    Column(modifier = Modifier.fillMaxSize()) {
+        MoviesToolbar(title = screenState.title.asString(context)) {
+            onBackPressed.invoke()
+        }
+        LazyColumn {
+            items(
+                count = screenState.creators.size,
+                itemContent = {
+                    CreditsCrewItemUI(screenState.creators[it])
+                }
+            )
+        }
     }
+}
+
+@Preview
+@Composable
+internal fun CreditsCrewUIPreview() {
+    CreditsCrewUI(
+        screenState = CreditsCrewScreenState(
+            creators = emptyList(),
+            title = StringValue.Empty
+        ),
+        onBackPressed = {}
+    )
 }

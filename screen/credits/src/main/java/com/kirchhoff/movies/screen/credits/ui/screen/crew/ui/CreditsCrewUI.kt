@@ -33,6 +33,7 @@ internal fun CreditsCrewUI(
                 count = screenState.creators.size,
                 itemContent = {
                     CreditsCrewItemUI(screenState.creators[it])
+                    CreditsCrewCreatorsItemUI()
                 }
             )
         }

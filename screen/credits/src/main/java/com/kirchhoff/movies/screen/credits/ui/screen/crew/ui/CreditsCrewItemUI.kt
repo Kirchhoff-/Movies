@@ -15,7 +15,7 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListI
 @Composable
 internal fun CreditsCrewItemUI(
     item: CreditsCrewListItem,
-    onItemClick: () -> Unit
+    onItemClick: (String) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         CreditsCrewListJobUI(

@@ -5,7 +5,10 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListC
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListItem
 
 internal class CreditsCrewListFactory : ICreditsCrewListFactory {
-    override fun createCrewList(creators: List<UIEntertainmentPerson.Creator>): List<CreditsCrewListItem> {
+    override fun createCrewList(
+        creators: List<UIEntertainmentPerson.Creator>,
+        expandedItems: Set<String>
+    ): List<CreditsCrewListItem> {
         val resultList = mutableListOf<CreditsCrewListItem>()
         creators.groupBy { it.job }
             .onEach { group ->
@@ -19,7 +22,7 @@ internal class CreditsCrewListFactory : ICreditsCrewListFactory {
                                     profilePath = creator.profilePath
                                 )
                             },
-                            isExpanded = false
+                            isExpanded = expandedItems.contains(job)
                         )
                     )
                 }

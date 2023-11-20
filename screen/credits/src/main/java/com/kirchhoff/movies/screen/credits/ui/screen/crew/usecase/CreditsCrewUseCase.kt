@@ -7,6 +7,8 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListI
 internal class CreditsCrewUseCase(
     private val creditsCrewListFactory: ICreditsCrewListFactory
 ) : ICreditsCrewUseCase {
-    override fun createCrewList(creators: List<UIEntertainmentPerson.Creator>): List<CreditsCrewListItem> =
-        creditsCrewListFactory.createCrewList(creators)
+    override fun createCrewList(
+        creators: List<UIEntertainmentPerson.Creator>,
+        expandedItems: Set<String>
+    ): List<CreditsCrewListItem> = creditsCrewListFactory.createCrewList(creators, expandedItems)
 }

@@ -18,7 +18,7 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewScree
 @Composable
 internal fun CreditsCrewUI(
     screenState: CreditsCrewScreenState,
-    onItemClick: () -> Unit,
+    onItemClick: (String) -> Unit,
     onBackPressed: () -> Unit
 ) {
    val context = LocalContext.current

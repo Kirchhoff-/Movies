@@ -25,14 +25,14 @@ import com.kirchhoff.movies.screen.credits.R
 @Composable
 internal fun CreditsCrewListJobUI(
     jobText: String,
-    onItemClick: () -> Unit
+    onItemClick: (String) -> Unit
 ) {
     Row(
         modifier = Modifier.fillMaxWidth()
             .height(48.dp)
             .background(Color.LightGray)
             .padding(horizontal = 16.dp)
-            .clickable { onItemClick.invoke() },
+            .clickable { onItemClick.invoke(jobText) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(

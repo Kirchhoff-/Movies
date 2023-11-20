@@ -18,6 +18,7 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewScree
 @Composable
 internal fun CreditsCrewUI(
     screenState: CreditsCrewScreenState,
+    onItemClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
    val context = LocalContext.current
@@ -32,8 +33,10 @@ internal fun CreditsCrewUI(
             items(
                 count = screenState.creators.size,
                 itemContent = {
-                    CreditsCrewItemUI(screenState.creators[it])
-                    CreditsCrewCreatorsItemUI()
+                    CreditsCrewItemUI(
+                        item = screenState.creators[it],
+                        onItemClick = onItemClick
+                    )
                 }
             )
         }
@@ -48,6 +51,7 @@ internal fun CreditsCrewUIPreview() {
             creators = emptyList(),
             title = StringValue.Empty
         ),
+        onItemClick = {},
         onBackPressed = {}
     )
 }

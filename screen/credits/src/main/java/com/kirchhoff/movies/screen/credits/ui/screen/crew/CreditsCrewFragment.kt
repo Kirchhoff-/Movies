@@ -46,6 +46,7 @@ internal class CreditsCrewFragment : BaseFragment() {
 
             CreditsCrewUI(
                 screenState = screenState ?: error("Can't build UI without state"),
+                onItemClick = { },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }

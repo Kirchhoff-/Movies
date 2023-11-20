@@ -18,7 +18,8 @@ internal class CreditsCrewListFactory : ICreditsCrewListFactory {
                                     name = creator.name,
                                     profilePath = creator.profilePath
                                 )
-                            }
+                            },
+                            isExpanded = false
                         )
                     )
                 }

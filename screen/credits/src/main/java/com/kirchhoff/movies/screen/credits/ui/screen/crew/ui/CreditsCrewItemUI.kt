@@ -13,9 +13,16 @@ import androidx.compose.ui.unit.dp
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListItem
 
 @Composable
-internal fun CreditsCrewItemUI(item: CreditsCrewListItem) {
+internal fun CreditsCrewItemUI(
+    item: CreditsCrewListItem,
+    onItemClick: () -> Unit
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        CreditsCrewListJobUI(jobText = item.job)
+        CreditsCrewListJobUI(
+            jobText = item.job,
+            onItemClick = onItemClick
+        )
+        CreditsCrewCreatorsItemUI(item.isExpanded)
     }
 }
 
@@ -25,7 +32,9 @@ internal fun CreditsCrewItemUIPreview() {
     CreditsCrewItemUI(
         CreditsCrewListItem(
             job = "Creator",
-            persons = emptyList()
-        )
+            persons = emptyList(),
+            isExpanded = false
+        ),
+        onItemClick = {}
     )
 }

@@ -9,6 +9,7 @@ include ':app',
         ':screen:movie',
         ':screen:tvshow',
         ':screen:review',
-        ':screen:person'
+        ':screen:person',
+        ':screen:credits'
 
 rootProject.name='Movies'

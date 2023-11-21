@@ -12,3 +12,11 @@ inline fun <reified T : Parcelable> Bundle.getParcelableExtra(key: String): T? =
         @Suppress("DEPRECATION")
         getParcelable(key) as? T
     }
+
+inline fun <reified T : Parcelable> Bundle.getParcelableArrayListExtra(key: String): ArrayList<T>? =
+    if (SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        getParcelableArrayList(key, T::class.java)
+    } else {
+        @Suppress("DEPRECATION")
+        getParcelableArrayList(key)
+    }

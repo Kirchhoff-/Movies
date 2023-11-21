@@ -1,0 +1,12 @@
+apply from: '../../buildsystem/android-module.gradle'
+
+android {
+  namespace "com.kirchhoff.movies.screen.credits"
+}
+
+dependencies {
+  implementation project(path: ':core')
+
+  implementation libs.bundles.di
+  implementation libs.coilCompose
+}

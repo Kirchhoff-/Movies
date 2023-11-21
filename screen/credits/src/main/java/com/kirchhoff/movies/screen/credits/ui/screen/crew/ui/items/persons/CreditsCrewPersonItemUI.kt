@@ -9,7 +9,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,6 +39,7 @@ internal fun CreditsCrewPersonItemUI(
                     .fillMaxWidth()
                     .height(190.dp),
                 model = BASE_POSTER_PATH + person.profilePath,
+                contentScale = ContentScale.Crop,
                 placeholder = painterResource(com.kirchhoff.movies.core.R.drawable.ic_empty_avatar),
                 error = painterResource(com.kirchhoff.movies.core.R.drawable.ic_empty_avatar),
                 contentDescription = ""
@@ -44,7 +47,7 @@ internal fun CreditsCrewPersonItemUI(
             Text(
                 text = person.name,
                 fontSize = 16.sp,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
+                color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
             )
         }
     }

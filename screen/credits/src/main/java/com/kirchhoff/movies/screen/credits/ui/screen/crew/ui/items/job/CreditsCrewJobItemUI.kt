@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui
+package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.job
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.screen.credits.R
 
 @Composable
-internal fun CreditsCrewListJobUI(
+internal fun CreditsCrewJobItemUI(
     jobText: String,
     onItemClick: (String) -> Unit
 ) {
@@ -54,7 +53,7 @@ internal fun CreditsCrewListJobUI(
 @Preview
 @Composable
 internal fun CreditsCrewListJobUIPreview() {
-    CreditsCrewListJobUI(
+    CreditsCrewJobItemUI(
         jobText = "Creator",
         onItemClick = {}
     )

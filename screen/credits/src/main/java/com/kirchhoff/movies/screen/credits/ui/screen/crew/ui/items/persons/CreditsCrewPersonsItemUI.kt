@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui
+package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.persons
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -17,9 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListCreatorItem
 
 @Composable
-internal fun CreditsCrewCreatorsItemUI(isExpanded: Boolean) {
+internal fun CreditsCrewPersonsItemUI(
+    persons: List<CreditsCrewListCreatorItem>,
+    isExpanded: Boolean
+) {
     val expandTransition = remember {
         expandVertically(
             expandFrom = Alignment.Top,
@@ -54,6 +58,9 @@ internal fun CreditsCrewCreatorsItemUI(isExpanded: Boolean) {
 
 @Preview
 @Composable
-internal fun CreditsCrewCreatorsItemUIPreview() {
-    CreditsCrewCreatorsItemUI(isExpanded = false)
+internal fun CreditsCrewPersonsItemUIPreview() {
+    CreditsCrewPersonsItemUI(
+        persons = emptyList(),
+        isExpanded = false
+    )
 }

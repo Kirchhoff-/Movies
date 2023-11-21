@@ -1,16 +1,13 @@
-package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui
+package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListItem
+import com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.persons.CreditsCrewPersonsItemUI
+import com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.job.CreditsCrewJobItemUI
 
 @Composable
 internal fun CreditsCrewItemUI(
@@ -18,11 +15,14 @@ internal fun CreditsCrewItemUI(
     onItemClick: (String) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        CreditsCrewListJobUI(
+        CreditsCrewJobItemUI(
             jobText = item.job,
             onItemClick = onItemClick
         )
-        CreditsCrewCreatorsItemUI(item.isExpanded)
+        CreditsCrewPersonsItemUI(
+            persons = item.persons,
+            isExpanded = item.isExpanded
+        )
     }
 }
 

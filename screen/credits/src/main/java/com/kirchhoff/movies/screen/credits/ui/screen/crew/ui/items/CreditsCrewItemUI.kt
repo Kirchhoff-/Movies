@@ -17,6 +17,7 @@ internal fun CreditsCrewItemUI(
     Column(modifier = Modifier.fillMaxWidth()) {
         CreditsCrewJobItemUI(
             jobText = item.job,
+            isExpanded = item.isExpanded,
             onItemClick = onItemClick
         )
         CreditsCrewPersonsItemUI(

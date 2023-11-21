@@ -11,7 +11,8 @@ val routerModule = module {
             movieFacade = get(),
             tvShowFacade = get(),
             personFacade = get(),
-            reviewFacade = get()
+            reviewFacade = get(),
+            creditsFacade = get()
         )
     }
 }

@@ -75,6 +75,7 @@ dependencies {
     implementation project(path: ':screen:tvshow')
     implementation project(path: ':screen:review')
     implementation project(path: ':screen:person')
+    implementation project(path: ':screen:credits')
     implementation project(path: ':view:voteview')
     implementation project(path: ':view:keywordsview')
     implementation project(path: ':view:creditsview')

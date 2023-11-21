@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.crew.factory
 
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
-import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListCreatorItem
+import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListPersonItem
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListItem
 
 internal class CreditsCrewListFactory : ICreditsCrewListFactory {
@@ -17,7 +17,7 @@ internal class CreditsCrewListFactory : ICreditsCrewListFactory {
                         CreditsCrewListItem(
                             job = job,
                             persons = group.value.map { creator ->
-                                CreditsCrewListCreatorItem(
+                                CreditsCrewListPersonItem(
                                     name = creator.name,
                                     profilePath = creator.profilePath
                                 )

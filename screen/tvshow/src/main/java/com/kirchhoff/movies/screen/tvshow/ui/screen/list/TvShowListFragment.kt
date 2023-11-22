@@ -12,7 +12,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 
-internal class TvShowListFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
+internal class TvShowListFragment :
+    PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
     override val vm by viewModel<TvShowListViewModel>()

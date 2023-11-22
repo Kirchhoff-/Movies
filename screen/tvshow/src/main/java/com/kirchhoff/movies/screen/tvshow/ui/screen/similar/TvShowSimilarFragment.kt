@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.paginated.PaginatedScreenFragment
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.ui.recyclerview.adapter.BaseRecyclerViewAdapter
@@ -14,10 +15,16 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-internal class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
+internal class TvShowSimilarFragment :
+    PaginatedScreenFragment<UITv, UIPaginated<UITv>>(),
     BaseRecyclerViewAdapter.OnItemClickListener<UITv> {
 
-    override val vm: TvShowSimilarViewModel by viewModel { parametersOf(requireArguments().getInt(TV_ID_ARG)) }
+    private val tvShow: UITv by lazy {
+        requireArguments().getParcelableExtra(TV_SHOW_ARG)
+            ?: error("Should provide UITv argument for fragment")
+    }
+
+    override val vm: TvShowSimilarViewModel by viewModel { parametersOf(tvShow.id) }
 
     override val listAdapter = TvShowAdapter(this)
 
@@ -36,7 +43,7 @@ internal class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        displayTitle(getString(R.string.tv_show_similar_to_format, requireArguments().getString(TV_NAME_ARG)))
+        displayTitle(getString(R.string.tv_show_similar_to_format, tvShow.name))
     }
 
     override fun onDestroyView() {
@@ -49,16 +56,14 @@ internal class TvShowSimilarFragment : PaginatedScreenFragment<UITv, UIPaginated
     }
 
     companion object {
-        fun newInstance(tvId: Int, tvName: String?): TvShowSimilarFragment =
+        fun newInstance(tvShow: UITv): TvShowSimilarFragment =
             TvShowSimilarFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(TV_ID_ARG, tvId)
-                    putString(TV_NAME_ARG, tvName)
+                    putParcelable(TV_SHOW_ARG, tvShow)
                 }
             }
 
-        private const val TV_ID_ARG = "TV_ID_ARG"
-        private const val TV_NAME_ARG = "TV_NAME_ARG"
+        private const val TV_SHOW_ARG = "TV_SHOW_ARG"
         private const val SPAN_COUNT = 1
         private const val THRESHOLD = 3
     }

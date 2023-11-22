@@ -1,4 +1,5 @@
 @file:SuppressWarnings("LongParameterList", "LongMethod")
+
 package com.kirchhoff.movies.linkifytext
 
 import android.os.Build

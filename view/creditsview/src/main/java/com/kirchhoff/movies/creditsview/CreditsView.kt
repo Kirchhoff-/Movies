@@ -27,6 +27,8 @@ class CreditsView @JvmOverloads constructor(
     private val binding = ViewCreditsBinding.inflate(LayoutInflater.from(context), this, true)
 
     private var creditItemClickListener: ((Int) -> Unit)? = null
+    private var castSeeAllClickListener: (() -> Unit)? = null
+    private var crewSeeAllClickListener: (() -> Unit)? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_credits, this)
@@ -34,14 +36,26 @@ class CreditsView @JvmOverloads constructor(
         configRecyclerView(binding.rvCrewCredits, crewAdapter)
     }
 
-    fun display(castCredits: List<CreditsInfo>?, crewCredits: List<CreditsInfo>?) {
-        displayCredits(castCredits, crewCredits)
+    fun display(
+        castCredits: List<CreditsInfo>?,
+        crewCredits: List<CreditsInfo>?,
+        seeAllVisible: Boolean
+    ) {
+        displayCredits(
+            castCredits,
+            crewCredits,
+            seeAllVisible
+        )
     }
 
-    fun display(credits: UIEntertainmentCredits) {
+    fun display(
+        credits: UIEntertainmentCredits,
+        seeAllVisible: Boolean
+    ) {
         displayCredits(
             credits.cast?.map { CreditsInfo(it) },
-            credits.crew?.map { CreditsInfo(it) }
+            credits.crew?.map { CreditsInfo(it) },
+            seeAllVisible
         )
     }
 
@@ -49,17 +63,33 @@ class CreditsView @JvmOverloads constructor(
         creditItemClickListener = listener
     }
 
-    private fun displayCredits(castCredits: List<CreditsInfo>?, crewCredits: List<CreditsInfo>?) {
+    fun castSeeAllClickListener(listener: () -> Unit) {
+        castSeeAllClickListener = listener
+    }
+
+    fun crewSeeAllClickListener(listener: () -> Unit) {
+        crewSeeAllClickListener = listener
+    }
+
+    private fun displayCredits(
+        castCredits: List<CreditsInfo>?,
+        crewCredits: List<CreditsInfo>?,
+        seeAllVisible: Boolean
+    ) {
         with(binding) {
             val castCreditsVisible = !castCredits.isNullOrEmpty()
             tvCastCredits.isVisible = castCreditsVisible
             rvCastCredits.isVisible = castCreditsVisible
             castCredits?.let { castAdapter.addItems(it) }
+            tvSeeAllCastCredits.isVisible = seeAllVisible && castCreditsVisible
+            tvSeeAllCastCredits.setOnClickListener { castSeeAllClickListener?.invoke() }
 
             val crewCreditsVisible = !crewCredits.isNullOrEmpty()
             tvCrewCredits.isVisible = crewCreditsVisible
             rvCrewCredits.isVisible = crewCreditsVisible
             crewCredits?.let { crewAdapter.addItems(it) }
+            tvSeeAllCrewCredits.isVisible = seeAllVisible && crewCreditsVisible
+            tvSeeAllCrewCredits.setOnClickListener { crewSeeAllClickListener?.invoke() }
         }
     }
 

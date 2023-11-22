@@ -72,7 +72,9 @@ internal class MovieDetailsViewModel(private val movieRepository: IMovieReposito
                 similarMoviesResult.data.results.isNotEmpty()
             ) {
                 similarMoviesResult.data.results.take(SIMILAR_MOVIES_AMOUNT)
-            } else emptyList()
+            } else {
+                emptyList()
+            }
             _similarMovies.postValue(resultSimilarMoviesList)
 
             val imagesResult = movieRepository.fetchImages(movieId)
@@ -81,7 +83,9 @@ internal class MovieDetailsViewModel(private val movieRepository: IMovieReposito
                 imagesResult.data.isNotEmpty()
             ) {
                 imagesResult.data.take(IMAGES_AMOUNT)
-            } else emptyList()
+            } else {
+                emptyList()
+            }
             _images.postValue(resultImages)
         }
     }

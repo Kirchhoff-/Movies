@@ -87,7 +87,7 @@ internal class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_de
     private fun handleTvCredits(tvCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
-            display(tvCredits)
+            display(tvCredits, false)
         }
     }
 

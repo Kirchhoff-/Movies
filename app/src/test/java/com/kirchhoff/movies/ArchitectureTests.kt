@@ -52,8 +52,8 @@ class ArchitectureTests {
             .filterNot { it.name == "BaseRepository" }
             .assert {
                 it.numParents == 2 &&
-                it.hasParentWithName("BaseRepository") &&
-                it.parents.any { parent -> parent.hasNameStartingWith("I") }
+                    it.hasParentWithName("BaseRepository") &&
+                    it.parents.any { parent -> parent.hasNameStartingWith("I") }
             }
     }
 
@@ -72,7 +72,7 @@ class ArchitectureTests {
             .withNameEndingWith("Repository")
             .assert { interfaceDeclaration ->
                 interfaceDeclaration.containingFile.hasImportWithName("com.kirchhoff.movies.core.repository.Result") &&
-                interfaceDeclaration.functions().all { it.returnType?.hasNameStartingWith("Result") == true }
+                    interfaceDeclaration.functions().all { it.returnType?.hasNameStartingWith("Result") == true }
             }
     }
 

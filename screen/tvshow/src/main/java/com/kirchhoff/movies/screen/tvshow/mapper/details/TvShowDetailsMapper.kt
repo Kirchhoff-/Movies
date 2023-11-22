@@ -8,7 +8,8 @@ import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.details.tv.NetworkTvDetails
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 
-internal class TvShowDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(),
+internal class TvShowDetailsMapper(private val coreMapper: ICoreMapper) :
+    BaseMapper(),
     ITvShowDetailsMapper {
 
     override fun createUITvDetails(tvDetailsResult: Result<NetworkTvDetails>): Result<UITvShowDetails> =

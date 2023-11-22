@@ -39,7 +39,8 @@ internal fun PersonImagesUI(
             modifier = Modifier.fillMaxSize(),
             beyondBoundsPageCount = 2,
             state = pagerState
-        ) { page -> AsyncImage(
+        ) { page ->
+            AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = BASE_POSTER_PATH + imagesUrls[page],
                 contentScale = ContentScale.Crop,

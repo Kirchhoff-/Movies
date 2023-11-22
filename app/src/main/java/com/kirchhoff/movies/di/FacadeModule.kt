@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.di
 
+import com.kirchhoff.movies.screen.credits.ICreditsFacade
+import com.kirchhoff.movies.screen.credits.facade.CreditsFacade
 import com.kirchhoff.movies.screen.movie.IMovieFacade
 import com.kirchhoff.movies.screen.movie.facade.MovieFacade
 import com.kirchhoff.movies.screen.person.IPersonFacade
@@ -15,4 +17,5 @@ val facadeModule = module {
     single<ITvShowFacade> { TvShowFacade() }
     single<IReviewFacade> { ReviewFacade() }
     single<IPersonFacade> { PersonFacade() }
+    single<ICreditsFacade> { CreditsFacade() }
 }

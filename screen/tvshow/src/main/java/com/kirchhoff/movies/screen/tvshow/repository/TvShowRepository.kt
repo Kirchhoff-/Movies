@@ -17,22 +17,30 @@ internal class TvShowRepository(
 ) : BaseRepository(), ITvShowRepository {
 
     override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UITv>> =
-        discoverMapper.createUIDiscoverTvList(apiCall {
-            tvService.fetchDiscoverList(page)
-        })
+        discoverMapper.createUIDiscoverTvList(
+            apiCall {
+                tvService.fetchDiscoverList(page)
+            }
+        )
 
     override suspend fun fetchSimilarTvShows(tvId: Int, page: Int): Result<UIPaginated<UITv>> =
-        discoverMapper.createUIDiscoverTvList(apiCall {
-            tvService.fetchSimilarTvShows(tvId, page)
-        })
+        discoverMapper.createUIDiscoverTvList(
+            apiCall {
+                tvService.fetchSimilarTvShows(tvId, page)
+            }
+        )
 
     override suspend fun fetchDetails(tvId: Int): Result<UITvShowDetails> =
-        tvDetailsMapper.createUITvDetails(apiCall {
-            tvService.fetchDetails(tvId)
-        })
+        tvDetailsMapper.createUITvDetails(
+            apiCall {
+                tvService.fetchDetails(tvId)
+            }
+        )
 
     override suspend fun fetchCredits(tvId: Int): Result<UIEntertainmentCredits> =
-        tvDetailsMapper.createUIEntertainmentCredits(apiCall {
-            tvService.fetchCredits(tvId)
-        })
+        tvDetailsMapper.createUIEntertainmentCredits(
+            apiCall {
+                tvService.fetchCredits(tvId)
+            }
+        )
 }

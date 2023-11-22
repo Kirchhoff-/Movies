@@ -129,7 +129,8 @@ internal class PersonDetailsFragment : BaseFragment() {
                         imagePath = it.posterPath,
                         placeholderImageResources = com.kirchhoff.movies.core.R.drawable.ic_empty_movie
                     )
-                }
+                },
+                false
             )
         }
     }

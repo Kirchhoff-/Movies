@@ -18,26 +18,34 @@ internal class PersonsRepository(
 ) : BaseRepository(), IPersonsRepository {
 
     override suspend fun fetchPopularPersons(page: Int): Result<UIPaginated<UIPerson>> =
-        personMapper.createUIPersons(apiCall {
-            personService.fetchPopularPerson(page)
-        })
+        personMapper.createUIPersons(
+            apiCall {
+                personService.fetchPopularPerson(page)
+            }
+        )
 
     override suspend fun fetchPersonDetail(personId: Int): Result<UIPersonDetails> =
-        personDetailsMapper.createUIPersonDetails(apiCall {
-            personService.fetchPersonDetail(
-                personId
-            )
-        })
+        personDetailsMapper.createUIPersonDetails(
+            apiCall {
+                personService.fetchPersonDetail(
+                    personId
+                )
+            }
+        )
 
     override suspend fun fetchPersonCredits(personId: Int): Result<UIPersonCredits> =
-        personDetailsMapper.createUIPersonCredits(apiCall {
-            personService.fetchPersonCredits(
-                personId
-            )
-        })
+        personDetailsMapper.createUIPersonCredits(
+            apiCall {
+                personService.fetchPersonCredits(
+                    personId
+                )
+            }
+        )
 
     override suspend fun fetchPersonImages(personId: Int): Result<List<UIPersonImage>> =
-        personDetailsMapper.createUIPersonImages(apiCall {
-            personService.fetchPersonImages(personId)
-        })
+        personDetailsMapper.createUIPersonImages(
+            apiCall {
+                personService.fetchPersonImages(personId)
+            }
+        )
 }

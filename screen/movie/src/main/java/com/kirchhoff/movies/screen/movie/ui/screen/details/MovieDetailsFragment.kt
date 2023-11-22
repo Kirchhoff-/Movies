@@ -30,17 +30,18 @@ import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.adapter.MovieTrailerListAdapter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.view.images.MovieDetailsImagesView
 import com.kirchhoff.movies.screen.movie.ui.screen.details.view.similar.MovieDetailsSimilarMoviesView
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @SuppressWarnings("TooManyFunctions")
-internal class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_details),
+internal class MovieDetailsFragment :
+    BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
     private val movie: UIMovie by lazy { requireArguments().getParcelableExtra(MOVIE_ARG)!! }
@@ -84,6 +85,8 @@ internal class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_detai
             bRetry.setOnClickListener { vm.loadMovieDetails(movie.id) }
             tvReviews.setOnClickListener { openReviewsListScreen(movie) }
             vCredits.itemClickListener { openPersonDetailsScreen(it) }
+            vCredits.castSeeAllClickListener { openCastCreditsScreen() }
+            vCredits.crewSeeAllClickListener { openCrewCreditsScreen() }
             tvCountry.setOnClickListener {
                 val countryId =
                     it.tag as? String ?: error("Should set countryId as tag for this TextView")
@@ -196,7 +199,7 @@ internal class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_detai
     private fun handleMovieCredits(movieCredits: UIEntertainmentCredits) {
         with(viewBinding.content.vCredits) {
             isVisible = true
-            display(movieCredits)
+            display(movieCredits, true)
         }
     }
 
@@ -218,6 +221,16 @@ internal class MovieDetailsFragment : BaseFragment(R.layout.fragment_movie_detai
         val person: UIEntertainmentPerson =
             vm.movieCredits.value?.findPerson(id) ?: error("Can't find person with id = $id")
         router.openPersonDetailsScreen(UIPerson(person))
+    }
+
+    private fun openCastCreditsScreen() {
+        val actors = vm.movieCredits.value?.cast ?: error("There are no actors for this movie = $id")
+        router.openCastCreditsScreen(actors)
+    }
+
+    private fun openCrewCreditsScreen() {
+        val creators = vm.movieCredits.value?.crew ?: error("There are no creators for this movie = $id")
+        router.openCrewCreditsScreen(creators)
     }
 
     private fun openMoviesByCountryScreen(countryId: String, countryName: String) {

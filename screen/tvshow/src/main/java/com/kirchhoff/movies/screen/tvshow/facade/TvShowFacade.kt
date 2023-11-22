@@ -13,8 +13,5 @@ class TvShowFacade : ITvShowFacade {
 
     override fun tvShowDetails(tv: UITv): Fragment = TvShowDetailsFragment.newInstance(tv)
 
-    override fun similarTvShow(
-        tvId: Int,
-        tvName: String?
-    ): Fragment = TvShowSimilarFragment.newInstance(tvId, tvName)
+    override fun similarTvShow(tv: UITv): Fragment = TvShowSimilarFragment.newInstance(tv)
 }

@@ -9,18 +9,20 @@ buildscript {
         classpath libs.plugin.buildTools
         classpath libs.plugin.kotlin
         classpath libs.plugin.detekt
+        classpath libs.plugin.ktlint
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
 allprojects {
-    apply from: rootProject.file("buildsystem/ktlint.gradle")
     apply plugin: "io.gitlab.arturbosch.detekt"
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
 
     repositories {
         google()
         mavenCentral()
+        maven { url "https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven" }
     }
 }
 

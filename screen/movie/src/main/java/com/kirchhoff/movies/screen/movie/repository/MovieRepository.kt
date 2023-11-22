@@ -21,39 +21,53 @@ internal class MovieRepository(
 ) : BaseRepository(), IMovieRepository {
 
     override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>> =
-        discoverMapper.createUIDiscoverMovieList(apiCall {
-            movieService.fetchDiscoverList(page)
-        })
+        discoverMapper.createUIDiscoverMovieList(
+            apiCall {
+                movieService.fetchDiscoverList(page)
+            }
+        )
 
     override suspend fun fetchDetails(movieId: Int): Result<UIMovieDetails> =
-        movieDetailsMapper.createUIMovieDetails(apiCall {
-            movieService.fetchDetails(movieId)
-        })
+        movieDetailsMapper.createUIMovieDetails(
+            apiCall {
+                movieService.fetchDetails(movieId)
+            }
+        )
 
     override suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>> =
-        discoverMapper.createUIDiscoverMovieList(apiCall {
-            movieService.fetchSimilarMovies(movieId, page)
-        })
+        discoverMapper.createUIDiscoverMovieList(
+            apiCall {
+                movieService.fetchSimilarMovies(movieId, page)
+            }
+        )
 
     override suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>> =
-        discoverMapper.createUIDiscoverMovieList(apiCall {
-            movieService.fetchByCountry(countryId, page)
-        })
+        discoverMapper.createUIDiscoverMovieList(
+            apiCall {
+                movieService.fetchByCountry(countryId, page)
+            }
+        )
 
     override suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList> =
-        movieDetailsMapper.createUITrailersList(apiCall {
-            movieService.fetchTrailersList(movieId)
-        })
+        movieDetailsMapper.createUITrailersList(
+            apiCall {
+                movieService.fetchTrailersList(movieId)
+            }
+        )
 
     override suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits> =
-        movieDetailsMapper.createUIEntertainmentCredits(apiCall {
-            movieService.fetchMovieCredits(movieId)
-        })
+        movieDetailsMapper.createUIEntertainmentCredits(
+            apiCall {
+                movieService.fetchMovieCredits(movieId)
+            }
+        )
 
     override suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>> =
-        discoverMapper.createUIDiscoverMovieList(apiCall {
-            movieService.fetchByGenre(genre, page)
-        })
+        discoverMapper.createUIDiscoverMovieList(
+            apiCall {
+                movieService.fetchByGenre(genre, page)
+            }
+        )
 
     override suspend fun fetchImages(movieId: Int): Result<List<UIImage>> {
         val localImages = movieImagesStorage.fetchImages(movieId)
@@ -61,9 +75,11 @@ internal class MovieRepository(
         return if (localImages != null) {
             Result.Success(localImages)
         } else {
-            val result = movieDetailsMapper.createUIImages(apiCall {
-                movieService.fetchImages(movieId)
-            })
+            val result = movieDetailsMapper.createUIImages(
+                apiCall {
+                    movieService.fetchImages(movieId)
+                }
+            )
 
             if (result is Result.Success) {
                 movieImagesStorage.updateImages(movieId, result.data)

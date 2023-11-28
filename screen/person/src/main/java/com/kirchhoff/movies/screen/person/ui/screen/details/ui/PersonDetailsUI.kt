@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
 
 @Composable
@@ -20,7 +21,12 @@ internal fun PersonDetailsUI(
 internal fun PersonDetailsUIPreview() {
     PersonDetailsUI(
         screenState = PersonDetailsScreenState(
-            stub = ""
+            details = UIPersonDetails(
+                birthday = "",
+                placeOfBirth = "",
+                biography = "",
+                alsoKnownAs = emptyList()
+            )
         )
     )
 }

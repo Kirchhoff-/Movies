@@ -22,11 +22,13 @@ import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 @Composable
 internal fun PersonDetailsInfoUI(details: UIPersonDetails) {
     Card(
-        modifier = Modifier.shadow(10.dp),
+        modifier = Modifier.background(Color.White)
+            .padding(horizontal = 16.dp)
+            .shadow(8.dp),
         shape = RoundedCornerShape(8.dp)
     ) {
         Column(
-            modifier = Modifier.background(Color.Red)
+            modifier = Modifier.padding(8.dp)
         ) {
             Text(
                 text = stringResource(R.string.person_born)

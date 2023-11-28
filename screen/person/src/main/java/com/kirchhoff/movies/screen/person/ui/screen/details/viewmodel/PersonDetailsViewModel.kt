@@ -3,6 +3,7 @@ package com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.repository.IPersonsRepository
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
@@ -11,7 +12,7 @@ import com.kirchhoff.movies.core.repository.Result
 import timber.log.Timber
 
 internal class PersonDetailsViewModel(
-    private val personId: Int,
+    private val person: UIPerson,
     private val personRepository: IPersonsRepository
 ) : ViewModel() {
 
@@ -19,6 +20,7 @@ internal class PersonDetailsViewModel(
 
     init {
         screenState.value = PersonDetailsScreenState(
+            name = person.name,
             details = UIPersonDetails(
                 birthday = "",
                 placeOfBirth = "",
@@ -31,7 +33,7 @@ internal class PersonDetailsViewModel(
     fun loadDetails() {
         //Show loading
         viewModelScope.launch {
-            val result = personRepository.fetchPersonDetail(personId)
+            val result = personRepository.fetchPersonDetail(person.id)
 
             //Hide loading
             when (result) {

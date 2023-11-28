@@ -26,7 +26,7 @@ internal class PersonDetailsFragment : BaseFragment() {
             ?: error("Should provide person info in arguments")
     }
 
-    private val viewModel: PersonDetailsViewModel by viewModel { parametersOf(person.id) }
+    private val viewModel: PersonDetailsViewModel by viewModel { parametersOf(person) }
 
     override fun onAttach(context: Context) {
         loadKoinModules(personDetailsModule)

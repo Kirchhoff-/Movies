@@ -33,13 +33,13 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
-internal class PersonDetailsFragment : BaseFragment() {
+internal class OldPersonDetailsFragment : BaseFragment() {
 
     private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
 
     private val personRouter: IPersonRouter by inject { parametersOf(requireActivity()) }
 
-    private val vm by viewModel<PersonDetailsViewModel>()
+    private val vm by viewModel<OldPersonDetailsViewModel>()
 
     private var _viewBinding: FragmentPersonDetailsBinding? = null
     private val viewBinding get() = _viewBinding!!
@@ -139,7 +139,7 @@ internal class PersonDetailsFragment : BaseFragment() {
         with(viewBinding) {
             val imagesUrls = personImages.map { it.url }
             imagesAdapter = PersonImageAdapter(
-                this@PersonDetailsFragment,
+                this@OldPersonDetailsFragment,
                 imagesUrls
             ) { openPersonImagesFragment(imagesUrls) }
 
@@ -217,8 +217,8 @@ internal class PersonDetailsFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(person: UIPerson): PersonDetailsFragment {
-            val fragment = PersonDetailsFragment()
+        fun newInstance(person: UIPerson): OldPersonDetailsFragment {
+            val fragment = OldPersonDetailsFragment()
             val arg = Bundle()
             arg.putParcelable(PERSON_ARG, person)
             fragment.arguments = arg

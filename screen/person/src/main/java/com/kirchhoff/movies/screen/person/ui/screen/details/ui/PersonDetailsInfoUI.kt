@@ -12,8 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.screen.person.R
@@ -32,37 +33,54 @@ internal fun PersonDetailsInfoUI(details: UIPersonDetails) {
             modifier = Modifier.padding(8.dp)
         ) {
             Text(
-                text = stringResource(R.string.person_born),
-                fontSize = 14.sp,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
+                style = infoTextStyle,
+                text = stringResource(R.string.person_born)
             )
             Text(
-                text = details.birthday.orEmpty(),
-                fontSize = 14.sp,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_hint)
+                style = supportTextStyle,
+                text = details.birthday.orEmpty()
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = stringResource(R.string.person_birthplace),
-                fontSize = 14.sp,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
+                style = infoTextStyle,
+                text = stringResource(R.string.person_birthplace)
             )
             Text(
-                text = details.placeOfBirth.orEmpty(),
-                fontSize = 14.sp,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_hint)
+                style = supportTextStyle,
+                text = details.placeOfBirth.orEmpty()
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = stringResource(R.string.person_bio),
-                fontSize = 14.sp,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
+                style = infoTextStyle,
+                text = stringResource(R.string.person_bio)
             )
             Text(
-                text = details.biography,
-                fontSize = 14.sp,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_hint)
+                style = supportTextStyle,
+                text = details.biography
             )
         }
     }
+}
+
+private val infoTextStyle: TextStyle = TextStyle(
+    fontSize = 14.sp,
+    color = Color.Black
+)
+
+private val supportTextStyle: TextStyle = TextStyle(
+    fontSize = 14.sp,
+    color = Color.Gray
+)
+
+@Preview
+@Composable
+private fun PersonDetailsInfoUIPreview() {
+    PersonDetailsInfoUI(
+        details = UIPersonDetails(
+            birthday = "",
+            placeOfBirth = "",
+            biography = "",
+            alsoKnownAs = emptyList()
+        )
+    )
 }

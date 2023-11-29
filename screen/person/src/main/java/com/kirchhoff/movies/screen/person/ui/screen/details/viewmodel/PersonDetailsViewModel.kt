@@ -22,6 +22,7 @@ internal class PersonDetailsViewModel(
     init {
         screenState.value = PersonDetailsScreenState(
             name = person.name,
+            title = person.name,
             details = UIPersonDetails(
                 birthday = "",
                 placeOfBirth = "",

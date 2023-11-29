@@ -52,7 +52,10 @@ internal class PersonDetailsFragment : BaseFragment() {
         setContent {
             val screenState by viewModel.screenState.observeAsState()
 
-            PersonDetailsUI(screenState = screenState ?: error("Can't build UI without state"))
+            PersonDetailsUI(
+                screenState = screenState ?: error("Can't build UI without state"),
+                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
+            )
         }
     }
 

@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
@@ -25,31 +26,38 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDe
 @ExperimentalLayoutApi
 @Composable
 internal fun PersonDetailsUI(
-    screenState: PersonDetailsScreenState
+    screenState: PersonDetailsScreenState,
+    onBackPressed: () -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-    ) {
-        Text(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            text = screenState.name,
-            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
-            fontSize = 26.sp,
-            fontWeight = FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        PersonDetailsInfoUI(details = screenState.details)
-        if (screenState.details.alsoKnownAs?.isEmpty() == false) {
-            Spacer(modifier = Modifier.height(16.dp))
-            PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
+    Column {
+        MoviesToolbar(title = screenState.title) {
+            onBackPressed.invoke()
         }
-        if (
-            screenState.credits.cast?.isNotEmpty() == true ||
-            screenState.credits.crew?.isNotEmpty() == true
+
+        Column(
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
         ) {
+            Text(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                text = screenState.name,
+                color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+                fontSize = 26.sp,
+                fontWeight = FontWeight.Bold
+            )
             Spacer(modifier = Modifier.height(16.dp))
-            PersonDetailsCreditsUI(screenState.credits)
+            PersonDetailsInfoUI(details = screenState.details)
+            if (screenState.details.alsoKnownAs?.isEmpty() == false) {
+                Spacer(modifier = Modifier.height(16.dp))
+                PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
+            }
+            if (
+                screenState.credits.cast?.isNotEmpty() == true ||
+                screenState.credits.crew?.isNotEmpty() == true
+            ) {
+                Spacer(modifier = Modifier.height(16.dp))
+                PersonDetailsCreditsUI(screenState.credits)
+            }
         }
     }
 }
@@ -61,6 +69,7 @@ internal fun PersonDetailsUIPreview() {
     PersonDetailsUI(
         screenState = PersonDetailsScreenState(
             name = "",
+            title = "",
             details = UIPersonDetails(
                 birthday = "",
                 placeOfBirth = "",
@@ -71,6 +80,7 @@ internal fun PersonDetailsUIPreview() {
                 cast = emptyList(),
                 crew = emptyList()
             )
-        )
+        ),
+        onBackPressed = {}
     )
 }

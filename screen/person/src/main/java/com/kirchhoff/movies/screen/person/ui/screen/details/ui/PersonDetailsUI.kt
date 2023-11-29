@@ -13,6 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.info.PersonDetailsInfoUI
@@ -37,6 +38,13 @@ internal fun PersonDetailsUI(
             Spacer(modifier = Modifier.height(16.dp))
             PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
         }
+        if (
+            screenState.credits.cast?.isNotEmpty() == true ||
+            screenState.credits.crew?.isNotEmpty() == true
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            PersonDetailsCreditsUI(screenState.credits)
+        }
     }
 }
 
@@ -52,6 +60,10 @@ internal fun PersonDetailsUIPreview() {
                 placeOfBirth = "",
                 biography = "",
                 alsoKnownAs = emptyList()
+            ),
+            credits = UIPersonCredits(
+                cast = emptyList(),
+                crew = emptyList()
             )
         )
     )

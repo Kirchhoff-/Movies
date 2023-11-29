@@ -9,6 +9,7 @@ import com.kirchhoff.movies.screen.person.repository.IPersonsRepository
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
 import kotlinx.coroutines.launch
 import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import timber.log.Timber
 
 internal class PersonDetailsViewModel(
@@ -26,6 +27,10 @@ internal class PersonDetailsViewModel(
                 placeOfBirth = "",
                 biography = "",
                 alsoKnownAs = emptyList()
+            ),
+            credits = UIPersonCredits(
+                cast = emptyList(),
+                crew = emptyList()
             )
         )
     }

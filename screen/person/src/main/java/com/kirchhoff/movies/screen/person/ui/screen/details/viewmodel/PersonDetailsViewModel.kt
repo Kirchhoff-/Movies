@@ -10,6 +10,8 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsS
 import kotlinx.coroutines.launch
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import timber.log.Timber
 
 internal class PersonDetailsViewModel(
@@ -32,7 +34,8 @@ internal class PersonDetailsViewModel(
             credits = UIPersonCredits(
                 cast = emptyList(),
                 crew = emptyList()
-            )
+            ),
+            images = emptyList()
         )
     }
 
@@ -48,7 +51,10 @@ internal class PersonDetailsViewModel(
                         details = result.data
                     )
 
-                  fetchCredits()
+                    awaitAll(
+                        async { fetchCredits() },
+                        async { fetchImages() }
+                    )
                 }
                 else -> Timber.e("Exception = $result")
             }
@@ -61,6 +67,15 @@ internal class PersonDetailsViewModel(
                 credits = creditsResult.data
             )
             else -> Timber.e(creditsResult.toString())
+        }
+    }
+
+    private suspend fun fetchImages() {
+        when (val personImages = personRepository.fetchPersonImages(person.id)) {
+            is Result.Success -> screenState.value = screenState.value?.copy(
+                images = personImages.data
+            )
+            else -> Timber.e(personImages.toString())
         }
     }
 }

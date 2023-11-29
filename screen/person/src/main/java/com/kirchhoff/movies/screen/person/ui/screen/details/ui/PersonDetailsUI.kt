@@ -20,6 +20,7 @@ import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.credits.PersonDetailsCreditsUI
+import com.kirchhoff.movies.screen.person.ui.screen.details.ui.images.PersonDetailsImagesUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.info.PersonDetailsInfoUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDetailsKeywordsUI
 
@@ -38,6 +39,7 @@ internal fun PersonDetailsUI(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
         ) {
+            PersonDetailsImagesUI(images = screenState.images)
             Text(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 text = screenState.name,
@@ -79,7 +81,8 @@ internal fun PersonDetailsUIPreview() {
             credits = UIPersonCredits(
                 cast = emptyList(),
                 crew = emptyList()
-            )
+            ),
+            images = emptyList()
         ),
         onBackPressed = {}
     )

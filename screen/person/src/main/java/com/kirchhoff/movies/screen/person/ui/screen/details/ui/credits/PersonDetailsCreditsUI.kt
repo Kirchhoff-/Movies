@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,8 +23,8 @@ internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
     ) {
         if (credits.cast != null) {
             Text(text = stringResource(com.kirchhoff.movies.creditsview.R.string.cast_credits))
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(16.dp)
             ) {
                 items(
@@ -38,8 +39,8 @@ internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
 
         if (credits.crew != null) {
             Text(text = stringResource(com.kirchhoff.movies.creditsview.R.string.crew_credits))
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(16.dp)
             ) {
                 items(

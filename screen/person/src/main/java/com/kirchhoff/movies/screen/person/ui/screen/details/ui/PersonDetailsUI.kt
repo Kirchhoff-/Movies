@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,7 +27,10 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDe
 internal fun PersonDetailsUI(
     screenState: PersonDetailsScreenState
 ) {
-    Column {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+    ) {
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = screenState.name,

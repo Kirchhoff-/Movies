@@ -42,11 +42,24 @@ internal class PersonDetailsViewModel(
 
             //Hide loading
             when (result) {
-                is Result.Success -> screenState.value = screenState.value?.copy(
-                    details = result.data
-                )
+                is Result.Success -> {
+                    screenState.value = screenState.value?.copy(
+                        details = result.data
+                    )
+
+                  fetchCredits()
+                }
                 else -> Timber.e("Exception = $result")
             }
+        }
+    }
+
+    private suspend fun fetchCredits() {
+        when (val creditsResult = personRepository.fetchPersonCredits(person.id)) {
+            is Result.Success -> screenState.value = screenState.value?.copy(
+                credits = creditsResult.data
+            )
+            else -> Timber.e(creditsResult.toString())
         }
     }
 }

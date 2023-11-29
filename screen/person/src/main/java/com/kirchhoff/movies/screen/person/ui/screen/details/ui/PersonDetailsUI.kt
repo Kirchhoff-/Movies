@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
+import com.kirchhoff.movies.screen.person.ui.screen.details.ui.credits.PersonDetailsCreditsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.info.PersonDetailsInfoUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDetailsKeywordsUI
 

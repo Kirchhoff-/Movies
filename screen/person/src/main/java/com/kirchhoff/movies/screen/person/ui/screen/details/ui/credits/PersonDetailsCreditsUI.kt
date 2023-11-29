@@ -21,7 +21,7 @@ internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        if (credits.cast != null) {
+        if (credits.cast?.isNotEmpty() == true) {
             Text(text = stringResource(com.kirchhoff.movies.creditsview.R.string.cast_credits))
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -37,7 +37,7 @@ internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
             Spacer(modifier = Modifier.height(16.dp))
         }
 
-        if (credits.crew != null) {
+        if (credits.crew?.isNotEmpty() == true) {
             Text(text = stringResource(com.kirchhoff.movies.creditsview.R.string.crew_credits))
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),

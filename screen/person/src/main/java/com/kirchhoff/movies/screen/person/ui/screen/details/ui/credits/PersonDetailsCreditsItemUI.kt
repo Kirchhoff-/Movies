@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,14 +59,23 @@ internal fun PersonDetailsCreditsItemUI(credit: UIPersonCredit) {
                 contentDescription = ""
             )
             Divider(color = Color.Gray)
+            Spacer(modifier = Modifier.height(4.dp))
             Text(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .wrapContentHeight(),
+                modifier = Modifier.padding(horizontal = 4.dp),
                 text = credit.title,
                 fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                color = colorResource(R.color.text_main)
+                color = colorResource(R.color.text_main),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                modifier = Modifier.padding(horizontal = 4.dp),
+                text = description,
+                fontSize = 14.sp,
+                color = colorResource(R.color.text_hint),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }

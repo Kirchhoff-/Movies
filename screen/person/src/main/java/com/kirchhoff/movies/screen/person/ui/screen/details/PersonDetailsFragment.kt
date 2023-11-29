@@ -10,9 +10,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
+import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.screen.person.data.UIMediaType
+import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -54,15 +58,39 @@ internal class PersonDetailsFragment : BaseFragment() {
 
             PersonDetailsUI(
                 screenState = screenState ?: error("Can't build UI without state"),
+                onCreditItemClick = { onCreditItemClick(it) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
     }
 
-
     override fun onDestroy() {
         unloadKoinModules(personDetailsModule)
         super.onDestroy()
+    }
+
+    private fun onCreditItemClick(credit: UIPersonCredit) {
+        if (credit.mediaType == UIMediaType.MOVIE) {
+            router.openMovieDetailsScreen(
+                UIMovie(
+                    credit.id,
+                    credit.title,
+                    credit.posterPath,
+                    credit.backdropPath,
+                    null
+                )
+            )
+        } else if (credit.mediaType == UIMediaType.TV) {
+            router.openTvDetailsScreen(
+                UITv(
+                    credit.id,
+                    credit.title,
+                    credit.posterPath,
+                    credit.backdropPath,
+                    null
+                )
+            )
+        }
     }
 
     companion object {

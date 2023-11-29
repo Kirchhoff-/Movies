@@ -18,10 +18,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.screen.person.R
+import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 
 @Composable
-internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
+internal fun PersonDetailsCreditsUI(
+    credits: UIPersonCredits,
+    onItemClick: (UIPersonCredit) -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -39,7 +43,10 @@ internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
                 items(
                     count = credits.cast.size,
                     itemContent = {
-                        PersonDetailsCreditsItemUI(credit = credits.cast[it])
+                        PersonDetailsCreditsItemUI(
+                            credit = credits.cast[it],
+                            onItemClick = onItemClick
+                        )
                     }
                 )
             }
@@ -60,7 +67,10 @@ internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
                 items(
                     count = credits.crew.size,
                     itemContent = {
-                        PersonDetailsCreditsItemUI(credit = credits.crew[it])
+                        PersonDetailsCreditsItemUI(
+                            credit = credits.crew[it],
+                            onItemClick = onItemClick
+                        )
                     }
                 )
             }
@@ -72,9 +82,10 @@ internal fun PersonDetailsCreditsUI(credits: UIPersonCredits) {
 @Composable
 private fun PersonDetailsCreditsUIPreview() {
     PersonDetailsCreditsUI(
-        UIPersonCredits(
+        credits = UIPersonCredits(
             cast = emptyList(),
             crew = emptyList()
-        )
+        ),
+        onItemClick = {}
     )
 }

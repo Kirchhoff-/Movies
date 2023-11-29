@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details.ui.credits
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,7 +12,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -27,7 +31,10 @@ import com.kirchhoff.movies.screen.person.data.UIMediaType
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 
 @Composable
-internal fun PersonDetailsCreditsItemUI(credit: UIPersonCredit) {
+internal fun PersonDetailsCreditsItemUI(
+    credit: UIPersonCredit,
+    onItemClick: (UIPersonCredit) -> Unit
+) {
     val description = when (credit) {
         is UIPersonCredit.Actor -> credit.character.orEmpty()
         is UIPersonCredit.Creator -> credit.job
@@ -36,7 +43,12 @@ internal fun PersonDetailsCreditsItemUI(credit: UIPersonCredit) {
     Card(
         modifier = Modifier
             .height(250.dp)
-            .width(150.dp),
+            .width(150.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple(bounded = true),
+                onClick = { onItemClick.invoke(credit) }
+            ),
         elevation = 4.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -78,13 +90,14 @@ internal fun PersonDetailsCreditsItemUI(credit: UIPersonCredit) {
 @Composable
 private fun PersonDetailsCreditsItemUIPreview() {
     PersonDetailsCreditsItemUI(
-        UIPersonCredit.Actor(
+        credit = UIPersonCredit.Actor(
             id = 1,
             title = "Title",
             posterPath = "",
             backdropPath = "",
             UIMediaType.MOVIE,
             character = "Character"
-        )
+        ),
+        onItemClick = {}
     )
 }

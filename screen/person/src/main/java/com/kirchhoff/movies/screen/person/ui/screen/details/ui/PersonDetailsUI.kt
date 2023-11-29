@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
@@ -28,6 +29,7 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDe
 @Composable
 internal fun PersonDetailsUI(
     screenState: PersonDetailsScreenState,
+    onCreditItemClick: (UIPersonCredit) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Column {
@@ -58,7 +60,10 @@ internal fun PersonDetailsUI(
                 screenState.credits.crew?.isNotEmpty() == true
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
-                PersonDetailsCreditsUI(screenState.credits)
+                PersonDetailsCreditsUI(
+                    credits = screenState.credits,
+                    onItemClick = onCreditItemClick
+                )
             }
         }
     }
@@ -84,6 +89,7 @@ internal fun PersonDetailsUIPreview() {
             ),
             images = emptyList()
         ),
+        onCreditItemClick = {},
         onBackPressed = {}
     )
 }

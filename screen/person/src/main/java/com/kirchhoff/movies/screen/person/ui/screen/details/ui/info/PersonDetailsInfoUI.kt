@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.person.ui.screen.details.ui
+package com.kirchhoff.movies.screen.person.ui.screen.details.ui.info
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

@@ -9,5 +9,6 @@ internal data class PersonDetailsScreenState(
     val title: String,
     val details: UIPersonDetails,
     val credits: UIPersonCredits,
-    val images: List<UIPersonImage>
+    val images: List<UIPersonImage>,
+    val isLoading: Boolean
 )

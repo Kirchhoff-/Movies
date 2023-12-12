@@ -35,16 +35,17 @@ internal class PersonDetailsViewModel(
                 cast = emptyList(),
                 crew = emptyList()
             ),
-            images = emptyList()
+            images = emptyList(),
+            isLoading = false
         )
     }
 
     fun loadDetails() {
-        // Show loading
+        screenState.value = screenState.value?.copy(isLoading = true)
         viewModelScope.launch {
             val result = personRepository.fetchPersonDetail(person.id)
 
-            // Hide loading
+            screenState.value = screenState.value?.copy(isLoading = false)
             when (result) {
                 is Result.Success -> {
                     screenState.value = screenState.value?.copy(

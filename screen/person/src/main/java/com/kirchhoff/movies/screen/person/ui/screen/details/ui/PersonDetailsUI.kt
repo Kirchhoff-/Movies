@@ -1,12 +1,15 @@
 @file:SuppressWarnings("MagicNumber")
 package com.kirchhoff.movies.screen.person.ui.screen.details.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -40,39 +43,49 @@ internal fun PersonDetailsUI(
             onBackPressed.invoke()
         }
 
-        Column(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState())
-        ) {
-            PersonDetailsImagesUI(
-                images = screenState.images,
-                onItemClick = onImageClick
-            )
-            Text(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                text = screenState.name,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
-                fontSize = 26.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            PersonDetailsInfoUI(
-                details = screenState.details,
-                onLocationClick = onLocationClick
-            )
-            if (screenState.details.alsoKnownAs?.isEmpty() == false) {
-                Spacer(modifier = Modifier.height(16.dp))
-                PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
-            }
-            if (
-                screenState.credits.cast?.isNotEmpty() == true ||
-                screenState.credits.crew?.isNotEmpty() == true
+        if (screenState.isLoading) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Spacer(modifier = Modifier.height(16.dp))
-                PersonDetailsCreditsUI(
-                    credits = screenState.credits,
-                    onItemClick = onCreditItemClick
+                CircularProgressIndicator()
+            }
+        } else {
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+            ) {
+                PersonDetailsImagesUI(
+                    images = screenState.images,
+                    onItemClick = onImageClick
                 )
+                Text(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    text = screenState.name,
+                    color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+                    fontSize = 26.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                PersonDetailsInfoUI(
+                    details = screenState.details,
+                    onLocationClick = onLocationClick
+                )
+                if (screenState.details.alsoKnownAs?.isEmpty() == false) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
+                }
+                if (
+                    screenState.credits.cast?.isNotEmpty() == true ||
+                    screenState.credits.crew?.isNotEmpty() == true
+                ) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    PersonDetailsCreditsUI(
+                        credits = screenState.credits,
+                        onItemClick = onCreditItemClick
+                    )
+                }
             }
         }
     }
@@ -96,7 +109,8 @@ internal fun PersonDetailsUIPreview() {
                 cast = emptyList(),
                 crew = emptyList()
             ),
-            images = emptyList()
+            images = emptyList(),
+            isLoading = false
         ),
         onCreditItemClick = {},
         onImageClick = {},

@@ -36,7 +36,8 @@ internal class PersonDetailsViewModel(
                 crew = emptyList()
             ),
             images = emptyList(),
-            isLoading = false
+            isLoading = false,
+            errorMessage = ""
         )
     }
 
@@ -57,7 +58,11 @@ internal class PersonDetailsViewModel(
                         async { fetchImages() }
                     )
                 }
-                else -> Timber.e("Exception = $result")
+                else -> {
+                    screenState.value = screenState.value?.copy(
+                        errorMessage = result.toString()
+                    )
+                }
             }
         }
     }

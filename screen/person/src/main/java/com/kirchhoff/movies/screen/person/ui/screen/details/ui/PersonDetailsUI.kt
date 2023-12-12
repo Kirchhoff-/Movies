@@ -43,50 +43,76 @@ internal fun PersonDetailsUI(
             onBackPressed.invoke()
         }
 
-        if (screenState.isLoading) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CircularProgressIndicator()
-            }
-        } else {
-            Column(
-                modifier = Modifier
-                    .verticalScroll(rememberScrollState())
-            ) {
-                PersonDetailsImagesUI(
-                    images = screenState.images,
-                    onItemClick = onImageClick
-                )
-                Text(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    text = screenState.name,
-                    color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                PersonDetailsInfoUI(
-                    details = screenState.details,
-                    onLocationClick = onLocationClick
-                )
-                if (screenState.details.alsoKnownAs?.isEmpty() == false) {
-                    Spacer(modifier = Modifier.height(16.dp))
-                    PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
-                }
-                if (
-                    screenState.credits.cast?.isNotEmpty() == true ||
-                    screenState.credits.crew?.isNotEmpty() == true
-                ) {
-                    Spacer(modifier = Modifier.height(16.dp))
-                    PersonDetailsCreditsUI(
-                        credits = screenState.credits,
-                        onItemClick = onCreditItemClick
-                    )
-                }
-            }
+        when {
+            screenState.isLoading -> ShowLoading()
+            screenState.errorMessage.isNotEmpty() -> ShowError()
+            else -> ShowUI(
+                screenState = screenState,
+                onCreditItemClick = onCreditItemClick,
+                onImageClick = onImageClick,
+                onLocationClick = onLocationClick
+            )
+        }
+    }
+}
+
+@Composable
+private fun ShowLoading() {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator()
+    }
+}
+
+@Composable
+private fun ShowError() {
+
+}
+
+@ExperimentalLayoutApi
+@Composable
+private fun ShowUI(
+    screenState: PersonDetailsScreenState,
+    onCreditItemClick: (UIPersonCredit) -> Unit,
+    onImageClick: (Int) -> Unit,
+    onLocationClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+    ) {
+        PersonDetailsImagesUI(
+            images = screenState.images,
+            onItemClick = onImageClick
+        )
+        Text(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            text = screenState.name,
+            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+            fontSize = 26.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        PersonDetailsInfoUI(
+            details = screenState.details,
+            onLocationClick = onLocationClick
+        )
+        if (screenState.details.alsoKnownAs?.isEmpty() == false) {
+            Spacer(modifier = Modifier.height(16.dp))
+            PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
+        }
+        if (
+            screenState.credits.cast?.isNotEmpty() == true ||
+            screenState.credits.crew?.isNotEmpty() == true
+        ) {
+            Spacer(modifier = Modifier.height(16.dp))
+            PersonDetailsCreditsUI(
+                credits = screenState.credits,
+                onItemClick = onCreditItemClick
+            )
         }
     }
 }
@@ -94,7 +120,7 @@ internal fun PersonDetailsUI(
 @ExperimentalLayoutApi
 @Preview
 @Composable
-internal fun PersonDetailsUIPreview() {
+private fun PersonDetailsUIPreview() {
     PersonDetailsUI(
         screenState = PersonDetailsScreenState(
             name = "",
@@ -110,7 +136,8 @@ internal fun PersonDetailsUIPreview() {
                 crew = emptyList()
             ),
             images = emptyList(),
-            isLoading = false
+            isLoading = false,
+            errorMessage = ""
         ),
         onCreditItemClick = {},
         onImageClick = {},

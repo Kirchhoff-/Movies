@@ -1,4 +1,5 @@
 @file:SuppressWarnings("MagicNumber")
+
 package com.kirchhoff.movies.screen.person.ui.screen.details.ui.images
 
 import androidx.compose.foundation.ExperimentalFoundationApi

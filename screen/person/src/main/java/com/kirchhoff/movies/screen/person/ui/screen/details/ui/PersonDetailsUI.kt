@@ -30,6 +30,7 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDe
 internal fun PersonDetailsUI(
     screenState: PersonDetailsScreenState,
     onCreditItemClick: (UIPersonCredit) -> Unit,
+    onImageClick: (Int) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Column {
@@ -41,7 +42,10 @@ internal fun PersonDetailsUI(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
         ) {
-            PersonDetailsImagesUI(images = screenState.images)
+            PersonDetailsImagesUI(
+                images = screenState.images,
+                onItemClick = onImageClick
+            )
             Text(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 text = screenState.name,
@@ -90,6 +94,7 @@ internal fun PersonDetailsUIPreview() {
             images = emptyList()
         ),
         onCreditItemClick = {},
+        onImageClick = {},
         onBackPressed = {}
     )
 }

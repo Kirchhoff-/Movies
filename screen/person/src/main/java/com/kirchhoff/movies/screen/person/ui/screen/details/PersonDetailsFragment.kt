@@ -17,8 +17,10 @@ import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.person.data.UIMediaType
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
+import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -30,6 +32,8 @@ internal class PersonDetailsFragment : BaseFragment() {
         requireArguments().getParcelableExtra(PERSON_ARG)
             ?: error("Should provide person info in arguments")
     }
+
+    private val personRouter: IPersonRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: PersonDetailsViewModel by viewModel { parametersOf(person) }
 
@@ -59,6 +63,7 @@ internal class PersonDetailsFragment : BaseFragment() {
             PersonDetailsUI(
                 screenState = screenState ?: error("Can't build UI without state"),
                 onCreditItemClick = { onCreditItemClick(it) },
+                onImageClick = { onImageClick(it) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
@@ -91,6 +96,13 @@ internal class PersonDetailsFragment : BaseFragment() {
                 )
             )
         }
+    }
+
+    private fun onImageClick(position: Int) {
+        personRouter.openImagesScreen(
+            imagesUrls = viewModel.screenState.value?.images?.map { it.url } ?: error("Can't open images screen without images"),
+            currentPosition = position
+        )
     }
 
     companion object {

@@ -2,6 +2,8 @@ package com.kirchhoff.movies.screen.person.ui.screen.details.ui.images
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -14,7 +16,9 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,7 +33,10 @@ import com.kirchhoff.movies.screen.person.data.UIPersonImage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun PersonDetailsImagesUI(images: List<UIPersonImage>) {
+internal fun PersonDetailsImagesUI(
+    images: List<UIPersonImage>,
+    onItemClick: (Int) -> Unit
+) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         pageCount = { images.size }
@@ -44,7 +51,12 @@ internal fun PersonDetailsImagesUI(images: List<UIPersonImage>) {
             state = pagerState
         ) { page ->
             AsyncImage(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize()
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple(bounded = true),
+                        onClick = { onItemClick.invoke(page) }
+                    ),
                 model = BASE_POSTER_PATH + images[page].url,
                 contentScale = ContentScale.Crop,
                 contentDescription = ""
@@ -76,5 +88,8 @@ internal fun PersonDetailsImagesUI(images: List<UIPersonImage>) {
 @Preview
 @Composable
 private fun PersonDetailsImagesUIPreview() {
-    PersonDetailsImagesUI(images = emptyList())
+    PersonDetailsImagesUI(
+        images = emptyList(),
+        onItemClick = {}
+    )
 }

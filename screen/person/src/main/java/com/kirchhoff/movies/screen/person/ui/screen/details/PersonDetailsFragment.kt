@@ -1,6 +1,9 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details
 
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
+import timber.log.Timber
 
 internal class PersonDetailsFragment : BaseFragment() {
 
@@ -64,6 +68,7 @@ internal class PersonDetailsFragment : BaseFragment() {
                 screenState = screenState ?: error("Can't build UI without state"),
                 onCreditItemClick = { onCreditItemClick(it) },
                 onImageClick = { onImageClick(it) },
+                onLocationClick = { onLocationClick() },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
@@ -103,6 +108,16 @@ internal class PersonDetailsFragment : BaseFragment() {
             imagesUrls = viewModel.screenState.value?.images?.map { it.url } ?: error("Can't open images screen without images"),
             currentPosition = position
         )
+    }
+
+    private fun onLocationClick() {
+        try {
+            val birthplace = viewModel.screenState.value?.details?.placeOfBirth ?: error("Can't open location without place of birth")
+            val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$birthplace"))
+            startActivity(mapIntent)
+        } catch (e: ActivityNotFoundException) {
+            Timber.e("Can't find map application")
+        }
     }
 
     companion object {

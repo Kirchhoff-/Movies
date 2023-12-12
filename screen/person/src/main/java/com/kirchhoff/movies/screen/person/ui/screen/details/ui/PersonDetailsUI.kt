@@ -31,6 +31,7 @@ internal fun PersonDetailsUI(
     screenState: PersonDetailsScreenState,
     onCreditItemClick: (UIPersonCredit) -> Unit,
     onImageClick: (Int) -> Unit,
+    onLocationClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
     Column {
@@ -54,7 +55,10 @@ internal fun PersonDetailsUI(
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(16.dp))
-            PersonDetailsInfoUI(details = screenState.details)
+            PersonDetailsInfoUI(
+                details = screenState.details,
+                onLocationClick = onLocationClick
+            )
             if (screenState.details.alsoKnownAs?.isEmpty() == false) {
                 Spacer(modifier = Modifier.height(16.dp))
                 PersonDetailsKeywordsUI(keywords = screenState.details.alsoKnownAs)
@@ -95,6 +99,7 @@ internal fun PersonDetailsUIPreview() {
         ),
         onCreditItemClick = {},
         onImageClick = {},
+        onLocationClick = {},
         onBackPressed = {}
     )
 }

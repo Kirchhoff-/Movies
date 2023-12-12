@@ -1,3 +1,4 @@
+@file:SuppressWarnings("MagicNumber")
 package com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords
 
 import androidx.compose.foundation.background

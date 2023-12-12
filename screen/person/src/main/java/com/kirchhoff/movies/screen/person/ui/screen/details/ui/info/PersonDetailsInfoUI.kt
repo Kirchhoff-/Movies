@@ -30,48 +30,60 @@ internal fun PersonDetailsInfoUI(
     details: UIPersonDetails,
     onLocationClick: () -> Unit
 ) {
-    Card(
-        modifier = Modifier
-            .background(Color.White)
-            .padding(horizontal = 16.dp)
-            .shadow(8.dp),
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(8.dp)
+    val isBornVisible = !details.birthday.isNullOrEmpty()
+    val isPlaceOfBirthVisible = !details.placeOfBirth.isNullOrEmpty()
+    val isBiographyVisible = details.biography.isNotEmpty()
+
+    if (isBornVisible || isPlaceOfBirthVisible || isBiographyVisible) {
+        Card(
+            modifier = Modifier
+                .background(Color.White)
+                .padding(horizontal = 16.dp)
+                .shadow(8.dp),
+            shape = RoundedCornerShape(8.dp)
         ) {
-            Text(
-                style = infoTextStyle,
-                text = stringResource(R.string.person_born)
-            )
-            Text(
-                style = supportTextStyle,
-                text = details.birthday.orEmpty()
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                style = infoTextStyle,
-                text = stringResource(R.string.person_birthplace)
-            )
-            Text(
-                modifier = Modifier.clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple(bounded = true),
-                    onClick = { onLocationClick.invoke() }
-                ),
-                style = supportTextStyle,
-                textDecoration = TextDecoration.Underline,
-                text = details.placeOfBirth.orEmpty()
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                style = infoTextStyle,
-                text = stringResource(R.string.person_bio)
-            )
-            Text(
-                style = supportTextStyle,
-                text = details.biography
-            )
+            Column(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                if (isBornVisible) {
+                    Text(
+                        style = infoTextStyle,
+                        text = stringResource(R.string.person_born)
+                    )
+                    Text(
+                        style = supportTextStyle,
+                        text = details.birthday.orEmpty()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+                if (isPlaceOfBirthVisible) {
+                    Text(
+                        style = infoTextStyle,
+                        text = stringResource(R.string.person_birthplace)
+                    )
+                    Text(
+                        modifier = Modifier.clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(bounded = true),
+                            onClick = { onLocationClick.invoke() }
+                        ),
+                        style = supportTextStyle,
+                        textDecoration = TextDecoration.Underline,
+                        text = details.placeOfBirth.orEmpty()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+                if (isBiographyVisible) {
+                    Text(
+                        style = infoTextStyle,
+                        text = stringResource(R.string.person_bio)
+                    )
+                    Text(
+                        style = supportTextStyle,
+                        text = details.biography
+                    )
+                }
+            }
         }
     }
 }

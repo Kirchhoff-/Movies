@@ -1,6 +1,7 @@
 @file:SuppressWarnings("MagicNumber")
 package com.kirchhoff.movies.screen.person.ui.screen.details.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -12,8 +13,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,7 +52,7 @@ internal fun PersonDetailsUI(
 
         when {
             screenState.isLoading -> ShowLoading()
-            screenState.errorMessage.isNotEmpty() -> ShowError()
+            screenState.errorMessage.isNotEmpty() -> ShowError(screenState = screenState)
             else -> ShowUI(
                 screenState = screenState,
                 onCreditItemClick = onCreditItemClick,
@@ -68,8 +75,16 @@ private fun ShowLoading() {
 }
 
 @Composable
-private fun ShowError() {
+private fun ShowError(screenState: PersonDetailsScreenState) {
+    val context = LocalContext.current
+    var errorMessage by rememberSaveable { mutableStateOf("") }
 
+    if (screenState.errorMessage.isNotEmpty() && errorMessage.isEmpty()) {
+        errorMessage = screenState.errorMessage
+        SideEffect {
+            Toast.makeText(context, screenState.errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }
 }
 
 @ExperimentalLayoutApi

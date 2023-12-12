@@ -10,7 +10,6 @@ import com.kirchhoff.movies.screen.person.data.UIPersonImage
 import com.kirchhoff.movies.screen.person.mapper.details.IPersonDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.main.IPersonsMapper
 import com.kirchhoff.movies.screen.person.network.PersonService
-import kotlinx.coroutines.delay
 
 internal class PersonsRepository(
     private val personService: PersonService,
@@ -25,16 +24,14 @@ internal class PersonsRepository(
             }
         )
 
-    override suspend fun fetchPersonDetail(personId: Int): Result<UIPersonDetails> {
-        return Result.Error(123)
-        /*return personDetailsMapper.createUIPersonDetails(
+    override suspend fun fetchPersonDetail(personId: Int): Result<UIPersonDetails> =
+        personDetailsMapper.createUIPersonDetails(
             apiCall {
                 personService.fetchPersonDetail(
                     personId
                 )
             }
-        )*/
-    }
+        )
 
     override suspend fun fetchPersonCredits(personId: Int): Result<UIPersonCredits> =
         personDetailsMapper.createUIPersonCredits(

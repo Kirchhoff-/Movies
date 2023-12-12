@@ -4,14 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIPerson
+import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.repository.IPersonsRepository
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
-import kotlinx.coroutines.launch
-import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 internal class PersonDetailsViewModel(
@@ -40,11 +40,11 @@ internal class PersonDetailsViewModel(
     }
 
     fun loadDetails() {
-        //Show loading
+        // Show loading
         viewModelScope.launch {
             val result = personRepository.fetchPersonDetail(person.id)
 
-            //Hide loading
+            // Hide loading
             when (result) {
                 is Result.Success -> {
                     screenState.value = screenState.value?.copy(

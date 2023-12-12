@@ -72,7 +72,12 @@ internal fun PersonDetailsImagesUI(
             horizontalArrangement = Arrangement.Center
         ) {
             repeat(pagerState.pageCount) { iteration ->
-                val color = if (pagerState.currentPage == iteration) colorResource(com.kirchhoff.movies.core.R.color.colorPrimary) else Color.LightGray
+                val color = if (pagerState.currentPage == iteration) {
+                    colorResource(com.kirchhoff.movies.core.R.color.colorPrimary)
+                } else {
+                    Color.LightGray
+                }
+
                 Box(
                     modifier = Modifier
                         .padding(4.dp)

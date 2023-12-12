@@ -17,15 +17,15 @@ import androidx.compose.ui.unit.sp
 @Composable
 internal fun PersonDetailsKeywordsItemUI(text: String) {
     Text(
-       modifier = Modifier
-           .padding(2.dp)
-           .background(Color.White)
-           .border(
-               width = 1.dp,
-               color = Color.Black,
-               shape = RoundedCornerShape(8.dp)
-           )
-           .padding(8.dp),
+        modifier = Modifier
+            .padding(2.dp)
+            .background(Color.White)
+            .border(
+                width = 1.dp,
+                color = Color.Black,
+                shape = RoundedCornerShape(8.dp)
+            )
+            .padding(8.dp),
         color = Color.Black,
         fontSize = 14.sp,
         text = text

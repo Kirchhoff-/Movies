@@ -1,185 +1,85 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details
 
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
-import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.isVisible
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
-import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
-import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.creditsview.data.CreditsInfo
-import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
-import com.kirchhoff.movies.screen.person.R
 import com.kirchhoff.movies.screen.person.data.UIMediaType
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
-import com.kirchhoff.movies.screen.person.data.UIPersonCredits
-import com.kirchhoff.movies.screen.person.data.UIPersonDetails
-import com.kirchhoff.movies.screen.person.data.UIPersonImage
-import com.kirchhoff.movies.screen.person.databinding.FragmentPersonDetailsBinding
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
-import com.kirchhoff.movies.screen.person.ui.view.adapter.PersonImageAdapter
+import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsUI
+import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 internal class PersonDetailsFragment : BaseFragment() {
 
-    private val person: UIPerson by lazy { requireArguments().getParcelableExtra(PERSON_ARG)!! }
+    private val person: UIPerson by lazy {
+        requireArguments().getParcelableExtra(PERSON_ARG)
+            ?: error("Should provide person info in arguments")
+    }
 
     private val personRouter: IPersonRouter by inject { parametersOf(requireActivity()) }
 
-    private val vm by viewModel<PersonDetailsViewModel>()
+    private val viewModel: PersonDetailsViewModel by viewModel { parametersOf(person) }
 
-    private var _viewBinding: FragmentPersonDetailsBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
-    private var imagesAdapter: PersonImageAdapter? = null
+    override fun onAttach(context: Context) {
+        loadKoinModules(personDetailsModule)
+        super.onAttach(context)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm.loadPersonDetails(person.id)
+        viewModel.loadDetails()
     }
 
+    @OptIn(ExperimentalLayoutApi::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _viewBinding = FragmentPersonDetailsBinding.inflate(inflater, container, false)
-        return viewBinding.root
-    }
+    ): View = ComposeView(requireContext()).apply {
+        setViewCompositionStrategy(
+            ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner)
+        )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        setContent {
+            val screenState by viewModel.screenState.observeAsState()
 
-        with(viewBinding) {
-            ivBackdrop.downloadPoster(person.profilePath)
-            toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
-            appbar.addTitleWithCollapsingListener(toolbar, person.name)
-        }
-
-        with(viewBinding.content) {
-            tvPersonName.text = person.name
-            bRetry.setOnClickListener { vm.loadPersonDetails(person.id) }
-            vCredits.itemClickListener { openMovieOrTvShowScreen(it) }
-            tvBirthplace.setOnClickListener { openBirthplace(tvBirthplace.text.toString()) }
-            tvBirthplace.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        }
-
-        with(vm) {
-            personDetails.subscribe(::handlePersonDetails)
-            personCredits.subscribe(::handlePersonCredits)
-            personImages.subscribe(::handlePersonImages)
-            loading.subscribe(::handleLoading)
-            error.subscribe(::handleError)
-            exception.subscribe(::handleException)
-        }
-    }
-
-    override fun onDestroyView() {
-        viewBinding.vpImages.adapter = null
-        super.onDestroyView()
-        _viewBinding = null
-    }
-
-    private fun handlePersonDetails(personDetails: UIPersonDetails) {
-        with(viewBinding.content) {
-            groupData.isVisible = true
-
-            tvBorn.setTextOrNoInfo(personDetails.birthday)
-            tvBirthplace.setTextOrNoInfo(personDetails.placeOfBirth)
-            tvBio.setTextOrNoInfo(personDetails.biography)
-
-            if (!personDetails.alsoKnownAs.isNullOrEmpty()) {
-                cvAlsoKnowAs.isVisible = true
-                vKeywords.displayItems(personDetails.alsoKnownAs.map { KeywordsViewData(it, it) })
-            }
-        }
-    }
-
-    private fun handlePersonCredits(personCredits: UIPersonCredits) {
-        with(viewBinding.content.vCredits) {
-            isVisible = true
-            display(
-                personCredits.cast?.map {
-                    CreditsInfo(
-                        id = it.id,
-                        title = it.title,
-                        description = it.character,
-                        imagePath = it.posterPath,
-                        placeholderImageResources = com.kirchhoff.movies.core.R.drawable.ic_empty_movie
-                    )
-                },
-                personCredits.crew?.map {
-                    CreditsInfo(
-                        id = it.id,
-                        title = it.title,
-                        description = it.job,
-                        imagePath = it.posterPath,
-                        placeholderImageResources = com.kirchhoff.movies.core.R.drawable.ic_empty_movie
-                    )
-                },
-                false
+            PersonDetailsUI(
+                screenState = screenState ?: error("Can't build UI without state"),
+                onCreditItemClick = { onCreditItemClick(it) },
+                onImageClick = { onImageClick(it) },
+                onLocationClick = { onLocationClick() },
+                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
     }
 
-    private fun handlePersonImages(personImages: List<UIPersonImage>) {
-        with(viewBinding) {
-            val imagesUrls = personImages.map { it.url }
-            imagesAdapter = PersonImageAdapter(
-                this@PersonDetailsFragment,
-                imagesUrls
-            ) { openPersonImagesFragment(imagesUrls) }
-
-            vpImages.adapter = imagesAdapter
-            tabLayout.attachToPager(vpImages)
-
-            ivBackdrop.isVisible = personImages.isEmpty()
-            vpImages.isVisible = personImages.isNotEmpty()
-            tabLayout.isVisible = personImages.isNotEmpty()
-        }
+    override fun onDestroy() {
+        unloadKoinModules(personDetailsModule)
+        super.onDestroy()
     }
 
-    private fun handleLoading(visible: Boolean) {
-        with(viewBinding) {
-            content.groupLoading.isVisible = visible
-
-            if (visible) {
-                content.groupException.isVisible = false
-                content.groupError.isVisible = false
-                content.groupData.isVisible = false
-            }
-        }
-    }
-
-    private fun handleError(error: String) {
-        with(viewBinding) {
-            content.groupError.isVisible = true
-            content.tvError.text = error
-        }
-    }
-
-    private fun handleException(exception: String) {
-        with(viewBinding) {
-            content.groupException.isVisible = true
-            content.tvException.text = exception
-        }
-    }
-
-    private fun openMovieOrTvShowScreen(id: Int) {
-        val credit: UIPersonCredit = vm.personCredits.value?.findCredit(id) ?: error("Can't find person credits with id = $id")
+    private fun onCreditItemClick(credit: UIPersonCredit) {
         if (credit.mediaType == UIMediaType.MOVIE) {
             router.openMovieDetailsScreen(
                 UIMovie(
@@ -203,12 +103,16 @@ internal class PersonDetailsFragment : BaseFragment() {
         }
     }
 
-    private fun openPersonImagesFragment(imagesUrls: List<String>) {
-        personRouter.openImagesScreen(imagesUrls, viewBinding.vpImages.currentItem)
+    private fun onImageClick(position: Int) {
+        personRouter.openImagesScreen(
+            imagesUrls = viewModel.screenState.value?.images?.map { it.url } ?: error("Can't open images screen without images"),
+            currentPosition = position
+        )
     }
 
-    private fun openBirthplace(birthplace: String) {
+    private fun onLocationClick() {
         try {
+            val birthplace = viewModel.screenState.value?.details?.placeOfBirth ?: error("Can't open location without place of birth")
             val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$birthplace"))
             startActivity(mapIntent)
         } catch (e: ActivityNotFoundException) {
@@ -217,19 +121,12 @@ internal class PersonDetailsFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(person: UIPerson): PersonDetailsFragment {
-            val fragment = PersonDetailsFragment()
-            val arg = Bundle()
-            arg.putParcelable(PERSON_ARG, person)
-            fragment.arguments = arg
-            return fragment
+        fun newInstance(person: UIPerson): PersonDetailsFragment = PersonDetailsFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(PERSON_ARG, person)
+            }
         }
 
         private const val PERSON_ARG = "PERSON_ARG"
-    }
-
-    private fun TextView.setTextOrNoInfo(txt: String?) {
-        text =
-            if (!txt.isNullOrEmpty()) txt else resources.getString(R.string.person_no_information)
     }
 }

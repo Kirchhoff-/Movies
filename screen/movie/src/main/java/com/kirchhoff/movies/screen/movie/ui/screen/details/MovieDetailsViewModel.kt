@@ -11,6 +11,8 @@ import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 internal class MovieDetailsViewModel(private val movieRepository: IMovieRepository) : ViewModel() {
@@ -47,47 +49,59 @@ internal class MovieDetailsViewModel(private val movieRepository: IMovieReposito
 
             _loading.postValue(false)
             when (result) {
-                is Result.Success -> _movieDetails.postValue(result.data)
+                is Result.Success -> {
+                    _movieDetails.postValue(result.data)
+                    awaitAll(
+                        async { fetchTrailers(movieId) },
+                        async { fetchMovieCredits(movieId) },
+                        async { fetchSimilarMovies(movieId) },
+                        async { fetchImages(movieId) }
+                    )
+                }
                 is Result.Error -> _error.postValue(result.toString())
                 is Result.Exception -> _exception.postValue(result.toString())
             }
-
-            if (result is Result.Success) {
-                when (val trailersResult = movieRepository.fetchTrailersList(movieId)) {
-                    is Result.Success -> _trailers.postValue(trailersResult.data.results)
-                    else -> {}
-                }
-            }
-
-            if (result is Result.Success) {
-                when (val creditsResult = movieRepository.fetchMovieCredits(movieId)) {
-                    is Result.Success -> _movieCredits.postValue(creditsResult.data)
-                    else -> {}
-                }
-            }
-
-            val similarMoviesResult = movieRepository.fetchSimilarMovies(movieId = movieId, 1)
-            val resultSimilarMoviesList = if (
-                similarMoviesResult is Result.Success &&
-                similarMoviesResult.data.results.isNotEmpty()
-            ) {
-                similarMoviesResult.data.results.take(SIMILAR_MOVIES_AMOUNT)
-            } else {
-                emptyList()
-            }
-            _similarMovies.postValue(resultSimilarMoviesList)
-
-            val imagesResult = movieRepository.fetchImages(movieId)
-            val resultImages = if (
-                imagesResult is Result.Success &&
-                imagesResult.data.isNotEmpty()
-            ) {
-                imagesResult.data.take(IMAGES_AMOUNT)
-            } else {
-                emptyList()
-            }
-            _images.postValue(resultImages)
         }
+    }
+
+    private suspend fun fetchTrailers(movieId: Int) {
+        when (val trailersResult = movieRepository.fetchTrailersList(movieId)) {
+            is Result.Success -> _trailers.postValue(trailersResult.data.results)
+            else -> {}
+        }
+    }
+
+    private suspend fun fetchMovieCredits(movieId: Int) {
+        when (val creditsResult = movieRepository.fetchMovieCredits(movieId)) {
+            is Result.Success -> _movieCredits.postValue(creditsResult.data)
+            else -> {}
+        }
+    }
+
+    private suspend fun fetchSimilarMovies(movieId: Int) {
+        val similarMoviesResult = movieRepository.fetchSimilarMovies(movieId = movieId, 1)
+        val resultSimilarMoviesList = if (
+            similarMoviesResult is Result.Success &&
+            similarMoviesResult.data.results.isNotEmpty()
+        ) {
+            similarMoviesResult.data.results.take(SIMILAR_MOVIES_AMOUNT)
+        } else {
+            emptyList()
+        }
+        _similarMovies.postValue(resultSimilarMoviesList)
+    }
+
+    private suspend fun fetchImages(movieId: Int) {
+        val imagesResult = movieRepository.fetchImages(movieId)
+        val resultImages = if (
+            imagesResult is Result.Success &&
+            imagesResult.data.isNotEmpty()
+        ) {
+            imagesResult.data.take(IMAGES_AMOUNT)
+        } else {
+            emptyList()
+        }
+        _images.postValue(resultImages)
     }
 
     private companion object {

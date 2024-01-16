@@ -40,11 +40,11 @@ class Router(
     }
 
     override fun openReviewsListScreen(movie: UIMovie) {
-        replaceFragment(reviewFacade.movieReview(movie.id, movie.title))
+        replaceFragment(reviewFacade.movieReview(movie.id))
     }
 
     override fun openReviewsListScreen(tv: UITv) {
-        replaceFragment(reviewFacade.tvShowReview(tv.id, tv.name))
+        replaceFragment(reviewFacade.tvShowReview(tv.id))
     }
 
     override fun openCastCreditsScreen(actors: List<UIEntertainmentPerson.Actor>) {

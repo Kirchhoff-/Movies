@@ -19,7 +19,8 @@ val tvShowModule = module {
         TvShowRepository(
             tvService = get(),
             tvDetailsMapper = get(),
-            discoverMapper = get()
+            discoverMapper = get(),
+            tvShowStorage = get()
         )
     }
 

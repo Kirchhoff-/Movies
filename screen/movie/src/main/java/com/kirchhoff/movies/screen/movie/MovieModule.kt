@@ -29,6 +29,7 @@ internal val movieModule = module {
     single<IMovieRepository> {
         MovieRepository(
             movieService = get(),
+            movieStorage = get(),
             movieImagesStorage = get(),
             movieDetailsMapper = get(),
             discoverMapper = get()

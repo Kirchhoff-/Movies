@@ -5,10 +5,14 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.mapper.IReviewListMapper
 import com.kirchhoff.movies.screen.review.repository.IReviewRepository
+import com.kirchhoff.movies.storage.movie.IStorageMovie
+import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
 
 internal class ReviewUseCase(
     private val reviewRepository: IReviewRepository,
-    private val reviewMapper: IReviewListMapper
+    private val reviewMapper: IReviewListMapper,
+    private val movieStorage: IStorageMovie,
+    private val tvShowStorage: IStorageTvShow
 ) : IReviewUseCase {
 
     override suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>> =
@@ -16,4 +20,10 @@ internal class ReviewUseCase(
 
     override suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>> =
         reviewMapper.createUIReviewList(reviewRepository.fetchTvReviews(tvId, page))
+
+    override fun movieTitle(movieId: Int): String =
+        movieStorage.info(movieId)?.title ?: error("Can't get title for movie with id = $movieId")
+
+    override fun tvShowTitle(tvShowId: Int): String =
+        tvShowStorage.info(tvShowId)?.name ?: error("Can't get title for tv show with id = $tvShowId")
 }

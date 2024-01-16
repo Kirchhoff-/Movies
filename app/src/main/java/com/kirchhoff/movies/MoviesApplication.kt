@@ -4,6 +4,7 @@ import android.app.Application
 import com.kirchhoff.movies.di.facadeModule
 import com.kirchhoff.movies.di.mapperModule
 import com.kirchhoff.movies.di.networkModule
+import com.kirchhoff.movies.di.storageModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -18,6 +19,7 @@ class MoviesApplication : Application() {
             modules(networkModule)
             modules(mapperModule)
             modules(facadeModule)
+            modules(storageModules)
         }
 
         if (BuildConfig.DEBUG) {

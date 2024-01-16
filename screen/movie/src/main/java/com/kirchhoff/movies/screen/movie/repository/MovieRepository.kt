@@ -12,20 +12,25 @@ import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.mapper.details.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
 import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
+import com.kirchhoff.movies.storage.movie.IStorageMovie
 
 internal class MovieRepository(
     private val movieService: MovieService,
+    private val movieStorage: IStorageMovie,
     private val movieImagesStorage: IMovieImagesStorage,
     private val movieDetailsMapper: IMovieDetailsMapper,
     private val discoverMapper: IDiscoverMapper
 ) : BaseRepository(), IMovieRepository {
 
-    override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>> =
-        discoverMapper.createUIDiscoverMovieList(
-            apiCall {
-                movieService.fetchDiscoverList(page)
-            }
-        )
+    override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchDiscoverList(page) }
+
+        if (result is Result.Success) {
+            result.data.results.forEach { movieStorage.updateInfo(it) }
+        }
+
+        return discoverMapper.createUIDiscoverMovieList(result)
+    }
 
     override suspend fun fetchDetails(movieId: Int): Result<UIMovieDetails> =
         movieDetailsMapper.createUIMovieDetails(

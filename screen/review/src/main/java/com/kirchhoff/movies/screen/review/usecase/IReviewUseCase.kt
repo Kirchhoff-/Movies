@@ -7,4 +7,6 @@ import com.kirchhoff.movies.screen.review.data.UIReview
 internal interface IReviewUseCase {
     suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>>
     suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>>
+    fun movieTitle(movieId: Int): String
+    fun tvShowTitle(tvShowId: Int): String
 }

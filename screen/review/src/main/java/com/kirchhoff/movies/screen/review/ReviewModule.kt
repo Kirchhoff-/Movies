@@ -32,7 +32,9 @@ internal val reviewModule = module {
     single<IReviewUseCase> {
         ReviewUseCase(
             reviewRepository = get(),
-            reviewMapper = get()
+            reviewMapper = get(),
+            movieStorage = get(),
+            tvShowStorage = get()
         )
     }
 

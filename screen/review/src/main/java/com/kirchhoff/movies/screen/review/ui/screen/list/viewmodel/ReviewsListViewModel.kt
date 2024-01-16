@@ -24,7 +24,11 @@ internal class ReviewsListViewModel(
 
     init {
         screenState.value = ReviewsListScreenState(
-            title = args.title,
+            title = if (args.reviewType == ReviewType.MOVIE) {
+                useCase.movieTitle(args.id)
+            } else {
+                useCase.tvShowTitle(args.id)
+            },
             reviewsList = emptyList(),
             errorMessage = "",
             loadingVisible = false,

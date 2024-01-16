@@ -54,7 +54,7 @@ internal class ReviewsListFragment : BaseFragment() {
             ReviewListUI(
                 screenState ?: error("Can't build UI without state"),
                 onLoadMore = { viewModel.loadReviews() },
-                onReviewClick = { onReviewClick(it) },
+                onReviewClick = { review, title -> onReviewClick(review, title) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
@@ -65,28 +65,26 @@ internal class ReviewsListFragment : BaseFragment() {
         super.onDestroy()
     }
 
-    private fun onReviewClick(review: UIReview) {
-        reviewRouter.openDetailsScreen(review, args.title)
+    private fun onReviewClick(review: UIReview, title: String) {
+        reviewRouter.openDetailsScreen(review, title)
     }
 
     companion object {
-        fun newInstanceForMovie(id: Int, title: String?): ReviewsListFragment =
-            newInstance(id, ReviewType.MOVIE, title)
+        fun newInstanceForMovie(id: Int): ReviewsListFragment =
+            newInstance(id, ReviewType.MOVIE)
 
-        fun newInstanceForTvShow(id: Int, title: String?): ReviewsListFragment =
-            newInstance(id, ReviewType.TV, title)
+        fun newInstanceForTvShow(id: Int): ReviewsListFragment =
+            newInstance(id, ReviewType.TV)
 
         private fun newInstance(
             id: Int,
-            reviewType: ReviewType,
-            title: String?
+            reviewType: ReviewType
         ): ReviewsListFragment = ReviewsListFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(
                     REVIEW_ARGS,
                     ReviewsListArgs(
                         id = id,
-                        title = title.orEmpty(),
                         reviewType = reviewType
                     )
                 )

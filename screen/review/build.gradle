@@ -10,6 +10,8 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
     implementation project(path: ':view:linkifytext')
+    implementation project(path: ':storage:movie')
+    implementation project(path: ':storage:tvshow')
 
     implementation libs.bundles.internet
     implementation libs.bundles.di

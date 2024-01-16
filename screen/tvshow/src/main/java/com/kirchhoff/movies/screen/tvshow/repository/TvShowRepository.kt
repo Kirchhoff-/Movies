@@ -9,19 +9,24 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.mapper.details.ITvShowDetailsMapper
 import com.kirchhoff.movies.screen.tvshow.network.TvShowService
+import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
 
 internal class TvShowRepository(
     private val tvService: TvShowService,
     private val tvDetailsMapper: ITvShowDetailsMapper,
-    private val discoverMapper: IDiscoverMapper
+    private val discoverMapper: IDiscoverMapper,
+    private val tvShowStorage: IStorageTvShow
 ) : BaseRepository(), ITvShowRepository {
 
-    override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UITv>> =
-        discoverMapper.createUIDiscoverTvList(
-            apiCall {
-                tvService.fetchDiscoverList(page)
-            }
-        )
+    override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UITv>> {
+        val result = apiCall { tvService.fetchDiscoverList(page) }
+
+        if (result is Result.Success) {
+            result.data.results.forEach { tvShowStorage.updateInfo(it) }
+        }
+
+        return discoverMapper.createUIDiscoverTvList(result)
+    }
 
     override suspend fun fetchSimilarTvShows(tvId: Int, page: Int): Result<UIPaginated<UITv>> =
         discoverMapper.createUIDiscoverTvList(

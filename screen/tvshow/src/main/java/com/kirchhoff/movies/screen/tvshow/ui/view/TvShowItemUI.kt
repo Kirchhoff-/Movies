@@ -1,6 +1,6 @@
 @file:SuppressWarnings("MagicNumber")
 
-package com.kirchhoff.movies.screen.tvshow.ui.screen.similar.ui
+package com.kirchhoff.movies.screen.tvshow.ui.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,7 +35,7 @@ import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.keywordsview.RatingText
 
 @Composable
-internal fun TvShowSimilarItemUI(
+internal fun TvShowItemUI(
     tvShow: UITv,
     onTvShowClick: (UITv) -> Unit
 ) {
@@ -100,8 +100,8 @@ internal fun TvShowSimilarItemUI(
 
 @Preview
 @Composable
-private fun TvShowSimilarItemUIPreview() {
-    TvShowSimilarItemUI(
+private fun TvShowItemUIPreview() {
+    TvShowItemUI(
         tvShow = UITv(
             id = 100,
             name = "Super tv show",

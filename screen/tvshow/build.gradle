@@ -17,4 +17,5 @@ dependencies {
     implementation libs.bundles.di
 
     implementation libs.timber
+    implementation libs.coilCompose
 }

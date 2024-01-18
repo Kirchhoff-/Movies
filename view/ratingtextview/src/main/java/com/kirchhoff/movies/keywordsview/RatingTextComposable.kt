@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.ratingtextview.R
@@ -18,7 +19,8 @@ private val ratingFormat = DecimalFormat("#.0")
 @Composable
 fun RatingText(
     modifier: Modifier,
-    voteAverage: Float?
+    voteAverage: Float?,
+    fontSize: TextUnit = 14.sp
 ) {
     Text(
         modifier = modifier
@@ -31,7 +33,7 @@ fun RatingText(
             )
             .padding(8.dp),
         color = colorResource(R.color.rating_text_view_text_color),
-        fontSize = 14.sp,
+        fontSize = fontSize,
         text = ratingFormat.format(voteAverage)
     )
 }

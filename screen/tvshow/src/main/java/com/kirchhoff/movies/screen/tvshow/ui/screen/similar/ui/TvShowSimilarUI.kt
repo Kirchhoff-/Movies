@@ -29,6 +29,7 @@ import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.ui.screen.similar.model.TvShowSimilarScreenState
+import com.kirchhoff.movies.screen.tvshow.ui.view.TvShowItemUI
 
 @Composable
 internal fun TvShowSimilarUI(
@@ -53,7 +54,7 @@ internal fun TvShowSimilarUI(
                     items(
                         count = screenState.tvShowList.size,
                         itemContent = {
-                            TvShowSimilarItemUI(
+                            TvShowItemUI(
                                 tvShow = screenState.tvShowList[it],
                                 onTvShowClick = onTvShowClick
                             )

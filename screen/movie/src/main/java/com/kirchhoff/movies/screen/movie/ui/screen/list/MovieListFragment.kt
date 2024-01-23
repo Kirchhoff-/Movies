@@ -13,6 +13,7 @@ import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.screen.movie.movieModule
 import com.kirchhoff.movies.screen.movie.ui.screen.list.ui.MovieListUI
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,6 +33,9 @@ internal class MovieListFragment : BaseFragment() {
     }
 
     override fun onAttach(context: Context) {
+        if (type == MovieListType.Discover) {
+            loadKoinModules(movieModule)
+        }
         loadKoinModules(movieListModule)
         super.onAttach(context)
     }
@@ -63,31 +67,32 @@ internal class MovieListFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
-        unloadKoinModules(movieListModule)
+        if (type != MovieListType.Discover) unloadKoinModules(movieListModule)
         super.onDestroyView()
     }
 
+    override fun onDestroy() {
+        if (type == MovieListType.Discover) unloadKoinModules(movieModule)
+        super.onDestroy()
+    }
+
     companion object {
-        fun byGenre(genre: UIGenre): MovieListFragment =
-            MovieListFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(TYPE_ARG, MovieListType.Genre(genre))
-                }
-            }
 
-        fun byCountry(countryId: String, countryName: String): MovieListFragment =
-            MovieListFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(TYPE_ARG, MovieListType.Country(countryId, countryName))
-                }
-            }
+        fun discover(): MovieListFragment = createFragment(MovieListType.Discover)
 
-        fun similarWith(movie: UIMovie): MovieListFragment =
-            MovieListFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(TYPE_ARG, MovieListType.Similar(movie))
-                }
+        fun byGenre(genre: UIGenre): MovieListFragment = createFragment(MovieListType.Genre(genre))
+
+        fun byCountry(countryId: String, countryName: String): MovieListFragment = createFragment(
+            MovieListType.Country(countryId, countryName)
+        )
+
+        fun similarWith(movie: UIMovie): MovieListFragment = createFragment(MovieListType.Similar(movie))
+
+        private fun createFragment(type: MovieListType): MovieListFragment = MovieListFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(TYPE_ARG, type)
             }
+        }
 
         private const val TYPE_ARG = "TYPE_ARG"
     }

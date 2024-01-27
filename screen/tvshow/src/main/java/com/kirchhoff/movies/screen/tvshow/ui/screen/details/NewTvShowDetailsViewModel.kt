@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 internal class NewTvShowDetailsViewModel(
-    private val tvId: Int,
+    private val tvShow: UITv,
     private val tvRepository: ITvShowRepository
 ) : ViewModel() {
 
@@ -43,7 +44,7 @@ internal class NewTvShowDetailsViewModel(
     fun loadDetails() {
         screenState.value = screenState.value?.copy(isLoading = true)
         viewModelScope.launch {
-            val result = tvRepository.fetchDetails(tvId)
+            val result = tvRepository.fetchDetails(tvShow.id)
 
             screenState.value = screenState.value?.copy(isLoading = false)
             when (result) {
@@ -64,7 +65,7 @@ internal class NewTvShowDetailsViewModel(
     }
 
     private suspend fun fetchCredits() {
-        when (val creditsResult = tvRepository.fetchCredits(tvId)) {
+        when (val creditsResult = tvRepository.fetchCredits(tvShow.id)) {
             is Result.Success -> screenState.value = screenState.value?.copy(
                 credits = creditsResult.data
             )

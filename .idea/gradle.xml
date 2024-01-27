@@ -4,10 +4,8 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="Android Studio java home" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -15,14 +13,23 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/networkdata" />
             <option value="$PROJECT_DIR$/screen" />
+            <option value="$PROJECT_DIR$/screen/credits" />
+            <option value="$PROJECT_DIR$/screen/movie" />
+            <option value="$PROJECT_DIR$/screen/person" />
             <option value="$PROJECT_DIR$/screen/review" />
+            <option value="$PROJECT_DIR$/screen/tvshow" />
+            <option value="$PROJECT_DIR$/storage" />
+            <option value="$PROJECT_DIR$/storage/movie" />
+            <option value="$PROJECT_DIR$/storage/tvshow" />
             <option value="$PROJECT_DIR$/view" />
             <option value="$PROJECT_DIR$/view/creditsview" />
             <option value="$PROJECT_DIR$/view/keywordsview" />
+            <option value="$PROJECT_DIR$/view/linkifytext" />
             <option value="$PROJECT_DIR$/view/ratingtextview" />
             <option value="$PROJECT_DIR$/view/voteview" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

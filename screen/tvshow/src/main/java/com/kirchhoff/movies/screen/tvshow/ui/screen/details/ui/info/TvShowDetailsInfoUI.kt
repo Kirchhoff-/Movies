@@ -25,6 +25,7 @@ import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
+import com.kirchhoff.movies.voteview.VoteViewComposable
 
 @Composable
 internal fun TvShowDetailsInfoUI(
@@ -49,6 +50,10 @@ internal fun TvShowDetailsInfoUI(
         )
         Spacer(modifier = Modifier.width(16.dp))
         Column {
+            VoteViewComposable(
+                voteAverage = info.voteAverage,
+                voteCount = info.voteCount
+            )
             Text(
                 style = infoTextStyle,
                 text = StringValue.IdText(

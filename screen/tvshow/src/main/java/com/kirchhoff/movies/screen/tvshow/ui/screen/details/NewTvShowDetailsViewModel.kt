@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
@@ -21,7 +22,7 @@ internal class NewTvShowDetailsViewModel(
 
     init {
         screenState.value = TvShowDetailsScreenState(
-            title = "",
+            title = StringValue.SimpleText(tvShow.name.orEmpty()),
             details = UITvShowDetails(
                 numberOfEpisodes = 0,
                 numberOfSeasons = 0,
@@ -37,7 +38,7 @@ internal class NewTvShowDetailsViewModel(
                 crew = null
             ),
             isLoading = false,
-            errorMessage = ""
+            errorMessage = StringValue.Empty
         )
     }
 
@@ -57,7 +58,7 @@ internal class NewTvShowDetailsViewModel(
                 }
                 else -> {
                     screenState.value = screenState.value?.copy(
-                        errorMessage = result.toString()
+                        errorMessage = StringValue.SimpleText(result.toString())
                     )
                 }
             }

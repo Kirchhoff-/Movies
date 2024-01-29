@@ -2,9 +2,11 @@ package com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 
@@ -15,13 +17,13 @@ internal fun TvShowDetailsUI(
 ) {
     Column {
         MoviesToolbar(
-            title = screenState.title,
+            title = screenState.title.asString(LocalContext.current),
             onBackPressed = { onBackPressed.invoke() }
         )
 
         when {
             screenState.isLoading -> ShowLoading()
-            screenState.errorMessage.isNotEmpty() -> ShowError()
+            screenState.errorMessage.asString(LocalContext.current).isNotEmpty() -> ShowError()
             else -> ShowUI()
         }
     }
@@ -47,7 +49,7 @@ private fun ShowUI() {
 private fun TvShowDetailsUIPreview() {
     TvShowDetailsUI(
         screenState = TvShowDetailsScreenState(
-            title = "",
+            title = StringValue.SimpleText("TvShow"),
             details = UITvShowDetails(
                 numberOfSeasons = 0,
                 numberOfEpisodes = 0,
@@ -63,7 +65,7 @@ private fun TvShowDetailsUIPreview() {
                 crew = emptyList()
             ),
             isLoading = false,
-            errorMessage = ""
+            errorMessage = StringValue.Empty
         ),
         onBackPressed = {}
     )

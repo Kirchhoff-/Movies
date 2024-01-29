@@ -92,6 +92,13 @@ private fun ShowUI(
         )
         Spacer(modifier = Modifier.height(8.dp))
         TvShowDetailsKeywordsUI(keywords = screenState.info.genres.map { it.name })
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            text = screenState.info.overview,
+            color = colorResource(R.color.text_hint),
+            fontSize = 14.sp
+        )
     }
 }
 

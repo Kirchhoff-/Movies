@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 import kotlinx.coroutines.launch
@@ -24,7 +24,8 @@ internal class NewTvShowDetailsViewModel(
         screenState.value = TvShowDetailsScreenState(
             title = StringValue.SimpleText(tvShow.name.orEmpty()),
             backdropPath = tvShow.backdropPath,
-            details = UITvShowDetails(
+            posterPath = tvShow.posterPath,
+            info = UITvShowInfo(
                 numberOfEpisodes = 0,
                 numberOfSeasons = 0,
                 overview = "",
@@ -52,7 +53,7 @@ internal class NewTvShowDetailsViewModel(
             when (result) {
                 is Result.Success -> {
                     screenState.value = screenState.value?.copy(
-                        details = result.data
+                        info = result.data
                     )
 
                     fetchCredits()

@@ -23,8 +23,9 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.info.TvShowDetailsInfoUI
 
 @Composable
 internal fun TvShowDetailsUI(
@@ -80,6 +81,11 @@ private fun ShowUI(
             color = colorResource(R.color.text_main),
             fontSize = 22.sp
         )
+        Spacer(modifier = Modifier.height(8.dp))
+        TvShowDetailsInfoUI(
+            info = screenState.info,
+            posterPath = screenState.posterPath
+        )
     }
 }
 
@@ -90,7 +96,8 @@ private fun TvShowDetailsUIPreview() {
         screenState = TvShowDetailsScreenState(
             title = StringValue.SimpleText("TvShow"),
             backdropPath = "",
-            details = UITvShowDetails(
+            posterPath = "",
+            info = UITvShowInfo(
                 numberOfSeasons = 0,
                 numberOfEpisodes = 0,
                 overview = "",

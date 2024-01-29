@@ -2,12 +2,13 @@ package com.kirchhoff.movies.screen.tvshow.ui.screen.details.model
 
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 
 internal data class TvShowDetailsScreenState(
     val title: StringValue,
     val backdropPath: String?,
-    val details: UITvShowDetails,
+    val posterPath: String?,
+    val info: UITvShowInfo,
     val credits: UIEntertainmentCredits,
     val isLoading: Boolean,
     val errorMessage: StringValue

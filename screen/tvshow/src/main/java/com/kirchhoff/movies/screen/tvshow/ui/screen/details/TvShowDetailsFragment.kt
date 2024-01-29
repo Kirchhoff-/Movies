@@ -15,7 +15,7 @@ import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
 import com.kirchhoff.movies.screen.tvshow.R
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.databinding.FragmentTvShowDetailsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -70,7 +70,7 @@ internal class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_de
         super.onDestroyView()
     }
 
-    private fun handleTvDetailsData(tvDetails: UITvShowDetails) {
+    private fun handleTvDetailsData(tvDetails: UITvShowInfo) {
         with(viewBinding.content) {
             groupData.isVisible = true
 

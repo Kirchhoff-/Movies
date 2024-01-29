@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -22,8 +22,8 @@ internal class TvShowDetailsViewModel(private val tvRepository: ITvShowRepositor
     private val _exception = MutableLiveData<String>()
     val exception: LiveData<String> = _exception
 
-    private val _tvDetails = MutableLiveData<UITvShowDetails>()
-    val tvDetails: LiveData<UITvShowDetails> = _tvDetails
+    private val _tvDetails = MutableLiveData<UITvShowInfo>()
+    val tvDetails: LiveData<UITvShowInfo> = _tvDetails
 
     private val _tvCredits = MutableLiveData<UIEntertainmentCredits>()
     val tvCredits: LiveData<UIEntertainmentCredits> = _tvCredits

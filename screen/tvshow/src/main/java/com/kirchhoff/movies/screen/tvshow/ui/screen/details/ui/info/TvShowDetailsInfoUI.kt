@@ -54,6 +54,7 @@ internal fun TvShowDetailsInfoUI(
                 voteAverage = info.voteAverage,
                 voteCount = info.voteCount
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 style = infoTextStyle,
                 text = StringValue.IdText(

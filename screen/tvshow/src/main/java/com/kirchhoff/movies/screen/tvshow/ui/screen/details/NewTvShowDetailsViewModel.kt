@@ -23,6 +23,7 @@ internal class NewTvShowDetailsViewModel(
     init {
         screenState.value = TvShowDetailsScreenState(
             title = StringValue.SimpleText(tvShow.name.orEmpty()),
+            backdropPath = tvShow.backdropPath,
             details = UITvShowDetails(
                 numberOfEpisodes = 0,
                 numberOfSeasons = 0,

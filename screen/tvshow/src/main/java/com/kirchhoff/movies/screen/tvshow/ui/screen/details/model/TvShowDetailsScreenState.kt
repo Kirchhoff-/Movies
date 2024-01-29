@@ -6,6 +6,7 @@ import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
 
 internal data class TvShowDetailsScreenState(
     val title: StringValue,
+    val backdropPath: String?,
     val details: UITvShowDetails,
     val credits: UIEntertainmentCredits,
     val isLoading: Boolean,

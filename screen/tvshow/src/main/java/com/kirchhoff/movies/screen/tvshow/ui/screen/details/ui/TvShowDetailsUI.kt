@@ -21,11 +21,13 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.credits.TvShowDetailsCreditsUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.info.TvShowDetailsInfoUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.keywords.TvShowDetailsKeywordsUI
 
@@ -33,6 +35,7 @@ import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.keywords.TvShowDe
 @Composable
 internal fun TvShowDetailsUI(
     screenState: TvShowDetailsScreenState,
+    onCreditItemClick: (UIEntertainmentPerson) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Column {
@@ -44,7 +47,10 @@ internal fun TvShowDetailsUI(
         when {
             screenState.isLoading -> ShowLoading()
             screenState.errorMessage.asString(LocalContext.current).isNotEmpty() -> ShowError()
-            else -> ShowUI(screenState)
+            else -> ShowUI(
+                screenState = screenState,
+                onCreditItemClick = onCreditItemClick
+            )
         }
     }
 }
@@ -62,8 +68,11 @@ private fun ShowError() {
 @ExperimentalLayoutApi
 @Composable
 private fun ShowUI(
-    screenState: TvShowDetailsScreenState
+    screenState: TvShowDetailsScreenState,
+    onCreditItemClick: (UIEntertainmentPerson) -> Unit
 ) {
+    val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
+
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -99,6 +108,13 @@ private fun ShowUI(
             color = colorResource(R.color.text_hint),
             fontSize = 14.sp
         )
+        if (creditsVisible) {
+            Spacer(modifier = Modifier.height(16.dp))
+            TvShowDetailsCreditsUI(
+                credits = screenState.credits,
+                onItemClick = onCreditItemClick
+            )
+        }
     }
 }
 
@@ -128,6 +144,7 @@ private fun TvShowDetailsUIPreview() {
             isLoading = false,
             errorMessage = StringValue.Empty
         ),
+        onCreditItemClick = {},
         onBackPressed = {}
     )
 }

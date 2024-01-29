@@ -38,7 +38,10 @@ internal fun TvShowDetailsInfoUI(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(start = 16.dp, end = 16.dp)
+            .padding(
+                start = 16.dp,
+                end = 16.dp
+            )
     ) {
         AsyncImage(
             modifier = Modifier

@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,7 +27,9 @@ import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.info.TvShowDetailsInfoUI
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.keywords.TvShowDetailsKeywordsUI
 
+@ExperimentalLayoutApi
 @Composable
 internal fun TvShowDetailsUI(
     screenState: TvShowDetailsScreenState,
@@ -56,6 +59,7 @@ private fun ShowError() {
 
 }
 
+@ExperimentalLayoutApi
 @Composable
 private fun ShowUI(
     screenState: TvShowDetailsScreenState
@@ -86,9 +90,12 @@ private fun ShowUI(
             info = screenState.info,
             posterPath = screenState.posterPath
         )
+        Spacer(modifier = Modifier.height(8.dp))
+        TvShowDetailsKeywordsUI(keywords = screenState.info.genres.map { it.name })
     }
 }
 
+@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun TvShowDetailsUIPreview() {

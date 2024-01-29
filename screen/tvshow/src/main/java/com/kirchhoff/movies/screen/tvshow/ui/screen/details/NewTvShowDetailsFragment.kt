@@ -10,7 +10,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
@@ -55,7 +54,8 @@ internal class NewTvShowDetailsFragment : BaseFragment() {
 
             TvShowDetailsUI(
                 screenState = screenState ?: error("Can't build UI without state"),
-                onCreditItemClick = { onCreditItemClick(it) },
+                onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
+                onReviewsClick = { router.openReviewsListScreen(tvShow) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
@@ -64,10 +64,6 @@ internal class NewTvShowDetailsFragment : BaseFragment() {
     override fun onDestroy() {
         unloadKoinModules(newTvShowDetailsModule)
         super.onDestroy()
-    }
-
-    private fun onCreditItemClick(credit: UIEntertainmentPerson) {
-        router.openPersonDetailsScreen(UIPerson(credit))
     }
 
     companion object {

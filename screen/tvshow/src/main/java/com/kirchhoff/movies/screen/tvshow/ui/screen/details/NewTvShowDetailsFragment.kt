@@ -50,7 +50,8 @@ internal class NewTvShowDetailsFragment : BaseFragment() {
             val screenState by viewModel.screenState.observeAsState()
 
             TvShowDetailsUI(
-                screenState = screenState ?: error("Can't build UI without state")
+                screenState = screenState ?: error("Can't build UI without state"),
+                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
     }

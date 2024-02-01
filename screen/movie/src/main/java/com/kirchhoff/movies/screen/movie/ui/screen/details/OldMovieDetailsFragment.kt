@@ -40,7 +40,7 @@ import java.util.Date
 import java.util.Locale
 
 @SuppressWarnings("TooManyFunctions")
-internal class MovieDetailsFragment :
+internal class OldMovieDetailsFragment :
     BaseFragment(R.layout.fragment_movie_details),
     BaseRecyclerViewAdapter.OnItemClickListener<UITrailer> {
 
@@ -48,11 +48,11 @@ internal class MovieDetailsFragment :
 
     private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
 
-    private val vm by viewModel<MovieDetailsViewModel>()
+    private val vm by viewModel<OldMovieDetailsViewModel>()
     private val viewBinding by viewBinding(FragmentMovieDetailsBinding::bind)
 
     override fun onAttach(context: Context) {
-        loadKoinModules(movieDetailsModule)
+        loadKoinModules(oldMovieDetailsModule)
         super.onAttach(context)
     }
 
@@ -117,7 +117,7 @@ internal class MovieDetailsFragment :
     }
 
     override fun onDestroyView() {
-        unloadKoinModules(movieDetailsModule)
+        unloadKoinModules(oldMovieDetailsModule)
         super.onDestroyView()
     }
 
@@ -183,7 +183,7 @@ internal class MovieDetailsFragment :
             with(viewBinding.content) {
                 groupTrailers.isVisible = true
                 rvTrailers.adapter =
-                    MovieTrailerListAdapter(trailersList, this@MovieDetailsFragment)
+                    MovieTrailerListAdapter(trailersList, this@OldMovieDetailsFragment)
             }
         }
     }
@@ -248,7 +248,7 @@ internal class MovieDetailsFragment :
         }
 
         override fun onMovieClick(movie: UIMovie) {
-            unloadKoinModules(movieDetailsModule)
+            unloadKoinModules(oldMovieDetailsModule)
             router.openMovieDetailsScreen(movie)
         }
     }
@@ -264,8 +264,8 @@ internal class MovieDetailsFragment :
     }
 
     companion object {
-        fun newInstance(movie: UIMovie): MovieDetailsFragment {
-            val fragment = MovieDetailsFragment()
+        fun newInstance(movie: UIMovie): OldMovieDetailsFragment {
+            val fragment = OldMovieDetailsFragment()
             val arg = Bundle()
             arg.putParcelable(MOVIE_ARG, movie)
             fragment.arguments = arg

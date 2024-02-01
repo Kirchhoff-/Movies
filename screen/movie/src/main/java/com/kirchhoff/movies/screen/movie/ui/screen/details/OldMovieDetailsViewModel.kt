@@ -15,7 +15,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
-internal class MovieDetailsViewModel(private val movieRepository: IMovieRepository) : ViewModel() {
+internal class OldMovieDetailsViewModel(private val movieRepository: IMovieRepository) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading

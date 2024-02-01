@@ -6,7 +6,7 @@ import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.mapper.details.ITvShowDetailsMapper
 import com.kirchhoff.movies.screen.tvshow.network.TvShowService
 import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
@@ -35,7 +35,7 @@ internal class TvShowRepository(
             }
         )
 
-    override suspend fun fetchDetails(tvId: Int): Result<UITvShowDetails> =
+    override suspend fun fetchDetails(tvId: Int): Result<UITvShowInfo> =
         tvDetailsMapper.createUITvDetails(
             apiCall {
                 tvService.fetchDetails(tvId)

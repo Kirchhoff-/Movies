@@ -1,3 +1,5 @@
+@file:SuppressWarnings("MagicNumber")
+
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui
 
 import android.widget.Toast
@@ -97,6 +99,7 @@ private fun ShowError(screenState: TvShowDetailsScreenState) {
 }
 
 @ExperimentalLayoutApi
+@SuppressWarnings("LongMethod")
 @Composable
 private fun ShowUI(
     screenState: TvShowDetailsScreenState,

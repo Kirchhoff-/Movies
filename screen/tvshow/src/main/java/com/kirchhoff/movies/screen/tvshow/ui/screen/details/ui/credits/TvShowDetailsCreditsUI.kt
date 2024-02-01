@@ -1,3 +1,5 @@
+@file:SuppressWarnings("MagicNumber")
+
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.credits
 
 import androidx.compose.foundation.layout.Arrangement

@@ -27,6 +27,7 @@ import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.voteview.VoteViewComposable
 
+@SuppressWarnings("LongMethod")
 @Composable
 internal fun TvShowDetailsInfoUI(
     info: UITvShowInfo,

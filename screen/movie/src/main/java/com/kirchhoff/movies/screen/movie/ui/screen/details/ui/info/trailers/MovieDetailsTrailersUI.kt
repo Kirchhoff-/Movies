@@ -5,9 +5,7 @@ package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Text
@@ -27,20 +25,17 @@ internal fun MovieDetailsTrailersUI(
     trailers: UITrailersList,
     onTrailerClick: (UITrailer) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                start = 16.dp,
-                end = 16.dp
-            )
-    ) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         Text(
+            modifier = Modifier
+                .padding(
+                    start = 16.dp,
+                    end = 16.dp
+                ),
             text = stringResource(R.string.movie_trailers),
             color = Color.Black,
             fontSize = 20.sp,
         )
-        Spacer(modifier = Modifier.height(8.dp))
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(16.dp)
@@ -48,7 +43,10 @@ internal fun MovieDetailsTrailersUI(
             items(
                 count = trailers.results.size,
                 itemContent = {
-
+                    MovieDetailsTrailersItemUI(
+                        trailer = trailers.results[it],
+                        onTrailerClick = onTrailerClick
+                    )
                 }
             )
         }

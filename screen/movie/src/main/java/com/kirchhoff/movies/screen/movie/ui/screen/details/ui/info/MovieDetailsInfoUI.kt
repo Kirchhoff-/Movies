@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -134,6 +135,26 @@ internal fun MovieDetailsInfoUI(
         MovieDetailsGenresUI(
             genres = info.genres,
             onGenreClick = onGenreClick
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            modifier = Modifier.padding(
+                start = 16.dp,
+                end = 16.dp
+            ),
+            text = info.tagLine.orEmpty(),
+            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+            fontSize = 20.sp
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            modifier = Modifier.padding(
+                start = 16.dp,
+                end = 16.dp
+            ),
+            text = info.overview,
+            fontSize = 14.sp,
+            color = Color.Gray
         )
     }
 }

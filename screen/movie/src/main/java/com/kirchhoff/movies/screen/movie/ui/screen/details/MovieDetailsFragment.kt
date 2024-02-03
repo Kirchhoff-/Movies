@@ -13,12 +13,14 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.MovieDetailsUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.viewmodel.MovieDetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
+import org.koin.android.ext.android.inject
 
 internal class MovieDetailsFragment : BaseFragment() {
 
@@ -26,6 +28,8 @@ internal class MovieDetailsFragment : BaseFragment() {
         requireArguments().getParcelableExtra(MOVIE_ARG)
             ?: error("Should provide movie info in arguments")
     }
+
+    private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: MovieDetailsViewModel by viewModel { parametersOf(movie) }
 
@@ -54,7 +58,8 @@ internal class MovieDetailsFragment : BaseFragment() {
 
             MovieDetailsUI(
                 screenState = screenState ?: error("Can't build UI without state"),
-                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
+                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() },
+                onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it.id, it.name) }
             )
         }
     }

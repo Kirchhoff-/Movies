@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
@@ -44,7 +45,8 @@ import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsI
 internal fun MovieDetailsUI(
     screenState: MovieDetailsScreenState,
     onBackPressed: () -> Unit,
-    onProductionCountryClick: (UICountry) -> Unit
+    onProductionCountryClick: (UICountry) -> Unit,
+    onGenreClick: (UIGenre) -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -57,7 +59,8 @@ internal fun MovieDetailsUI(
             screenState.errorMessage.asString(LocalContext.current).isNotEmpty() -> ShowError(screenState)
             else -> ShowUI(
                 screenState = screenState,
-                onProductionCountryClick = onProductionCountryClick
+                onProductionCountryClick = onProductionCountryClick,
+                onGenreClick = onGenreClick
             )
         }
     }
@@ -92,7 +95,8 @@ private fun ShowError(screenState: MovieDetailsScreenState) {
 @Composable
 private fun ShowUI(
     screenState: MovieDetailsScreenState,
-    onProductionCountryClick: (UICountry) -> Unit
+    onProductionCountryClick: (UICountry) -> Unit,
+    onGenreClick: (UIGenre) -> Unit
 ) {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         AsyncImage(
@@ -116,7 +120,8 @@ private fun ShowUI(
         MovieDetailsInfoUI(
             info = screenState.info,
             posterPath = screenState.posterPath,
-            onProductionCountryClick = onProductionCountryClick
+            onProductionCountryClick = onProductionCountryClick,
+            onGenreClick = onGenreClick
         )
     }
 }
@@ -153,6 +158,7 @@ private fun MovieDetailsUIPreview() {
             errorMessage = StringValue.Empty
         ),
         onBackPressed = {},
-        onProductionCountryClick = {}
+        onProductionCountryClick = {},
+        onGenreClick = {}
     )
 }

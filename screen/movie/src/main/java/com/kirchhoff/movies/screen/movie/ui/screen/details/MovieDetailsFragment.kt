@@ -59,7 +59,8 @@ internal class MovieDetailsFragment : BaseFragment() {
             MovieDetailsUI(
                 screenState = screenState ?: error("Can't build UI without state"),
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() },
-                onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it.id, it.name) }
+                onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it.id, it.name) },
+                onGenreClick = { movieRouter.openMoviesByGenreScreen(it) }
             )
         }
     }

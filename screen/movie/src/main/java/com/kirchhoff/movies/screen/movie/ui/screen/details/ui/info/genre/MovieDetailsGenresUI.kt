@@ -13,10 +13,16 @@ import com.kirchhoff.movies.core.data.UIGenre
 
 @ExperimentalLayoutApi
 @Composable
-internal fun MovieDetailsGenresUI(genres: List<UIGenre>) {
+internal fun MovieDetailsGenresUI(
+    genres: List<UIGenre>,
+    onGenreClick: (UIGenre) -> Unit
+) {
     FlowRow(modifier = Modifier.padding(start = 12.dp)) {
         genres.forEach { genre ->
-            MovieDetailsGenresItemUI(genre = genre)
+            MovieDetailsGenresItemUI(
+                genre = genre,
+                onGenreClick = onGenreClick
+            )
         }
     }
 }
@@ -25,5 +31,8 @@ internal fun MovieDetailsGenresUI(genres: List<UIGenre>) {
 @Preview
 @Composable
 private fun MovieDetailsGenresUIPreview() {
-    MovieDetailsGenresUI(genres = emptyList())
+    MovieDetailsGenresUI(
+        genres = emptyList(),
+        onGenreClick = {}
+    )
 }

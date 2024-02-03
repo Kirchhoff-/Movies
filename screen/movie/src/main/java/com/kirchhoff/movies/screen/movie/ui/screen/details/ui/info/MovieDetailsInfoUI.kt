@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
@@ -49,7 +50,8 @@ import java.util.Locale
 internal fun MovieDetailsInfoUI(
     info: UIMovieInfo,
     posterPath: String?,
-    onProductionCountryClick: (UICountry) -> Unit
+    onProductionCountryClick: (UICountry) -> Unit,
+    onGenreClick: (UIGenre) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -129,7 +131,10 @@ internal fun MovieDetailsInfoUI(
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
-        MovieDetailsGenresUI(genres = info.genres)
+        MovieDetailsGenresUI(
+            genres = info.genres,
+            onGenreClick = onGenreClick
+        )
     }
 }
 
@@ -160,6 +165,7 @@ private fun MovieDetailsInfoUIPreview() {
             genres = emptyList()
         ),
         posterPath = "",
-        onProductionCountryClick = {}
+        onProductionCountryClick = {},
+        onGenreClick = {}
     )
 }

@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -90,6 +93,21 @@ internal fun MovieDetailsInfoUI(
                     ).asString(context)
                 )
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(2.dp)
+                    .background(Color.White)
+                    .border(
+                        width = 1.dp,
+                        color = Color.Black,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .padding(8.dp),
+                style = infoTextStyle,
+                text = info.productionCountries.first().name
+            )
         }
     }
 }

@@ -36,9 +36,11 @@ import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
+import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
+import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers.MovieDetailsTrailersUI
 
 @ExperimentalLayoutApi
 @Composable
@@ -46,7 +48,8 @@ internal fun MovieDetailsUI(
     screenState: MovieDetailsScreenState,
     onBackPressed: () -> Unit,
     onProductionCountryClick: (UICountry) -> Unit,
-    onGenreClick: (UIGenre) -> Unit
+    onGenreClick: (UIGenre) -> Unit,
+    onTrailerClick: (UITrailer) -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -60,7 +63,8 @@ internal fun MovieDetailsUI(
             else -> ShowUI(
                 screenState = screenState,
                 onProductionCountryClick = onProductionCountryClick,
-                onGenreClick = onGenreClick
+                onGenreClick = onGenreClick,
+                onTrailerClick = onTrailerClick
             )
         }
     }
@@ -96,7 +100,8 @@ private fun ShowError(screenState: MovieDetailsScreenState) {
 private fun ShowUI(
     screenState: MovieDetailsScreenState,
     onProductionCountryClick: (UICountry) -> Unit,
-    onGenreClick: (UIGenre) -> Unit
+    onGenreClick: (UIGenre) -> Unit,
+    onTrailerClick: (UITrailer) -> Unit
 ) {
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         AsyncImage(
@@ -123,6 +128,13 @@ private fun ShowUI(
             onProductionCountryClick = onProductionCountryClick,
             onGenreClick = onGenreClick
         )
+        if (screenState.trailers.results.isNotEmpty()) {
+            Spacer(modifier = Modifier.height(8.dp))
+            MovieDetailsTrailersUI(
+                trailers = screenState.trailers,
+                onTrailerClick = onTrailerClick
+            )
+        }
     }
 }
 
@@ -159,6 +171,7 @@ private fun MovieDetailsUIPreview() {
         ),
         onBackPressed = {},
         onProductionCountryClick = {},
-        onGenreClick = {}
+        onGenreClick = {},
+        onTrailerClick = {}
     )
 }

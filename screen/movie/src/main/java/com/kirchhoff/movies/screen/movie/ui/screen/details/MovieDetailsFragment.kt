@@ -1,6 +1,8 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.details
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -60,7 +62,8 @@ internal class MovieDetailsFragment : BaseFragment() {
                 screenState = screenState ?: error("Can't build UI without state"),
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() },
                 onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it.id, it.name) },
-                onGenreClick = { movieRouter.openMoviesByGenreScreen(it) }
+                onGenreClick = { movieRouter.openMoviesByGenreScreen(it) },
+                onTrailerClick = { startActivity( Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) }
             )
         }
     }
@@ -78,5 +81,6 @@ internal class MovieDetailsFragment : BaseFragment() {
         }
 
         private const val MOVIE_ARG = "MOVIE_ARG"
+        private const val YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v="
     }
 }

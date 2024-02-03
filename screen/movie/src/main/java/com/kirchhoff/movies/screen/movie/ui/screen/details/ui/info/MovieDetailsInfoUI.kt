@@ -143,7 +143,7 @@ internal fun MovieDetailsInfoUI(
                 end = 16.dp
             ),
             text = info.tagLine.orEmpty(),
-            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+            color = Color.Black,
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.height(8.dp))

@@ -3,6 +3,7 @@ package com.kirchhoff.movies.screen.movie.ui.screen.details.ui
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +39,7 @@ import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
 
+@ExperimentalLayoutApi
 @Composable
 internal fun MovieDetailsUI(
     screenState: MovieDetailsScreenState,
@@ -86,6 +88,7 @@ private fun ShowError(screenState: MovieDetailsScreenState) {
     }
 }
 
+@ExperimentalLayoutApi
 @Composable
 private fun ShowUI(
     screenState: MovieDetailsScreenState,
@@ -118,6 +121,7 @@ private fun ShowUI(
     }
 }
 
+@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun MovieDetailsUIPreview() {

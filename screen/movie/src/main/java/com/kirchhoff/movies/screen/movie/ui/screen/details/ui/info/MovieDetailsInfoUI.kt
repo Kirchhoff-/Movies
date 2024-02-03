@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,11 +38,13 @@ import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
+import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.genre.MovieDetailsGenresUI
 import com.kirchhoff.movies.voteview.VoteViewComposable
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+@ExperimentalLayoutApi
 @Composable
 internal fun MovieDetailsInfoUI(
     info: UIMovieInfo,
@@ -50,79 +53,83 @@ internal fun MovieDetailsInfoUI(
 ) {
     val context = LocalContext.current
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .padding(
-                start = 16.dp,
-                end = 16.dp
-            )
-    ) {
-        AsyncImage(
+    Column {
+        Row(
             modifier = Modifier
-                .height(175.dp)
-                .width(120.dp),
-            model = BASE_POSTER_PATH + posterPath,
-            contentScale = ContentScale.Crop,
-            contentDescription = ""
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Column {
-            VoteViewComposable(
-                voteAverage = info.voteAverage,
-                voteCount = info.voteCount
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Filled.DateRange,
-                    contentDescription = ""
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(
+                    start = 16.dp,
+                    end = 16.dp
                 )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    style = infoTextStyle,
-                    text = info.releaseDate.orEmpty()
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    painter = painterResource(com.kirchhoff.movies.core.R.drawable.ic_access_time),
-                    contentDescription = ""
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    style = infoTextStyle,
-                    text = StringValue.IdText(
-                        R.string.movie_runtime_format,
-                        info.runtime.asMovieRuntime(),
-                        info.runtime
-                    ).asString(context)
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
+        ) {
+            AsyncImage(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(2.dp)
-                    .background(Color.White)
-                    .border(
-                        width = 1.dp,
-                        color = Color.Black,
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(bounded = true),
-                        onClick = { onProductionCountryClick.invoke(info.productionCountries.first()) }
-                    )
-                    .padding(8.dp),
-                style = infoTextStyle,
-                textAlign = TextAlign.Center,
-                text = info.productionCountries.first().name
+                    .height(175.dp)
+                    .width(120.dp),
+                model = BASE_POSTER_PATH + posterPath,
+                contentScale = ContentScale.Crop,
+                contentDescription = ""
             )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                VoteViewComposable(
+                    voteAverage = info.voteAverage,
+                    voteCount = info.voteCount
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Filled.DateRange,
+                        contentDescription = ""
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        style = infoTextStyle,
+                        text = info.releaseDate.orEmpty()
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        painter = painterResource(com.kirchhoff.movies.core.R.drawable.ic_access_time),
+                        contentDescription = ""
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        style = infoTextStyle,
+                        text = StringValue.IdText(
+                            R.string.movie_runtime_format,
+                            info.runtime.asMovieRuntime(),
+                            info.runtime
+                        ).asString(context)
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(2.dp)
+                        .background(Color.White)
+                        .border(
+                            width = 1.dp,
+                            color = Color.Black,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(bounded = true),
+                            onClick = { onProductionCountryClick.invoke(info.productionCountries.first()) }
+                        )
+                        .padding(8.dp),
+                    style = infoTextStyle,
+                    textAlign = TextAlign.Center,
+                    text = info.productionCountries.first().name
+                )
+            }
         }
+        Spacer(modifier = Modifier.height(8.dp))
+        MovieDetailsGenresUI(genres = info.genres)
     }
 }
 
@@ -137,6 +144,7 @@ private fun Int?.asMovieRuntime(): String = if (this != null) {
     hourFormat.format(minuteFormat.parse(this.toString()) as Date)
 } else ""
 
+@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun MovieDetailsInfoUIPreview() {

@@ -23,7 +23,7 @@ import com.kirchhoff.movies.core.ui.recyclerview.decorations.EdgesMarginItemDeco
 import com.kirchhoff.movies.core.ui.utils.viewBinding
 import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
+import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.databinding.FragmentMovieDetailsBinding
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
@@ -126,7 +126,7 @@ internal class OldMovieDetailsFragment :
         startActivity(intent)
     }
 
-    private fun handleMovieDetailsData(movieDetails: UIMovieDetails) {
+    private fun handleMovieDetailsData(movieDetails: UIMovieInfo) {
         with(viewBinding.content) {
             groupData.isVisible = true
 

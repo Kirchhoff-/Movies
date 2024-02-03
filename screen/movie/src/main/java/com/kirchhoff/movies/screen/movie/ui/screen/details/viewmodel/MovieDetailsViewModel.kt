@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
+import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
@@ -27,7 +27,7 @@ internal class MovieDetailsViewModel(
             title = StringValue.SimpleText(movie.title),
             backdropPath = movie.backdropPath,
             posterPath = movie.posterPath,
-            details = UIMovieDetails(
+            info = UIMovieInfo(
                 productionCountries = emptyList(),
                 runtime = 0,
                 tagLine = "",
@@ -59,7 +59,7 @@ internal class MovieDetailsViewModel(
             screenState.value = screenState.value?.copy(isLoading = false)
             when (result) {
                 is Result.Success -> {
-                    screenState.value = screenState.value?.copy(details = result.data)
+                    screenState.value = screenState.value?.copy(info = result.data)
                     awaitAll(
                         async { fetchTrailers() },
                         async { fetchMovieCredits() },

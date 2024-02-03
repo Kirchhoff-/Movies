@@ -2,7 +2,7 @@ package com.kirchhoff.movies.screen.movie.data
 
 import com.kirchhoff.movies.core.data.UIGenre
 
-internal data class UIMovieDetails(
+internal data class UIMovieInfo(
     val productionCountries: List<UICountry>,
     val runtime: Int?,
     val tagLine: String?,

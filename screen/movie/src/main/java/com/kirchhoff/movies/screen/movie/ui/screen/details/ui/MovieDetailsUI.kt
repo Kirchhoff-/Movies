@@ -32,9 +32,10 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
+import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
+import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
 
 @Composable
 internal fun MovieDetailsUI(
@@ -105,6 +106,10 @@ private fun ShowUI(
             fontSize = 22.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
+        MovieDetailsInfoUI(
+            info = screenState.info,
+            posterPath = screenState.posterPath
+        )
     }
 }
 
@@ -116,7 +121,7 @@ private fun MovieDetailsUIPreview() {
             title = StringValue.SimpleText(""),
             backdropPath = "",
             posterPath = "",
-            details = UIMovieDetails(
+            info = UIMovieInfo(
                 productionCountries = emptyList(),
                 runtime = 0,
                 tagLine = "",

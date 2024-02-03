@@ -8,7 +8,7 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
+import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import kotlinx.coroutines.async
@@ -26,8 +26,8 @@ internal class OldMovieDetailsViewModel(private val movieRepository: IMovieRepos
     private val _exception = MutableLiveData<String>()
     val exception: LiveData<String> = _exception
 
-    private val _movieDetails = MutableLiveData<UIMovieDetails>()
-    val movieDetails: LiveData<UIMovieDetails> = _movieDetails
+    private val _movieDetails = MutableLiveData<UIMovieInfo>()
+    val movieDetails: LiveData<UIMovieInfo> = _movieDetails
 
     private val _trailers = MutableLiveData<List<UITrailer>>()
     val trailers: LiveData<List<UITrailer>> = _trailers

@@ -67,7 +67,9 @@ internal class MovieDetailsFragment : BaseFragment() {
                 onTrailerClick = { startActivity( Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) },
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
                 onCastSeeAllClick = { router.openCastCreditsScreen(it) },
-                onCrewSeeAllClick = { router.openCrewCreditsScreen(it) }
+                onCrewSeeAllClick = { router.openCrewCreditsScreen(it) },
+                onSimilarMovieClick = { router.openMovieDetailsScreen(it) },
+                onSimilarMovieSeeAllClick = { movieRouter.openSimilarMoviesScreen(movie) }
             )
         }
     }

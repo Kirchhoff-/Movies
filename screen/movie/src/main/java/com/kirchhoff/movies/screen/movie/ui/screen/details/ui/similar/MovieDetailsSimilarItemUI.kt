@@ -4,9 +4,9 @@ package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.similar
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -49,10 +49,7 @@ internal fun MovieDetailsSimilarItemUI(
         elevation = 4.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
-        Column(
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        Column {
             Box {
                 AsyncImage(
                     modifier = Modifier
@@ -70,13 +67,16 @@ internal fun MovieDetailsSimilarItemUI(
                     voteAverage = movie.voteAverage
                 )
             }
-            Text(
-                text = movie.title,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                color = colorResource(R.color.text_main),
-                overflow = TextOverflow.Ellipsis
-            )
+            Box(modifier = Modifier.fillMaxSize()) {
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = movie.title,
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    color = colorResource(R.color.text_main),
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
         }
     }
 }

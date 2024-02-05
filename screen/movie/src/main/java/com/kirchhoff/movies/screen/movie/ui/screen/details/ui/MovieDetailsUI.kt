@@ -32,6 +32,7 @@ import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIGenre
+import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
@@ -42,6 +43,7 @@ import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.credits.MovieDetailsCreditsUI
+import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.images.MovieDetailsImagesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers.MovieDetailsTrailersUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.similar.MovieDetailsSimilarUI
@@ -58,7 +60,9 @@ internal fun MovieDetailsUI(
     onCastSeeAllClick: (List<UIEntertainmentPerson.Actor>) -> Unit,
     onCrewSeeAllClick: (List<UIEntertainmentPerson.Creator>) -> Unit,
     onSimilarMovieClick: (UIMovie) -> Unit,
-    onSimilarMovieSeeAllClick: () -> Unit
+    onSimilarMovieSeeAllClick: () -> Unit,
+    onImageItemClick: (UIImage) -> Unit,
+    onImageSeeAllClick: () -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -78,7 +82,9 @@ internal fun MovieDetailsUI(
                 onCastSeeAllClick = onCastSeeAllClick,
                 onCrewSeeAllClick = onCrewSeeAllClick,
                 onSimilarMovieClick = onSimilarMovieClick,
-                onSimilarMovieSeeAllClick = onSimilarMovieSeeAllClick
+                onSimilarMovieSeeAllClick = onSimilarMovieSeeAllClick,
+                onImageItemClick = onImageItemClick,
+                onImageSeeAllClick = onImageSeeAllClick
             )
         }
     }
@@ -120,10 +126,13 @@ private fun ShowUI(
     onCastSeeAllClick: (List<UIEntertainmentPerson.Actor>) -> Unit,
     onCrewSeeAllClick: (List<UIEntertainmentPerson.Creator>) -> Unit,
     onSimilarMovieClick: (UIMovie) -> Unit,
-    onSimilarMovieSeeAllClick: () -> Unit
+    onSimilarMovieSeeAllClick: () -> Unit,
+    onImageItemClick: (UIImage) -> Unit,
+    onImageSeeAllClick: () -> Unit
 ) {
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
     val similarMoviesVisible = screenState.similarMovies.isNotEmpty()
+    val imagesVisible = screenState.images.isNotEmpty()
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         AsyncImage(
@@ -174,6 +183,14 @@ private fun ShowUI(
                 onSeeAllClick = onSimilarMovieSeeAllClick
             )
         }
+        if (imagesVisible) {
+            Spacer(modifier = Modifier.height(8.dp))
+            MovieDetailsImagesUI(
+                images = screenState.images,
+                onItemClick = onImageItemClick,
+                onSeeAllClick = onImageSeeAllClick
+            )
+        }
     }
 }
 
@@ -216,6 +233,8 @@ private fun MovieDetailsUIPreview() {
         onCastSeeAllClick = {},
         onCrewSeeAllClick = {},
         onSimilarMovieClick = {},
-        onSimilarMovieSeeAllClick = {}
+        onSimilarMovieSeeAllClick = {},
+        onImageItemClick = {},
+        onImageSeeAllClick = {}
     )
 }

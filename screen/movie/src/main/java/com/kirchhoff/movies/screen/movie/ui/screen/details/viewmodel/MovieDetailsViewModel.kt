@@ -83,10 +83,22 @@ internal class MovieDetailsViewModel(
     }
 
     private suspend fun fetchMovieCredits() {
-        when (val creditsResult = movieRepository.fetchMovieCredits(movie.id)) {
-            is Result.Success -> screenState.value = screenState.value?.copy(credits = creditsResult.data)
-            else -> {}
+        val creditsResult = movieRepository.fetchMovieCredits(movie.id)
+        val resultCredits = if (creditsResult is Result.Success) {
+            val cast = creditsResult.data.cast
+            val crew = creditsResult.data.crew
+
+            UIEntertainmentCredits(
+                cast = if (cast?.isNotEmpty() == true) cast.take(DISPLAYING_DATA_AMOUNT) else emptyList(),
+                crew = if (crew?.isNotEmpty() == true) crew.take(DISPLAYING_DATA_AMOUNT) else emptyList(),
+            )
+        } else {
+            UIEntertainmentCredits(
+                cast = emptyList(),
+                crew = emptyList()
+            )
         }
+        screenState.value = screenState.value?.copy(credits = resultCredits)
     }
 
     private suspend fun fetchSimilarMovies() {
@@ -95,7 +107,7 @@ internal class MovieDetailsViewModel(
             similarMoviesResult is Result.Success &&
             similarMoviesResult.data.results.isNotEmpty()
         ) {
-            similarMoviesResult.data.results.take(SIMILAR_MOVIES_AMOUNT)
+            similarMoviesResult.data.results.take(DISPLAYING_DATA_AMOUNT)
         } else {
             emptyList()
         }
@@ -109,7 +121,7 @@ internal class MovieDetailsViewModel(
             imagesResult is Result.Success &&
             imagesResult.data.isNotEmpty()
         ) {
-            imagesResult.data.take(IMAGES_AMOUNT)
+            imagesResult.data.take(DISPLAYING_DATA_AMOUNT)
         } else {
             emptyList()
         }
@@ -117,7 +129,6 @@ internal class MovieDetailsViewModel(
     }
 
     private companion object {
-        const val SIMILAR_MOVIES_AMOUNT = 10
-        const val IMAGES_AMOUNT = 10
+        const val DISPLAYING_DATA_AMOUNT = 10
     }
 }

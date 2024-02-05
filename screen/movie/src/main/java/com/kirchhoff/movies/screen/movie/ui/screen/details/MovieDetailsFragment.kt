@@ -13,6 +13,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
@@ -63,7 +64,8 @@ internal class MovieDetailsFragment : BaseFragment() {
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() },
                 onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it.id, it.name) },
                 onGenreClick = { movieRouter.openMoviesByGenreScreen(it) },
-                onTrailerClick = { startActivity( Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) }
+                onTrailerClick = { startActivity( Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) },
+                onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) }
             )
         }
     }

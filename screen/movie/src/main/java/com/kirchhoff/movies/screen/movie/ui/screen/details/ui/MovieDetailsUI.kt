@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
@@ -39,6 +40,7 @@ import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
+import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.credits.MovieDetailsCreditsUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers.MovieDetailsTrailersUI
 
@@ -49,7 +51,8 @@ internal fun MovieDetailsUI(
     onBackPressed: () -> Unit,
     onProductionCountryClick: (UICountry) -> Unit,
     onGenreClick: (UIGenre) -> Unit,
-    onTrailerClick: (UITrailer) -> Unit
+    onTrailerClick: (UITrailer) -> Unit,
+    onCreditItemClick: (UIEntertainmentPerson) -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -64,7 +67,8 @@ internal fun MovieDetailsUI(
                 screenState = screenState,
                 onProductionCountryClick = onProductionCountryClick,
                 onGenreClick = onGenreClick,
-                onTrailerClick = onTrailerClick
+                onTrailerClick = onTrailerClick,
+                onCreditItemClick = onCreditItemClick
             )
         }
     }
@@ -101,8 +105,11 @@ private fun ShowUI(
     screenState: MovieDetailsScreenState,
     onProductionCountryClick: (UICountry) -> Unit,
     onGenreClick: (UIGenre) -> Unit,
-    onTrailerClick: (UITrailer) -> Unit
+    onTrailerClick: (UITrailer) -> Unit,
+    onCreditItemClick: (UIEntertainmentPerson) -> Unit
 ) {
+    val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
+
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         AsyncImage(
             modifier = Modifier
@@ -133,6 +140,13 @@ private fun ShowUI(
             MovieDetailsTrailersUI(
                 trailers = screenState.trailers,
                 onTrailerClick = onTrailerClick
+            )
+        }
+        if (creditsVisible) {
+            Spacer(modifier = Modifier.height(8.dp))
+            MovieDetailsCreditsUI(
+                credits = screenState.credits,
+                onItemClick = onCreditItemClick
             )
         }
     }
@@ -172,6 +186,7 @@ private fun MovieDetailsUIPreview() {
         onBackPressed = {},
         onProductionCountryClick = {},
         onGenreClick = {},
-        onTrailerClick = {}
+        onTrailerClick = {},
+        onCreditItemClick = {}
     )
 }

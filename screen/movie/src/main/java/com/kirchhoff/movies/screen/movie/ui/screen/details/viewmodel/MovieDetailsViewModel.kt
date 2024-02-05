@@ -83,22 +83,10 @@ internal class MovieDetailsViewModel(
     }
 
     private suspend fun fetchMovieCredits() {
-        val creditsResult = movieRepository.fetchMovieCredits(movie.id)
-        val resultCredits = if (creditsResult is Result.Success) {
-            val cast = creditsResult.data.cast
-            val crew = creditsResult.data.crew
-
-            UIEntertainmentCredits(
-                cast = if (cast?.isNotEmpty() == true) cast.take(DISPLAYING_DATA_AMOUNT) else emptyList(),
-                crew = if (crew?.isNotEmpty() == true) crew.take(DISPLAYING_DATA_AMOUNT) else emptyList(),
-            )
-        } else {
-            UIEntertainmentCredits(
-                cast = emptyList(),
-                crew = emptyList()
-            )
+        when (val creditsResult = movieRepository.fetchMovieCredits(movie.id)) {
+            is Result.Success -> screenState.value = screenState.value?.copy(credits = creditsResult.data)
+            else -> {}
         }
-        screenState.value = screenState.value?.copy(credits = resultCredits)
     }
 
     private suspend fun fetchSimilarMovies() {

@@ -12,12 +12,12 @@ import com.kirchhoff.movies.networkdata.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailer
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.screen.movie.data.UICountry
-import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
+import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
 internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
-    override fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieDetails> =
+    override fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieInfo> =
         when (movieDetailsResult) {
             is Result.Success -> Result.Success(createUIMovieDetails(movieDetailsResult.data))
             else -> mapErrorOrException(movieDetailsResult)
@@ -42,7 +42,7 @@ internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMap
         }
 
     private fun createUIMovieDetails(movieDetails: NetworkMovieDetails) =
-        UIMovieDetails(
+        UIMovieInfo(
             movieDetails.productionCountries.map { createUICountry(it) },
             movieDetails.runtime,
             movieDetails.tagline,

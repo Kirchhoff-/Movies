@@ -52,7 +52,9 @@ internal fun MovieDetailsUI(
     onProductionCountryClick: (UICountry) -> Unit,
     onGenreClick: (UIGenre) -> Unit,
     onTrailerClick: (UITrailer) -> Unit,
-    onCreditItemClick: (UIEntertainmentPerson) -> Unit
+    onCreditItemClick: (UIEntertainmentPerson) -> Unit,
+    onCastSeeAllClick: (List<UIEntertainmentPerson.Actor>) -> Unit,
+    onCrewSeeAllClick: (List<UIEntertainmentPerson.Creator>) -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -68,7 +70,9 @@ internal fun MovieDetailsUI(
                 onProductionCountryClick = onProductionCountryClick,
                 onGenreClick = onGenreClick,
                 onTrailerClick = onTrailerClick,
-                onCreditItemClick = onCreditItemClick
+                onCreditItemClick = onCreditItemClick,
+                onCastSeeAllClick = onCastSeeAllClick,
+                onCrewSeeAllClick = onCrewSeeAllClick
             )
         }
     }
@@ -106,7 +110,9 @@ private fun ShowUI(
     onProductionCountryClick: (UICountry) -> Unit,
     onGenreClick: (UIGenre) -> Unit,
     onTrailerClick: (UITrailer) -> Unit,
-    onCreditItemClick: (UIEntertainmentPerson) -> Unit
+    onCreditItemClick: (UIEntertainmentPerson) -> Unit,
+    onCastSeeAllClick: (List<UIEntertainmentPerson.Actor>) -> Unit,
+    onCrewSeeAllClick: (List<UIEntertainmentPerson.Creator>) -> Unit
 ) {
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
 
@@ -146,7 +152,9 @@ private fun ShowUI(
             Spacer(modifier = Modifier.height(8.dp))
             MovieDetailsCreditsUI(
                 credits = screenState.credits,
-                onItemClick = onCreditItemClick
+                onItemClick = onCreditItemClick,
+                onCastSeeAllClick = onCastSeeAllClick,
+                onCrewSeeAllClick = onCrewSeeAllClick
             )
         }
     }
@@ -187,6 +195,8 @@ private fun MovieDetailsUIPreview() {
         onProductionCountryClick = {},
         onGenreClick = {},
         onTrailerClick = {},
-        onCreditItemClick = {}
+        onCreditItemClick = {},
+        onCastSeeAllClick = {},
+        onCrewSeeAllClick = {}
     )
 }

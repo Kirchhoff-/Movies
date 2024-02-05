@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
+import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.mapper.details.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
@@ -32,7 +32,7 @@ internal class MovieRepository(
         return discoverMapper.createUIDiscoverMovieList(result)
     }
 
-    override suspend fun fetchDetails(movieId: Int): Result<UIMovieDetails> =
+    override suspend fun fetchDetails(movieId: Int): Result<UIMovieInfo> =
         movieDetailsMapper.createUIMovieDetails(
             apiCall {
                 movieService.fetchDetails(movieId)

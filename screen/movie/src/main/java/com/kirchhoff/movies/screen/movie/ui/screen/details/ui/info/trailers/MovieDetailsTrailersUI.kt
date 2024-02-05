@@ -34,7 +34,7 @@ internal fun MovieDetailsTrailersUI(
                 ),
             text = stringResource(R.string.movie_trailers),
             color = Color.Black,
-            fontSize = 20.sp,
+            fontSize = 20.sp
         )
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(16.dp),

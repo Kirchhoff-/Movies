@@ -19,11 +19,11 @@ import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.MovieDetailsUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.viewmodel.MovieDetailsViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
-import org.koin.android.ext.android.inject
 
 internal class MovieDetailsFragment : BaseFragment() {
 
@@ -64,7 +64,7 @@ internal class MovieDetailsFragment : BaseFragment() {
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() },
                 onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it.id, it.name) },
                 onGenreClick = { movieRouter.openMoviesByGenreScreen(it) },
-                onTrailerClick = { startActivity( Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) },
+                onTrailerClick = { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) },
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
                 onCastSeeAllClick = { router.openCastCreditsScreen(it) },
                 onCrewSeeAllClick = { router.openCrewCreditsScreen(it) },

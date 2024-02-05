@@ -1,3 +1,5 @@
+@file:SuppressWarnings("MagicNumber")
+
 package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info
 
 import androidx.compose.foundation.background
@@ -26,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -46,6 +47,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+@SuppressWarnings("LongMethod")
 @ExperimentalLayoutApi
 @Composable
 internal fun MovieDetailsInfoUI(
@@ -168,7 +170,9 @@ private fun Int?.asMovieRuntime(): String = if (this != null) {
     val minuteFormat = SimpleDateFormat("mm", Locale.ENGLISH)
     val hourFormat = SimpleDateFormat("H:mm", Locale.ENGLISH)
     hourFormat.format(minuteFormat.parse(this.toString()) as Date)
-} else ""
+} else {
+    ""
+}
 
 @ExperimentalLayoutApi
 @Preview

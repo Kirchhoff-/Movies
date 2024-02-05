@@ -27,6 +27,7 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.creditsview.R
 
+@SuppressWarnings("LongMethod")
 @Composable
 internal fun MovieDetailsCreditsUI(
     credits: UIEntertainmentCredits,

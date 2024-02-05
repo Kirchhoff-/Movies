@@ -1,3 +1,5 @@
+@file:SuppressWarnings("MagicNumber")
+
 package com.kirchhoff.movies.screen.movie.ui.screen.details.ui
 
 import android.widget.Toast
@@ -53,6 +55,7 @@ import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers.MovieDetailsTrailersUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.similar.MovieDetailsSimilarUI
 
+@SuppressWarnings("LongParameterList")
 @ExperimentalLayoutApi
 @Composable
 internal fun MovieDetailsUI(
@@ -122,6 +125,7 @@ private fun ShowError(screenState: MovieDetailsScreenState) {
     }
 }
 
+@SuppressWarnings("LongParameterList", "LongMethod")
 @ExperimentalLayoutApi
 @Composable
 private fun ShowUI(

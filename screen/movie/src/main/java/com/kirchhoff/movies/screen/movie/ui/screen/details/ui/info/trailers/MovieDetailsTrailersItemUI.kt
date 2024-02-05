@@ -1,3 +1,5 @@
+@file:SuppressWarnings("MagicNumber")
+
 package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers
 
 import androidx.compose.foundation.Image

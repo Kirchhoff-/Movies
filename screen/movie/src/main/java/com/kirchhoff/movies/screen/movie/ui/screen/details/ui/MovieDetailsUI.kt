@@ -1,6 +1,8 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.details.ui
 
 import android.widget.Toast
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -9,14 +11,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -62,7 +67,8 @@ internal fun MovieDetailsUI(
     onSimilarMovieClick: (UIMovie) -> Unit,
     onSimilarMovieSeeAllClick: () -> Unit,
     onImageItemClick: (UIImage) -> Unit,
-    onImageSeeAllClick: () -> Unit
+    onImageSeeAllClick: () -> Unit,
+    onReviewsClick: () -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -84,7 +90,8 @@ internal fun MovieDetailsUI(
                 onSimilarMovieClick = onSimilarMovieClick,
                 onSimilarMovieSeeAllClick = onSimilarMovieSeeAllClick,
                 onImageItemClick = onImageItemClick,
-                onImageSeeAllClick = onImageSeeAllClick
+                onImageSeeAllClick = onImageSeeAllClick,
+                onReviewsClick = onReviewsClick
             )
         }
     }
@@ -128,7 +135,8 @@ private fun ShowUI(
     onSimilarMovieClick: (UIMovie) -> Unit,
     onSimilarMovieSeeAllClick: () -> Unit,
     onImageItemClick: (UIImage) -> Unit,
-    onImageSeeAllClick: () -> Unit
+    onImageSeeAllClick: () -> Unit,
+    onReviewsClick: () -> Unit
 ) {
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
     val similarMoviesVisible = screenState.similarMovies.isNotEmpty()
@@ -191,6 +199,23 @@ private fun ShowUI(
                 onSeeAllClick = onImageSeeAllClick
             )
         }
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(bounded = true),
+                    onClick = { onReviewsClick.invoke() }
+                )
+                .padding(16.dp),
+            text = StringValue
+                .IdText(com.kirchhoff.movies.screen.movie.R.string.movie_reviews)
+                .asString(LocalContext.current),
+            color = colorResource(R.color.text_main),
+            fontSize = 18.sp
+        )
     }
 }
 
@@ -235,6 +260,7 @@ private fun MovieDetailsUIPreview() {
         onSimilarMovieClick = {},
         onSimilarMovieSeeAllClick = {},
         onImageItemClick = {},
-        onImageSeeAllClick = {}
+        onImageSeeAllClick = {},
+        onReviewsClick = {}
     )
 }

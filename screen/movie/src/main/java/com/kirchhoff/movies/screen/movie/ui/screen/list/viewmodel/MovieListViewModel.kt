@@ -40,6 +40,7 @@ internal class MovieListViewModel(
             is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, type.genre.name)
             is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, type.countryName)
             is MovieListType.Similar -> StringValue.IdText(R.string.movie_similar_to_format, type.movie.title)
+            is MovieListType.Company -> StringValue.IdText(R.string.movie_movies_by_company_format, type.company.name)
             is MovieListType.Discover -> StringValue.Empty
         }
 
@@ -91,6 +92,7 @@ internal class MovieListViewModel(
         is MovieListType.Genre -> movieRepository.fetchByGenre(type.genre.id, currentPage + 1)
         is MovieListType.Country -> movieRepository.fetchByCountry(type.countryId, currentPage + 1)
         is MovieListType.Similar -> movieRepository.fetchSimilarMovies(type.movie.id, currentPage + 1)
+        is MovieListType.Company -> movieRepository.fetchByCompany(type.company.id, currentPage + 1)
         is MovieListType.Discover -> movieRepository.fetchDiscoverList(currentPage + 1)
     }
 }

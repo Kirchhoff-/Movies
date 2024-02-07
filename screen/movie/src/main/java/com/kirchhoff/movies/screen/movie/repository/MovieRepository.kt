@@ -53,6 +53,13 @@ internal class MovieRepository(
             }
         )
 
+    override suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>> =
+        discoverMapper.createUIDiscoverMovieList(
+            apiCall {
+                movieService.fetchByCompany(companyId, page)
+            }
+        )
+
     override suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList> =
         movieDetailsMapper.createUITrailersList(
             apiCall {

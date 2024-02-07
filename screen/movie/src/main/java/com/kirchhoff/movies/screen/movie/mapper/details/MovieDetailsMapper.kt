@@ -7,12 +7,14 @@ import com.kirchhoff.movies.core.mapper.core.ICoreMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.core.NetworkImagesResponse
+import com.kirchhoff.movies.networkdata.core.NetworkProductionCompany
 import com.kirchhoff.movies.networkdata.details.movie.NetworkCountry
 import com.kirchhoff.movies.networkdata.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailer
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
+import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
@@ -44,6 +46,7 @@ internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMap
     private fun createUIMovieDetails(movieDetails: NetworkMovieDetails) =
         UIMovieInfo(
             movieDetails.productionCountries.map { createUICountry(it) },
+            movieDetails.productionCompanies.map { createUIProductionCompany(it) },
             movieDetails.runtime,
             movieDetails.tagline,
             movieDetails.overview,
@@ -60,4 +63,10 @@ internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMap
         UITrailer(trailer.site, trailer.key)
 
     private fun createUICountry(item: NetworkCountry) = UICountry(item.id, item.name)
+
+    private fun createUIProductionCompany(item: NetworkProductionCompany) = UIProductionCompany(
+        id = item.id,
+        logoPath = item.logoPath.orEmpty(),
+        name = item.name
+    )
 }

@@ -13,6 +13,7 @@ import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.movieModule
 import com.kirchhoff.movies.screen.movie.ui.screen.list.ui.MovieListUI
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
@@ -84,6 +85,10 @@ internal class MovieListFragment : BaseFragment() {
 
         fun byCountry(countryId: String, countryName: String): MovieListFragment = createFragment(
             MovieListType.Country(countryId, countryName)
+        )
+
+        fun byCompany(company: UIProductionCompany): MovieListFragment = createFragment(
+            MovieListType.Company(company)
         )
 
         fun similarWith(movie: UIMovie): MovieListFragment = createFragment(MovieListType.Similar(movie))

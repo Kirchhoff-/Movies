@@ -181,6 +181,7 @@ private fun MovieDetailsInfoUIPreview() {
     MovieDetailsInfoUI(
         info = UIMovieInfo(
             productionCountries = emptyList(),
+            productionCompanies = emptyList(),
             runtime = 0,
             tagLine = "",
             overview = "",

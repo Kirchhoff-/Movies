@@ -13,6 +13,7 @@ internal interface IMovieRepository {
     suspend fun fetchDetails(movieId: Int): Result<UIMovieInfo>
     suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList>
     suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits>
     suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>>

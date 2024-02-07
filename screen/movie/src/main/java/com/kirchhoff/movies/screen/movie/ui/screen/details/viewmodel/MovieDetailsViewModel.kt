@@ -29,6 +29,7 @@ internal class MovieDetailsViewModel(
             posterPath = movie.posterPath,
             info = UIMovieInfo(
                 productionCountries = emptyList(),
+                productionCompanies = emptyList(),
                 runtime = 0,
                 tagLine = "",
                 overview = "",

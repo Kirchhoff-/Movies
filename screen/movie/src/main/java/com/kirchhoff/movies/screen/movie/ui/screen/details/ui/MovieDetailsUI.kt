@@ -46,9 +46,11 @@ import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
+import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
+import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.companies.MovieDetailsProductionCompaniesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.credits.MovieDetailsCreditsUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.images.MovieDetailsImagesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
@@ -71,7 +73,8 @@ internal fun MovieDetailsUI(
     onSimilarMovieSeeAllClick: () -> Unit,
     onImageItemClick: (UIImage) -> Unit,
     onImageSeeAllClick: () -> Unit,
-    onReviewsClick: () -> Unit
+    onReviewsClick: () -> Unit,
+    onProductionCompanyClick: (UIProductionCompany) -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -94,7 +97,8 @@ internal fun MovieDetailsUI(
                 onSimilarMovieSeeAllClick = onSimilarMovieSeeAllClick,
                 onImageItemClick = onImageItemClick,
                 onImageSeeAllClick = onImageSeeAllClick,
-                onReviewsClick = onReviewsClick
+                onReviewsClick = onReviewsClick,
+                onProductionCompanyClick = onProductionCompanyClick
             )
         }
     }
@@ -140,11 +144,14 @@ private fun ShowUI(
     onSimilarMovieSeeAllClick: () -> Unit,
     onImageItemClick: (UIImage) -> Unit,
     onImageSeeAllClick: () -> Unit,
-    onReviewsClick: () -> Unit
+    onReviewsClick: () -> Unit,
+    onProductionCompanyClick: (UIProductionCompany) -> Unit
 ) {
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
     val similarMoviesVisible = screenState.similarMovies.isNotEmpty()
     val imagesVisible = screenState.images.isNotEmpty()
+    val trailersVisible = screenState.trailers.results.isNotEmpty()
+    val productionCompaniesVisible = screenState.info.productionCompanies.isNotEmpty()
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
         AsyncImage(
@@ -171,11 +178,18 @@ private fun ShowUI(
             onProductionCountryClick = onProductionCountryClick,
             onGenreClick = onGenreClick
         )
-        if (screenState.trailers.results.isNotEmpty()) {
+        if (trailersVisible) {
             Spacer(modifier = Modifier.height(8.dp))
             MovieDetailsTrailersUI(
                 trailers = screenState.trailers,
                 onTrailerClick = onTrailerClick
+            )
+        }
+        if (productionCompaniesVisible) {
+            Spacer(modifier = Modifier.height(8.dp))
+            MovieDetailsProductionCompaniesUI(
+                companies = screenState.info.productionCompanies,
+                onItemClick = onProductionCompanyClick
             )
         }
         if (creditsVisible) {
@@ -234,6 +248,7 @@ private fun MovieDetailsUIPreview() {
             posterPath = "",
             info = UIMovieInfo(
                 productionCountries = emptyList(),
+                productionCompanies = emptyList(),
                 runtime = 0,
                 tagLine = "",
                 overview = "",
@@ -265,6 +280,7 @@ private fun MovieDetailsUIPreview() {
         onSimilarMovieSeeAllClick = {},
         onImageItemClick = {},
         onImageSeeAllClick = {},
-        onReviewsClick = {}
+        onReviewsClick = {},
+        onProductionCompanyClick = {}
     )
 }

@@ -7,6 +7,7 @@ internal data class MovieListScreenState(
     val movieList: List<UIMovie>,
     val title: StringValue,
     val errorMessage: String,
+    val toolbarVisible: Boolean,
     val loadingVisible: Boolean,
     val paginationVisible: Boolean
 )

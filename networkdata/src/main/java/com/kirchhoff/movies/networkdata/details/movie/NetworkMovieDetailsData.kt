@@ -2,9 +2,11 @@ package com.kirchhoff.movies.networkdata.details.movie
 
 import com.google.gson.annotations.SerializedName
 import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName
+import com.kirchhoff.movies.networkdata.core.NetworkProductionCompany
 
 data class NetworkMovieDetails(
     @SerializedName("production_countries") val productionCountries: List<NetworkCountry>,
+    @SerializedName("production_companies") val productionCompanies: List<NetworkProductionCompany>,
     @SerializedName("runtime")val runtime: Int?,
     @SerializedName("tagline") val tagline: String?,
     @SerializedName("overview") val overview: String,

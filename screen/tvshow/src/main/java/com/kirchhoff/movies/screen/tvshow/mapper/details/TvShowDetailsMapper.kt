@@ -6,13 +6,13 @@ import com.kirchhoff.movies.core.mapper.core.ICoreMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.details.tv.NetworkTvDetails
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
+import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 
 internal class TvShowDetailsMapper(private val coreMapper: ICoreMapper) :
     BaseMapper(),
     ITvShowDetailsMapper {
 
-    override fun createUITvDetails(tvDetailsResult: Result<NetworkTvDetails>): Result<UITvShowDetails> =
+    override fun createUITvDetails(tvDetailsResult: Result<NetworkTvDetails>): Result<UITvShowInfo> =
         when (tvDetailsResult) {
             is Result.Success -> Result.Success(createUITvDetails(tvDetailsResult.data))
             else -> mapErrorOrException(tvDetailsResult)
@@ -30,7 +30,7 @@ internal class TvShowDetailsMapper(private val coreMapper: ICoreMapper) :
         }
 
     private fun createUITvDetails(tvDetails: NetworkTvDetails) =
-        UITvShowDetails(
+        UITvShowInfo(
             tvDetails.numberOfSeasons,
             tvDetails.numberOfEpisodes,
             tvDetails.overview,

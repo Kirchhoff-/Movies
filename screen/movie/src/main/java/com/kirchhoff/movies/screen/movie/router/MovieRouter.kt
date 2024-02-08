@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.ui.screen.image.MovieImageFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.images.MovieImagesFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListFragment
@@ -32,6 +33,16 @@ internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRout
             .replace(
                 R.id.fragmentContainer,
                 MovieListFragment.similarWith(movie)
+            )
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun openCompanyMoviesScreen(company: UIProductionCompany) {
+        activity.supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.fragmentContainer,
+                MovieListFragment.byCompany(company)
             )
             .addToBackStack(null)
             .commit()

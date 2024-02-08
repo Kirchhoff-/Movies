@@ -7,6 +7,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 internal data class ReviewsListArgs(
     val id: Int,
-    val title: String,
     val reviewType: ReviewType
 ) : Parcelable

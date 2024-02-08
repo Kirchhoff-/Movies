@@ -2,141 +2,75 @@ package com.kirchhoff.movies.screen.tvshow.ui.screen.details
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.core.view.isVisible
-import com.kirchhoff.movies.core.data.UIEntertainmentCredits
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import android.view.ViewGroup
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
-import com.kirchhoff.movies.core.extensions.addTitleWithCollapsingListener
-import com.kirchhoff.movies.core.extensions.downloadPoster
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.core.ui.utils.viewBinding
-import com.kirchhoff.movies.keywordsview.data.KeywordsViewData
-import com.kirchhoff.movies.screen.tvshow.R
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowDetails
-import com.kirchhoff.movies.screen.tvshow.databinding.FragmentTvShowDetailsBinding
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.TvShowDetailsUI
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+import org.koin.core.parameter.parametersOf
 
-internal class TvShowDetailsFragment : BaseFragment(R.layout.fragment_tv_show_details) {
+internal class TvShowDetailsFragment : BaseFragment() {
 
-    private val tv: UITv by lazy { requireArguments().getParcelableExtra(TV_ARG)!! }
+    private val tvShow: UITv by lazy {
+        requireArguments().getParcelableExtra(TV_ARG)
+            ?: error("Should provide tv show info in arguments")
+    }
 
-    private val vm by viewModel<TvShowDetailsViewModel>()
-    private val viewBinding by viewBinding(FragmentTvShowDetailsBinding::bind)
+    private val viewModel: TvShowDetailsViewModel by viewModel { parametersOf(tvShow) }
 
     override fun onAttach(context: Context) {
-        loadKoinModules(tvShowDetailsModule)
+        loadKoinModules(newTvShowDetailsModule)
         super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        vm.loadTvDetails(tv.id)
+        viewModel.loadDetails()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    @ExperimentalLayoutApi
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View = ComposeView(requireContext()).apply {
+        setViewCompositionStrategy(
+            ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner)
+        )
 
-        with(viewBinding) {
-            ivBackdrop.downloadPoster(tv.backdropPath)
-            toolbar.setNavigationOnClickListener { requireActivity().onBackPressedDispatcher.onBackPressed() }
-            appbar.addTitleWithCollapsingListener(toolbar, tv.name.orEmpty())
-        }
+        setContent {
+            val screenState by viewModel.screenState.observeAsState()
 
-        with(viewBinding.content) {
-            tvTvTitle.text = tv.name
-            ivTvPoster.downloadPoster(tv.posterPath)
-            bRetry.setOnClickListener { vm.loadTvDetails(tv.id) }
-            tvSimilarTv.setOnClickListener { openSimilarTvShowsScreen(tv) }
-            tvReviews.setOnClickListener { openReviewsListScreen(tv) }
-            vCredits.itemClickListener { openPersonDetailsScreen(it) }
-        }
-
-        with(vm) {
-            tvDetails.subscribe(::handleTvDetailsData)
-            tvCredits.subscribe(::handleTvCredits)
-            loading.subscribe(::handleLoading)
-            error.subscribe(::handleError)
-            exception.subscribe(::handleException)
+            TvShowDetailsUI(
+                screenState = screenState ?: error("Can't build UI without state"),
+                onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
+                onReviewsClick = { router.openReviewsListScreen(tvShow) },
+                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
+            )
         }
     }
 
-    override fun onDestroyView() {
-        unloadKoinModules(tvShowDetailsModule)
-        super.onDestroyView()
-    }
-
-    private fun handleTvDetailsData(tvDetails: UITvShowDetails) {
-        with(viewBinding.content) {
-            groupData.isVisible = true
-
-            tvSeasons.text = resources.getString(R.string.tv_seasons_format, tvDetails.numberOfSeasons)
-            tvEpisodes.text = resources.getString(R.string.tv_episodes_format, tvDetails.numberOfEpisodes)
-            tvFirstAirDate.text = resources.getString(R.string.tv_first_air_date_format, tvDetails.firstAirDate)
-            tvStatus.text = resources.getString(R.string.tv_status_format, tvDetails.status)
-            tvOverview.text = tvDetails.overview
-            voteView.displayRatingAndVoteCount(tvDetails.voteAverage, tvDetails.voteCount)
-            vKeywords.displayItems(tvDetails.genres.map { KeywordsViewData(it.name, it.name) })
-        }
-    }
-
-    private fun handleTvCredits(tvCredits: UIEntertainmentCredits) {
-        with(viewBinding.content.vCredits) {
-            isVisible = true
-            display(tvCredits, false)
-        }
-    }
-
-    private fun handleLoading(visible: Boolean) {
-        with(viewBinding) {
-            content.groupLoading.isVisible = visible
-
-            if (visible) {
-                content.groupException.isVisible = false
-                content.groupError.isVisible = false
-                content.groupData.isVisible = false
-            }
-        }
-    }
-
-    private fun handleError(error: String) {
-        with(viewBinding) {
-            content.groupError.isVisible = true
-            content.tvError.text = error
-        }
-    }
-
-    private fun handleException(exception: String) {
-        with(viewBinding) {
-            content.groupException.isVisible = true
-            content.tvException.text = exception
-        }
-    }
-
-    private fun openReviewsListScreen(tv: UITv) {
-        router.openReviewsListScreen(tv)
-    }
-
-    private fun openSimilarTvShowsScreen(tv: UITv) {
-        router.openSimilarTvShowsScreen(tv)
-    }
-
-    private fun openPersonDetailsScreen(id: Int) {
-        val person: UIEntertainmentPerson = vm.tvCredits.value?.findPerson(id) ?: error("Can't find person with id = $id")
-        router.openPersonDetailsScreen(UIPerson(person))
+    override fun onDestroy() {
+        unloadKoinModules(newTvShowDetailsModule)
+        super.onDestroy()
     }
 
     companion object {
-        fun newInstance(tv: UITv): TvShowDetailsFragment {
-            val fragment = TvShowDetailsFragment()
-            val arg = Bundle()
-            arg.putParcelable(TV_ARG, tv)
-            fragment.arguments = arg
-            return fragment
+        fun newInstance(tv: UITv): TvShowDetailsFragment = TvShowDetailsFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(TV_ARG, tv)
+            }
         }
 
         private const val TV_ARG = "TV_ARG"

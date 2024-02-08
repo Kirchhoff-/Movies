@@ -11,6 +11,7 @@ dependencies {
     implementation project(path: ':view:keywordsview')
     implementation project(path: ':view:creditsview')
     implementation project(path: ':view:ratingtextview')
+    implementation project(path: ':storage:movie')
 
     implementation libs.bundles.internet
     implementation libs.bundles.di

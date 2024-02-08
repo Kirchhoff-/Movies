@@ -41,8 +41,10 @@ internal fun MovieListUI(
     var errorMessage by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        MoviesToolbar(title = screenState.title.asString(context)) {
-            onBackPressed.invoke()
+        if (screenState.toolbarVisible) {
+            MoviesToolbar(title = screenState.title.asString(context)) {
+                onBackPressed.invoke()
+            }
         }
 
         Box(modifier = Modifier.fillMaxSize()) {
@@ -111,6 +113,7 @@ internal fun MovieListUIPreview() {
             title = StringValue.IdText(R.string.movie_movies_with_genre_format, "Action"),
             errorMessage = "Some error message",
             loadingVisible = true,
+            toolbarVisible = true,
             paginationVisible = false
         ),
         onLoadMore = {},

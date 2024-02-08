@@ -7,27 +7,32 @@ import com.kirchhoff.movies.core.mapper.IDiscoverMapper
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.screen.movie.data.UIMovieDetails
+import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.mapper.details.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
 import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
+import com.kirchhoff.movies.storage.movie.IStorageMovie
 
 internal class MovieRepository(
     private val movieService: MovieService,
+    private val movieStorage: IStorageMovie,
     private val movieImagesStorage: IMovieImagesStorage,
     private val movieDetailsMapper: IMovieDetailsMapper,
     private val discoverMapper: IDiscoverMapper
 ) : BaseRepository(), IMovieRepository {
 
-    override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>> =
-        discoverMapper.createUIDiscoverMovieList(
-            apiCall {
-                movieService.fetchDiscoverList(page)
-            }
-        )
+    override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchDiscoverList(page) }
 
-    override suspend fun fetchDetails(movieId: Int): Result<UIMovieDetails> =
+        if (result is Result.Success) {
+            result.data.results.forEach { movieStorage.updateInfo(it) }
+        }
+
+        return discoverMapper.createUIDiscoverMovieList(result)
+    }
+
+    override suspend fun fetchDetails(movieId: Int): Result<UIMovieInfo> =
         movieDetailsMapper.createUIMovieDetails(
             apiCall {
                 movieService.fetchDetails(movieId)
@@ -45,6 +50,13 @@ internal class MovieRepository(
         discoverMapper.createUIDiscoverMovieList(
             apiCall {
                 movieService.fetchByCountry(countryId, page)
+            }
+        )
+
+    override suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>> =
+        discoverMapper.createUIDiscoverMovieList(
+            apiCall {
+                movieService.fetchByCompany(companyId, page)
             }
         )
 

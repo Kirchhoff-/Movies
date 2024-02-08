@@ -18,7 +18,6 @@ class DashboardRouter(
     override fun openDashboard() {
         activity.supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, MainFragment.newInstance())
-            .addToBackStack(null)
             .commit()
     }
 

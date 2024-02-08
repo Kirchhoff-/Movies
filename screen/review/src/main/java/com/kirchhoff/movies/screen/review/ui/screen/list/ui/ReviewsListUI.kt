@@ -33,7 +33,7 @@ import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreen
 internal fun ReviewListUI(
     screenState: ReviewsListScreenState,
     onLoadMore: () -> Unit,
-    onReviewClick: (UIReview) -> Unit,
+    onReviewClick: (UIReview, String) -> Unit,
     onBackPressed: () -> Unit
 ) {
     val context = LocalContext.current
@@ -50,7 +50,15 @@ internal fun ReviewListUI(
                 LazyColumn(state = listState) {
                     items(
                         count = screenState.reviewsList.size,
-                        itemContent = { ReviewItem(screenState.reviewsList[it], onReviewClick) }
+                        itemContent = {
+                            ReviewItem(
+                                review = screenState.reviewsList[it],
+                                onReviewClick = {
+                                        review ->
+                                    onReviewClick.invoke(review, screenState.title)
+                                }
+                            )
+                        }
                     )
                     item {
                         this@Column.AnimatedVisibility(visible = screenState.paginationVisible) {
@@ -115,7 +123,7 @@ internal fun ReviewListPreview() {
             emptyTextVisible = false
         ),
         onLoadMore = {},
-        onReviewClick = { UIReview("", "", "", null) },
+        onReviewClick = { _, _ -> },
         onBackPressed = {}
     )
 }

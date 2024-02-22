@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.person.mapper.details
+package com.kirchhoff.movies.screen.person.mapper
 
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
@@ -13,6 +13,12 @@ import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
+
+internal interface IPersonDetailsMapper {
+    fun createUIPersonDetails(personDetailsResult: Result<NetworkPersonDetails>): Result<UIPersonDetails>
+    fun createUIPersonCredits(personCreditsResult: Result<NetworkPersonCredits>): Result<UIPersonCredits>
+    fun createUIPersonImages(personImagesResult: Result<NetworkPersonImages>): Result<List<UIPersonImage>>
+}
 
 internal class PersonDetailsMapper :
     BaseMapper(),

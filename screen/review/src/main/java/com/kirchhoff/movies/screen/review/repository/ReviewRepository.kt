@@ -6,6 +6,11 @@ import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.details.review.NetworkReview
 import com.kirchhoff.movies.screen.review.network.ReviewService
 
+internal interface IReviewRepository {
+    suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<NetworkPaginated<NetworkReview>>
+    suspend fun fetchTvReviews(tvId: Int, page: Int): Result<NetworkPaginated<NetworkReview>>
+}
+
 internal class ReviewRepository(
     private val reviewService: ReviewService
 ) : BaseRepository(), IReviewRepository {

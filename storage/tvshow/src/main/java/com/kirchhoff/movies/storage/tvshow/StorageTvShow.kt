@@ -1,7 +1,11 @@
-package com.kirchhoff.movies.storage.tvshow.storage
+package com.kirchhoff.movies.storage.tvshow
 
 import com.kirchhoff.movies.networkdata.main.NetworkTv
-import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
+
+interface IStorageTvShow {
+    fun updateInfo(tvShow: NetworkTv)
+    fun info(tvShowId: Int): NetworkTv?
+}
 
 internal class StorageTvShow : IStorageTvShow {
     private val tvShowCache: MutableMap<Int, NetworkTv> = HashMap()

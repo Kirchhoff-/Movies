@@ -8,6 +8,13 @@ import com.kirchhoff.movies.screen.review.repository.IReviewRepository
 import com.kirchhoff.movies.storage.movie.IStorageMovie
 import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
 
+internal interface IReviewUseCase {
+    suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>>
+    suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>>
+    fun movieTitle(movieId: Int): String
+    fun tvShowTitle(tvShowId: Int): String
+}
+
 internal class ReviewUseCase(
     private val reviewRepository: IReviewRepository,
     private val reviewMapper: IReviewListMapper,

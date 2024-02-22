@@ -1,7 +1,11 @@
-package com.kirchhoff.movies.storage.movie.storage
+package com.kirchhoff.movies.storage.movie
 
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
-import com.kirchhoff.movies.storage.movie.IStorageMovie
+
+interface IStorageMovie {
+    fun updateInfo(movie: NetworkMovie)
+    fun info(movieId: Int): NetworkMovie?
+}
 
 internal class StorageMovie : IStorageMovie {
     private val moviesCache: MutableMap<Int, NetworkMovie> = HashMap()

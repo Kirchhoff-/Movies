@@ -1,9 +1,9 @@
-package com.kirchhoff.movies.screen.movie.mapper.details
+package com.kirchhoff.movies.screen.movie.mapper
 
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.mapper.BaseMapper
-import com.kirchhoff.movies.core.mapper.core.ICoreMapper
+import com.kirchhoff.movies.core.mapper.ICoreMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.core.NetworkImagesResponse
@@ -17,6 +17,13 @@ import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
+
+internal interface IMovieDetailsMapper {
+    fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieInfo>
+    fun createUIEntertainmentCredits(movieCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits>
+    fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<UITrailersList>
+    fun createUIImages(imagesResponseResult: Result<NetworkImagesResponse>): Result<List<UIImage>>
+}
 
 internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
     override fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieInfo> =

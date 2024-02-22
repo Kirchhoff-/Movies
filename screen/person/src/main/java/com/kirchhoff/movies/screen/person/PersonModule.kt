@@ -1,10 +1,10 @@
 package com.kirchhoff.movies.screen.person
 
 import androidx.appcompat.app.AppCompatActivity
-import com.kirchhoff.movies.screen.person.mapper.details.IPersonDetailsMapper
-import com.kirchhoff.movies.screen.person.mapper.details.PersonDetailsMapper
-import com.kirchhoff.movies.screen.person.mapper.main.IPersonsMapper
-import com.kirchhoff.movies.screen.person.mapper.main.PersonsMapper
+import com.kirchhoff.movies.screen.person.mapper.IPersonDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.IPersonsMapper
+import com.kirchhoff.movies.screen.person.mapper.PersonDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.PersonsMapper
 import com.kirchhoff.movies.screen.person.network.PersonService
 import com.kirchhoff.movies.screen.person.repository.IPersonsRepository
 import com.kirchhoff.movies.screen.person.repository.PersonsRepository

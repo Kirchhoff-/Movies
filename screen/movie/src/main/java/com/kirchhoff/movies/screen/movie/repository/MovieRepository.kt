@@ -8,11 +8,23 @@ import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
-import com.kirchhoff.movies.screen.movie.mapper.details.IMovieDetailsMapper
-import com.kirchhoff.movies.screen.movie.mapper.list.IMovieListMapper
+import com.kirchhoff.movies.screen.movie.mapper.IMovieDetailsMapper
+import com.kirchhoff.movies.screen.movie.mapper.IMovieListMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
 import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
 import com.kirchhoff.movies.storage.movie.IStorageMovie
+
+internal interface IMovieRepository {
+    suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchDetails(movieId: Int): Result<UIMovieInfo>
+    suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList>
+    suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits>
+    suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchImages(movieId: Int): Result<List<UIImage>>
+}
 
 internal class MovieRepository(
     private val movieService: MovieService,

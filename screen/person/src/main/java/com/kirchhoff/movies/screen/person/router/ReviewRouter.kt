@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.screen.person.ui.screen.images.PersonImagesFragment
 
+internal interface IPersonRouter {
+    fun openImagesScreen(imagesUrls: List<String>, currentPosition: Int)
+}
+
 internal class PersonRouter(private val activity: AppCompatActivity) : IPersonRouter {
     override fun openImagesScreen(imagesUrls: List<String>, currentPosition: Int) {
         activity.supportFragmentManager.beginTransaction()

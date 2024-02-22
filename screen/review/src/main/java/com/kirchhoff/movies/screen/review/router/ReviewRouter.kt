@@ -5,6 +5,10 @@ import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.ui.screen.details.ReviewDetailsFragment
 
+internal interface IReviewRouter {
+    fun openDetailsScreen(review: UIReview, title: String)
+}
+
 internal class ReviewRouter(private val activity: AppCompatActivity) : IReviewRouter {
     override fun openDetailsScreen(review: UIReview, title: String) {
         activity.supportFragmentManager

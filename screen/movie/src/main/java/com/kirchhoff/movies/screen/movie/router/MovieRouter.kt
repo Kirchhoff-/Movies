@@ -9,6 +9,15 @@ import com.kirchhoff.movies.screen.movie.ui.screen.image.MovieImageFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.images.MovieImagesFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListFragment
 
+internal interface IMovieRouter {
+    fun openMoviesByGenreScreen(genre: UIGenre)
+    fun openMoviesByCountryScreen(countryId: String, countryName: String)
+    fun openCompanyMoviesScreen(company: UIProductionCompany)
+    fun openSimilarMoviesScreen(movie: UIMovie)
+    fun openImagesScreen(movie: UIMovie)
+    fun openImage(imagePath: String)
+}
+
 internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
 
     override fun openMoviesByGenreScreen(genre: UIGenre) {

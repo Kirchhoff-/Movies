@@ -7,9 +7,16 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
-import com.kirchhoff.movies.screen.person.mapper.details.IPersonDetailsMapper
-import com.kirchhoff.movies.screen.person.mapper.main.IPersonsMapper
+import com.kirchhoff.movies.screen.person.mapper.IPersonDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.IPersonsMapper
 import com.kirchhoff.movies.screen.person.network.PersonService
+
+internal interface IPersonsRepository {
+    suspend fun fetchPopularPersons(page: Int): Result<UIPaginated<UIPerson>>
+    suspend fun fetchPersonDetail(personId: Int): Result<UIPersonDetails>
+    suspend fun fetchPersonCredits(personId: Int): Result<UIPersonCredits>
+    suspend fun fetchPersonImages(personId: Int): Result<List<UIPersonImage>>
+}
 
 internal class PersonsRepository(
     private val personService: PersonService,

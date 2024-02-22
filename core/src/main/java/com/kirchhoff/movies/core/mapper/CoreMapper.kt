@@ -1,14 +1,19 @@
-package com.kirchhoff.movies.core.mapper.core
+package com.kirchhoff.movies.core.mapper
 
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIImage
-import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentPerson
 import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName
 import com.kirchhoff.movies.networkdata.main.NetworkImage
+
+interface ICoreMapper {
+    fun createUIEntertainmentCredits(credits: NetworkEntertainmentCredits): UIEntertainmentCredits
+    fun createUIGenre(item: NetworkObjectWithName): UIGenre
+    fun createUIImage(item: NetworkImage): UIImage
+}
 
 class CoreMapper : BaseMapper(), ICoreMapper {
 

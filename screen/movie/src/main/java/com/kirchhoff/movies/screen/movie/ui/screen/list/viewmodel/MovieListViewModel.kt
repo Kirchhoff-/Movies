@@ -91,7 +91,7 @@ internal class MovieListViewModel(
     private suspend fun fetchMovieList(): Result<UIPaginated<UIMovie>> = when (type) {
         is MovieListType.Genre -> movieRepository.fetchByGenre(type.genre.id, currentPage + 1)
         is MovieListType.Country -> movieRepository.fetchByCountry(type.countryId, currentPage + 1)
-        is MovieListType.Similar -> movieRepository.fetchSimilarMovies(type.movie.id, currentPage + 1)
+        is MovieListType.Similar -> movieRepository.similarMovies(type.movie.id, currentPage + 1)
         is MovieListType.Company -> movieRepository.fetchByCompany(type.company.id, currentPage + 1)
         is MovieListType.Discover -> movieRepository.fetchDiscoverList(currentPage + 1)
     }

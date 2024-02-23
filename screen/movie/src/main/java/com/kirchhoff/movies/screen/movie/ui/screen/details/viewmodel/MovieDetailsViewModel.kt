@@ -91,7 +91,7 @@ internal class MovieDetailsViewModel(
     }
 
     private suspend fun fetchSimilarMovies() {
-        val similarMoviesResult = movieRepository.fetchSimilarMovies(movieId = movie.id, 1)
+        val similarMoviesResult = movieRepository.fetchSimilarMovies(id = movie.id, 1)
         val resultSimilarMoviesList = if (
             similarMoviesResult is Result.Success &&
             similarMoviesResult.data.results.isNotEmpty()

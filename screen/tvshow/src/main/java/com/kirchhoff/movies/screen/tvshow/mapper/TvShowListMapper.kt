@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.tvshow.mapper
 
+import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
@@ -25,7 +26,7 @@ internal class TvShowListMapper : BaseMapper(), ITvShowListMapper {
     )
 
     private fun NetworkTv.toUITv(): UITv = UITv(
-        id = id,
+        id = TvId(id),
         name = name,
         posterPath = posterPath,
         backdropPath = backdropPath,

@@ -1,23 +1,24 @@
 package com.kirchhoff.movies.screen.movie.storage
 
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIImage
 
 internal interface IMovieImagesStorage {
-    fun fetchImages(movieId: Int): List<UIImage>?
-    fun updateImages(movieId: Int, images: List<UIImage>)
+    fun fetchImages(id: MovieId): List<UIImage>?
+    fun updateImages(id: MovieId, images: List<UIImage>)
 }
 
 internal class MovieImagesStorage : IMovieImagesStorage {
 
-    private val imagesMap: MutableMap<Int, List<UIImage>> = mutableMapOf()
+    private val imagesMap: MutableMap<MovieId, List<UIImage>> = mutableMapOf()
 
-    override fun fetchImages(movieId: Int): List<UIImage>? = imagesMap[movieId]
+    override fun fetchImages(id: MovieId): List<UIImage>? = imagesMap[id]
 
-    override fun updateImages(movieId: Int, images: List<UIImage>) {
+    override fun updateImages(id: MovieId, images: List<UIImage>) {
         if (imagesMap.size > MAX_STORAGE_SIZE) {
             imagesMap.remove(imagesMap.keys.first())
         }
-        imagesMap[movieId] = images
+        imagesMap[id] = images
     }
 
     private companion object {

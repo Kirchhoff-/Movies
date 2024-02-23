@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.tvshow.repository
 
+import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.BaseRepository
@@ -13,9 +14,9 @@ import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
 
 internal interface ITvShowRepository {
     suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UITv>>
-    suspend fun fetchSimilarTvShows(tvId: Int, page: Int): Result<UIPaginated<UITv>>
-    suspend fun fetchDetails(tvId: Int): Result<UITvShowInfo>
-    suspend fun fetchCredits(tvId: Int): Result<UIEntertainmentCredits>
+    suspend fun fetchSimilarTvShows(id: TvId, page: Int): Result<UIPaginated<UITv>>
+    suspend fun fetchDetails(id: TvId): Result<UITvShowInfo>
+    suspend fun fetchCredits(id: TvId): Result<UIEntertainmentCredits>
 }
 
 internal class TvShowRepository(
@@ -35,24 +36,24 @@ internal class TvShowRepository(
         return tvShowListMapper.createTvShowList(result)
     }
 
-    override suspend fun fetchSimilarTvShows(tvId: Int, page: Int): Result<UIPaginated<UITv>> =
+    override suspend fun fetchSimilarTvShows(id: TvId, page: Int): Result<UIPaginated<UITv>> =
         tvShowListMapper.createTvShowList(
             apiCall {
-                tvService.fetchSimilarTvShows(tvId, page)
+                tvService.fetchSimilarTvShows(id.value, page)
             }
         )
 
-    override suspend fun fetchDetails(tvId: Int): Result<UITvShowInfo> =
+    override suspend fun fetchDetails(id: TvId): Result<UITvShowInfo> =
         tvDetailsMapper.createUITvDetails(
             apiCall {
-                tvService.fetchDetails(tvId)
+                tvService.fetchDetails(id.value)
             }
         )
 
-    override suspend fun fetchCredits(tvId: Int): Result<UIEntertainmentCredits> =
+    override suspend fun fetchCredits(id: TvId): Result<UIEntertainmentCredits> =
         tvDetailsMapper.createUIEntertainmentCredits(
             apiCall {
-                tvService.fetchCredits(tvId)
+                tvService.fetchCredits(id.value)
             }
         )
 }

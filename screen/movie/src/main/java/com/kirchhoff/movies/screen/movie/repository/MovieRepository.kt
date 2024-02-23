@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.movie.repository
 
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
@@ -16,14 +17,14 @@ import com.kirchhoff.movies.storage.movie.IStorageMovie
 
 internal interface IMovieRepository {
     suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>>
-    suspend fun fetchDetails(movieId: Int): Result<UIMovieInfo>
-    suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo>
+    suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>>
-    suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList>
-    suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits>
+    suspend fun fetchTrailersList(id: MovieId): Result<UITrailersList>
+    suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits>
     suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>>
-    suspend fun fetchImages(movieId: Int): Result<List<UIImage>>
+    suspend fun fetchImages(id: MovieId): Result<List<UIImage>>
 }
 
 internal class MovieRepository(
@@ -44,17 +45,17 @@ internal class MovieRepository(
         return movieListMapper.createMovieList(result)
     }
 
-    override suspend fun fetchDetails(movieId: Int): Result<UIMovieInfo> =
+    override suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo> =
         movieDetailsMapper.createUIMovieDetails(
             apiCall {
-                movieService.fetchDetails(movieId)
+                movieService.fetchDetails(id.value)
             }
         )
 
-    override suspend fun fetchSimilarMovies(movieId: Int, page: Int): Result<UIPaginated<UIMovie>> =
+    override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
         movieListMapper.createMovieList(
             apiCall {
-                movieService.fetchSimilarMovies(movieId, page)
+                movieService.fetchSimilarMovies(id.value, page)
             }
         )
 
@@ -72,17 +73,17 @@ internal class MovieRepository(
             }
         )
 
-    override suspend fun fetchTrailersList(movieId: Int): Result<UITrailersList> =
+    override suspend fun fetchTrailersList(id: MovieId): Result<UITrailersList> =
         movieDetailsMapper.createUITrailersList(
             apiCall {
-                movieService.fetchTrailersList(movieId)
+                movieService.fetchTrailersList(id.value)
             }
         )
 
-    override suspend fun fetchMovieCredits(movieId: Int): Result<UIEntertainmentCredits> =
+    override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> =
         movieDetailsMapper.createUIEntertainmentCredits(
             apiCall {
-                movieService.fetchMovieCredits(movieId)
+                movieService.fetchMovieCredits(id.value)
             }
         )
 
@@ -93,20 +94,20 @@ internal class MovieRepository(
             }
         )
 
-    override suspend fun fetchImages(movieId: Int): Result<List<UIImage>> {
-        val localImages = movieImagesStorage.fetchImages(movieId)
+    override suspend fun fetchImages(id: MovieId): Result<List<UIImage>> {
+        val localImages = movieImagesStorage.fetchImages(id)
 
         return if (localImages != null) {
             Result.Success(localImages)
         } else {
             val result = movieDetailsMapper.createUIImages(
                 apiCall {
-                    movieService.fetchImages(movieId)
+                    movieService.fetchImages(id.value)
                 }
             )
 
             if (result is Result.Success) {
-                movieImagesStorage.updateImages(movieId, result.data)
+                movieImagesStorage.updateImages(id, result.data)
             }
 
             result

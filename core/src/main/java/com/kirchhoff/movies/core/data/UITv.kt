@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UITv(
-    val id: Int,
+    val id: TvId,
     val name: String?,
     val posterPath: String?,
     val backdropPath: String?,

@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.movie.mapper
 
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.repository.Result
@@ -25,7 +26,7 @@ internal class MovieListMapper : BaseMapper(), IMovieListMapper {
     )
 
     private fun NetworkMovie.toUIMovie(): UIMovie = UIMovie(
-        id = id,
+        id = MovieId(id),
         title = title,
         posterPath = posterPath,
         backdropPath = backdropPath,

@@ -66,7 +66,7 @@ internal fun CreditsCastItemUI(actor: UIEntertainmentPerson.Actor) {
 
 @Preview
 @Composable
-internal fun CreditsCastItemUIPreview() {
+private fun CreditsCastItemUIPreview() {
     CreditsCastItemUI(
         UIEntertainmentPerson.Actor(
             id = Random.nextInt(),

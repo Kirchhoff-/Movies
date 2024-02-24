@@ -78,7 +78,7 @@ internal fun CreditsCrewJobItemUI(
 
 @Preview
 @Composable
-internal fun CreditsCrewListJobUIPreview() {
+private fun CreditsCrewListJobUIPreview() {
     CreditsCrewJobItemUI(
         jobText = "Creator",
         isExpanded = false,

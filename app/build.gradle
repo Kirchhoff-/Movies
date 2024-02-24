@@ -66,6 +66,7 @@ dependencies {
 
     debugImplementation libs.leakCanary
 
+    testImplementation libs.bundles.compose
     testImplementation libs.bundles.tests
     testImplementation libs.konsist
 

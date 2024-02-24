@@ -98,7 +98,7 @@ internal fun ReviewListUI(
 
 @Preview
 @Composable
-internal fun ReviewListPreview() {
+private fun ReviewListPreview() {
     ReviewListUI(
         screenState = ReviewsListScreenState(
             title = "Some movie title",

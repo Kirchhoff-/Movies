@@ -63,7 +63,7 @@ internal fun CreditsCrewPersonItemUI(
 
 @Preview
 @Composable
-internal fun CreditsCrewPersonItemUIPreview() {
+private fun CreditsCrewPersonItemUIPreview() {
     CreditsCrewListPersonItem(
         name = "Some name",
         profilePath = null

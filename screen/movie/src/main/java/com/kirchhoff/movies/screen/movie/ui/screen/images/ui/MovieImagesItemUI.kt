@@ -48,7 +48,7 @@ internal fun MovieImagesItemUI(
 
 @Preview
 @Composable
-internal fun MovieImagesItemUIPreview() {
+private fun MovieImagesItemUIPreview() {
     MovieImagesItemUI(
         UIImage(
             path = "",

@@ -43,7 +43,7 @@ internal fun CreditsCrewUI(
 
 @Preview
 @Composable
-internal fun CreditsCrewUIPreview() {
+private fun CreditsCrewUIPreview() {
     CreditsCrewUI(
         screenState = CreditsCrewScreenState(
             creators = emptyList(),

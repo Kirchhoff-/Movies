@@ -52,7 +52,7 @@ internal fun PersonImagesUI(
 
 @Preview
 @Composable
-internal fun PersonImagesUIPreview() {
+private fun PersonImagesUIPreview() {
     PersonImagesUI(
         imagesUrls = listOf("", ""),
         startPosition = 0,

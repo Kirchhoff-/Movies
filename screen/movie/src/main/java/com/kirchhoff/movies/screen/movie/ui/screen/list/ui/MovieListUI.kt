@@ -92,7 +92,7 @@ internal fun MovieListUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun MovieListUIPreview() {
+private fun MovieListUIPreview() {
     MovieListUI(
         screenState = MovieListScreenState(
             movieList = listOf(

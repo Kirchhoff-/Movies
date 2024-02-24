@@ -44,7 +44,7 @@ internal fun CreditsCastUI(
 
 @Preview
 @Composable
-internal fun CreditsCastUIPreview() {
+private fun CreditsCastUIPreview() {
     CreditsCastUI(
         screenState = CreditsCastScreenState(
             actors = listOf(

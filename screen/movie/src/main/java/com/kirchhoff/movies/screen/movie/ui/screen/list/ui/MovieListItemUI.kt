@@ -87,7 +87,7 @@ internal fun MovieListItemUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun MovieListItemUIPreview() {
+private fun MovieListItemUIPreview() {
     val movie = UIMovie(
         id = MovieId(100),
         title = "Super movie",

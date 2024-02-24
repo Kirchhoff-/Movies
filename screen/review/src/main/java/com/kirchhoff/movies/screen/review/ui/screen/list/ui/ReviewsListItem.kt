@@ -105,7 +105,7 @@ internal fun ReviewItem(
 
 @Preview
 @Composable
-internal fun ReviewItemPreview() {
+private fun ReviewItemPreview() {
     val review = UIReview(
         author = "John Doe",
         content = "Some cool stuff about movie or tv show",

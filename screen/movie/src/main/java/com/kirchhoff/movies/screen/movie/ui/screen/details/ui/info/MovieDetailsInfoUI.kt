@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -37,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.compose.TextWithIcon
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UICountry
@@ -84,25 +84,15 @@ internal fun MovieDetailsInfoUI(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
+                    TextWithIcon(
                         imageVector = Icons.Filled.DateRange,
-                        contentDescription = ""
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        style = infoTextStyle,
                         text = info.releaseDate.orEmpty()
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
+                    TextWithIcon(
                         painter = painterResource(com.kirchhoff.movies.core.R.drawable.ic_access_time),
-                        contentDescription = ""
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        style = infoTextStyle,
                         text = StringValue.IdText(
                             R.string.movie_runtime_format,
                             info.runtime.asMovieRuntime(),

@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.person.ui.screen.images
+package com.kirchhoff.movies.screen.person.ui.screen.images.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
@@ -14,22 +14,23 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.person.R
+import com.kirchhoff.movies.screen.person.data.UIPersonImage
+import com.kirchhoff.movies.screen.person.ui.screen.images.model.PersonImagesScreenState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun PersonImagesUI(
-    imagesUrls: List<String>,
-    startPosition: Int,
+    screenState: PersonImagesScreenState,
     onBackPressed: () -> Unit
 ) {
     val pagerState = rememberPagerState(
-        initialPage = startPosition,
-        pageCount = { imagesUrls.size }
+        initialPage = screenState.startPosition,
+        pageCount = { screenState.imagesUrls.size }
     )
     val currentTitle = stringResource(
         R.string.person_images_title_format,
         pagerState.currentPage + 1,
-        imagesUrls.size
+        screenState.imagesUrls.size
     )
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -42,7 +43,7 @@ internal fun PersonImagesUI(
         ) { page ->
             AsyncImage(
                 modifier = Modifier.fillMaxSize(),
-                model = BASE_POSTER_PATH + imagesUrls[page],
+                model = BASE_POSTER_PATH + screenState.imagesUrls[page].url,
                 contentScale = ContentScale.Crop,
                 contentDescription = ""
             )
@@ -54,8 +55,10 @@ internal fun PersonImagesUI(
 @Composable
 private fun PersonImagesUIPreview() {
     PersonImagesUI(
-        imagesUrls = listOf("", ""),
-        startPosition = 0,
+        screenState = PersonImagesScreenState(
+            imagesUrls = listOf(UIPersonImage(""), UIPersonImage("")),
+            startPosition = 0
+        ),
         onBackPressed = {}
     )
 }

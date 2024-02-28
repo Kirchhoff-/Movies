@@ -10,6 +10,7 @@ import com.kirchhoff.movies.screen.person.data.UIPersonImage
 import com.kirchhoff.movies.screen.person.mapper.IPersonDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.IPersonsMapper
 import com.kirchhoff.movies.screen.person.network.PersonService
+import com.kirchhoff.movies.screen.person.storage.IPersonImagesStorage
 
 internal interface IPersonsRepository {
     suspend fun fetchPopularPersons(page: Int): Result<UIPaginated<UIPerson>>
@@ -20,6 +21,7 @@ internal interface IPersonsRepository {
 
 internal class PersonsRepository(
     private val personService: PersonService,
+    private val personImagesStorage: IPersonImagesStorage,
     private val personMapper: IPersonsMapper,
     private val personDetailsMapper: IPersonDetailsMapper
 ) : BaseRepository(), IPersonsRepository {
@@ -49,10 +51,23 @@ internal class PersonsRepository(
             }
         )
 
-    override suspend fun fetchPersonImages(personId: Int): Result<List<UIPersonImage>> =
-        personDetailsMapper.createUIPersonImages(
-            apiCall {
-                personService.fetchPersonImages(personId)
+    override suspend fun fetchPersonImages(personId: Int): Result<List<UIPersonImage>> {
+        val localImages = personImagesStorage.fetchImages(personId)
+
+        return if (localImages != null) {
+            Result.Success(localImages)
+        } else {
+            val result = personDetailsMapper.createUIPersonImages(
+                apiCall {
+                    personService.fetchPersonImages(personId)
+                }
+            )
+
+            if (result is Result.Success) {
+                personImagesStorage.updateImages(personId, result.data)
             }
-        )
+
+            result
+        }
+    }
 }

@@ -107,7 +107,7 @@ internal class PersonDetailsFragment : BaseFragment() {
 
     private fun onImageClick(position: Int) {
         personRouter.openImagesScreen(
-            imagesUrls = viewModel.screenState.value?.images?.map { it.url } ?: error("Can't open images screen without images"),
+            personId = person.id,
             currentPosition = position
         )
     }

@@ -78,8 +78,14 @@ internal class MovieRepository(
 
     override suspend fun fetchTrailersList(id: MovieId): Result<NetworkTrailersList> = apiCall { movieService.fetchTrailersList(id.value) }
 
-    override suspend fun fetchMovieCredits(id: MovieId): Result<NetworkEntertainmentCredits> = apiCall {
-        movieService.fetchMovieCredits(id.value)
+    override suspend fun fetchMovieCredits(id: MovieId): Result<NetworkEntertainmentCredits> {
+        val result = apiCall { movieService.fetchMovieCredits(id.value) }
+
+        if (result is Result.Success) {
+            movieStorage.updateCredits(id.value, result.data)
+        }
+
+        return result
     }
 
     override suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>> =

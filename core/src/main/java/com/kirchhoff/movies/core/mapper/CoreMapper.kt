@@ -11,41 +11,48 @@ import com.kirchhoff.movies.networkdata.main.NetworkImage
 
 interface ICoreMapper {
     fun createUIEntertainmentCredits(credits: NetworkEntertainmentCredits): UIEntertainmentCredits
+    fun createUIEntertainmentActors(actors: List<NetworkEntertainmentPerson.Actor>): List<UIEntertainmentPerson.Actor>
+    fun createUIEntertainmentCreators(creators: List<NetworkEntertainmentPerson.Creator>): List<UIEntertainmentPerson.Creator>
     fun createUIGenre(item: NetworkObjectWithName): UIGenre
     fun createUIImage(item: NetworkImage): UIImage
 }
 
 class CoreMapper : BaseMapper(), ICoreMapper {
 
-    override fun createUIEntertainmentCredits(credits: NetworkEntertainmentCredits) =
-        UIEntertainmentCredits(
-            credits.cast?.map { createUIEntertainmentActor(it) },
-            credits.crew?.map { createUIEntertainmentCreator(it) }
-        )
+    override fun createUIEntertainmentCredits(credits: NetworkEntertainmentCredits): UIEntertainmentCredits = credits.toUICredits()
 
-    override fun createUIGenre(item: NetworkObjectWithName) = UIGenre(item.id, item.name)
+    override fun createUIGenre(item: NetworkObjectWithName): UIGenre = UIGenre(item.id, item.name)
 
-    override fun createUIImage(item: NetworkImage) = UIImage(
+    override fun createUIImage(item: NetworkImage): UIImage = UIImage(
         path = item.path,
         height = item.height / IMAGE_SIZE_KF,
         width = item.width / IMAGE_SIZE_KF
     )
 
-    private fun createUIEntertainmentActor(actor: NetworkEntertainmentPerson.Actor) =
-        UIEntertainmentPerson.Actor(
-            actor.id,
-            actor.name,
-            actor.profilePath,
-            actor.character
-        )
+    override fun createUIEntertainmentActors(actors: List<NetworkEntertainmentPerson.Actor>): List<UIEntertainmentPerson.Actor> =
+        actors.map { it.toUIActor() }
 
-    private fun createUIEntertainmentCreator(creator: NetworkEntertainmentPerson.Creator) =
-        UIEntertainmentPerson.Creator(
-            creator.id,
-            creator.name,
-            creator.profilePath,
-            creator.job
-        )
+    override fun createUIEntertainmentCreators(creators: List<NetworkEntertainmentPerson.Creator>): List<UIEntertainmentPerson.Creator> =
+        creators.map { it.toUICreator() }
+
+    private fun NetworkEntertainmentCredits.toUICredits(): UIEntertainmentCredits = UIEntertainmentCredits(
+        cast = cast?.let { createUIEntertainmentActors(it) },
+        crew = crew?.let { createUIEntertainmentCreators(it) }
+    )
+
+    private fun NetworkEntertainmentPerson.Actor.toUIActor(): UIEntertainmentPerson.Actor = UIEntertainmentPerson.Actor(
+        id = id,
+        name = name,
+        profilePath = profilePath,
+        character = character
+    )
+
+    private fun NetworkEntertainmentPerson.Creator.toUICreator(): UIEntertainmentPerson.Creator = UIEntertainmentPerson.Creator(
+        id = id,
+        name = name,
+        profilePath = profilePath,
+        job = job
+    )
 
     private companion object {
         const val IMAGE_SIZE_KF = 2

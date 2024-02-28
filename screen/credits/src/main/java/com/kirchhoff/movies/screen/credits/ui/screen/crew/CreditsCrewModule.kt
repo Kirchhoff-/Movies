@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.crew
 
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.factory.CreditsCrewListFactory
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.factory.ICreditsCrewListFactory
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.usecase.CreditsCrewUseCase
@@ -12,12 +12,18 @@ import org.koin.dsl.module
 internal val creditsCrewModule = module {
     single<ICreditsCrewListFactory> { CreditsCrewListFactory() }
 
-    single<ICreditsCrewUseCase> { CreditsCrewUseCase(creditsCrewListFactory = get()) }
+    single<ICreditsCrewUseCase> {
+        CreditsCrewUseCase(
+            movieStorage = get(),
+            coreMapper = get(),
+            creditsCrewListFactory = get()
+        )
+    }
 
-    viewModel { (creators: List<UIEntertainmentPerson.Creator>) ->
+    viewModel { (movieId: MovieId) ->
         CreditsCrewViewModel(
-            creditsCrewUseCase = get(),
-            creators = creators
+            movieId = movieId,
+            creditsCrewUseCase = get()
         )
     }
 }

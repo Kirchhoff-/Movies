@@ -32,8 +32,8 @@ import com.kirchhoff.movies.creditsview.R
 internal fun MovieDetailsCreditsUI(
     credits: UIEntertainmentCredits,
     onItemClick: (UIEntertainmentPerson) -> Unit,
-    onCastSeeAllClick: (List<UIEntertainmentPerson.Actor>) -> Unit,
-    onCrewSeeAllClick: (List<UIEntertainmentPerson.Creator>) -> Unit
+    onCastSeeAllClick: () -> Unit,
+    onCrewSeeAllClick: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -51,7 +51,7 @@ internal fun MovieDetailsCreditsUI(
                     modifier = Modifier.clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = true),
-                        onClick = { onCastSeeAllClick.invoke(castCredits) }
+                        onClick = { onCastSeeAllClick.invoke() }
                     ),
                     text = stringResource(R.string.see_all),
                     color = colorResource(com.kirchhoff.movies.core.R.color.link_color),
@@ -88,7 +88,7 @@ internal fun MovieDetailsCreditsUI(
                     modifier = Modifier.clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = rememberRipple(bounded = true),
-                        onClick = { onCrewSeeAllClick.invoke(crewCredits) }
+                        onClick = { onCrewSeeAllClick.invoke() }
                     ),
                     text = stringResource(R.string.see_all),
                     color = colorResource(com.kirchhoff.movies.core.R.color.link_color),

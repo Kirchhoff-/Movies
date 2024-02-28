@@ -6,6 +6,8 @@ android {
 
 dependencies {
   implementation project(path: ':core')
+  implementation project(path: ':networkdata')
+  implementation project(path: ':storage:movie')
 
   implementation libs.bundles.di
   implementation libs.coilCompose

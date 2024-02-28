@@ -3,7 +3,7 @@ package com.kirchhoff.movies.router
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.R
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
@@ -47,12 +47,12 @@ class Router(
         replaceFragment(reviewFacade.tvShowReview(tv.id))
     }
 
-    override fun openCastCreditsScreen(actors: List<UIEntertainmentPerson.Actor>) {
-        replaceFragment(creditsFacade.castCredits(actors))
+    override fun openCastCreditsScreen(movieId: MovieId) {
+        replaceFragment(creditsFacade.castCredits(movieId))
     }
 
-    override fun openCrewCreditsScreen(creators: List<UIEntertainmentPerson.Creator>) {
-        replaceFragment(creditsFacade.crewCredits(creators))
+    override fun openCrewCreditsScreen(movieId: MovieId) {
+        replaceFragment(creditsFacade.crewCredits(movieId))
     }
 
     private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {

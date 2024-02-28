@@ -8,5 +8,7 @@ internal interface IPersonImagesUseCase {
 }
 
 internal class PersonImagesUseCase(private val personImagesStorage: IPersonImagesStorage) : IPersonImagesUseCase {
-    override fun fetchImages(personId: Int): List<UIPersonImage> = personImagesStorage.fetchImages(personId) ?: error("There are no images for person with id = $personId")
+    override fun fetchImages(personId: Int): List<UIPersonImage> = personImagesStorage.fetchImages(personId) ?: error(
+        "There are no images for person with id = $personId"
+    )
 }

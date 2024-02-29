@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.screen.movie.router
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
@@ -21,58 +22,32 @@ internal interface IMovieRouter {
 internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
 
     override fun openMoviesByGenreScreen(genre: UIGenre) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, MovieListFragment.byGenre(genre))
-            .addToBackStack(null)
-            .commit()
+        replaceFragment(MovieListFragment.byGenre(genre))
     }
 
     override fun openMoviesByCountryScreen(countryId: String, countryName: String) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                MovieListFragment.byCountry(countryId, countryName)
-            )
-            .addToBackStack(null)
-            .commit()
+        replaceFragment(MovieListFragment.byCountry(countryId, countryName))
     }
 
     override fun openSimilarMoviesScreen(movie: UIMovie) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                MovieListFragment.similarWith(movie)
-            )
-            .addToBackStack(null)
-            .commit()
+        replaceFragment(MovieListFragment.similarWith(movie))
     }
 
     override fun openCompanyMoviesScreen(company: UIProductionCompany) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                MovieListFragment.byCompany(company)
-            )
-            .addToBackStack(null)
-            .commit()
+        replaceFragment(MovieListFragment.byCompany(company))
     }
 
     override fun openImagesScreen(movie: UIMovie) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                MovieImagesFragment.newInstance(movie)
-            )
-            .addToBackStack(null)
-            .commit()
+        replaceFragment(MovieImagesFragment.newInstance(movie))
     }
 
     override fun openImage(imagePath: String) {
+        replaceFragment(MovieImageFragment.newInstance(imagePath))
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
         activity.supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                MovieImageFragment.newInstance(imagePath)
-            )
+            .replace(R.id.fragmentContainer, fragment)
             .addToBackStack(null)
             .commit()
     }

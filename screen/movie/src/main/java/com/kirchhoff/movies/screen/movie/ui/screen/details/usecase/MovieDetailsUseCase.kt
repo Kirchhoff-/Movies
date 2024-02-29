@@ -10,6 +10,7 @@ import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.mapper.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.mapper.IMovieListMapper
+import com.kirchhoff.movies.screen.movie.repository.IMovieDetailsRepository
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 
 internal interface IMovieDetailsUseCase {
@@ -22,21 +23,22 @@ internal interface IMovieDetailsUseCase {
 
 internal class MovieDetailsUseCase(
     private val movieRepository: IMovieRepository,
+    private val movieDetailsRepository: IMovieDetailsRepository,
     private val movieDetailsMapper: IMovieDetailsMapper,
     private val movieListMapper: IMovieListMapper
 ) : IMovieDetailsUseCase {
 
     override suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo> =
-        movieDetailsMapper.createUIMovieDetails(movieRepository.fetchDetails(id))
+        movieDetailsMapper.createUIMovieDetails(movieDetailsRepository.fetchDetails(id))
 
     override suspend fun fetchTrailersList(id: MovieId): Result<UITrailersList> =
-        movieDetailsMapper.createUITrailersList(movieRepository.fetchTrailersList(id))
+        movieDetailsMapper.createUITrailersList(movieDetailsRepository.fetchTrailersList(id))
 
     override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> =
-        movieDetailsMapper.createUIEntertainmentCredits(movieRepository.fetchMovieCredits(id))
+        movieDetailsMapper.createUIEntertainmentCredits(movieDetailsRepository.fetchMovieCredits(id))
 
     override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(movieRepository.fetchSimilarMovies(id, page))
+        movieListMapper.createMovieList(movieDetailsRepository.fetchSimilarMovies(id, page))
 
     override suspend fun fetchImages(id: MovieId): Result<List<UIImage>> = movieRepository.fetchImages(id)
 }

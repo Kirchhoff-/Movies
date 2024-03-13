@@ -63,7 +63,7 @@ internal fun MovieDetailsCreditsUI(
                 contentPadding = PaddingValues(16.dp)
             ) {
                 items(
-                    count = DISPLAYING_ITEM_COUNT,
+                    count = castCredits.size,
                     itemContent = {
                         MovieDetailsCreditsItemUI(
                             credit = castCredits[it],
@@ -100,7 +100,7 @@ internal fun MovieDetailsCreditsUI(
                 contentPadding = PaddingValues(16.dp)
             ) {
                 items(
-                    count = DISPLAYING_ITEM_COUNT,
+                    count = crewCredits.size,
                     itemContent = {
                         MovieDetailsCreditsItemUI(
                             credit = crewCredits[it],
@@ -112,8 +112,6 @@ internal fun MovieDetailsCreditsUI(
         }
     }
 }
-
-private const val DISPLAYING_ITEM_COUNT = 10
 
 @Preview
 @Composable

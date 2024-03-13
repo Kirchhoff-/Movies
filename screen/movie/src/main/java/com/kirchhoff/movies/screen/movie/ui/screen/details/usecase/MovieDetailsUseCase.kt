@@ -6,6 +6,7 @@ import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
+import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.mapper.IMovieDetailsMapper
@@ -34,8 +35,22 @@ internal class MovieDetailsUseCase(
     override suspend fun fetchTrailersList(id: MovieId): Result<List<UITrailer>> =
         movieDetailsMapper.createUITrailersList(movieDetailsRepository.fetchTrailersList(id))
 
-    override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> =
-        movieDetailsMapper.createUIEntertainmentCredits(movieDetailsRepository.fetchMovieCredits(id))
+    override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> {
+        val creditsResult = movieDetailsRepository.fetchMovieCredits(id)
+
+        return if (creditsResult is Result.Success) {
+            movieDetailsMapper.createUIEntertainmentCredits(
+                Result.Success(
+                    NetworkEntertainmentCredits(
+                        creditsResult.data.cast?.sortedByDescending { it.popularity },
+                        creditsResult.data.crew?.sortedByDescending { it.popularity }
+                    )
+                )
+            )
+        } else {
+            movieDetailsMapper.createUIEntertainmentCredits(creditsResult)
+        }
+    }
 
     override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
         movieListMapper.createMovieList(movieDetailsRepository.fetchSimilarMovies(id, page))

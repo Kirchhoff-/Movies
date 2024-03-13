@@ -5,14 +5,14 @@ import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
-import com.kirchhoff.movies.screen.movie.data.UITrailersList
+import com.kirchhoff.movies.screen.movie.data.UITrailer
 
 internal data class MovieDetailsScreenState(
     val title: StringValue,
     val backdropPath: String?,
     val posterPath: String?,
     val info: UIMovieInfo,
-    val trailers: UITrailersList,
+    val trailers: List<UITrailer>,
     val credits: UIEntertainmentCredits,
     val similarMovies: List<UIMovie>,
     val images: List<UIImage>,

@@ -18,11 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UITrailer
-import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
 @Composable
 internal fun MovieDetailsTrailersUI(
-    trailers: UITrailersList,
+    trailers: List<UITrailer>,
     onTrailerClick: (UITrailer) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -41,10 +40,10 @@ internal fun MovieDetailsTrailersUI(
             contentPadding = PaddingValues(16.dp)
         ) {
             items(
-                count = trailers.results.size,
+                count = trailers.size,
                 itemContent = {
                     MovieDetailsTrailersItemUI(
-                        trailer = trailers.results[it],
+                        trailer = trailers[it],
                         onTrailerClick = onTrailerClick
                     )
                 }
@@ -57,7 +56,7 @@ internal fun MovieDetailsTrailersUI(
 @Composable
 private fun MovieDetailsTrailersUIPreview() {
     MovieDetailsTrailersUI(
-        trailers = UITrailersList(results = emptyList()),
+        trailers = emptyList(),
         onTrailerClick = {}
     )
 }

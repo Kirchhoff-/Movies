@@ -16,12 +16,11 @@ import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
-import com.kirchhoff.movies.screen.movie.data.UITrailersList
 
 internal interface IMovieDetailsMapper {
     fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieInfo>
     fun createUIEntertainmentCredits(movieCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits>
-    fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<UITrailersList>
+    fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<List<UITrailer>>
     fun createUIImages(imagesResponseResult: Result<NetworkImagesResponse>): Result<List<UIImage>>
 }
 
@@ -38,7 +37,7 @@ internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMap
             else -> mapErrorOrException(movieCreditsResult)
         }
 
-    override fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<UITrailersList> =
+    override fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<List<UITrailer>> =
         when (trailersListResult) {
             is Result.Success -> Result.Success(createUITrailerList(trailersListResult.data))
             else -> mapErrorOrException(trailersListResult)
@@ -64,7 +63,7 @@ internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMap
         )
 
     private fun createUITrailerList(trailer: NetworkTrailersList) =
-        UITrailersList(trailer.results.map { createUITrailer(it) })
+        trailer.results.map { createUITrailer(it) }
 
     private fun createUITrailer(trailer: NetworkTrailer) =
         UITrailer(trailer.site, trailer.key)

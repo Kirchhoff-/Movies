@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
-import com.kirchhoff.movies.screen.movie.data.UITrailersList
+import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.mapper.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.mapper.IMovieListMapper
 import com.kirchhoff.movies.screen.movie.repository.IMovieDetailsRepository
@@ -15,7 +15,7 @@ import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 
 internal interface IMovieDetailsUseCase {
     suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo>
-    suspend fun fetchTrailersList(id: MovieId): Result<UITrailersList>
+    suspend fun fetchTrailersList(id: MovieId): Result<List<UITrailer>>
     suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits>
     suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchImages(id: MovieId): Result<List<UIImage>>
@@ -31,7 +31,7 @@ internal class MovieDetailsUseCase(
     override suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo> =
         movieDetailsMapper.createUIMovieDetails(movieDetailsRepository.fetchDetails(id))
 
-    override suspend fun fetchTrailersList(id: MovieId): Result<UITrailersList> =
+    override suspend fun fetchTrailersList(id: MovieId): Result<List<UITrailer>> =
         movieDetailsMapper.createUITrailersList(movieDetailsRepository.fetchTrailersList(id))
 
     override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> =

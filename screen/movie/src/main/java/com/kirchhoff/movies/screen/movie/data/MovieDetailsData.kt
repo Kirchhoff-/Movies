@@ -21,8 +21,6 @@ internal data class UITrailer(
     val key: String
 )
 
-internal data class UITrailersList(val results: List<UITrailer>)
-
 internal data class UICountry(val id: String, val name: String)
 
 @Parcelize

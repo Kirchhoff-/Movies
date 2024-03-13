@@ -8,7 +8,6 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
-import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.usecase.IMovieDetailsUseCase
 import kotlinx.coroutines.async
@@ -38,9 +37,7 @@ internal class MovieDetailsViewModel(
                 voteAverage = 0f,
                 genres = emptyList()
             ),
-            trailers = UITrailersList(
-                results = emptyList()
-            ),
+            trailers = emptyList(),
             credits = UIEntertainmentCredits(
                 cast = emptyList(),
                 crew = emptyList()

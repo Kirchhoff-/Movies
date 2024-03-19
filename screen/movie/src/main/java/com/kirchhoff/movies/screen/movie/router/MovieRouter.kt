@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.ui.screen.image.MovieImageFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.images.MovieImagesFragment
@@ -12,7 +13,7 @@ import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListFragment
 
 internal interface IMovieRouter {
     fun openMoviesByGenreScreen(genre: UIGenre)
-    fun openMoviesByCountryScreen(countryId: String, countryName: String)
+    fun openMoviesByCountryScreen(country: UICountry)
     fun openCompanyMoviesScreen(company: UIProductionCompany)
     fun openSimilarMoviesScreen(movie: UIMovie)
     fun openImagesScreen(movie: UIMovie)
@@ -25,8 +26,8 @@ internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRout
         replaceFragment(MovieListFragment.byGenre(genre))
     }
 
-    override fun openMoviesByCountryScreen(countryId: String, countryName: String) {
-        replaceFragment(MovieListFragment.byCountry(countryId, countryName))
+    override fun openMoviesByCountryScreen(country: UICountry) {
+        replaceFragment(MovieListFragment.byCountry(country))
     }
 
     override fun openSimilarMoviesScreen(movie: UIMovie) {

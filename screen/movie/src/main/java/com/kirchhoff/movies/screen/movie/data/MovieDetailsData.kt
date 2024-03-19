@@ -21,7 +21,8 @@ internal data class UITrailer(
     val key: String
 )
 
-internal data class UICountry(val id: String, val name: String)
+@Parcelize
+internal data class UICountry(val id: String, val name: String) : Parcelable
 
 @Parcelize
 internal data class UIProductionCompany(

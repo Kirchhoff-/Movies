@@ -38,7 +38,7 @@ internal class MovieListViewModel(
     fun updateTitle() {
         val title = when (type) {
             is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, type.genre.name)
-            is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, type.countryName)
+            is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, type.country.name)
             is MovieListType.Similar -> StringValue.IdText(R.string.movie_similar_to_format, type.movie.title)
             is MovieListType.Company -> StringValue.IdText(R.string.movie_movies_by_company_format, type.company.name)
             is MovieListType.Discover -> StringValue.Empty
@@ -90,7 +90,7 @@ internal class MovieListViewModel(
 
     private suspend fun fetchMovieList(): Result<UIPaginated<UIMovie>> = when (type) {
         is MovieListType.Genre -> movieRepository.fetchByGenre(type.genre.id, currentPage + 1)
-        is MovieListType.Country -> movieRepository.fetchByCountry(type.countryId, currentPage + 1)
+        is MovieListType.Country -> movieRepository.fetchByCountry(type.country.id, currentPage + 1)
         is MovieListType.Similar -> movieRepository.similarMovies(type.movie.id, currentPage + 1)
         is MovieListType.Company -> movieRepository.fetchByCompany(type.company.id, currentPage + 1)
         is MovieListType.Discover -> movieRepository.fetchDiscoverList(currentPage + 1)

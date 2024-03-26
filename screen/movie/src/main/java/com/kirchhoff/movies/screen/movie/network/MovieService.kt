@@ -50,4 +50,16 @@ internal interface MovieService {
 
     @GET("/3/movie/{movie_id}/images?language=en")
     suspend fun fetchImages(@Path("movie_id") id: Int): Response<NetworkImagesResponse>
+
+    @GET("/3/movie/now_playing")
+    suspend fun fetchNowPlaying(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/popular")
+    suspend fun fetchPopular(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/top_rated")
+    suspend fun fetchTopRated(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/upcoming")
+    suspend fun fetchUpcoming(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
 }

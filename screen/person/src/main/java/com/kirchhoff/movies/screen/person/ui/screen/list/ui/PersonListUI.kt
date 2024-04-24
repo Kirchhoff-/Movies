@@ -73,7 +73,7 @@ internal fun PersonListUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun PersonListUIPreview() {
+private fun PersonListUIPreview() {
     PersonListUI(
         screenState = PersonListScreenState(
             personList = listOf(

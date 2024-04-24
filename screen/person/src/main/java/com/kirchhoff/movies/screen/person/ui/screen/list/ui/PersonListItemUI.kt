@@ -69,7 +69,7 @@ internal fun PersonListItemUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun PersonListItemUIPreview() {
+private fun PersonListItemUIPreview() {
     val person = UIPerson(
         id = 100,
         name = "John Doe",

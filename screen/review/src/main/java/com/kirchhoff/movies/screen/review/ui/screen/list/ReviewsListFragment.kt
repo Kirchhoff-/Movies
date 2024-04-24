@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
+import com.kirchhoff.movies.core.data.MovieId
+import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.review.data.UIReview
@@ -70,11 +72,11 @@ internal class ReviewsListFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstanceForMovie(id: Int): ReviewsListFragment =
-            newInstance(id, ReviewType.MOVIE)
+        fun newInstanceForMovie(id: MovieId): ReviewsListFragment =
+            newInstance(id.value, ReviewType.MOVIE)
 
-        fun newInstanceForTvShow(id: Int): ReviewsListFragment =
-            newInstance(id, ReviewType.TV)
+        fun newInstanceForTvShow(id: TvId): ReviewsListFragment =
+            newInstance(id.value, ReviewType.TV)
 
         private fun newInstance(
             id: Int,

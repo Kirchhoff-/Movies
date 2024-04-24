@@ -9,8 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
-import com.kirchhoff.movies.core.extensions.getParcelableArrayListExtra
+import com.kirchhoff.movies.core.data.MovieId
+import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.ui.CreditsCastUI
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.viewmodel.CreditsCastViewModel
@@ -21,12 +21,9 @@ import org.koin.core.parameter.parametersOf
 
 internal class CreditsCastFragment : BaseFragment() {
 
-    private val actors: List<UIEntertainmentPerson.Actor> by lazy {
-        requireArguments().getParcelableArrayListExtra(ACTORS_ARG)
-            ?: error("Should provide actors list in arguments")
+    private val viewModel: CreditsCastViewModel by viewModel {
+        parametersOf(requireArguments().getParcelableExtra(MOVIE_ID_ARG) ?: error("Should provide movieId in arguments"))
     }
-
-    private val viewModel: CreditsCastViewModel by viewModel { parametersOf(actors) }
 
     override fun onAttach(context: Context) {
         loadKoinModules(creditsCastModule)
@@ -57,12 +54,12 @@ internal class CreditsCastFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(actors: List<UIEntertainmentPerson.Actor>): CreditsCastFragment = CreditsCastFragment().apply {
+        fun newInstance(movieId: MovieId): CreditsCastFragment = CreditsCastFragment().apply {
             arguments = Bundle().apply {
-                putParcelableArrayList(ACTORS_ARG, ArrayList(actors))
+                putParcelable(MOVIE_ID_ARG, movieId)
             }
         }
 
-        private const val ACTORS_ARG = "ACTORS_ARG"
+        private const val MOVIE_ID_ARG = "MOVIE_ID_ARG"
     }
 }

@@ -29,7 +29,7 @@ internal fun CreditsCrewItemUI(
 
 @Preview
 @Composable
-internal fun CreditsCrewItemUIPreview() {
+private fun CreditsCrewItemUIPreview() {
     CreditsCrewItemUI(
         CreditsCrewListItem(
             job = "Creator",

@@ -1,9 +1,11 @@
 package com.kirchhoff.movies
 
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSealedModifier
 import com.lemonappdev.konsist.api.ext.list.withAllParentsOf
+import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
 import com.lemonappdev.konsist.api.verify.assert
 import org.junit.Test
@@ -101,5 +103,14 @@ class ArchitectureTests {
             .withNameEndingWith("Fragment")
             .filterNot { it.name == "BaseFragment" }
             .assert { it.hasParentWithName("BaseFragment") || it.hasParentWithName("PaginatedScreenFragment") }
+    }
+
+    @Test
+    fun `methods with '@Preview' annotation should have a 'private' visibility modifier`() {
+        Konsist.scopeFromProject()
+            .files
+            .flatMap { it.functions() }
+            .withAnnotationOf(Preview::class)
+            .assert { it.hasPrivateModifier }
     }
 }

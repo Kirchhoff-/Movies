@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
+import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.keywordsview.RatingText
@@ -103,7 +104,7 @@ internal fun TvShowItemUI(
 private fun TvShowItemUIPreview() {
     TvShowItemUI(
         tvShow = UITv(
-            id = 100,
+            id = TvId(100),
             name = "Super tv show",
             posterPath = null,
             backdropPath = null,

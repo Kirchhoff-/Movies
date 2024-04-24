@@ -61,7 +61,7 @@ internal fun CreditsCrewPersonsItemUI(
 
 @Preview
 @Composable
-internal fun CreditsCrewPersonsItemUIPreview() {
+private fun CreditsCrewPersonsItemUIPreview() {
     CreditsCrewPersonsItemUI(
         persons = emptyList(),
         isExpanded = false

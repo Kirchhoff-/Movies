@@ -8,6 +8,11 @@ import com.kirchhoff.movies.screen.person.IPersonFacade
 import com.kirchhoff.movies.screen.tvshow.ITvShowFacade
 import com.kirchhoff.movies.ui.screens.main.MainFragment
 
+interface IDashboardRouter {
+    fun openDashboard()
+    fun createScreenForDashboard(position: Int): Fragment
+}
+
 class DashboardRouter(
     private val activity: AppCompatActivity,
     private val movieFacade: IMovieFacade,

@@ -48,7 +48,6 @@ import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
-import com.kirchhoff.movies.screen.movie.data.UITrailersList
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.companies.MovieDetailsProductionCompaniesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.credits.MovieDetailsCreditsUI
@@ -67,8 +66,8 @@ internal fun MovieDetailsUI(
     onGenreClick: (UIGenre) -> Unit,
     onTrailerClick: (UITrailer) -> Unit,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
-    onCastSeeAllClick: (List<UIEntertainmentPerson.Actor>) -> Unit,
-    onCrewSeeAllClick: (List<UIEntertainmentPerson.Creator>) -> Unit,
+    onCastSeeAllClick: () -> Unit,
+    onCrewSeeAllClick: () -> Unit,
     onSimilarMovieClick: (UIMovie) -> Unit,
     onSimilarMovieSeeAllClick: () -> Unit,
     onImageItemClick: (UIImage) -> Unit,
@@ -138,8 +137,8 @@ private fun ShowUI(
     onGenreClick: (UIGenre) -> Unit,
     onTrailerClick: (UITrailer) -> Unit,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
-    onCastSeeAllClick: (List<UIEntertainmentPerson.Actor>) -> Unit,
-    onCrewSeeAllClick: (List<UIEntertainmentPerson.Creator>) -> Unit,
+    onCastSeeAllClick: () -> Unit,
+    onCrewSeeAllClick: () -> Unit,
     onSimilarMovieClick: (UIMovie) -> Unit,
     onSimilarMovieSeeAllClick: () -> Unit,
     onImageItemClick: (UIImage) -> Unit,
@@ -150,7 +149,7 @@ private fun ShowUI(
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
     val similarMoviesVisible = screenState.similarMovies.isNotEmpty()
     val imagesVisible = screenState.images.isNotEmpty()
-    val trailersVisible = screenState.trailers.results.isNotEmpty()
+    val trailersVisible = screenState.trailers.isNotEmpty()
     val productionCompaniesVisible = screenState.info.productionCompanies.isNotEmpty()
 
     Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
@@ -257,9 +256,7 @@ private fun MovieDetailsUIPreview() {
                 voteAverage = 0f,
                 genres = emptyList()
             ),
-            trailers = UITrailersList(
-                results = emptyList()
-            ),
+            trailers = emptyList(),
             credits = UIEntertainmentCredits(
                 cast = emptyList(),
                 crew = emptyList()

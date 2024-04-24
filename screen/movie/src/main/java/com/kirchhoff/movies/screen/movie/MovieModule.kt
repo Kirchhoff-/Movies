@@ -1,8 +1,10 @@
 package com.kirchhoff.movies.screen.movie
 
 import androidx.appcompat.app.AppCompatActivity
-import com.kirchhoff.movies.screen.movie.mapper.details.IMovieDetailsMapper
-import com.kirchhoff.movies.screen.movie.mapper.details.MovieDetailsMapper
+import com.kirchhoff.movies.screen.movie.mapper.IMovieDetailsMapper
+import com.kirchhoff.movies.screen.movie.mapper.IMovieListMapper
+import com.kirchhoff.movies.screen.movie.mapper.MovieDetailsMapper
+import com.kirchhoff.movies.screen.movie.mapper.MovieListMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import com.kirchhoff.movies.screen.movie.repository.MovieRepository
@@ -22,6 +24,8 @@ internal val movieModule = module {
 
     single<IMovieDetailsMapper> { MovieDetailsMapper(coreMapper = get()) }
 
+    single<IMovieListMapper> { MovieListMapper() }
+
     single<IMovieImagesStorage> { MovieImagesStorage() }
 
     single<IMovieRepository> {
@@ -29,8 +33,8 @@ internal val movieModule = module {
             movieService = get(),
             movieStorage = get(),
             movieImagesStorage = get(),
-            movieDetailsMapper = get(),
-            discoverMapper = get()
+            movieListMapper = get(),
+            movieDetailsMapper = get()
         )
     }
 }

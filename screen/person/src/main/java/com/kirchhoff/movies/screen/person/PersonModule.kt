@@ -1,15 +1,17 @@
 package com.kirchhoff.movies.screen.person
 
 import androidx.appcompat.app.AppCompatActivity
-import com.kirchhoff.movies.screen.person.mapper.details.IPersonDetailsMapper
-import com.kirchhoff.movies.screen.person.mapper.details.PersonDetailsMapper
-import com.kirchhoff.movies.screen.person.mapper.main.IPersonsMapper
-import com.kirchhoff.movies.screen.person.mapper.main.PersonsMapper
+import com.kirchhoff.movies.screen.person.mapper.IPersonDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.IPersonsMapper
+import com.kirchhoff.movies.screen.person.mapper.PersonDetailsMapper
+import com.kirchhoff.movies.screen.person.mapper.PersonsMapper
 import com.kirchhoff.movies.screen.person.network.PersonService
 import com.kirchhoff.movies.screen.person.repository.IPersonsRepository
 import com.kirchhoff.movies.screen.person.repository.PersonsRepository
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.router.PersonRouter
+import com.kirchhoff.movies.screen.person.storage.IPersonImagesStorage
+import com.kirchhoff.movies.screen.person.storage.PersonImagesStorage
 import com.kirchhoff.movies.screen.person.ui.screen.list.viewmodel.PersonListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -26,9 +28,12 @@ internal val personModule = module {
 
     single<IPersonsMapper> { PersonsMapper() }
 
+    single<IPersonImagesStorage> { PersonImagesStorage() }
+
     single<IPersonsRepository> {
         PersonsRepository(
             personService = get(),
+            personImagesStorage = get(),
             personMapper = get(),
             personDetailsMapper = get()
         )

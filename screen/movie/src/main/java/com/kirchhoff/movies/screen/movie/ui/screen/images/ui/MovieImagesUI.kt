@@ -48,7 +48,7 @@ internal fun MovieImagesUI(
 
 @Preview
 @Composable
-internal fun MovieImagesUIPreview() {
+private fun MovieImagesUIPreview() {
     MovieImagesUI(
         MovieImagesScreenState(
             title = "Title",

@@ -13,6 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.kirchhoff.movies.core.data.MovieId
+import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
@@ -83,7 +85,7 @@ internal class PersonDetailsFragment : BaseFragment() {
         if (credit.mediaType == UIMediaType.MOVIE) {
             router.openMovieDetailsScreen(
                 UIMovie(
-                    credit.id,
+                    MovieId(credit.id),
                     credit.title,
                     credit.posterPath,
                     credit.backdropPath,
@@ -93,7 +95,7 @@ internal class PersonDetailsFragment : BaseFragment() {
         } else if (credit.mediaType == UIMediaType.TV) {
             router.openTvDetailsScreen(
                 UITv(
-                    credit.id,
+                    TvId(credit.id),
                     credit.title,
                     credit.posterPath,
                     credit.backdropPath,
@@ -105,7 +107,7 @@ internal class PersonDetailsFragment : BaseFragment() {
 
     private fun onImageClick(position: Int) {
         personRouter.openImagesScreen(
-            imagesUrls = viewModel.screenState.value?.images?.map { it.url } ?: error("Can't open images screen without images"),
+            personId = person.id,
             currentPosition = position
         )
     }

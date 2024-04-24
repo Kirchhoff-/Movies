@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.keywordsview.RatingText
@@ -86,9 +87,9 @@ internal fun MovieListItemUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun MovieListItemUIPreview() {
+private fun MovieListItemUIPreview() {
     val movie = UIMovie(
-        id = 100,
+        id = MovieId(100),
         title = "Super movie",
         posterPath = null,
         backdropPath = null,

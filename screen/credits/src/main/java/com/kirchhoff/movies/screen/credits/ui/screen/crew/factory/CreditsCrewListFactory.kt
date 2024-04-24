@@ -4,6 +4,13 @@ import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListItem
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListPersonItem
 
+internal interface ICreditsCrewListFactory {
+    fun createCrewList(
+        creators: List<UIEntertainmentPerson.Creator>,
+        expandedItems: Set<String>
+    ): List<CreditsCrewListItem>
+}
+
 internal class CreditsCrewListFactory : ICreditsCrewListFactory {
     override fun createCrewList(
         creators: List<UIEntertainmentPerson.Creator>,

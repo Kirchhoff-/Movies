@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.ui.compose.LazyStaggeredGridScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
@@ -91,19 +92,19 @@ internal fun MovieListUI(
 @SuppressWarnings("MagicNumber")
 @Preview
 @Composable
-internal fun MovieListUIPreview() {
+private fun MovieListUIPreview() {
     MovieListUI(
         screenState = MovieListScreenState(
             movieList = listOf(
                 UIMovie(
-                    id = 0,
+                    id = MovieId(0),
                     title = "Title 1",
                     posterPath = null,
                     backdropPath = null,
                     voteAverage = null
                 ),
                 UIMovie(
-                    id = 1,
+                    id = MovieId(1),
                     title = "Title 2",
                     posterPath = "",
                     backdropPath = "",
@@ -117,7 +118,7 @@ internal fun MovieListUIPreview() {
             paginationVisible = false
         ),
         onLoadMore = {},
-        onMovieClick = { UIMovie(3, "Title 3", null, null, null) },
+        onMovieClick = { UIMovie(MovieId(3), "Title 3", null, null, null) },
         onBackPressed = {}
     )
 }

@@ -27,6 +27,6 @@ internal fun MovieImageUI(
 
 @Preview
 @Composable
-internal fun PersonImagesUIPreview() {
+private fun PersonImagesUIPreview() {
     MovieImageUI("") {}
 }

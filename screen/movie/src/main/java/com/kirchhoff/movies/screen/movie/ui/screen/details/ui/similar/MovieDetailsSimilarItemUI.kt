@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.keywordsview.RatingText
@@ -86,7 +87,7 @@ internal fun MovieDetailsSimilarItemUI(
 private fun MovieDetailsSimilarItemUIPreview() {
     MovieDetailsSimilarItemUI(
         movie = UIMovie(
-            id = 0,
+            id = MovieId(0),
             title = "Title 1",
             posterPath = null,
             backdropPath = null,

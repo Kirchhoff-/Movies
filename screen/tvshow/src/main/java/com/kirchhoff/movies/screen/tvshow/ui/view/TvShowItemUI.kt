@@ -88,7 +88,7 @@ internal fun TvShowItemUI(
                     )
                     .padding(vertical = 8.dp),
                 textAlign = TextAlign.Center,
-                text = tvShow.name.orEmpty(),
+                text = tvShow.name,
                 color = colorResource(R.color.white),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,

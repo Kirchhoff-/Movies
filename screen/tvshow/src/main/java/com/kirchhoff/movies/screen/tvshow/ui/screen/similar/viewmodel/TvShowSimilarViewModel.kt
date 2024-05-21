@@ -25,7 +25,7 @@ internal class TvShowSimilarViewModel(
     init {
         screenState.value = TvShowSimilarScreenState(
             tvShowList = emptyList(),
-            title = StringValue.IdText(R.string.tv_show_similar_to_format, tvShow.name.orEmpty()),
+            title = StringValue.IdText(R.string.tv_show_similar_to_format, tvShow.name),
             errorMessage = "",
             loadingVisible = false,
             paginationVisible = false,

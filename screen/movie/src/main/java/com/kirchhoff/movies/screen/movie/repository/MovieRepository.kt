@@ -10,34 +10,25 @@ import com.kirchhoff.movies.screen.movie.mapper.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.mapper.IMovieListMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
 import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
-import com.kirchhoff.movies.storage.movie.IStorageMovie
 
 internal interface IMovieRepository {
-    suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>>
     suspend fun similarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchNowPlaying(page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchUpcoming(page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchPopular(page: Int): Result<UIPaginated<UIMovie>>
+    suspend fun fetchTopRated(page: Int): Result<UIPaginated<UIMovie>>
     suspend fun fetchImages(id: MovieId): Result<List<UIImage>>
 }
 
 internal class MovieRepository(
     private val movieService: MovieService,
-    private val movieStorage: IStorageMovie,
     private val movieImagesStorage: IMovieImagesStorage,
     private val movieListMapper: IMovieListMapper,
     private val movieDetailsMapper: IMovieDetailsMapper
 ) : BaseRepository(), IMovieRepository {
-
-    override suspend fun fetchDiscoverList(page: Int): Result<UIPaginated<UIMovie>> {
-        val result = apiCall { movieService.fetchDiscoverList(page) }
-
-        if (result is Result.Success) {
-            result.data.results.forEach { movieStorage.updateInfo(it) }
-        }
-
-        return movieListMapper.createMovieList(result)
-    }
 
     override suspend fun similarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
         movieListMapper.createMovieList(
@@ -64,6 +55,34 @@ internal class MovieRepository(
         movieListMapper.createMovieList(
             apiCall {
                 movieService.fetchByGenre(genre, page)
+            }
+        )
+
+    override suspend fun fetchNowPlaying(page: Int): Result<UIPaginated<UIMovie>> =
+        movieListMapper.createMovieList(
+            apiCall {
+                movieService.fetchNowPlaying(page)
+            }
+        )
+
+    override suspend fun fetchUpcoming(page: Int): Result<UIPaginated<UIMovie>> =
+        movieListMapper.createMovieList(
+            apiCall {
+                movieService.fetchUpcoming(page)
+            }
+        )
+
+    override suspend fun fetchPopular(page: Int): Result<UIPaginated<UIMovie>> =
+        movieListMapper.createMovieList(
+            apiCall {
+                movieService.fetchPopular(page)
+            }
+        )
+
+    override suspend fun fetchTopRated(page: Int): Result<UIPaginated<UIMovie>> =
+        movieListMapper.createMovieList(
+            apiCall {
+                movieService.fetchTopRated(page)
             }
         )
 

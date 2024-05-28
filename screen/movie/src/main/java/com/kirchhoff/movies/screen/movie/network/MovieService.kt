@@ -12,9 +12,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface MovieService {
-    @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
-    suspend fun fetchDiscoverList(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
-
     @GET("/3/movie/{movie_id}")
     suspend fun fetchDetails(@Path("movie_id") id: Int): Response<NetworkMovieDetails>
 
@@ -47,6 +44,18 @@ internal interface MovieService {
         @Query("with_genres") genre: String,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/now_playing")
+    suspend fun fetchNowPlaying(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/upcoming")
+    suspend fun fetchUpcoming(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/popular")
+    suspend fun fetchPopular(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
+
+    @GET("/3/movie/top_rated")
+    suspend fun fetchTopRated(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
 
     @GET("/3/movie/{movie_id}/images?language=en")
     suspend fun fetchImages(@Path("movie_id") id: Int): Response<NetworkImagesResponse>

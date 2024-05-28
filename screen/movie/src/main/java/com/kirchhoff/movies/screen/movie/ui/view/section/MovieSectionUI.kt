@@ -1,3 +1,5 @@
+@file:SuppressWarnings("MagicNumber")
+
 package com.kirchhoff.movies.screen.movie.ui.view.section
 
 import androidx.compose.foundation.clickable

@@ -1,3 +1,5 @@
+@file:SuppressWarnings("MagicNumber", "LongParameterList")
+
 package com.kirchhoff.movies.screen.movie.ui.screen.discover.ui
 
 import android.widget.Toast

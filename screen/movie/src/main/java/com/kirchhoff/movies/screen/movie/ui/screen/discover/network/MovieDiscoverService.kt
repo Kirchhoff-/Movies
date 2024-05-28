@@ -4,7 +4,6 @@ import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 internal interface MovieDiscoverService {
     @GET("/3/movie/now_playing?page=1")

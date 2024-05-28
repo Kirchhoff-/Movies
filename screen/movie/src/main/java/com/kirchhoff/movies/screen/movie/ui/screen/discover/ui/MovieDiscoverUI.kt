@@ -38,9 +38,9 @@ internal fun MovieDiscoverUI(
         when {
             screenState.isLoading -> ShowLoading()
             screenState.nowPlaying.isEmpty() &&
-            screenState.popular.isEmpty() &&
-            screenState.upcoming.isEmpty() &&
-            screenState.topRated.isEmpty() -> ShowError()
+                screenState.popular.isEmpty() &&
+                screenState.upcoming.isEmpty() &&
+                screenState.topRated.isEmpty() -> ShowError()
             else -> ShowUI(
                 screenState = screenState,
                 onMovieClick = onMovieClick,

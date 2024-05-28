@@ -1,6 +1,6 @@
 @file:SuppressWarnings("MagicNumber")
 
-package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.similar
+package com.kirchhoff.movies.screen.movie.ui.view.section
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,7 +34,7 @@ import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.keywordsview.RatingText
 
 @Composable
-internal fun MovieDetailsSimilarItemUI(
+internal fun MovieSectionItemUI(
     movie: UIMovie,
     onItemClick: (UIMovie) -> Unit
 ) {
@@ -63,8 +63,7 @@ internal fun MovieDetailsSimilarItemUI(
                     contentDescription = ""
                 )
                 RatingText(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd),
+                    modifier = Modifier.align(Alignment.TopEnd),
                     voteAverage = movie.voteAverage
                 )
             }
@@ -85,7 +84,7 @@ internal fun MovieDetailsSimilarItemUI(
 @Preview
 @Composable
 private fun MovieDetailsSimilarItemUIPreview() {
-    MovieDetailsSimilarItemUI(
+    MovieSectionItemUI(
         movie = UIMovie(
             id = MovieId(0),
             title = "Title 1",

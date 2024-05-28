@@ -58,6 +58,8 @@ internal fun MovieDetailsInfoUI(
 ) {
     val context = LocalContext.current
 
+    val productionCountryVisible = info.productionCountries.isNotEmpty()
+
     Column {
         Row(
             modifier = Modifier
@@ -101,26 +103,28 @@ internal fun MovieDetailsInfoUI(
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(2.dp)
-                        .background(Color.White)
-                        .border(
-                            width = 1.dp,
-                            color = Color.Black,
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = true),
-                            onClick = { onProductionCountryClick.invoke(info.productionCountries.first()) }
-                        )
-                        .padding(8.dp),
-                    style = infoTextStyle,
-                    textAlign = TextAlign.Center,
-                    text = info.productionCountries.first().name
-                )
+                if (productionCountryVisible) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(2.dp)
+                            .background(Color.White)
+                            .border(
+                                width = 1.dp,
+                                color = Color.Black,
+                                shape = RoundedCornerShape(8.dp)
+                            )
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple(bounded = true),
+                                onClick = { onProductionCountryClick.invoke(info.productionCountries.first()) }
+                            )
+                            .padding(8.dp),
+                        style = infoTextStyle,
+                        textAlign = TextAlign.Center,
+                        text = info.productionCountries.first().name
+                    )
+                }
             }
         }
         Spacer(modifier = Modifier.height(8.dp))

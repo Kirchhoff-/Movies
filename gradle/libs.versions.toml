@@ -4,8 +4,8 @@ minSdk = "21"
 targetSdk = "34"
 compileSdk = "34"
 buildTools = "33.0.2"
-versionName = "1.18.0"
-versionCode = "18"
+versionName = "1.19.0"
+versionCode = "19"
 
 material = "1.9.0"
 constraintLayout = "2.1.4"
@@ -38,7 +38,6 @@ coilCompose = "2.3.0"
 pagerIndicator = "1.2.4"
 
 timber = "5.0.1"
-stetho = "1.6.0"
 
 leakCanary = "2.10"
 
@@ -80,8 +79,6 @@ coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" 
 pagerIndicator = { module = "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator", version.ref = "pagerIndicator" }
 
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
-stethoOkHttp = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = "stetho" }
 
 leakCanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 
@@ -101,5 +98,4 @@ architectureComponents = ["lifecycle", "liveData", "viewModel"]
 internet = ["retrofit", "retrofitConverter", "okHttpInterceptor"]
 di = ["koin"]
 tests = ["junit"]
-stethoLogs = ["stetho", "stethoOkHttp"]
 compose = ["composeMaterial", "activityCompose", "composeUI", "composeUITooling", "composeFoundation", "composeLiveData"]

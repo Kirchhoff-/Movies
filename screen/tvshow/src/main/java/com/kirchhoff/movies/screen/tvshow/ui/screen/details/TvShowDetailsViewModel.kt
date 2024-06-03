@@ -22,7 +22,7 @@ internal class TvShowDetailsViewModel(
 
     init {
         screenState.value = TvShowDetailsScreenState(
-            title = StringValue.SimpleText(tvShow.name.orEmpty()),
+            title = StringValue.SimpleText(tvShow.name),
             backdropPath = tvShow.backdropPath,
             posterPath = tvShow.posterPath,
             info = UITvShowInfo(

@@ -21,5 +21,14 @@ internal sealed interface MovieListType : Parcelable {
     data class Similar(val movie: UIMovie) : MovieListType, Parcelable
 
     @Parcelize
-    object Discover : MovieListType, Parcelable
+    object NowPlaying : MovieListType, Parcelable
+
+    @Parcelize
+    object Upcoming : MovieListType, Parcelable
+
+    @Parcelize
+    object Popular : MovieListType, Parcelable
+
+    @Parcelize
+    object TopRated : MovieListType, Parcelable
 }

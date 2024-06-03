@@ -14,6 +14,7 @@ internal data class MovieDetailsScreenState(
     val info: UIMovieInfo,
     val trailers: List<UITrailer>,
     val credits: UIEntertainmentCredits,
+    val similarMoviesTitle: StringValue,
     val similarMovies: List<UIMovie>,
     val images: List<UIImage>,
     val isLoading: Boolean,

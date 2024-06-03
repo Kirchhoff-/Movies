@@ -18,6 +18,10 @@ internal interface IMovieRouter {
     fun openSimilarMoviesScreen(movie: UIMovie)
     fun openImagesScreen(movie: UIMovie)
     fun openImage(imagePath: String)
+    fun openNowPlayingScreen()
+    fun openUpcomingScreen()
+    fun openPopularScreen()
+    fun openTopRatedScreen()
 }
 
 internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
@@ -44,6 +48,22 @@ internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRout
 
     override fun openImage(imagePath: String) {
         replaceFragment(MovieImageFragment.newInstance(imagePath))
+    }
+
+    override fun openNowPlayingScreen() {
+        replaceFragment(MovieListFragment.nowPlaying())
+    }
+
+    override fun openUpcomingScreen() {
+        replaceFragment(MovieListFragment.upcoming())
+    }
+
+    override fun openPopularScreen() {
+        replaceFragment(MovieListFragment.popular())
+    }
+
+    override fun openTopRatedScreen() {
+        replaceFragment(MovieListFragment.topRated())
     }
 
     private fun replaceFragment(fragment: Fragment) {

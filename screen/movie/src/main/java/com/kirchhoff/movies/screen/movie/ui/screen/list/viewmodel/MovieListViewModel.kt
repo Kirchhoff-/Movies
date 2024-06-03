@@ -29,7 +29,6 @@ internal class MovieListViewModel(
             movieList = emptyList(),
             title = StringValue.Empty,
             errorMessage = "",
-            toolbarVisible = type != MovieListType.Discover,
             loadingVisible = false,
             paginationVisible = false
         )
@@ -41,7 +40,10 @@ internal class MovieListViewModel(
             is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, type.country.name)
             is MovieListType.Similar -> StringValue.IdText(R.string.movie_similar_to_format, type.movie.title)
             is MovieListType.Company -> StringValue.IdText(R.string.movie_movies_by_company_format, type.company.name)
-            is MovieListType.Discover -> StringValue.Empty
+            is MovieListType.NowPlaying -> StringValue.IdText(R.string.movie_now_playing)
+            is MovieListType.Upcoming -> StringValue.IdText(R.string.movie_upcoming)
+            is MovieListType.Popular -> StringValue.IdText(R.string.movie_popular)
+            is MovieListType.TopRated -> StringValue.IdText(R.string.movie_top_rated)
         }
 
         screenState.value = screenState.value?.copy(title = title)
@@ -93,6 +95,9 @@ internal class MovieListViewModel(
         is MovieListType.Country -> movieRepository.fetchByCountry(type.country.id, currentPage + 1)
         is MovieListType.Similar -> movieRepository.similarMovies(type.movie.id, currentPage + 1)
         is MovieListType.Company -> movieRepository.fetchByCompany(type.company.id, currentPage + 1)
-        is MovieListType.Discover -> movieRepository.fetchDiscoverList(currentPage + 1)
+        MovieListType.NowPlaying -> movieRepository.fetchNowPlaying(currentPage + 1)
+        MovieListType.Popular -> movieRepository.fetchPopular(currentPage + 1)
+        MovieListType.TopRated -> movieRepository.fetchTopRated(currentPage + 1)
+        MovieListType.Upcoming -> movieRepository.fetchUpcoming(currentPage + 1)
     }
 }

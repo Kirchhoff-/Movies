@@ -15,5 +15,9 @@
     <string name="movie_see_all">See all</string>
     <string name="movie_images">Images</string>
     <string name="movie_images_format">%s images</string>
+    <string name="movie_now_playing">Now Playing</string>
+    <string name="movie_upcoming">Upcoming</string>
+    <string name="movie_popular">Popular</string>
+    <string name="movie_top_rated">Top Rated</string>
     <string name="movie_production_companies">Production Companies</string>
 </resources>

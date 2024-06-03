@@ -15,7 +15,6 @@ import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
-import com.kirchhoff.movies.screen.movie.movieModule
 import com.kirchhoff.movies.screen.movie.ui.screen.list.ui.MovieListUI
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,9 +34,6 @@ internal class MovieListFragment : BaseFragment() {
     }
 
     override fun onAttach(context: Context) {
-        if (type == MovieListType.Discover) {
-            loadKoinModules(movieModule)
-        }
         loadKoinModules(movieListModule)
         super.onAttach(context)
     }
@@ -69,18 +65,11 @@ internal class MovieListFragment : BaseFragment() {
     }
 
     override fun onDestroyView() {
-        if (type != MovieListType.Discover) unloadKoinModules(movieListModule)
+        unloadKoinModules(movieListModule)
         super.onDestroyView()
     }
 
-    override fun onDestroy() {
-        if (type == MovieListType.Discover) unloadKoinModules(movieModule)
-        super.onDestroy()
-    }
-
     companion object {
-
-        fun discover(): MovieListFragment = createFragment(MovieListType.Discover)
 
         fun byGenre(genre: UIGenre): MovieListFragment = createFragment(MovieListType.Genre(genre))
 
@@ -89,6 +78,14 @@ internal class MovieListFragment : BaseFragment() {
         fun byCompany(company: UIProductionCompany): MovieListFragment = createFragment(MovieListType.Company(company))
 
         fun similarWith(movie: UIMovie): MovieListFragment = createFragment(MovieListType.Similar(movie))
+
+        fun nowPlaying(): MovieListFragment = createFragment(MovieListType.NowPlaying)
+
+        fun upcoming(): MovieListFragment = createFragment(MovieListType.Upcoming)
+
+        fun popular(): MovieListFragment = createFragment(MovieListType.Popular)
+
+        fun topRated(): MovieListFragment = createFragment(MovieListType.TopRated)
 
         private fun createFragment(type: MovieListType): MovieListFragment = MovieListFragment().apply {
             arguments = Bundle().apply {

@@ -54,7 +54,7 @@ import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.credits.MovieDetai
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.images.MovieDetailsImagesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers.MovieDetailsTrailersUI
-import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.similar.MovieDetailsSimilarUI
+import com.kirchhoff.movies.screen.movie.ui.view.section.MovieSectionUI
 
 @SuppressWarnings("LongParameterList")
 @ExperimentalLayoutApi
@@ -202,8 +202,9 @@ private fun ShowUI(
         }
         if (similarMoviesVisible) {
             Spacer(modifier = Modifier.height(8.dp))
-            MovieDetailsSimilarUI(
+            MovieSectionUI(
                 movies = screenState.similarMovies,
+                title = screenState.similarMoviesTitle,
                 onItemClick = onSimilarMovieClick,
                 onSeeAllClick = onSimilarMovieSeeAllClick
             )
@@ -262,6 +263,7 @@ private fun MovieDetailsUIPreview() {
                 crew = emptyList()
             ),
             similarMovies = emptyList(),
+            similarMoviesTitle = StringValue.IdText(com.kirchhoff.movies.screen.movie.R.string.movie_similar_movies),
             images = emptyList(),
             isLoading = false,
             errorMessage = StringValue.Empty

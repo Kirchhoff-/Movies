@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class UITv(
     val id: TvId,
-    val name: String?,
+    val name: String,
     val posterPath: String?,
     val backdropPath: String?,
     val voteAverage: Float?

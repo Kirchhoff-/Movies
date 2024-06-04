@@ -10,6 +10,8 @@ import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -39,6 +41,7 @@ internal class TvShowDetailsViewModel(
                 cast = null,
                 crew = null
             ),
+            similarTvShows = emptyList(),
             isLoading = false,
             errorMessage = StringValue.Empty
         )
@@ -52,11 +55,11 @@ internal class TvShowDetailsViewModel(
             screenState.value = screenState.value?.copy(isLoading = false)
             when (result) {
                 is Result.Success -> {
-                    screenState.value = screenState.value?.copy(
-                        info = result.data
+                    screenState.value = screenState.value?.copy(info = result.data)
+                    awaitAll(
+                        async { fetchCredits() },
+                        async { fetchSimilarTvShows() }
                     )
-
-                    fetchCredits()
                 }
                 else -> {
                     screenState.value = screenState.value?.copy(
@@ -74,5 +77,23 @@ internal class TvShowDetailsViewModel(
             )
             else -> Timber.e((creditsResult.toString()))
         }
+    }
+
+    private suspend fun fetchSimilarTvShows() {
+        val similarTvShows = tvRepository.fetchSimilarTvShows(id = tvShow.id, page = 1)
+        val resultSimilarTvShowsList = if (
+            similarTvShows is Result.Success &&
+            similarTvShows.data.results.isNotEmpty()
+        ) {
+            similarTvShows.data.results.take(DISPLAYING_DATA_AMOUNT)
+        } else {
+            emptyList()
+        }
+
+        screenState.value = screenState.value?.copy(similarTvShows = resultSimilarTvShowsList)
+    }
+
+    private companion object {
+        const val DISPLAYING_DATA_AMOUNT = 10
     }
 }

@@ -38,6 +38,7 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.utils.StringValue
@@ -46,12 +47,16 @@ import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsS
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.credits.TvShowDetailsCreditsUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.info.TvShowDetailsInfoUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.keywords.TvShowDetailsKeywordsUI
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.similar.TvShowDetailsSimilarUI
 
+@SuppressWarnings("LongParameterList")
 @ExperimentalLayoutApi
 @Composable
 internal fun TvShowDetailsUI(
     screenState: TvShowDetailsScreenState,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
+    onSimilarItemClick: (UITv) -> Unit,
+    onSimilarSeeAllClick: () -> Unit,
     onReviewsClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
@@ -67,6 +72,8 @@ internal fun TvShowDetailsUI(
             else -> ShowUI(
                 screenState = screenState,
                 onCreditItemClick = onCreditItemClick,
+                onSimilarItemClick = onSimilarItemClick,
+                onSimilarSeeAllClick = onSimilarSeeAllClick,
                 onReviewsClick = onReviewsClick
             )
         }
@@ -104,9 +111,12 @@ private fun ShowError(screenState: TvShowDetailsScreenState) {
 private fun ShowUI(
     screenState: TvShowDetailsScreenState,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
+    onSimilarItemClick: (UITv) -> Unit,
+    onSimilarSeeAllClick: () -> Unit,
     onReviewsClick: () -> Unit
 ) {
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
+    val similarTvShowsVisible = screenState.similarTvShows.isNotEmpty()
 
     Column(
         modifier = Modifier
@@ -148,6 +158,14 @@ private fun ShowUI(
             TvShowDetailsCreditsUI(
                 credits = screenState.credits,
                 onItemClick = onCreditItemClick
+            )
+        }
+        if (similarTvShowsVisible) {
+            Spacer(modifier = Modifier.height(8.dp))
+            TvShowDetailsSimilarUI(
+                tvShows = screenState.similarTvShows,
+                onItemClick = onSimilarItemClick,
+                onSeeAllClick = onSimilarSeeAllClick
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -193,11 +211,14 @@ private fun TvShowDetailsUIPreview() {
                 cast = emptyList(),
                 crew = emptyList()
             ),
+            similarTvShows = emptyList(),
             isLoading = false,
             errorMessage = StringValue.Empty
         ),
         onCreditItemClick = {},
         onReviewsClick = {},
+        onSimilarItemClick = {},
+        onSimilarSeeAllClick = {},
         onBackPressed = {}
     )
 }

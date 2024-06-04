@@ -56,6 +56,8 @@ internal class TvShowDetailsFragment : BaseFragment() {
                 screenState = screenState ?: error("Can't build UI without state"),
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
                 onReviewsClick = { router.openReviewsListScreen(tvShow) },
+                onSimilarItemClick = { router.openTvDetailsScreen(it) },
+                onSimilarSeeAllClick = { router.openSimilarTvShowsScreen(tvShow) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }

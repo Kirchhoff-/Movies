@@ -44,7 +44,7 @@ internal fun TvShowDetailsSimilarUI(
                     indication = rememberRipple(bounded = true),
                     onClick = { onSeeAllClick.invoke() }
                 ),
-                text = stringResource(com.kirchhoff.movies.creditsview.R.string.see_all),
+                text = stringResource(com.kirchhoff.movies.screen.tvshow.R.string.tv_show_see_all),
                 color = colorResource(R.color.link_color),
                 fontSize = 16.sp
             )

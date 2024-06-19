@@ -8,8 +8,6 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':networkdata')
     implementation project(path: ':view:voteview')
-    implementation project(path: ':view:keywordsview')
-    implementation project(path: ':view:creditsview')
     implementation project(path: ':view:ratingtextview')
     implementation project(path: ':storage:tvshow')
 

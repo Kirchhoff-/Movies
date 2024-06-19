@@ -10,4 +10,7 @@
     <string name="tv_show_retry">Retry</string>
     <string name="tv_show_empty_similar">There are no similar tv shows</string>
     <string name="tv_show_similar_to_format">Similar to %s</string>
+    <string name="tv_show_cast_credits">Cast Credits</string>
+    <string name="tv_show_crew_credits">Crew Credits</string>
+    <string name="tv_show_see_all">See all</string>
 </resources>

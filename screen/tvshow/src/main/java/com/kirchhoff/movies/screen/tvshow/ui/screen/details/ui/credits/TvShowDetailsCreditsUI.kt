@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
-import com.kirchhoff.movies.creditsview.R
+import com.kirchhoff.movies.screen.tvshow.R
 
 @Composable
 internal fun TvShowDetailsCreditsUI(
@@ -34,7 +34,7 @@ internal fun TvShowDetailsCreditsUI(
         if (castCredits.isNotEmpty()) {
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                text = stringResource(R.string.cast_credits),
+                text = stringResource(R.string.tv_show_cast_credits),
                 color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
                 fontSize = 16.sp
             )
@@ -59,7 +59,7 @@ internal fun TvShowDetailsCreditsUI(
         if (crewCredits.isNotEmpty()) {
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                text = stringResource(R.string.crew_credits),
+                text = stringResource(R.string.tv_show_crew_credits),
                 color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
                 fontSize = 16.sp
             )

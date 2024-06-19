@@ -32,7 +32,7 @@ internal fun PersonDetailsCreditsUI(
         if (credits.cast?.isNotEmpty() == true) {
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                text = stringResource(com.kirchhoff.movies.creditsview.R.string.cast_credits),
+                text = stringResource(com.kirchhoff.movies.screen.person.R.string.person_cast_credits),
                 color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
                 fontSize = 16.sp
             )
@@ -56,7 +56,7 @@ internal fun PersonDetailsCreditsUI(
         if (credits.crew?.isNotEmpty() == true) {
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                text = stringResource(com.kirchhoff.movies.creditsview.R.string.crew_credits),
+                text = stringResource(com.kirchhoff.movies.screen.person.R.string.person_crew_credits),
                 color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
                 fontSize = 16.sp
             )

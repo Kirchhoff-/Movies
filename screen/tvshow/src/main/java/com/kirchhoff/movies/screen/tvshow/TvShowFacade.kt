@@ -9,7 +9,6 @@ import com.kirchhoff.movies.screen.tvshow.ui.screen.similar.TvShowSimilarFragmen
 interface ITvShowFacade {
     fun tvShowList(): Fragment
     fun tvShowDetails(tv: UITv): Fragment
-    fun similarTvShow(tv: UITv): Fragment
 }
 
 class TvShowFacade : ITvShowFacade {
@@ -17,6 +16,4 @@ class TvShowFacade : ITvShowFacade {
     override fun tvShowList(): Fragment = TvShowListFragment()
 
     override fun tvShowDetails(tv: UITv): Fragment = TvShowDetailsFragment.newInstance(tv)
-
-    override fun similarTvShow(tv: UITv): Fragment = TvShowSimilarFragment.newInstance(tv)
 }

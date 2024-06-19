@@ -45,7 +45,7 @@ internal fun MovieDetailsImagesUI(
                     indication = rememberRipple(bounded = true),
                     onClick = { onSeeAllClick.invoke() }
                 ),
-                text = stringResource(com.kirchhoff.movies.creditsview.R.string.see_all),
+                text = stringResource(R.string.movie_see_all),
                 color = colorResource(com.kirchhoff.movies.core.R.color.link_color),
                 fontSize = 16.sp
             )

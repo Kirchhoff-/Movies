@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
-import com.kirchhoff.movies.creditsview.R
+import com.kirchhoff.movies.screen.movie.R
 
 @SuppressWarnings("LongMethod")
 @Composable
@@ -42,7 +42,7 @@ internal fun MovieDetailsCreditsUI(
         if (castCredits.isNotEmpty()) {
             Row(modifier = Modifier.padding(horizontal = 16.dp)) {
                 Text(
-                    text = stringResource(R.string.cast_credits),
+                    text = stringResource(R.string.movie_cast_credits),
                     color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
                     fontSize = 16.sp
                 )
@@ -53,7 +53,7 @@ internal fun MovieDetailsCreditsUI(
                         indication = rememberRipple(bounded = true),
                         onClick = { onCastSeeAllClick.invoke() }
                     ),
-                    text = stringResource(R.string.see_all),
+                    text = stringResource(R.string.movie_see_all),
                     color = colorResource(com.kirchhoff.movies.core.R.color.link_color),
                     fontSize = 16.sp
                 )
@@ -79,7 +79,7 @@ internal fun MovieDetailsCreditsUI(
         if (crewCredits.isNotEmpty()) {
             Row(modifier = Modifier.padding(horizontal = 16.dp)) {
                 Text(
-                    text = stringResource(R.string.crew_credits),
+                    text = stringResource(R.string.movie_crew_credits),
                     color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
                     fontSize = 16.sp
                 )
@@ -90,7 +90,7 @@ internal fun MovieDetailsCreditsUI(
                         indication = rememberRipple(bounded = true),
                         onClick = { onCrewSeeAllClick.invoke() }
                     ),
-                    text = stringResource(R.string.see_all),
+                    text = stringResource(R.string.movie_see_all),
                     color = colorResource(com.kirchhoff.movies.core.R.color.link_color),
                     fontSize = 16.sp
                 )

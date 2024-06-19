@@ -35,10 +35,6 @@ class Router(
         replaceFragment(personFacade.personDetails(person))
     }
 
-    override fun openSimilarTvShowsScreen(tv: UITv) {
-        replaceFragment(tvShowFacade.similarTvShow(tv))
-    }
-
     override fun openReviewsListScreen(movie: UIMovie) {
         replaceFragment(reviewFacade.movieReview(movie.id))
     }

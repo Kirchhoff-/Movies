@@ -14,7 +14,9 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.TvShowDetailsUI
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -26,6 +28,8 @@ internal class TvShowDetailsFragment : BaseFragment() {
         requireArguments().getParcelableExtra(TV_ARG)
             ?: error("Should provide tv show info in arguments")
     }
+
+    private val tvShowRouter: ITvShowRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: TvShowDetailsViewModel by viewModel { parametersOf(tvShow) }
 
@@ -57,7 +61,7 @@ internal class TvShowDetailsFragment : BaseFragment() {
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
                 onReviewsClick = { router.openReviewsListScreen(tvShow) },
                 onSimilarItemClick = { router.openTvDetailsScreen(it) },
-                onSimilarSeeAllClick = { router.openSimilarTvShowsScreen(tvShow) },
+                onSimilarSeeAllClick = { tvShowRouter.openSimilarTvShowScreen(tvShow) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }

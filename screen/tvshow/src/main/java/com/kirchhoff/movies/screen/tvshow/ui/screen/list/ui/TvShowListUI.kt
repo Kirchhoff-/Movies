@@ -19,11 +19,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.ui.compose.ListScrollHandler
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.model.TvShowListScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.view.TvShowItemUI
@@ -72,7 +72,7 @@ internal fun TvShowListUI(
         ) {
             Text(
                 text = stringResource(R.string.empty_tw_shows),
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
+                color = Colors.TextMain
             )
         }
     }

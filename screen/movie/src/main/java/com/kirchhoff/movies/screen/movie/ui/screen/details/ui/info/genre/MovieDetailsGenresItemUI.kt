@@ -13,11 +13,11 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.data.UIGenre
+import com.kirchhoff.movies.core.ui.resources.Colors
 
 @Composable
 internal fun MovieDetailsGenresItemUI(
@@ -27,10 +27,10 @@ internal fun MovieDetailsGenresItemUI(
     Text(
         modifier = Modifier
             .padding(2.dp)
-            .background(Color.White)
+            .background(Colors.White)
             .border(
                 width = 1.dp,
-                color = Color.Black,
+                color = Colors.Black,
                 shape = RoundedCornerShape(8.dp)
             )
             .clickable(
@@ -39,7 +39,7 @@ internal fun MovieDetailsGenresItemUI(
                 onClick = { onGenreClick.invoke(genre) }
             )
             .padding(8.dp),
-        color = Color.Black,
+        color = Colors.Black,
         fontSize = 14.sp,
         text = genre.name
     )

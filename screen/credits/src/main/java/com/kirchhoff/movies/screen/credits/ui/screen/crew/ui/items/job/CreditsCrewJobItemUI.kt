@@ -21,12 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.credits.R
 
 @SuppressWarnings("MagicNumber")
@@ -49,7 +49,7 @@ internal fun CreditsCrewJobItemUI(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
-            .background(Color.LightGray)
+            .background(Colors.LightGray)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = rememberRipple(bounded = true),
@@ -62,7 +62,7 @@ internal fun CreditsCrewJobItemUI(
             modifier = Modifier.wrapContentSize(),
             text = jobText,
             fontSize = 16.sp,
-            color = Color.Black
+            color = Colors.Black
         )
         Spacer(modifier = Modifier.weight(1f))
         Image(
@@ -70,7 +70,7 @@ internal fun CreditsCrewJobItemUI(
                 .wrapContentSize()
                 .rotate(animatedRotation),
             painter = painterResource(R.drawable.ic_chevron_right),
-            colorFilter = ColorFilter.tint(Color.Black),
+            colorFilter = ColorFilter.tint(Colors.Black),
             contentDescription = ""
         )
     }

@@ -30,17 +30,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
@@ -136,7 +135,7 @@ private fun ShowUI(
                 .align(Alignment.Start)
                 .padding(start = 16.dp),
             text = screenState.title.asString(LocalContext.current),
-            color = colorResource(R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 22.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -150,7 +149,7 @@ private fun ShowUI(
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = screenState.info.overview,
-            color = colorResource(R.color.text_hint),
+            color = Colors.TextHint,
             fontSize = 14.sp
         )
         if (creditsVisible) {
@@ -182,7 +181,7 @@ private fun ShowUI(
             text = StringValue
                 .IdText(com.kirchhoff.movies.screen.tvshow.R.string.tv_show_reviews)
                 .asString(LocalContext.current),
-            color = colorResource(R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 18.sp
         )
     }

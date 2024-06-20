@@ -17,12 +17,11 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.ui.resources.Colors
 
 @Composable
 internal fun TvShowDetailsSimilarUI(
@@ -34,7 +33,7 @@ internal fun TvShowDetailsSimilarUI(
         Row(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(
                 text = stringResource(com.kirchhoff.movies.screen.tvshow.R.string.similar_tv_shows),
-                color = colorResource(R.color.text_main),
+                color = Colors.TextMain,
                 fontSize = 16.sp
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -45,7 +44,7 @@ internal fun TvShowDetailsSimilarUI(
                     onClick = { onSeeAllClick.invoke() }
                 ),
                 text = stringResource(com.kirchhoff.movies.screen.tvshow.R.string.tv_show_see_all),
-                color = colorResource(R.color.link_color),
+                color = Colors.Link,
                 fontSize = 16.sp
             )
         }

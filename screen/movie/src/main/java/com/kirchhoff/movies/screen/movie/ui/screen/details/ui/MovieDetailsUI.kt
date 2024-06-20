@@ -30,12 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIGenre
@@ -43,6 +41,7 @@ import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
@@ -167,7 +166,7 @@ private fun ShowUI(
                 .align(Alignment.Start)
                 .padding(start = 16.dp),
             text = screenState.title.asString(LocalContext.current),
-            color = colorResource(R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 22.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -231,7 +230,7 @@ private fun ShowUI(
             text = StringValue
                 .IdText(com.kirchhoff.movies.screen.movie.R.string.movie_reviews)
                 .asString(LocalContext.current),
-            color = colorResource(R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 18.sp
         )
     }

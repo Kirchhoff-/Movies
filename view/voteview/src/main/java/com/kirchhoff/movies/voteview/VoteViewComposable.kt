@@ -52,7 +52,7 @@ fun VoteViewComposable(
 
 private val textStyle: TextStyle = TextStyle(
     fontSize = 14.sp,
-    color = Color.Black
+    color = Color(0xFF000000)
 )
 
 @Preview

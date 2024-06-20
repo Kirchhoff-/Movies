@@ -13,13 +13,13 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.tvshow.R
 
 @Composable
@@ -35,7 +35,7 @@ internal fun TvShowDetailsCreditsUI(
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = stringResource(R.string.tv_show_cast_credits),
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+                color = Colors.TextMain,
                 fontSize = 16.sp
             )
             LazyRow(
@@ -60,7 +60,7 @@ internal fun TvShowDetailsCreditsUI(
             Text(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 text = stringResource(R.string.tv_show_crew_credits),
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+                color = Colors.TextMain,
                 fontSize = 16.sp
             )
             LazyRow(

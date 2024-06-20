@@ -24,13 +24,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -75,9 +74,9 @@ internal fun PersonDetailsImagesUI(
         ) {
             repeat(pagerState.pageCount) { iteration ->
                 val color = if (pagerState.currentPage == iteration) {
-                    colorResource(com.kirchhoff.movies.core.R.color.colorPrimary)
+                    Colors.Primary
                 } else {
-                    Color.LightGray
+                    Colors.LightGray
                 }
 
                 Box(

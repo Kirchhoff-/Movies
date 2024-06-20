@@ -18,9 +18,7 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.person.data.UIMediaType
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 
@@ -65,13 +64,13 @@ internal fun PersonDetailsCreditsItemUI(
                 error = painterResource(R.drawable.ic_empty_movie),
                 contentDescription = ""
             )
-            Divider(color = Color.Gray)
+            Divider(color = Colors.Gray)
             Spacer(modifier = Modifier.height(4.dp))
             Text(
                 modifier = Modifier.padding(horizontal = 4.dp),
                 text = credit.title,
                 fontSize = 16.sp,
-                color = colorResource(R.color.text_main),
+                color = Colors.TextMain,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -80,7 +79,7 @@ internal fun PersonDetailsCreditsItemUI(
                 modifier = Modifier.padding(horizontal = 4.dp),
                 text = description,
                 fontSize = 14.sp,
-                color = colorResource(R.color.text_hint),
+                color = Colors.TextHint,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

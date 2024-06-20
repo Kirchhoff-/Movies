@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,10 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.keywordsview.RatingText
 
 @Composable
@@ -80,7 +79,7 @@ internal fun TvShowItemUI(
                     .wrapContentHeight()
                     .align(Alignment.BottomStart)
                     .background(
-                        color = colorResource(R.color.grey_text_background),
+                        color = Colors.GrayTextBackground,
                         shape = RoundedCornerShape(
                             bottomStart = cornerRadius,
                             bottomEnd = cornerRadius
@@ -89,7 +88,7 @@ internal fun TvShowItemUI(
                     .padding(vertical = 8.dp),
                 textAlign = TextAlign.Center,
                 text = tvShow.name,
-                color = colorResource(R.color.white),
+                color = Colors.White,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 maxLines = 2,

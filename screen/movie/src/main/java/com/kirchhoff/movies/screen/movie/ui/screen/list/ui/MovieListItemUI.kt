@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +28,7 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.keywordsview.RatingText
 
 @SuppressWarnings("MagicNumber")
@@ -76,7 +76,7 @@ internal fun MovieListItemUI(
             modifier = Modifier.height(50.dp),
             textAlign = TextAlign.Center,
             text = movie.title,
-            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 16.sp,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis

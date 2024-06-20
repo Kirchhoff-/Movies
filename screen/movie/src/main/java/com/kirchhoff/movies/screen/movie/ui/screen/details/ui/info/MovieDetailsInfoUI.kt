@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -37,6 +36,7 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.TextWithIcon
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UICountry
@@ -108,10 +108,10 @@ internal fun MovieDetailsInfoUI(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(2.dp)
-                            .background(Color.White)
+                            .background(Colors.White)
                             .border(
                                 width = 1.dp,
-                                color = Color.Black,
+                                color = Colors.Black,
                                 shape = RoundedCornerShape(8.dp)
                             )
                             .clickable(
@@ -139,7 +139,7 @@ internal fun MovieDetailsInfoUI(
                 end = 16.dp
             ),
             text = info.tagLine.orEmpty(),
-            color = Color.Black,
+            color = Colors.Black,
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -150,14 +150,14 @@ internal fun MovieDetailsInfoUI(
             ),
             text = info.overview,
             fontSize = 14.sp,
-            color = Color.Gray
+            color = Colors.Gray
         )
     }
 }
 
 private val infoTextStyle: TextStyle = TextStyle(
     fontSize = 14.sp,
-    color = Color.Black
+    color = Colors.Black
 )
 
 private fun Int?.asMovieRuntime(): String = if (this != null) {

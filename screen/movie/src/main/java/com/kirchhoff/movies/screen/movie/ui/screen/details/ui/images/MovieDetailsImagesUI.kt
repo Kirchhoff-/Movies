@@ -17,12 +17,12 @@ import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.data.UIImage
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.movie.R
 
 @Composable
@@ -35,7 +35,7 @@ internal fun MovieDetailsImagesUI(
         Row(modifier = Modifier.padding(horizontal = 16.dp)) {
             Text(
                 text = stringResource(R.string.movie_images),
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+                color = Colors.TextMain,
                 fontSize = 16.sp
             )
             Spacer(modifier = Modifier.weight(1f))
@@ -46,7 +46,7 @@ internal fun MovieDetailsImagesUI(
                     onClick = { onSeeAllClick.invoke() }
                 ),
                 text = stringResource(R.string.movie_see_all),
-                color = colorResource(com.kirchhoff.movies.core.R.color.link_color),
+                color = Colors.Link,
                 fontSize = 16.sp
             )
         }

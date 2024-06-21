@@ -29,7 +29,6 @@ internal val tvShowModule = module {
     single<ITvShowRepository> {
         TvShowRepository(
             tvService = get(),
-            tvDetailsMapper = get(),
             tvShowListMapper = get(),
             tvShowStorage = get()
         )

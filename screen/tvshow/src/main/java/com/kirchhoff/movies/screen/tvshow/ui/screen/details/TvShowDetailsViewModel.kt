@@ -8,8 +8,8 @@ import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
-import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase.ITvShowDetailsUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -17,7 +17,7 @@ import timber.log.Timber
 
 internal class TvShowDetailsViewModel(
     private val tvShow: UITv,
-    private val tvRepository: ITvShowRepository
+    private val tvShowDetailsUseCase: ITvShowDetailsUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<TvShowDetailsScreenState> = MutableLiveData()
@@ -50,7 +50,7 @@ internal class TvShowDetailsViewModel(
     fun loadDetails() {
         screenState.value = screenState.value?.copy(isLoading = true)
         viewModelScope.launch {
-            val result = tvRepository.fetchDetails(tvShow.id)
+            val result = tvShowDetailsUseCase.fetchDetails(tvShow.id)
 
             screenState.value = screenState.value?.copy(isLoading = false)
             when (result) {
@@ -71,7 +71,7 @@ internal class TvShowDetailsViewModel(
     }
 
     private suspend fun fetchCredits() {
-        when (val creditsResult = tvRepository.fetchCredits(tvShow.id)) {
+        when (val creditsResult = tvShowDetailsUseCase.fetchCredits(tvShow.id)) {
             is Result.Success -> screenState.value = screenState.value?.copy(
                 credits = creditsResult.data
             )
@@ -80,7 +80,7 @@ internal class TvShowDetailsViewModel(
     }
 
     private suspend fun fetchSimilarTvShows() {
-        val similarTvShows = tvRepository.fetchSimilarTvShows(id = tvShow.id, page = 1)
+        val similarTvShows = tvShowDetailsUseCase.fetchSimilar(id = tvShow.id, page = 1)
         val resultSimilarTvShowsList = if (
             similarTvShows is Result.Success &&
             similarTvShows.data.results.isNotEmpty()

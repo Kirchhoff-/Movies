@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.tvshow.ui.screen.similar
+package com.kirchhoff.movies.screen.tvshow.ui.screen.discover
 
 import android.content.Context
 import android.os.Bundle
@@ -9,35 +9,30 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.kirchhoff.movies.core.data.UITv
-import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.tvshow.ui.screen.similar.ui.TvShowSimilarUI
-import com.kirchhoff.movies.screen.tvshow.ui.screen.similar.viewmodel.TvShowSimilarViewModel
+import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
+import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.ui.TvShowDiscoverUI
+import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.viewmodel.TvShowDiscoverViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.parameter.parametersOf
 
-internal class TvShowSimilarFragment : BaseFragment() {
+internal class TvShowDiscoverFragment : BaseFragment() {
 
-    private val tvShow: UITv by lazy {
-        requireArguments().getParcelableExtra(TV_SHOW_ARG)
-            ?: error("Should provide UITv argument for fragment")
-    }
+    private val tvShowRouter: ITvShowRouter by inject { parametersOf(requireActivity()) }
 
-    private val viewModel: TvShowSimilarViewModel by viewModel {
-        parametersOf(tvShow)
-    }
+    private val viewModel: TvShowDiscoverViewModel by viewModel()
 
     override fun onAttach(context: Context) {
-        loadKoinModules(tvShowSimilarModule)
+        loadKoinModules(tvShowDiscoverModule)
         super.onAttach(context)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.loadSimilarTvShow()
+        viewModel.discover()
     }
 
     override fun onCreateView(
@@ -52,28 +47,23 @@ internal class TvShowSimilarFragment : BaseFragment() {
         setContent {
             val screenState by viewModel.screenState.observeAsState()
 
-            TvShowSimilarUI(
+            TvShowDiscoverUI(
                 screenState = screenState ?: error("Can't build UI without state"),
-                onLoadMore = { viewModel.loadSimilarTvShow() },
                 onTvShowClick = { router.openTvDetailsScreen(it) },
-                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
+                onAiringTodayClick = { tvShowRouter.openAiringTodayScreen() },
+                onTheAirClick = { tvShowRouter.openOnTheAirScreen() },
+                onPopularClick = { tvShowRouter.openPopularScreen() },
+                onTopRatedClick = { tvShowRouter.openTopRatedScreen() }
             )
         }
     }
 
-    override fun onDestroyView() {
-        unloadKoinModules(tvShowSimilarModule)
-        super.onDestroyView()
+    override fun onDestroy() {
+        unloadKoinModules(tvShowDiscoverModule)
+        super.onDestroy()
     }
 
     companion object {
-        fun newInstance(tvShow: UITv): TvShowSimilarFragment =
-            TvShowSimilarFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(TV_SHOW_ARG, tvShow)
-                }
-            }
-
-        private const val TV_SHOW_ARG = "TV_SHOW_ARG"
+        fun newInstance(): TvShowDiscoverFragment = TvShowDiscoverFragment()
     }
 }

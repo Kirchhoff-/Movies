@@ -34,7 +34,7 @@ internal class TvShowDetailsFragment : BaseFragment() {
     private val viewModel: TvShowDetailsViewModel by viewModel { parametersOf(tvShow) }
 
     override fun onAttach(context: Context) {
-        loadKoinModules(newTvShowDetailsModule)
+        loadKoinModules(tvShowDetailsModule)
         super.onAttach(context)
     }
 
@@ -61,14 +61,14 @@ internal class TvShowDetailsFragment : BaseFragment() {
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
                 onReviewsClick = { router.openReviewsListScreen(tvShow) },
                 onSimilarItemClick = { router.openTvDetailsScreen(it) },
-                onSimilarSeeAllClick = { tvShowRouter.openSimilarTvShowScreen(tvShow) },
+                onSimilarSeeAllClick = { tvShowRouter.openSimilarTvShowScreen(tvShow.id) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
     }
 
     override fun onDestroy() {
-        unloadKoinModules(newTvShowDetailsModule)
+        unloadKoinModules(tvShowDetailsModule)
         super.onDestroy()
     }
 

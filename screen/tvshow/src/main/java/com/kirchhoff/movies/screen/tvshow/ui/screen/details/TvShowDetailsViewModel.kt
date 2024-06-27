@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase.ITvShowDetailsUseCase
 import kotlinx.coroutines.async
@@ -27,7 +27,7 @@ internal class TvShowDetailsViewModel(
             title = StringValue.SimpleText(tvShow.name),
             backdropPath = tvShow.backdropPath,
             posterPath = tvShow.posterPath,
-            info = UITvShowInfo(
+            info = TvShowDetailsInfo(
                 numberOfEpisodes = 0,
                 numberOfSeasons = 0,
                 overview = "",

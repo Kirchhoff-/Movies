@@ -41,12 +41,13 @@ import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
+import com.kirchhoff.movies.screen.tvshow.R
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.credits.TvShowDetailsCreditsUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.info.TvShowDetailsInfoUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.keywords.TvShowDetailsKeywordsUI
-import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.similar.TvShowDetailsSimilarUI
+import com.kirchhoff.movies.screen.tvshow.ui.view.section.TvShowSectionUI
 
 @SuppressWarnings("LongParameterList")
 @ExperimentalLayoutApi
@@ -161,8 +162,9 @@ private fun ShowUI(
         }
         if (similarTvShowsVisible) {
             Spacer(modifier = Modifier.height(8.dp))
-            TvShowDetailsSimilarUI(
+            TvShowSectionUI(
                 tvShows = screenState.similarTvShows,
+                title = StringValue.IdText(R.string.similar_tv_shows),
                 onItemClick = onSimilarItemClick,
                 onSeeAllClick = onSimilarSeeAllClick
             )
@@ -196,7 +198,7 @@ private fun TvShowDetailsUIPreview() {
             title = StringValue.SimpleText("TvShow"),
             backdropPath = "",
             posterPath = "",
-            info = UITvShowInfo(
+            info = TvShowDetailsInfo(
                 numberOfSeasons = 0,
                 numberOfEpisodes = 0,
                 overview = "",

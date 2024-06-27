@@ -1,12 +1,11 @@
 package com.kirchhoff.movies.router
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.extensions.replaceFragment
 import com.kirchhoff.movies.core.router.IRouter
 import com.kirchhoff.movies.screen.credits.ICreditsFacade
 import com.kirchhoff.movies.screen.movie.IMovieFacade
@@ -24,39 +23,30 @@ class Router(
 ) : IRouter {
 
     override fun openMovieDetailsScreen(movie: UIMovie) {
-        replaceFragment(movieFacade.movieDetails(movie))
+        activity.replaceFragment(movieFacade.movieDetails(movie))
     }
 
     override fun openTvDetailsScreen(tv: UITv) {
-        replaceFragment(tvShowFacade.tvShowDetails(tv))
+        activity.replaceFragment(tvShowFacade.tvShowDetails(tv))
     }
 
     override fun openPersonDetailsScreen(person: UIPerson) {
-        replaceFragment(personFacade.personDetails(person))
+        activity.replaceFragment(personFacade.personDetails(person))
     }
 
     override fun openReviewsListScreen(movie: UIMovie) {
-        replaceFragment(reviewFacade.movieReview(movie.id))
+        activity.replaceFragment(reviewFacade.movieReview(movie.id))
     }
 
     override fun openReviewsListScreen(tv: UITv) {
-        replaceFragment(reviewFacade.tvShowReview(tv.id))
+        activity.replaceFragment(reviewFacade.tvShowReview(tv.id))
     }
 
     override fun openCastCreditsScreen(movieId: MovieId) {
-        replaceFragment(creditsFacade.castCredits(movieId))
+        activity.replaceFragment(creditsFacade.castCredits(movieId))
     }
 
     override fun openCrewCreditsScreen(movieId: MovieId) {
-        replaceFragment(creditsFacade.crewCredits(movieId))
-    }
-
-    private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {
-        val transaction = activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-
-        if (addToBackStack) transaction.addToBackStack(null)
-
-        transaction.commit()
+        activity.replaceFragment(creditsFacade.crewCredits(movieId))
     }
 }

@@ -1,10 +1,9 @@
 package com.kirchhoff.movies.screen.movie.router
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.extensions.replaceFragment
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.ui.screen.image.MovieImageFragment
@@ -27,49 +26,42 @@ internal interface IMovieRouter {
 internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRouter {
 
     override fun openMoviesByGenreScreen(genre: UIGenre) {
-        replaceFragment(MovieListFragment.byGenre(genre))
+        activity.replaceFragment(MovieListFragment.byGenre(genre))
     }
 
     override fun openMoviesByCountryScreen(country: UICountry) {
-        replaceFragment(MovieListFragment.byCountry(country))
+        activity.replaceFragment(MovieListFragment.byCountry(country))
     }
 
     override fun openSimilarMoviesScreen(movie: UIMovie) {
-        replaceFragment(MovieListFragment.similarWith(movie))
+        activity.replaceFragment(MovieListFragment.similarWith(movie))
     }
 
     override fun openCompanyMoviesScreen(company: UIProductionCompany) {
-        replaceFragment(MovieListFragment.byCompany(company))
+        activity.replaceFragment(MovieListFragment.byCompany(company))
     }
 
     override fun openImagesScreen(movie: UIMovie) {
-        replaceFragment(MovieImagesFragment.newInstance(movie))
+        activity.replaceFragment(MovieImagesFragment.newInstance(movie))
     }
 
     override fun openImage(imagePath: String) {
-        replaceFragment(MovieImageFragment.newInstance(imagePath))
+        activity.replaceFragment(MovieImageFragment.newInstance(imagePath))
     }
 
     override fun openNowPlayingScreen() {
-        replaceFragment(MovieListFragment.nowPlaying())
+        activity.replaceFragment(MovieListFragment.nowPlaying())
     }
 
     override fun openUpcomingScreen() {
-        replaceFragment(MovieListFragment.upcoming())
+        activity.replaceFragment(MovieListFragment.upcoming())
     }
 
     override fun openPopularScreen() {
-        replaceFragment(MovieListFragment.popular())
+        activity.replaceFragment(MovieListFragment.popular())
     }
 
     override fun openTopRatedScreen() {
-        replaceFragment(MovieListFragment.topRated())
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        activity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .addToBackStack(null)
-            .commit()
+        activity.replaceFragment(MovieListFragment.topRated())
     }
 }

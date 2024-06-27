@@ -24,13 +24,13 @@ import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.R
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
 import com.kirchhoff.movies.voteview.VoteViewComposable
 
 @SuppressWarnings("LongMethod")
 @Composable
 internal fun TvShowDetailsInfoUI(
-    info: UITvShowInfo,
+    info: TvShowDetailsInfo,
     posterPath: String?
 ) {
     val context = LocalContext.current
@@ -103,7 +103,7 @@ private val infoTextStyle: TextStyle = TextStyle(
 @Composable
 private fun TvShowDetailInfoUIPreview() {
     TvShowDetailsInfoUI(
-        info = UITvShowInfo(
+        info = TvShowDetailsInfo(
             numberOfEpisodes = 0,
             numberOfSeasons = 0,
             overview = "",

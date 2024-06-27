@@ -5,13 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.screen.tvshow.repository.ITvShowRepository
+import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.model.TvShowListScreenState
+import com.kirchhoff.movies.screen.tvshow.ui.screen.list.usecase.ITvShowListUseCase
 import kotlinx.coroutines.launch
 
-internal class TvShowListViewModel(
-    private val tvShowRepository: ITvShowRepository
-) : ViewModel() {
+internal class TvShowListViewModel(private val tvShowListUseCase: ITvShowListUseCase) : ViewModel() {
 
     val screenState: MutableLiveData<TvShowListScreenState> = MutableLiveData()
 
@@ -22,12 +21,16 @@ internal class TvShowListViewModel(
     init {
         screenState.value = TvShowListScreenState(
             tvShowList = emptyList(),
+            title = StringValue.Empty,
             errorMessage = "",
             loadingVisible = false,
             paginationVisible = false,
-            tvShowListVisible = false,
             emptyTextVisible = false
         )
+    }
+
+    fun updateTitle() {
+        screenState.value = screenState.value?.copy(title = tvShowListUseCase.title())
     }
 
     fun loadTvShows() {
@@ -42,7 +45,7 @@ internal class TvShowListViewModel(
                     paginationVisible = paginationVisible
                 )
 
-                when (val result = tvShowRepository.fetchDiscoverList(currentPage)) {
+                when (val result = tvShowListUseCase.load(currentPage)) {
                     is Result.Success -> {
                         totalPages = result.data.totalPages
                         currentPage = result.data.page + 1
@@ -57,16 +60,14 @@ internal class TvShowListViewModel(
                             loadingVisible = false,
                             paginationVisible = false,
                             errorMessage = "",
-                            tvShowListVisible = tvShowList.isNotEmpty(),
-                            emptyTextVisible = tvShowList.isEmpty()
+                            emptyTextVisible = tvShowList.isEmpty() && loadingVisible
                         )
                     }
                     else -> screenState.value = screenState.value?.copy(
                         loadingVisible = false,
                         paginationVisible = false,
                         errorMessage = result.toString(),
-                        tvShowListVisible = screenState.value?.tvShowList?.isNotEmpty() == true,
-                        emptyTextVisible = false
+                        emptyTextVisible = true
                     )
                 }
 

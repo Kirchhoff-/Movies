@@ -22,12 +22,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 import com.kirchhoff.movies.screen.person.data.UIPersonCredits
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
@@ -107,7 +107,7 @@ private fun ShowUI(
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             text = screenState.name,
-            color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold
         )

@@ -30,28 +30,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.tvshow.data.UITvShowInfo
+import com.kirchhoff.movies.screen.tvshow.R
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.credits.TvShowDetailsCreditsUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.info.TvShowDetailsInfoUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.keywords.TvShowDetailsKeywordsUI
+import com.kirchhoff.movies.screen.tvshow.ui.view.section.TvShowSectionUI
 
+@SuppressWarnings("LongParameterList")
 @ExperimentalLayoutApi
 @Composable
 internal fun TvShowDetailsUI(
     screenState: TvShowDetailsScreenState,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
+    onSimilarItemClick: (UITv) -> Unit,
+    onSimilarSeeAllClick: () -> Unit,
     onReviewsClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
@@ -67,6 +72,8 @@ internal fun TvShowDetailsUI(
             else -> ShowUI(
                 screenState = screenState,
                 onCreditItemClick = onCreditItemClick,
+                onSimilarItemClick = onSimilarItemClick,
+                onSimilarSeeAllClick = onSimilarSeeAllClick,
                 onReviewsClick = onReviewsClick
             )
         }
@@ -104,9 +111,12 @@ private fun ShowError(screenState: TvShowDetailsScreenState) {
 private fun ShowUI(
     screenState: TvShowDetailsScreenState,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
+    onSimilarItemClick: (UITv) -> Unit,
+    onSimilarSeeAllClick: () -> Unit,
     onReviewsClick: () -> Unit
 ) {
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
+    val similarTvShowsVisible = screenState.similarTvShows.isNotEmpty()
 
     Column(
         modifier = Modifier
@@ -126,7 +136,7 @@ private fun ShowUI(
                 .align(Alignment.Start)
                 .padding(start = 16.dp),
             text = screenState.title.asString(LocalContext.current),
-            color = colorResource(R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 22.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -140,7 +150,7 @@ private fun ShowUI(
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
             text = screenState.info.overview,
-            color = colorResource(R.color.text_hint),
+            color = Colors.TextHint,
             fontSize = 14.sp
         )
         if (creditsVisible) {
@@ -148,6 +158,15 @@ private fun ShowUI(
             TvShowDetailsCreditsUI(
                 credits = screenState.credits,
                 onItemClick = onCreditItemClick
+            )
+        }
+        if (similarTvShowsVisible) {
+            Spacer(modifier = Modifier.height(8.dp))
+            TvShowSectionUI(
+                tvShows = screenState.similarTvShows,
+                title = StringValue.IdText(R.string.similar_tv_shows),
+                onItemClick = onSimilarItemClick,
+                onSeeAllClick = onSimilarSeeAllClick
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -164,7 +183,7 @@ private fun ShowUI(
             text = StringValue
                 .IdText(com.kirchhoff.movies.screen.tvshow.R.string.tv_show_reviews)
                 .asString(LocalContext.current),
-            color = colorResource(R.color.text_main),
+            color = Colors.TextMain,
             fontSize = 18.sp
         )
     }
@@ -179,7 +198,7 @@ private fun TvShowDetailsUIPreview() {
             title = StringValue.SimpleText("TvShow"),
             backdropPath = "",
             posterPath = "",
-            info = UITvShowInfo(
+            info = TvShowDetailsInfo(
                 numberOfSeasons = 0,
                 numberOfEpisodes = 0,
                 overview = "",
@@ -193,11 +212,14 @@ private fun TvShowDetailsUIPreview() {
                 cast = emptyList(),
                 crew = emptyList()
             ),
+            similarTvShows = emptyList(),
             isLoading = false,
             errorMessage = StringValue.Empty
         ),
         onCreditItemClick = {},
         onReviewsClick = {},
+        onSimilarItemClick = {},
+        onSimilarSeeAllClick = {},
         onBackPressed = {}
     )
 }

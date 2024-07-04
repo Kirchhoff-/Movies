@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.resources.Colors
 import kotlin.random.Random
 
 @SuppressWarnings("MagicNumber")
@@ -52,12 +52,12 @@ internal fun CreditsCastItemUI(actor: UIEntertainmentPerson.Actor) {
                 Text(
                     text = actor.name,
                     fontSize = 16.sp,
-                    color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
+                    color = Colors.TextMain
                 )
                 Text(
                     text = actor.character.orEmpty(),
                     fontSize = 14.sp,
-                    color = colorResource(com.kirchhoff.movies.core.R.color.text_hint)
+                    color = Colors.TextHint
                 )
             }
         }

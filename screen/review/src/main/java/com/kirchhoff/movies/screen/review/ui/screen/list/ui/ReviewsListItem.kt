@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
 
@@ -48,7 +48,7 @@ internal fun ReviewItem(
                 onClick = { onReviewClick.invoke(review) }
             ),
         elevation = 2.dp,
-        backgroundColor = colorResource(com.kirchhoff.movies.core.R.color.white),
+        backgroundColor = Colors.White,
         shape = RoundedCornerShape(4.dp)
     ) {
         Column(
@@ -76,7 +76,7 @@ internal fun ReviewItem(
                 Spacer(Modifier.width(8.dp))
                 Text(
                     text = review.author,
-                    color = colorResource(com.kirchhoff.movies.core.R.color.text_main),
+                    color = Colors.TextMain,
                     fontSize = 16.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -85,7 +85,7 @@ internal fun ReviewItem(
             Spacer(Modifier.height(8.dp))
             Text(
                 text = review.content,
-                color = colorResource(com.kirchhoff.movies.core.R.color.text_hint),
+                color = Colors.TextHint,
                 fontSize = 14.sp,
                 maxLines = 5,
                 overflow = TextOverflow.Ellipsis

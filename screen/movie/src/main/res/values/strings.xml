@@ -20,4 +20,6 @@
     <string name="movie_popular">Popular</string>
     <string name="movie_top_rated">Top Rated</string>
     <string name="movie_production_companies">Production Companies</string>
+    <string name="movie_cast_credits">Cast Credits</string>
+    <string name="movie_crew_credits">Crew Credits</string>
 </resources>

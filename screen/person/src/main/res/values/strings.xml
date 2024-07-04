@@ -6,4 +6,6 @@
     <string name="person_birthplace">Birthplace</string>
     <string name="person_bio">Bio</string>
     <string name="person_retry">Retry</string>
+    <string name="person_cast_credits">Cast Credits</string>
+    <string name="person_crew_credits">Crew Credits</string>
 </resources>

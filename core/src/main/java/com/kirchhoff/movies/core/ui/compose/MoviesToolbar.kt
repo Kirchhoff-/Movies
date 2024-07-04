@@ -7,8 +7,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.colorResource
-import com.kirchhoff.movies.core.R
+import com.kirchhoff.movies.core.ui.resources.Colors
 
 @Composable
 fun MoviesToolbar(
@@ -19,18 +18,18 @@ fun MoviesToolbar(
         title = {
             Text(
                 text = title,
-                color = colorResource(R.color.white)
+                color = Colors.White
             )
         },
         navigationIcon = {
             IconButton(onClick = { onBackPressed.invoke() }) {
                 Icon(
                     imageVector = Icons.Filled.ArrowBack,
-                    tint = colorResource(R.color.white),
+                    tint = Colors.White,
                     contentDescription = ""
                 )
             }
         },
-        backgroundColor = colorResource(R.color.colorPrimary)
+        backgroundColor = Colors.Primary
     )
 }

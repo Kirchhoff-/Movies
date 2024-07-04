@@ -14,7 +14,9 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
+import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.TvShowDetailsUI
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -27,10 +29,12 @@ internal class TvShowDetailsFragment : BaseFragment() {
             ?: error("Should provide tv show info in arguments")
     }
 
+    private val tvShowRouter: ITvShowRouter by inject { parametersOf(requireActivity()) }
+
     private val viewModel: TvShowDetailsViewModel by viewModel { parametersOf(tvShow) }
 
     override fun onAttach(context: Context) {
-        loadKoinModules(newTvShowDetailsModule)
+        loadKoinModules(tvShowDetailsModule)
         super.onAttach(context)
     }
 
@@ -56,13 +60,15 @@ internal class TvShowDetailsFragment : BaseFragment() {
                 screenState = screenState ?: error("Can't build UI without state"),
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
                 onReviewsClick = { router.openReviewsListScreen(tvShow) },
+                onSimilarItemClick = { router.openTvDetailsScreen(it) },
+                onSimilarSeeAllClick = { tvShowRouter.openSimilarTvShowScreen(tvShow.id) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
     }
 
     override fun onDestroy() {
-        unloadKoinModules(newTvShowDetailsModule)
+        unloadKoinModules(tvShowDetailsModule)
         super.onDestroy()
     }
 

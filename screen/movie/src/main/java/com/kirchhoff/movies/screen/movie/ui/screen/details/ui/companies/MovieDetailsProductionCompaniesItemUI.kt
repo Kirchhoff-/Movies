@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 
 @Composable
@@ -63,7 +63,7 @@ internal fun MovieDetailsProductionCompaniesItemUI(
                     text = company.name,
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center,
-                    color = colorResource(R.color.text_main),
+                    color = Colors.TextMain,
                     overflow = TextOverflow.Ellipsis
                 )
             }

@@ -8,11 +8,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.linkifytext.LinkifyText
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
@@ -40,7 +40,7 @@ internal fun ReviewDetailsUI(
         LinkifyText(
             modifier = Modifier
                 .fillMaxSize()
-                .background(colorResource(com.kirchhoff.movies.core.R.color.background))
+                .background(Colors.White)
                 .padding(
                     top = textPadding,
                     start = textPadding,
@@ -48,7 +48,7 @@ internal fun ReviewDetailsUI(
                 )
                 .verticalScroll(scroll),
             text = review.content,
-            color = colorResource(com.kirchhoff.movies.core.R.color.text_hint),
+            color = Colors.TextHint,
             fontSize = textSize
         )
     }

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="keyword_item_padding_vertical">4dp</dimen>
-    <dimen name="keyword_item_padding_horizontal">8dp</dimen>
-    <dimen name="keyword_item_top_margin">2dp</dimen>
-    <dimen name="keyword_item_bottom_margin">2dp</dimen>
-    <dimen name="keyword_item_edges_margin">8dp</dimen>
-</resources>

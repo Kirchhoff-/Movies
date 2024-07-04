@@ -10,7 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -19,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kirchhoff.movies.core.ui.resources.Colors
 
 @Composable
 fun TextWithIcon(
@@ -55,7 +55,7 @@ fun TextWithIcon(
 
 private val textStyle: TextStyle = TextStyle(
     fontSize = 14.sp,
-    color = Color.Black
+    color = Colors.Black
 )
 
 @Preview

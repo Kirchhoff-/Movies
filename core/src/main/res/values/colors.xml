@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+<resources>
+    <!-- Don't add colors here, use Colors.kt instead -->
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="background">#ffffff</color>
-    <color name="background_gray">#BDBDBD</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="white_50">#80FFFFFF</color>
-    <color name="text_main">#000000</color>
-    <color name="text_hint">#757575</color>
-    <color name="grey_text_background">#66000000</color>
-    <color name="link_color">#00BCD4</color>
-    <color name="yellow">#EEC94D</color>
 </resources>

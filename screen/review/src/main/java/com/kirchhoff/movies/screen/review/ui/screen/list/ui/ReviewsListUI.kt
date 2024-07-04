@@ -20,11 +20,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.kirchhoff.movies.core.ui.compose.ListScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
+import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
@@ -82,7 +82,7 @@ internal fun ReviewListUI(
             ) {
                 Text(
                     text = stringResource(R.string.empty_reviews),
-                    color = colorResource(com.kirchhoff.movies.core.R.color.text_main)
+                    color = Colors.TextMain
                 )
             }
         }

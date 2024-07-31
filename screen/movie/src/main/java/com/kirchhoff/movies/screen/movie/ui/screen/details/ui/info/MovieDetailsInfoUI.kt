@@ -173,17 +173,7 @@ private fun Int?.asMovieRuntime(): String = if (this != null) {
 @Composable
 private fun MovieDetailsInfoUIPreview() {
     MovieDetailsInfoUI(
-        info = UIMovieInfo(
-            productionCountries = emptyList(),
-            productionCompanies = emptyList(),
-            runtime = 0,
-            tagLine = "",
-            overview = "",
-            releaseDate = "",
-            voteCount = 0,
-            voteAverage = 0f,
-            genres = emptyList()
-        ),
+        info = UIMovieInfo.Default,
         posterPath = "",
         onProductionCountryClick = {},
         onGenreClick = {}

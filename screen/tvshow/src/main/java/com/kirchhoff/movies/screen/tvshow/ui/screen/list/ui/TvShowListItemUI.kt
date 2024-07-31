@@ -28,7 +28,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
@@ -102,13 +101,7 @@ internal fun TvShowListItemUI(
 @Composable
 private fun TvShowListItemUIPreview() {
     TvShowListItemUI(
-        tvShow = UITv(
-            id = TvId(100),
-            name = "Super tv show",
-            posterPath = null,
-            backdropPath = null,
-            voteAverage = 9.5f
-        ),
+        tvShow = UITv.Default,
         onTvShowClick = {}
     )
 }

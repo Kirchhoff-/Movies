@@ -10,4 +10,15 @@ internal data class TvShowListScreenState(
     val loadingVisible: Boolean,
     val paginationVisible: Boolean,
     val emptyTextVisible: Boolean
-)
+) {
+    companion object {
+        val Default = TvShowListScreenState(
+            tvShowList = emptyList(),
+            title = StringValue.Empty,
+            errorMessage = "",
+            loadingVisible = false,
+            paginationVisible = false,
+            emptyTextVisible = false
+        )
+    }
+}

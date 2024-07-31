@@ -103,16 +103,7 @@ private val infoTextStyle: TextStyle = TextStyle(
 @Composable
 private fun TvShowDetailInfoUIPreview() {
     TvShowDetailsInfoUI(
-        info = TvShowDetailsInfo(
-            numberOfEpisodes = 0,
-            numberOfSeasons = 0,
-            overview = "",
-            status = "",
-            firstAirDate = "",
-            voteCount = null,
-            voteAverage = null,
-            genres = emptyList()
-        ),
+        info = TvShowDetailsInfo.Default,
         posterPath = ""
     )
 }

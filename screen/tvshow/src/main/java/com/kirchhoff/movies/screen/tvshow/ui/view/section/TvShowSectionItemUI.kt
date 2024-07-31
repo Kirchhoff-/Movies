@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
-import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
@@ -85,13 +84,7 @@ internal fun TvShowSectionItemUI(
 @Composable
 private fun TvShowDetailsSimilarItemUIPreview() {
     TvShowSectionItemUI(
-        tvShow = UITv(
-            id = TvId(0),
-            name = "Name",
-            posterPath = null,
-            backdropPath = null,
-            voteAverage = 10.0f
-        ),
+        tvShow = UITv.Default,
         onItemClick = {}
     )
 }

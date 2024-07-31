@@ -75,24 +75,8 @@ internal fun PersonListUI(
 @Composable
 private fun PersonListUIPreview() {
     PersonListUI(
-        screenState = PersonListScreenState(
-            personList = listOf(
-                UIPerson(
-                    id = 0,
-                    name = "John Doe",
-                    profilePath = null
-                ),
-                UIPerson(
-                    id = 0,
-                    name = "John Doe",
-                    profilePath = null
-                )
-            ),
-            errorMessage = "Some error message",
-            loadingVisible = true,
-            paginationVisible = false
-        ),
+        screenState = PersonListScreenState.Default,
         onLoadMore = {},
-        onPersonClick = { UIPerson(3, "Random name", null) }
+        onPersonClick = {}
     )
 }

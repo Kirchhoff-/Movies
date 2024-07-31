@@ -20,12 +20,7 @@ internal class PersonListViewModel(
     private var isLoading: Boolean = false
 
     init {
-        screenState.value = PersonListScreenState(
-            personList = emptyList(),
-            errorMessage = "",
-            loadingVisible = false,
-            paginationVisible = false
-        )
+        screenState.value = PersonListScreenState.Default
     }
 
     fun loadPersonList() {

@@ -69,10 +69,8 @@ internal fun PersonListItemUI(
 @Preview
 @Composable
 private fun PersonListItemUIPreview() {
-    val person = UIPerson(
-        id = 100,
-        name = "John Doe",
-        profilePath = null
+    PersonListItemUI(
+        person = UIPerson.Default,
+        onPersonClick = {}
     )
-    PersonListItemUI(person = person) {}
 }

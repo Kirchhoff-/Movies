@@ -10,11 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
-import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.model.CreditsCastScreenState
-import kotlin.random.Random
 
 @SuppressWarnings("MagicNumber")
 @Composable
@@ -46,17 +43,7 @@ internal fun CreditsCastUI(
 @Composable
 private fun CreditsCastUIPreview() {
     CreditsCastUI(
-        screenState = CreditsCastScreenState(
-            actors = listOf(
-                UIEntertainmentPerson.Actor(
-                    id = Random.nextInt(),
-                    name = "John",
-                    profilePath = null,
-                    character = "Batman"
-                )
-            ),
-            title = StringValue.Empty
-        ),
+        screenState = CreditsCastScreenState.Default,
         onBackPressed = {}
     )
 }

@@ -29,8 +29,6 @@ import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
-import com.kirchhoff.movies.screen.person.data.UIPersonCredits
-import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.credits.PersonDetailsCreditsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.images.PersonDetailsImagesUI
@@ -138,23 +136,7 @@ private fun ShowUI(
 @Composable
 private fun PersonDetailsUIPreview() {
     PersonDetailsUI(
-        screenState = PersonDetailsScreenState(
-            name = "",
-            title = "",
-            details = UIPersonDetails(
-                birthday = "",
-                placeOfBirth = "",
-                biography = "",
-                alsoKnownAs = emptyList()
-            ),
-            credits = UIPersonCredits(
-                cast = emptyList(),
-                crew = emptyList()
-            ),
-            images = emptyList(),
-            isLoading = false,
-            errorMessage = ""
-        ),
+        screenState = PersonDetailsScreenState.Default,
         onCreditItemClick = {},
         onImageClick = {},
         onLocationClick = {},

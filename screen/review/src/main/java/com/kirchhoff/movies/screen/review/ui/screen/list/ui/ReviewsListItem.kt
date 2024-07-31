@@ -106,11 +106,8 @@ internal fun ReviewItem(
 @Preview
 @Composable
 private fun ReviewItemPreview() {
-    val review = UIReview(
-        author = "John Doe",
-        content = "Some cool stuff about movie or tv show",
-        authorAvatar = null,
-        rating = 5
+    ReviewItem(
+        review = UIReview.Default,
+        onReviewClick = {}
     )
-    ReviewItem(review = review) {}
 }

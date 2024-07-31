@@ -7,4 +7,13 @@ internal data class PersonListScreenState(
     val errorMessage: String,
     val loadingVisible: Boolean,
     val paginationVisible: Boolean
-)
+) {
+    companion object {
+        val Default = PersonListScreenState(
+            personList = emptyList(),
+            errorMessage = "",
+            loadingVisible = false,
+            paginationVisible = false
+        )
+    }
+}

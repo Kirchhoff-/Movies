@@ -12,13 +12,7 @@ internal class TvShowDiscoverViewModel(private val tvShowDiscoverUseCase: ITvSho
     val screenState: MutableLiveData<TvShowDiscoverScreenState> = MutableLiveData()
 
     init {
-        screenState.value = TvShowDiscoverScreenState(
-            airingToday = emptyList(),
-            onTheAir = emptyList(),
-            popular = emptyList(),
-            topRated = emptyList(),
-            isLoading = false
-        )
+        screenState.value = TvShowDiscoverScreenState.Default
     }
 
     fun discover() {

@@ -23,7 +23,6 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
-import kotlin.random.Random
 
 @SuppressWarnings("MagicNumber")
 @Composable
@@ -67,12 +66,5 @@ internal fun CreditsCastItemUI(actor: UIEntertainmentPerson.Actor) {
 @Preview
 @Composable
 private fun CreditsCastItemUIPreview() {
-    CreditsCastItemUI(
-        UIEntertainmentPerson.Actor(
-            id = Random.nextInt(),
-            name = "Ethan",
-            profilePath = null,
-            character = "Joker"
-        )
-    )
+    CreditsCastItemUI(UIEntertainmentPerson.Actor.Default)
 }

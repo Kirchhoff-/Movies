@@ -85,10 +85,7 @@ internal fun TvShowDetailsCreditsUI(
 @Composable
 private fun TvShowDetailsCreditsUIPreview() {
     TvShowDetailsCreditsUI(
-        credits = UIEntertainmentCredits(
-            cast = emptyList(),
-            crew = emptyList()
-        ),
+        credits = UIEntertainmentCredits.Default,
         onItemClick = {}
     )
 }

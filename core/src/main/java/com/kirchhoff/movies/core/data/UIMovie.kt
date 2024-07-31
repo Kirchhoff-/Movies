@@ -10,4 +10,14 @@ data class UIMovie(
     val posterPath: String?,
     val backdropPath: String?,
     val voteAverage: Float?
-) : Parcelable
+) : Parcelable {
+    companion object {
+        val Default = UIMovie(
+            id = MovieId(0),
+            title = "",
+            posterPath = "",
+            backdropPath = "",
+            voteAverage = 0.0f
+        )
+    }
+}

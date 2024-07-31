@@ -82,10 +82,7 @@ internal fun PersonDetailsCreditsUI(
 @Composable
 private fun PersonDetailsCreditsUIPreview() {
     PersonDetailsCreditsUI(
-        credits = UIPersonCredits(
-            cast = emptyList(),
-            crew = emptyList()
-        ),
+        credits = UIPersonCredits.Default,
         onItemClick = {}
     )
 }

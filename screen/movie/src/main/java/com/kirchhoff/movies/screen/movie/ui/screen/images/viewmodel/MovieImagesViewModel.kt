@@ -18,10 +18,7 @@ internal class MovieImagesViewModel(
     val screenState: MutableLiveData<MovieImagesScreenState> = MutableLiveData()
 
     init {
-        screenState.value = MovieImagesScreenState(
-            title = movie.title,
-            image = emptyList()
-        )
+        screenState.value = MovieImagesScreenState.Default
     }
 
     fun loadImages() {

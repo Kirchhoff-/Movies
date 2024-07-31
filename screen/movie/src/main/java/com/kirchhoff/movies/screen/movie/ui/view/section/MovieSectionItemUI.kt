@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
-import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
@@ -85,13 +84,7 @@ internal fun MovieSectionItemUI(
 @Composable
 private fun MovieDetailsSimilarItemUIPreview() {
     MovieSectionItemUI(
-        movie = UIMovie(
-            id = MovieId(0),
-            title = "Title 1",
-            posterPath = null,
-            backdropPath = null,
-            voteAverage = null
-        ),
+        movie = UIMovie.Default,
         onItemClick = {}
     )
 }

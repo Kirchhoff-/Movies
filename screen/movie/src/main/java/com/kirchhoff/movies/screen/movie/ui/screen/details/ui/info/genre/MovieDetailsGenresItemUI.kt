@@ -49,10 +49,7 @@ internal fun MovieDetailsGenresItemUI(
 @Composable
 private fun MovieDetailsGenresItemUIPreview() {
     MovieDetailsGenresItemUI(
-        UIGenre(
-            id = "",
-            name = ""
-        ),
+        genre = UIGenre.Default,
         onGenreClick = {}
     )
 }

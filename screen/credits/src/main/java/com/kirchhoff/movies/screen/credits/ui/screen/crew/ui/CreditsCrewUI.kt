@@ -10,7 +10,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewScreenState
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.CreditsCrewItemUI
 
@@ -45,10 +44,7 @@ internal fun CreditsCrewUI(
 @Composable
 private fun CreditsCrewUIPreview() {
     CreditsCrewUI(
-        screenState = CreditsCrewScreenState(
-            creators = emptyList(),
-            title = StringValue.Empty
-        ),
+        screenState = CreditsCrewScreenState.Default,
         onItemClick = {},
         onBackPressed = {}
     )

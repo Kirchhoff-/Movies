@@ -10,4 +10,14 @@ data class UITv(
     val posterPath: String?,
     val backdropPath: String?,
     val voteAverage: Float?
-) : Parcelable
+) : Parcelable {
+    companion object {
+        val Default = UITv(
+            id = TvId(0),
+            name = "",
+            posterPath = "",
+            backdropPath = "",
+            voteAverage = 0.0f
+        )
+    }
+}

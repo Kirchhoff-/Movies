@@ -11,4 +11,17 @@ internal data class TvShowDetailsInfo(
     val voteCount: Int?,
     val voteAverage: Float?,
     val genres: List<UIGenre>
-)
+) {
+    companion object {
+        val Default = TvShowDetailsInfo(
+            numberOfSeasons = 0,
+            numberOfEpisodes = 0,
+            overview = "",
+            status = "",
+            firstAirDate = "",
+            voteAverage = 0f,
+            voteCount = 0,
+            genres = emptyList()
+        )
+    }
+}

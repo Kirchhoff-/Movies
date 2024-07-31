@@ -28,7 +28,6 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.person.data.UIMediaType
 import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 
 @Composable
@@ -91,14 +90,7 @@ internal fun PersonDetailsCreditsItemUI(
 @Composable
 private fun PersonDetailsCreditsItemUIPreview() {
     PersonDetailsCreditsItemUI(
-        credit = UIPersonCredit.Actor(
-            id = 1,
-            title = "Title",
-            posterPath = "",
-            backdropPath = "",
-            UIMediaType.MOVIE,
-            character = "Character"
-        ),
+        credit = UIPersonCredit.Actor.Default,
         onItemClick = {}
     )
 }

@@ -7,8 +7,6 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.usecase.IMovieDetailsUseCase
 import kotlinx.coroutines.async
@@ -23,32 +21,7 @@ internal class MovieDetailsViewModel(
     val screenState: MutableLiveData<MovieDetailsScreenState> = MutableLiveData()
 
     init {
-        screenState.value = MovieDetailsScreenState(
-            title = StringValue.SimpleText(movie.title),
-            backdropPath = movie.backdropPath,
-            posterPath = movie.posterPath,
-            info = UIMovieInfo(
-                productionCountries = emptyList(),
-                productionCompanies = emptyList(),
-                runtime = 0,
-                tagLine = "",
-                overview = "",
-                releaseDate = "",
-                voteCount = 0,
-                voteAverage = 0f,
-                genres = emptyList()
-            ),
-            trailers = emptyList(),
-            credits = UIEntertainmentCredits(
-                cast = emptyList(),
-                crew = emptyList()
-            ),
-            similarMovies = emptyList(),
-            similarMoviesTitle = StringValue.IdText(R.string.movie_similar_movies),
-            images = emptyList(),
-            isLoading = false,
-            errorMessage = StringValue.Empty
-        )
+        screenState.value = MovieDetailsScreenState.Default
     }
 
     fun loadDetails() {

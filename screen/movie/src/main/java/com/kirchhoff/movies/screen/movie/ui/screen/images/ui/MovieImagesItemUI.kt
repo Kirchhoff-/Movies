@@ -50,11 +50,7 @@ internal fun MovieImagesItemUI(
 @Composable
 private fun MovieImagesItemUIPreview() {
     MovieImagesItemUI(
-        UIImage(
-            path = "",
-            height = 96,
-            width = 96
-        ),
+        image = UIImage.Default,
         onImageClick = {}
     )
 }

@@ -34,7 +34,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIImage
@@ -44,7 +43,6 @@ import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.data.UICountry
-import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
@@ -241,32 +239,7 @@ private fun ShowUI(
 @Composable
 private fun MovieDetailsUIPreview() {
     MovieDetailsUI(
-        screenState = MovieDetailsScreenState(
-            title = StringValue.SimpleText(""),
-            backdropPath = "",
-            posterPath = "",
-            info = UIMovieInfo(
-                productionCountries = emptyList(),
-                productionCompanies = emptyList(),
-                runtime = 0,
-                tagLine = "",
-                overview = "",
-                releaseDate = "",
-                voteCount = 0,
-                voteAverage = 0f,
-                genres = emptyList()
-            ),
-            trailers = emptyList(),
-            credits = UIEntertainmentCredits(
-                cast = emptyList(),
-                crew = emptyList()
-            ),
-            similarMovies = emptyList(),
-            similarMoviesTitle = StringValue.IdText(com.kirchhoff.movies.screen.movie.R.string.movie_similar_movies),
-            images = emptyList(),
-            isLoading = false,
-            errorMessage = StringValue.Empty
-        ),
+        screenState = MovieDetailsScreenState.Default,
         onBackPressed = {},
         onProductionCountryClick = {},
         onGenreClick = {},

@@ -90,12 +90,7 @@ internal fun MovieDetailsCreditsItemUI(
 @Composable
 private fun MovieDetailsCreditsItemUIPreview() {
     MovieDetailsCreditsItemUI(
-        credit = UIEntertainmentPerson.Actor(
-            id = 1,
-            name = "Name",
-            profilePath = "",
-            character = ""
-        ),
+        credit = UIEntertainmentPerson.Actor.Default,
         onItemClick = {}
     )
 }

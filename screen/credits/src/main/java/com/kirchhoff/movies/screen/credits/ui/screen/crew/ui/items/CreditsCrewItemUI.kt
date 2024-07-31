@@ -31,11 +31,7 @@ internal fun CreditsCrewItemUI(
 @Composable
 private fun CreditsCrewItemUIPreview() {
     CreditsCrewItemUI(
-        CreditsCrewListItem(
-            job = "Creator",
-            persons = emptyList(),
-            isExpanded = false
-        ),
+        item = CreditsCrewListItem.Default,
         onItemClick = {}
     )
 }

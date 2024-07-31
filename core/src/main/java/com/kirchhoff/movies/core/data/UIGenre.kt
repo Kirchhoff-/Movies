@@ -7,4 +7,11 @@ import kotlinx.parcelize.Parcelize
 data class UIGenre(
     val id: String,
     val name: String
-) : Parcelable
+) : Parcelable {
+    companion object {
+        val Default = UIGenre(
+            id = "",
+            name = ""
+        )
+    }
+}

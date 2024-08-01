@@ -53,7 +53,7 @@ internal class MovieDetailsUseCase(
     }
 
     override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(movieDetailsRepository.fetchSimilarMovies(id, page))
+        movieDetailsRepository.fetchSimilarMovies(id, page)
 
     override suspend fun fetchImages(id: MovieId): Result<List<UIImage>> = movieRepository.fetchImages(id)
 }

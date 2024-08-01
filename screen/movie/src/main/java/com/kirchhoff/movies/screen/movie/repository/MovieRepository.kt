@@ -30,61 +30,85 @@ internal class MovieRepository(
     private val movieDetailsMapper: IMovieDetailsMapper
 ) : BaseRepository(), IMovieRepository {
 
-    override suspend fun similarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchSimilarMovies(id.value, page)
-            }
-        )
+    override suspend fun similarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchSimilarMovies(id.value, page) }
 
-    override suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchByCountry(countryId, page)
-            }
-        )
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
 
-    override suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchByCompany(companyId, page)
-            }
-        )
+    override suspend fun fetchByCountry(countryId: String, page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchByCountry(countryId, page) }
 
-    override suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchByGenre(genre, page)
-            }
-        )
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
 
-    override suspend fun fetchNowPlaying(page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchNowPlaying(page)
-            }
-        )
+    override suspend fun fetchByCompany(companyId: String, page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchByCompany(companyId, page) }
 
-    override suspend fun fetchUpcoming(page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchUpcoming(page)
-            }
-        )
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
 
-    override suspend fun fetchPopular(page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchPopular(page)
-            }
-        )
+    override suspend fun fetchByGenre(genre: String, page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchByGenre(genre, page) }
 
-    override suspend fun fetchTopRated(page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(
-            apiCall {
-                movieService.fetchTopRated(page)
-            }
-        )
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
+
+    override suspend fun fetchNowPlaying(page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchNowPlaying(page) }
+
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
+
+    override suspend fun fetchUpcoming(page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchUpcoming(page) }
+
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
+
+    override suspend fun fetchPopular(page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall { movieService.fetchPopular(page) }
+
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
+
+    override suspend fun fetchTopRated(page: Int): Result<UIPaginated<UIMovie>> {
+        val result = apiCall {  movieService.fetchTopRated(page) }
+
+        return if (result is Result.Success) {
+            Result.Success(movieListMapper.createMovieList(result.data))
+        } else {
+            mapErrorOrException(result)
+        }
+    }
 
     override suspend fun fetchImages(id: MovieId): Result<List<UIImage>> {
         val localImages = movieImagesStorage.fetchImages(id)

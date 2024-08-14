@@ -42,8 +42,10 @@ internal class MovieDetailsUseCase(
             movieDetailsMapper.createUIEntertainmentCredits(
                 Result.Success(
                     NetworkEntertainmentCredits(
-                        creditsResult.data.cast?.sortedByDescending { it.popularity },
-                        creditsResult.data.crew?.sortedByDescending { it.popularity }
+                        cast = creditsResult.data.cast?.sortedByDescending { it.popularity },
+                        crew = creditsResult.data.crew
+                            ?.sortedByDescending { it.popularity }
+                            ?.distinctBy { it.name }
                     )
                 )
             )

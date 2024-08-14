@@ -23,10 +23,16 @@ internal class ReviewUseCase(
 ) : IReviewUseCase {
 
     override suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>> =
-        reviewMapper.createUIReviewList(reviewRepository.fetchMovieReviews(movieId, page))
+        when (val movieReviews = reviewRepository.fetchMovieReviews(movieId, page)) {
+            is Result.Success -> Result.Success(reviewMapper.createUIReviewList(movieReviews.data))
+            else -> movieReviews.mapErrorOrException()
+        }
 
     override suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>> =
-        reviewMapper.createUIReviewList(reviewRepository.fetchTvReviews(tvId, page))
+        when (val movieReviews = reviewRepository.fetchTvReviews(tvId, page)) {
+            is Result.Success -> Result.Success(reviewMapper.createUIReviewList(movieReviews.data))
+            else -> movieReviews.mapErrorOrException()
+        }
 
     override fun movieTitle(movieId: Int): String =
         movieStorage.info(movieId)?.title ?: error("Can't get title for movie with id = $movieId")

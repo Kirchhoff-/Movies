@@ -33,7 +33,8 @@ internal val tvShowDetailsModule = module {
     single<ITvShowDetailsUseCase> {
         TvShowDetailsUseCase(
             tvShowDetailsRepository = get(),
-            tvShowDetailsMapper = get()
+            tvShowDetailsMapper = get(),
+            coreMapper = get()
         )
     }
 

@@ -25,13 +25,7 @@ internal class MovieListViewModel(
     private var isLoading: Boolean = false
 
     init {
-        screenState.value = MovieListScreenState(
-            movieList = emptyList(),
-            title = StringValue.Empty,
-            errorMessage = "",
-            loadingVisible = false,
-            paginationVisible = false
-        )
+        screenState.value = MovieListScreenState.Default
     }
 
     fun updateTitle() {

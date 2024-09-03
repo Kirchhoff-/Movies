@@ -26,7 +26,6 @@ import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.ui.compose.ListScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.model.TvShowListScreenState
 
@@ -96,14 +95,7 @@ internal fun TvShowListUI(
 @Composable
 private fun TvShowListUIPreview() {
     TvShowListUI(
-        screenState = TvShowListScreenState(
-            tvShowList = emptyList(),
-            title = StringValue.Empty,
-            errorMessage = "",
-            loadingVisible = false,
-            paginationVisible = false,
-            emptyTextVisible = false
-        ),
+        screenState = TvShowListScreenState.Default,
         onLoadMore = {},
         onTvShowClick = {},
         onBackPressed = {}

@@ -14,7 +14,6 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.person.R
-import com.kirchhoff.movies.screen.person.data.UIPersonImage
 import com.kirchhoff.movies.screen.person.ui.screen.images.model.PersonImagesScreenState
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -55,10 +54,7 @@ internal fun PersonImagesUI(
 @Composable
 private fun PersonImagesUIPreview() {
     PersonImagesUI(
-        screenState = PersonImagesScreenState(
-            imagesUrls = listOf(UIPersonImage(""), UIPersonImage("")),
-            startPosition = 0
-        ),
+        screenState = PersonImagesScreenState.Default,
         onBackPressed = {}
     )
 }

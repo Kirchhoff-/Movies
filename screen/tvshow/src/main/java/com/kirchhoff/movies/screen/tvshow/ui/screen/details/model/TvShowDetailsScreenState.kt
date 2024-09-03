@@ -13,4 +13,17 @@ internal data class TvShowDetailsScreenState(
     val similarTvShows: List<UITv>,
     val isLoading: Boolean,
     val errorMessage: StringValue
-)
+) {
+    companion object {
+        val Default = TvShowDetailsScreenState(
+            title = StringValue.Empty,
+            backdropPath = "",
+            posterPath = "",
+            info = TvShowDetailsInfo.Default,
+            credits = UIEntertainmentCredits.Default,
+            similarTvShows = emptyList(),
+            isLoading = false,
+            errorMessage = StringValue.Empty
+        )
+    }
+}

@@ -75,11 +75,7 @@ internal fun MovieDetailsProductionCompaniesItemUI(
 @Composable
 private fun MovieDetailsProductionCompaniesItemUIPreview() {
     MovieDetailsProductionCompaniesItemUI(
-        company = UIProductionCompany(
-            id = "",
-            logoPath = "",
-            name = ""
-        ),
+        company = UIProductionCompany.Default,
         onItemClick = {}
     )
 }

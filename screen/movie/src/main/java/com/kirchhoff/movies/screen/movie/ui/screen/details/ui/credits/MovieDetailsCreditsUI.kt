@@ -117,10 +117,7 @@ internal fun MovieDetailsCreditsUI(
 @Composable
 private fun MovieDetailsCreditsUIPreview() {
     MovieDetailsCreditsUI(
-        credits = UIEntertainmentCredits(
-            cast = emptyList(),
-            crew = emptyList()
-        ),
+        credits = UIEntertainmentCredits.Default,
         onItemClick = {},
         onCastSeeAllClick = {},
         onCrewSeeAllClick = {}

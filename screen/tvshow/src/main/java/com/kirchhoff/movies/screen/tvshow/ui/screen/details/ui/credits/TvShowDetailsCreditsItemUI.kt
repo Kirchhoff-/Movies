@@ -90,12 +90,7 @@ internal fun TvShowDetailsCreditsItemUI(
 @Composable
 private fun TvShowDetailsCreditsItemUIPreview() {
     TvShowDetailsCreditsItemUI(
-        credit = UIEntertainmentPerson.Actor(
-            id = 1,
-            name = "Name",
-            profilePath = "",
-            character = ""
-        ),
+        credit = UIEntertainmentPerson.Actor.Default,
         onItemClick = {}
     )
 }

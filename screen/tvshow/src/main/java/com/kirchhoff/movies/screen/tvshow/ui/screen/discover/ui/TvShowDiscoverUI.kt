@@ -138,13 +138,7 @@ private fun ShowUI(
 @Composable
 private fun TvShowDiscoverUIPreview() {
     TvShowDiscoverUI(
-        screenState = TvShowDiscoverScreenState(
-            airingToday = emptyList(),
-            onTheAir = emptyList(),
-            popular = emptyList(),
-            topRated = emptyList(),
-            isLoading = false
-        ),
+        screenState = TvShowDiscoverScreenState.Default,
         onTvShowClick = {},
         onAiringTodayClick = {},
         onTheAirClick = {},

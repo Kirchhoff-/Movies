@@ -19,4 +19,20 @@ internal data class MovieDetailsScreenState(
     val images: List<UIImage>,
     val isLoading: Boolean,
     val errorMessage: StringValue
-)
+) {
+    companion object {
+        val Default = MovieDetailsScreenState(
+            title = StringValue.Empty,
+            backdropPath = "",
+            posterPath = "",
+            info = UIMovieInfo.Default,
+            trailers = emptyList(),
+            credits = UIEntertainmentCredits.Default,
+            similarMoviesTitle = StringValue.Empty,
+            similarMovies = emptyList(),
+            images = emptyList(),
+            isLoading = false,
+            errorMessage = StringValue.Empty
+        )
+    }
+}

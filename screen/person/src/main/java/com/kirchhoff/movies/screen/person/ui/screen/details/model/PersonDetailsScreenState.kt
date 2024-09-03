@@ -12,4 +12,16 @@ internal data class PersonDetailsScreenState(
     val images: List<UIPersonImage>,
     val isLoading: Boolean,
     val errorMessage: String
-)
+) {
+    companion object {
+        val Default = PersonDetailsScreenState(
+            name = "",
+            title = "",
+            details = UIPersonDetails.Default,
+            credits = UIPersonCredits.Default,
+            images = emptyList(),
+            isLoading = false,
+            errorMessage = ""
+        )
+    }
+}

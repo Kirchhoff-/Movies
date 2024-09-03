@@ -104,12 +104,7 @@ private val supportTextStyle: TextStyle = TextStyle(
 @Composable
 private fun PersonDetailsInfoUIPreview() {
     PersonDetailsInfoUI(
-        details = UIPersonDetails(
-            birthday = "",
-            placeOfBirth = "",
-            biography = "",
-            alsoKnownAs = emptyList()
-        ),
+        details = UIPersonDetails.Default,
         onLocationClick = {}
     )
 }

@@ -69,10 +69,7 @@ private const val YOUTUBE_POSTER_PATH = "https://img.youtube.com/vi/%s/0.jpg"
 @Composable
 private fun MovieDetailsTrailersItemUIPreview() {
     MovieDetailsTrailersItemUI(
-        trailer = UITrailer(
-            site = "",
-            key = ""
-        ),
+        trailer = UITrailer.Default,
         onTrailerClick = {}
     )
 }

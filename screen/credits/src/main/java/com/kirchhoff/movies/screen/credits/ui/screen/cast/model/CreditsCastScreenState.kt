@@ -6,4 +6,11 @@ import com.kirchhoff.movies.core.utils.StringValue
 internal data class CreditsCastScreenState(
     val actors: List<UIEntertainmentPerson.Actor>,
     val title: StringValue
-)
+) {
+    companion object {
+        val Default = CreditsCastScreenState(
+            actors = emptyList(),
+            title = StringValue.Empty
+        )
+    }
+}

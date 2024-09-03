@@ -8,4 +8,14 @@ internal data class MovieDiscoverScreenState(
     val topRated: List<UIMovie>,
     val upcoming: List<UIMovie>,
     val isLoading: Boolean
-)
+) {
+    companion object {
+        val Default = MovieDiscoverScreenState(
+            nowPlaying = emptyList(),
+            popular = emptyList(),
+            topRated = emptyList(),
+            upcoming = emptyList(),
+            isLoading = false
+        )
+    }
+}

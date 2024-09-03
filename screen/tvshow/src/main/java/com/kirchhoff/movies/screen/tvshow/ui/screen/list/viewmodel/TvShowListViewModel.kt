@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.model.TvShowListScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.usecase.ITvShowListUseCase
 import kotlinx.coroutines.launch
@@ -19,14 +18,7 @@ internal class TvShowListViewModel(private val tvShowListUseCase: ITvShowListUse
     private var isLoading: Boolean = false
 
     init {
-        screenState.value = TvShowListScreenState(
-            tvShowList = emptyList(),
-            title = StringValue.Empty,
-            errorMessage = "",
-            loadingVisible = false,
-            paginationVisible = false,
-            emptyTextVisible = false
-        )
+        screenState.value = TvShowListScreenState.Default
     }
 
     fun updateTitle() {

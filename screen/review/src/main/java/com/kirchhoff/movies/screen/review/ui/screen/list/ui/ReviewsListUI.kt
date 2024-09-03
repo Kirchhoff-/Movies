@@ -100,28 +100,7 @@ internal fun ReviewListUI(
 @Composable
 private fun ReviewListPreview() {
     ReviewListUI(
-        screenState = ReviewsListScreenState(
-            title = "Some movie title",
-            reviewsList = listOf(
-                UIReview(
-                    author = "Name 1",
-                    content = "Content 1",
-                    authorAvatar = null,
-                    rating = null
-                ),
-                UIReview(
-                    author = "Name 1",
-                    content = "Content 1",
-                    authorAvatar = null,
-                    rating = null
-                )
-            ),
-            errorMessage = "Some error message",
-            reviewsVisible = true,
-            loadingVisible = true,
-            paginationVisible = true,
-            emptyTextVisible = false
-        ),
+        screenState = ReviewsListScreenState.Default,
         onLoadMore = {},
         onReviewClick = { _, _ -> },
         onBackPressed = {}

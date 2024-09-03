@@ -10,4 +10,12 @@ data class UIPerson(
     val profilePath: String?
 ) : Parcelable {
     constructor(person: UIEntertainmentPerson) : this(person.id, person.name, person.profilePath)
+
+    companion object {
+        val Default = UIPerson(
+            id = 0,
+            name = "",
+            profilePath = ""
+        )
+    }
 }

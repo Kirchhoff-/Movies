@@ -50,10 +50,7 @@ internal fun MovieImagesUI(
 @Composable
 private fun MovieImagesUIPreview() {
     MovieImagesUI(
-        MovieImagesScreenState(
-            title = "Title",
-            image = emptyList()
-        ),
+        screenState = MovieImagesScreenState.Default,
         onImageClick = {},
         onBackPressed = {}
     )

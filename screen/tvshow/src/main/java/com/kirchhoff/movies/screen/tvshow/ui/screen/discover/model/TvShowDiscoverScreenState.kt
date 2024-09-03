@@ -8,4 +8,14 @@ internal data class TvShowDiscoverScreenState(
     val popular: List<UITv>,
     val topRated: List<UITv>,
     val isLoading: Boolean
-)
+) {
+    companion object {
+        val Default = TvShowDiscoverScreenState(
+            airingToday = emptyList(),
+            onTheAir = emptyList(),
+            popular = emptyList(),
+            topRated = emptyList(),
+            isLoading = false
+        )
+    }
+}

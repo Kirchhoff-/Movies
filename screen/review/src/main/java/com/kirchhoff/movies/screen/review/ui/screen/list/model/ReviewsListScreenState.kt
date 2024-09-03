@@ -10,4 +10,16 @@ internal data class ReviewsListScreenState(
     val paginationVisible: Boolean,
     val reviewsVisible: Boolean,
     val emptyTextVisible: Boolean
-)
+) {
+    companion object {
+        val Default = ReviewsListScreenState(
+            title = "",
+            reviewsList = emptyList(),
+            errorMessage = "",
+            loadingVisible = false,
+            paginationVisible = false,
+            reviewsVisible = false,
+            emptyTextVisible = false
+        )
+    }
+}

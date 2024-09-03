@@ -7,8 +7,12 @@ data class UIEntertainmentCredits(
     val cast: List<UIEntertainmentPerson.Actor>?,
     val crew: List<UIEntertainmentPerson.Creator>?
 ) {
-    fun findPerson(id: Int): UIEntertainmentPerson? =
-        cast?.find { it.id == id } ?: crew?.find { it.id == id }
+    companion object {
+        val Default: UIEntertainmentCredits = UIEntertainmentCredits(
+            cast = emptyList(),
+            crew = emptyList()
+        )
+    }
 }
 
 sealed class UIEntertainmentPerson(
@@ -22,7 +26,16 @@ sealed class UIEntertainmentPerson(
         override val name: String,
         override val profilePath: String?,
         val character: String?
-    ) : UIEntertainmentPerson(id, name, profilePath), Parcelable
+    ) : UIEntertainmentPerson(id, name, profilePath), Parcelable {
+        companion object {
+            val Default = Actor(
+                id = 0,
+                name = "",
+                profilePath = "",
+                character = ""
+            )
+        }
+    }
 
     @Parcelize
     data class Creator(

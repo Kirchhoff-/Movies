@@ -5,14 +5,27 @@ internal data class UIPersonDetails(
     val placeOfBirth: String?,
     val biography: String,
     val alsoKnownAs: List<String>?
-)
+) {
+    companion object {
+        val Default = UIPersonDetails(
+            birthday = "",
+            placeOfBirth = "",
+            biography = "",
+            alsoKnownAs = emptyList()
+        )
+    }
+}
 
 internal data class UIPersonCredits(
     val cast: List<UIPersonCredit.Actor>?,
     val crew: List<UIPersonCredit.Creator>?
 ) {
-    fun findCredit(id: Int): UIPersonCredit? =
-        cast?.find { it.id == id } ?: crew?.find { it.id == id }
+    companion object {
+        val Default = UIPersonCredits(
+            cast = emptyList(),
+            crew = emptyList()
+        )
+    }
 }
 
 internal sealed class UIPersonCredit(
@@ -29,7 +42,18 @@ internal sealed class UIPersonCredit(
         backdropPath: String?,
         mediaType: UIMediaType,
         val character: String?
-    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType)
+    ) : UIPersonCredit(id, title, posterPath, backdropPath, mediaType) {
+        companion object {
+            val Default = Actor(
+                id = 0,
+                title = "",
+                posterPath = "",
+                backdropPath = "",
+                mediaType = UIMediaType.MOVIE,
+                character = ""
+            )
+        }
+    }
 
     class Creator(
         id: Int,

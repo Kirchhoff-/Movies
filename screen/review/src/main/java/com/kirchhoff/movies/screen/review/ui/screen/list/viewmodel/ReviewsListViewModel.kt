@@ -23,22 +23,18 @@ internal class ReviewsListViewModel(
     private var isLoading: Boolean = false
 
     init {
-        screenState.value = ReviewsListScreenState(
+        screenState.value = ReviewsListScreenState.Default
+    }
+
+    fun loadReviews() {
+        screenState.value = screenState.value?.copy(
             title = if (args.reviewType == ReviewType.MOVIE) {
                 useCase.movieTitle(args.id)
             } else {
                 useCase.tvShowTitle(args.id)
-            },
-            reviewsList = emptyList(),
-            errorMessage = "",
-            loadingVisible = false,
-            paginationVisible = false,
-            reviewsVisible = false,
-            emptyTextVisible = false
+            }
         )
-    }
 
-    fun loadReviews() {
         viewModelScope.launch {
             if (currentPage < totalPages && !isLoading && screenState.value?.errorMessage?.isEmpty() == true) {
                 isLoading = true

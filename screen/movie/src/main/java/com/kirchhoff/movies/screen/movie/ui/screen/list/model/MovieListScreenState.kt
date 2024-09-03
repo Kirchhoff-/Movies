@@ -9,4 +9,14 @@ internal data class MovieListScreenState(
     val errorMessage: String,
     val loadingVisible: Boolean,
     val paginationVisible: Boolean
-)
+) {
+    companion object {
+        val Default = MovieListScreenState(
+            movieList = emptyList(),
+            title = StringValue.Empty,
+            errorMessage = "",
+            loadingVisible = false,
+            paginationVisible = false
+        )
+    }
+}

@@ -138,13 +138,7 @@ private fun ShowUI(
 @Composable
 private fun MovieDiscoverUIPreview() {
     MovieDiscoverUI(
-        screenState = MovieDiscoverScreenState(
-            nowPlaying = emptyList(),
-            popular = emptyList(),
-            topRated = emptyList(),
-            upcoming = emptyList(),
-            isLoading = false
-        ),
+        screenState = MovieDiscoverScreenState.Default,
         onMovieClick = {},
         onNowPlayingClick = {},
         onUpcomingClick = {},

@@ -12,14 +12,7 @@ internal class MovieDiscoverViewModel(private val movieDiscoverUseCase: IMovieDi
     val screenState: MutableLiveData<MovieDiscoverScreenState> = MutableLiveData()
 
     init {
-        screenState.value = MovieDiscoverScreenState(
-            nowPlaying = emptyList(),
-            popular = emptyList(),
-            topRated = emptyList(),
-            upcoming = emptyList(),
-            isLoading = false
-        )
-
+        screenState.value = MovieDiscoverScreenState.Default
         discover()
     }
 

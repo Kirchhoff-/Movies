@@ -30,11 +30,6 @@ sealed class Result<out T> {
             this.code = code
         }
 
-        constructor(code: Int) {
-            this.responseBody = null
-            this.code = code
-        }
-
         override fun toString(): String = "[ApiResponse.Failure $code]: $responseBody"
     }
 
@@ -50,5 +45,11 @@ sealed class Result<out T> {
         }
 
         override fun toString(): String = "[ApiResponse.Failure]: $message"
+    }
+
+    fun <T> mapErrorOrException(): Result<T> = when (this) {
+        is Success -> error("Can't map success result")
+        is Error -> Error(this.responseBody, this.code)
+        is Exception -> Exception(this.message)
     }
 }

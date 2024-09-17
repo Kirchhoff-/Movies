@@ -15,13 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
-import com.kirchhoff.movies.core.ui.resources.Colors
+import com.kirchhoff.movies.core.ui.resources.TextStyles
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
@@ -60,7 +58,7 @@ internal fun TvShowDetailsInfoUI(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                style = infoTextStyle,
+                style = TextStyles.Info,
                 text = StringValue.IdText(
                     R.string.tv_seasons_format,
                     info.numberOfSeasons
@@ -68,7 +66,7 @@ internal fun TvShowDetailsInfoUI(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                style = infoTextStyle,
+                style = TextStyles.Info,
                 text = StringValue.IdText(
                     R.string.tv_episodes_format,
                     info.numberOfEpisodes
@@ -76,7 +74,7 @@ internal fun TvShowDetailsInfoUI(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                style = infoTextStyle,
+                style = TextStyles.Info,
                 text = StringValue.IdText(
                     R.string.tv_first_air_date_format,
                     info.firstAirDate
@@ -84,7 +82,7 @@ internal fun TvShowDetailsInfoUI(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                style = infoTextStyle,
+                style = TextStyles.Info,
                 text = StringValue.IdText(
                     R.string.tv_status_format,
                     info.status
@@ -93,11 +91,6 @@ internal fun TvShowDetailsInfoUI(
         }
     }
 }
-
-private val infoTextStyle: TextStyle = TextStyle(
-    fontSize = 14.sp,
-    color = Colors.Black
-)
 
 @Preview
 @Composable

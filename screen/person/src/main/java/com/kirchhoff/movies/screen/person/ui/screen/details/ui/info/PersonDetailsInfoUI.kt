@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
+import com.kirchhoff.movies.core.ui.resources.TextStyles
 import com.kirchhoff.movies.screen.person.R
 import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 
@@ -49,7 +50,7 @@ internal fun PersonDetailsInfoUI(
             ) {
                 if (isBornVisible) {
                     Text(
-                        style = infoTextStyle,
+                        style = TextStyles.Info,
                         text = stringResource(R.string.person_born)
                     )
                     Text(
@@ -60,7 +61,7 @@ internal fun PersonDetailsInfoUI(
                 }
                 if (isPlaceOfBirthVisible) {
                     Text(
-                        style = infoTextStyle,
+                        style = TextStyles.Info,
                         text = stringResource(R.string.person_birthplace)
                     )
                     Text(
@@ -77,7 +78,7 @@ internal fun PersonDetailsInfoUI(
                 }
                 if (isBiographyVisible) {
                     Text(
-                        style = infoTextStyle,
+                        style = TextStyles.Info,
                         text = stringResource(R.string.person_bio)
                     )
                     Text(
@@ -89,11 +90,6 @@ internal fun PersonDetailsInfoUI(
         }
     }
 }
-
-private val infoTextStyle: TextStyle = TextStyle(
-    fontSize = 14.sp,
-    color = Colors.Black
-)
 
 private val supportTextStyle: TextStyle = TextStyle(
     fontSize = 14.sp,

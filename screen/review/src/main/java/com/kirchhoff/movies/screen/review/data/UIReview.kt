@@ -8,14 +8,16 @@ internal data class UIReview(
     val author: String,
     val content: String,
     val authorAvatar: String?,
-    val rating: Int?
+    val rating: Int?,
+    val url: String
 ) : Parcelable {
     companion object {
         val Default = UIReview(
             author = "",
             content = "",
             authorAvatar = "",
-            rating = 0
+            rating = 0,
+            url = ""
         )
     }
 }

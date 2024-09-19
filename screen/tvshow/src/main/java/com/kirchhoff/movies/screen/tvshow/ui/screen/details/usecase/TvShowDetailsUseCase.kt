@@ -7,11 +7,11 @@ import com.kirchhoff.movies.core.mapper.ICoreMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.mapper.ITvShowDetailsMapper
-import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetails
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.repository.ITvShowDetailsRepository
 
 internal interface ITvShowDetailsUseCase {
-    suspend fun fetchDetails(id: TvId): Result<TvShowDetailsInfo>
+    suspend fun fetchDetails(id: TvId): Result<TvShowDetails>
     suspend fun fetchCredits(id: TvId): Result<UIEntertainmentCredits>
     suspend fun fetchSimilar(id: TvId, page: Int): Result<UIPaginated<UITv>>
 }
@@ -22,7 +22,7 @@ internal class TvShowDetailsUseCase(
     private val coreMapper: ICoreMapper
 ) : ITvShowDetailsUseCase {
 
-    override suspend fun fetchDetails(id: TvId): Result<TvShowDetailsInfo> =
+    override suspend fun fetchDetails(id: TvId): Result<TvShowDetails> =
         when (val response = tvShowDetailsRepository.fetchDetails(id)) {
             is Result.Success -> Result.Success(tvShowDetailsMapper.createUITvDetails(response.data))
             else -> response.mapErrorOrException()

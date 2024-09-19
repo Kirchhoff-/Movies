@@ -27,10 +27,7 @@ import com.kirchhoff.movies.voteview.VoteViewComposable
 
 @SuppressWarnings("LongMethod")
 @Composable
-internal fun TvShowDetailsInfoUI(
-    info: TvShowDetailsInfo,
-    posterPath: String?
-) {
+internal fun TvShowDetailsInfoUI(info: TvShowDetailsInfo) {
     val context = LocalContext.current
 
     Row(
@@ -46,7 +43,7 @@ internal fun TvShowDetailsInfoUI(
             modifier = Modifier
                 .height(175.dp)
                 .width(120.dp),
-            model = BASE_POSTER_PATH + posterPath,
+            model = BASE_POSTER_PATH + info.posterPath,
             contentScale = ContentScale.Crop,
             contentDescription = ""
         )
@@ -95,8 +92,5 @@ internal fun TvShowDetailsInfoUI(
 @Preview
 @Composable
 private fun TvShowDetailInfoUIPreview() {
-    TvShowDetailsInfoUI(
-        info = TvShowDetailsInfo.Default,
-        posterPath = ""
-    )
+    TvShowDetailsInfoUI(TvShowDetailsInfo.Default)
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase.ITvShowDetailsUseCase
 import kotlinx.coroutines.async
@@ -32,7 +33,20 @@ internal class TvShowDetailsViewModel(
             screenState.value = screenState.value?.copy(isLoading = false)
             when (result) {
                 is Result.Success -> {
-                    screenState.value = screenState.value?.copy(info = result.data)
+                    val data = result.data
+                    screenState.value = screenState.value?.copy(
+                        overview = data.overview,
+                        genres = data.genres,
+                        detailsInfo = TvShowDetailsInfo(
+                            posterPath = tvShow.posterPath,
+                            numberOfSeasons = data.numberOfSeasons,
+                            numberOfEpisodes = data.numberOfEpisodes,
+                            status = data.status,
+                            firstAirDate = data.firstAirDate,
+                            voteCount = data.voteCount,
+                            voteAverage = data.voteAverage
+                        )
+                    )
                     awaitAll(
                         async { fetchCredits() },
                         async { fetchSimilarTvShows() }

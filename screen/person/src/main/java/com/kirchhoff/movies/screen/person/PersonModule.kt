@@ -1,9 +1,7 @@
 package com.kirchhoff.movies.screen.person
 
 import androidx.appcompat.app.AppCompatActivity
-import com.kirchhoff.movies.screen.person.mapper.IPersonDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.IPersonsMapper
-import com.kirchhoff.movies.screen.person.mapper.PersonDetailsMapper
 import com.kirchhoff.movies.screen.person.mapper.PersonsMapper
 import com.kirchhoff.movies.screen.person.network.PersonService
 import com.kirchhoff.movies.screen.person.repository.IPersonsRepository
@@ -24,8 +22,6 @@ internal val personModule = module {
         PersonRouter(activity)
     }
 
-    single<IPersonDetailsMapper> { PersonDetailsMapper() }
-
     single<IPersonsMapper> { PersonsMapper() }
 
     single<IPersonImagesStorage> { PersonImagesStorage() }
@@ -33,9 +29,7 @@ internal val personModule = module {
     single<IPersonsRepository> {
         PersonsRepository(
             personService = get(),
-            personImagesStorage = get(),
-            personMapper = get(),
-            personDetailsMapper = get()
+            personMapper = get()
         )
     }
 

@@ -8,14 +8,14 @@ import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListType
 import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState
+import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListUseCase
 import kotlinx.coroutines.launch
 
 internal class MovieListViewModel(
     private val type: MovieListType,
-    private val movieRepository: IMovieRepository
+    private val movieListUseCase: IMovieListUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<MovieListScreenState> = MutableLiveData()
@@ -85,13 +85,13 @@ internal class MovieListViewModel(
     }
 
     private suspend fun fetchMovieList(): Result<UIPaginated<UIMovie>> = when (type) {
-        is MovieListType.Genre -> movieRepository.fetchByGenre(type.genre.id, currentPage + 1)
-        is MovieListType.Country -> movieRepository.fetchByCountry(type.country.id, currentPage + 1)
-        is MovieListType.Similar -> movieRepository.similarMovies(type.movie.id, currentPage + 1)
-        is MovieListType.Company -> movieRepository.fetchByCompany(type.company.id, currentPage + 1)
-        MovieListType.NowPlaying -> movieRepository.fetchNowPlaying(currentPage + 1)
-        MovieListType.Popular -> movieRepository.fetchPopular(currentPage + 1)
-        MovieListType.TopRated -> movieRepository.fetchTopRated(currentPage + 1)
-        MovieListType.Upcoming -> movieRepository.fetchUpcoming(currentPage + 1)
+        is MovieListType.Genre -> movieListUseCase.fetchByGenre(type.genre.id, currentPage + 1)
+        is MovieListType.Country -> movieListUseCase.fetchByCountry(type.country.id, currentPage + 1)
+        is MovieListType.Similar -> movieListUseCase.fetchSimilarMovies(type.movie.id, currentPage + 1)
+        is MovieListType.Company -> movieListUseCase.fetchByCompany(type.company.id, currentPage + 1)
+        is MovieListType.NowPlaying -> movieListUseCase.fetchNowPlaying(currentPage + 1)
+        is MovieListType.Popular -> movieListUseCase.fetchPopular(currentPage + 1)
+        is MovieListType.TopRated -> movieListUseCase.fetchTopRated(currentPage + 1)
+        is MovieListType.Upcoming -> movieListUseCase.fetchUpcoming(currentPage + 1)
     }
 }

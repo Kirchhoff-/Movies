@@ -29,7 +29,7 @@ internal interface MovieService {
 
     @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
     suspend fun fetchByCompany(
-        @Query("with_companies") countryId: String,
+        @Query("with_companies") companyId: String,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
 

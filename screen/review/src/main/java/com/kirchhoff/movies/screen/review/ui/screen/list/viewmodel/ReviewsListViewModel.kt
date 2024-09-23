@@ -3,7 +3,6 @@ package com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
@@ -50,14 +49,14 @@ internal class ReviewsListViewModel(
                     ReviewType.MOVIE -> useCase.fetchMovieReviews(args.id, currentPage + 1)
                     ReviewType.TV -> useCase.fetchTvReviews(args.id, currentPage + 1)
                 }
-                when (reviewsResult) {
-                    is Result.Success -> {
-                        totalPages = reviewsResult.data.totalPages
-                        currentPage = reviewsResult.data.page
+                reviewsResult.fold(
+                    onSuccess = { result ->
+                        totalPages = result.totalPages
+                        currentPage = result.page
 
                         val resultReviewsList = mutableListOf<UIReview>().apply {
                             screenState.value?.let { this.addAll(it.reviewsList) }
-                            addAll(reviewsResult.data.results)
+                            addAll(result.results)
                         }
 
                         screenState.value = screenState.value?.copy(
@@ -67,16 +66,17 @@ internal class ReviewsListViewModel(
                             reviewsVisible = resultReviewsList.isNotEmpty(),
                             emptyTextVisible = resultReviewsList.isEmpty()
                         )
+                    },
+                    onFailure = {
+                        screenState.value?.copy(
+                            errorMessage = reviewsResult.toString(),
+                            loadingVisible = false,
+                            reviewsVisible = screenState.value?.reviewsList?.isNotEmpty() == true,
+                            paginationVisible = false,
+                            emptyTextVisible = false
+                        )
                     }
-                    else -> screenState.value = screenState.value?.copy(
-                        errorMessage = reviewsResult.toString(),
-                        loadingVisible = false,
-                        reviewsVisible = screenState.value?.reviewsList?.isNotEmpty() == true,
-                        paginationVisible = false,
-                        emptyTextVisible = false
-                    )
-                }
-
+                )
                 isLoading = false
             }
         }

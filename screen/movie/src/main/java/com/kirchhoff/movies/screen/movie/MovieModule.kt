@@ -32,7 +32,6 @@ internal val movieModule = module {
         MovieRepository(
             movieService = get(),
             movieImagesStorage = get(),
-            movieListMapper = get(),
             movieDetailsMapper = get()
         )
     }

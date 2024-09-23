@@ -17,11 +17,11 @@ data class NetworkMovieDetails(
 )
 
 data class NetworkTrailer(
-    val site: String,
-    val key: String
+    @SerializedName("site") val site: String,
+    @SerializedName("key") val key: String
 )
 
-data class NetworkTrailersList(val results: List<NetworkTrailer>)
+data class NetworkTrailersList(@SerializedName("results") val results: List<NetworkTrailer>)
 
 data class NetworkCountry(
     @SerializedName("iso_3166_1") val id: String,

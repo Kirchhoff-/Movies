@@ -9,8 +9,8 @@ import com.kirchhoff.movies.storage.movie.IStorageMovie
 import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
 
 internal interface IReviewUseCase {
-    suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>>
-    suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>>
+    suspend fun fetchMovieReviews(movieId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>>
+    suspend fun fetchTvReviews(tvId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>>
     fun movieTitle(movieId: Int): String
     fun tvShowTitle(tvShowId: Int): String
 }
@@ -22,16 +22,16 @@ internal class ReviewUseCase(
     private val tvShowStorage: IStorageTvShow
 ) : IReviewUseCase {
 
-    override suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>> =
+    override suspend fun fetchMovieReviews(movieId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>> =
         when (val movieReviews = reviewRepository.fetchMovieReviews(movieId, page)) {
-            is Result.Success -> Result.Success(reviewMapper.createUIReviewList(movieReviews.data))
-            else -> movieReviews.mapErrorOrException()
+            is Result.Success -> kotlin.Result.success(reviewMapper.createUIReviewList(movieReviews.data))
+            else -> kotlin.Result.failure(Exception("Can't get info"))
         }
 
-    override suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>> =
+    override suspend fun fetchTvReviews(tvId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>> =
         when (val movieReviews = reviewRepository.fetchTvReviews(tvId, page)) {
-            is Result.Success -> Result.Success(reviewMapper.createUIReviewList(movieReviews.data))
-            else -> movieReviews.mapErrorOrException()
+            is Result.Success -> kotlin.Result.success(reviewMapper.createUIReviewList(movieReviews.data))
+            else -> kotlin.Result.failure(Exception("Can't get info"))
         }
 
     override fun movieTitle(movieId: Int): String =

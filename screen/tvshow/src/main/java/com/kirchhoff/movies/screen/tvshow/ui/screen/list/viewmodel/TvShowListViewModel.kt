@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UITv
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.model.TvShowListScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.usecase.ITvShowListUseCase
 import kotlinx.coroutines.launch
@@ -37,14 +36,14 @@ internal class TvShowListViewModel(private val tvShowListUseCase: ITvShowListUse
                     paginationVisible = paginationVisible
                 )
 
-                when (val result = tvShowListUseCase.load(currentPage)) {
-                    is Result.Success -> {
-                        totalPages = result.data.totalPages
-                        currentPage = result.data.page + 1
+                tvShowListUseCase.load(currentPage).fold(
+                    onSuccess = { result ->
+                        totalPages = result.totalPages
+                        currentPage = result.page + 1
 
                         val tvShowList = mutableListOf<UITv>().apply {
                             screenState.value?.let { this.addAll(it.tvShowList) }
-                            addAll(result.data.results)
+                            addAll(result.results)
                         }
 
                         screenState.value = screenState.value?.copy(
@@ -54,14 +53,16 @@ internal class TvShowListViewModel(private val tvShowListUseCase: ITvShowListUse
                             errorMessage = "",
                             emptyTextVisible = tvShowList.isEmpty() && loadingVisible
                         )
+                    },
+                    onFailure = { exception ->
+                        screenState.value = screenState.value?.copy(
+                            loadingVisible = false,
+                            paginationVisible = false,
+                            errorMessage = exception.localizedMessage.orEmpty(),
+                            emptyTextVisible = true
+                        )
                     }
-                    else -> screenState.value = screenState.value?.copy(
-                        loadingVisible = false,
-                        paginationVisible = false,
-                        errorMessage = result.toString(),
-                        emptyTextVisible = true
-                    )
-                }
+                )
 
                 isLoading = false
             }

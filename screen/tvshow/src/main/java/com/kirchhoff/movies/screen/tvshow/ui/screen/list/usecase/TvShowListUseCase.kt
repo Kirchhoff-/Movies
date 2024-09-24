@@ -10,7 +10,7 @@ import com.kirchhoff.movies.screen.tvshow.ui.screen.list.mapper.ITvShowListMappe
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.repository.ITvShowListRepository
 
 internal interface ITvShowListUseCase {
-    suspend fun load(page: Int): Result<UIPaginated<UITv>>
+    suspend fun load(page: Int): kotlin.Result<UIPaginated<UITv>>
     fun title(): StringValue
 }
 
@@ -20,7 +20,7 @@ internal class TvShowListUseCase(
     private val tvShowListMapper: ITvShowListMapper
 ) : ITvShowListUseCase {
 
-    override suspend fun load(page: Int): Result<UIPaginated<UITv>> {
+    override suspend fun load(page: Int): kotlin.Result<UIPaginated<UITv>> {
         val result = when (tvShowListType) {
             is TvShowListType.Similar -> tvShowListRepository.similar(tvShowListType.id, page)
             is TvShowListType.AiringToday -> tvShowListRepository.airingToday(page)
@@ -30,9 +30,9 @@ internal class TvShowListUseCase(
         }
 
         return if (result is Result.Success) {
-            Result.Success(tvShowListMapper.createTvShowList(result.data))
+            kotlin.Result.success(tvShowListMapper.createTvShowList(result.data))
         } else {
-            Result.Exception("Can't load list")
+            kotlin.Result.failure(Exception("Can't load list"))
         }
     }
 

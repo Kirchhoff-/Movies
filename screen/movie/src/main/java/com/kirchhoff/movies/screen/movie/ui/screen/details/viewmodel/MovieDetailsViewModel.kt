@@ -8,7 +8,6 @@ import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.usecase.IMovieDetailsUseCase
 import kotlinx.coroutines.async

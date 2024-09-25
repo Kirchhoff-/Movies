@@ -9,9 +9,9 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.mapper.IPersonDetail
 import com.kirchhoff.movies.screen.person.ui.screen.details.repository.IPersonDetailsRepository
 
 internal interface IPersonDetailsUseCase {
-    suspend fun fetchDetails(personId: Int): Result<UIPersonDetails>
-    suspend fun fetchCredits(personId: Int): Result<UIPersonCredits>
-    suspend fun fetchImages(personId: Int): Result<List<UIPersonImage>>
+    suspend fun fetchDetails(personId: Int): kotlin.Result<UIPersonDetails>
+    suspend fun fetchCredits(personId: Int): kotlin.Result<UIPersonCredits>
+    suspend fun fetchImages(personId: Int): kotlin.Result<List<UIPersonImage>>
 }
 
 internal class PersonDetailsUseCase(
@@ -20,32 +20,32 @@ internal class PersonDetailsUseCase(
     private val personDetailsMapper: IPersonDetailsMapper
 ) : IPersonDetailsUseCase {
 
-    override suspend fun fetchDetails(personId: Int): Result<UIPersonDetails> =
+    override suspend fun fetchDetails(personId: Int): kotlin.Result<UIPersonDetails> =
         when (val response = personDetailsRepository.details(personId)) {
-            is Result.Success -> Result.Success(personDetailsMapper.createPersonDetails(response.data))
-            else -> response.mapErrorOrException()
+            is Result.Success -> kotlin.Result.success(personDetailsMapper.createPersonDetails(response.data))
+            else -> kotlin.Result.failure(Exception("Can't fetch the details"))
         }
 
-    override suspend fun fetchCredits(personId: Int): Result<UIPersonCredits> =
+    override suspend fun fetchCredits(personId: Int): kotlin.Result<UIPersonCredits> =
         when (val response = personDetailsRepository.credits(personId)) {
-            is Result.Success -> Result.Success(personDetailsMapper.createCredits(response.data))
-            else -> response.mapErrorOrException()
+            is Result.Success -> kotlin.Result.success(personDetailsMapper.createCredits(response.data))
+            else -> kotlin.Result.failure(Exception("Can't fetch the credits"))
         }
 
-    override suspend fun fetchImages(personId: Int): Result<List<UIPersonImage>> {
+    override suspend fun fetchImages(personId: Int): kotlin.Result<List<UIPersonImage>> {
         val localImages = personImageStorage.fetchImages(personId)
 
         return if (localImages != null) {
-            Result.Success(localImages)
+            kotlin.Result.success(localImages)
         } else {
             val result = personDetailsRepository.images(personId)
 
             if (result is Result.Success) {
                 val uiImages = result.data.images.map { personDetailsMapper.createPersonImage(it) }
                 personImageStorage.updateImages(personId, uiImages)
-                Result.Success(uiImages)
+                kotlin.Result.success(uiImages)
             } else {
-                result.mapErrorOrException()
+                kotlin.Result.failure(Exception("Can't fetch the images"))
             }
         }
     }

@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIPerson
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
 import com.kirchhoff.movies.screen.person.ui.screen.details.usecase.IPersonDetailsUseCase
 import kotlinx.coroutines.async
@@ -29,31 +28,41 @@ internal class PersonDetailsViewModel(
             val result = personDetailsUseCase.fetchDetails(person.id)
 
             screenState.value = screenState.value?.copy(isLoading = false)
-            when (result) {
-                is Result.Success -> {
-                    screenState.value = screenState.value?.copy(details = result.data)
+            result.fold(
+                onSuccess = { details ->
+                    screenState.value = screenState.value?.copy(details = details)
 
                     awaitAll(
                         async { fetchCredits() },
                         async { fetchImages() }
                     )
+                },
+                onFailure = { exception ->
+                    screenState.value = screenState.value?.copy(errorMessage = exception.localizedMessage.orEmpty())
                 }
-                else -> screenState.value = screenState.value?.copy(errorMessage = result.toString())
-            }
+            )
         }
     }
 
     private suspend fun fetchCredits() {
-        when (val creditsResult = personDetailsUseCase.fetchCredits(person.id)) {
-            is Result.Success -> screenState.value = screenState.value?.copy(credits = creditsResult.data)
-            else -> Timber.e(creditsResult.toString())
-        }
+        personDetailsUseCase.fetchCredits(person.id).fold(
+            onSuccess = { credits ->
+                screenState.value = screenState.value?.copy(credits = credits)
+            },
+            onFailure = { exception ->
+                Timber.e(exception.localizedMessage.orEmpty())
+            }
+        )
     }
 
     private suspend fun fetchImages() {
-        when (val personImages = personDetailsUseCase.fetchImages(person.id)) {
-            is Result.Success -> screenState.value = screenState.value?.copy(images = personImages.data)
-            else -> Timber.e(personImages.toString())
-        }
+        personDetailsUseCase.fetchImages(person.id).fold(
+            onSuccess = { personImages ->
+                screenState.value = screenState.value?.copy(images = personImages)
+            },
+            onFailure = { exception ->
+                Timber.e(exception.localizedMessage.orEmpty())
+            }
+        )
     }
 }

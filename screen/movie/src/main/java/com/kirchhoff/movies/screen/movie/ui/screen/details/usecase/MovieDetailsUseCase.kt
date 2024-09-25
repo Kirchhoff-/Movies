@@ -30,29 +30,34 @@ internal class MovieDetailsUseCase(
 ) : IMovieDetailsUseCase {
 
     override suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo> =
-        movieDetailsMapper.createUIMovieDetails(movieDetailsRepository.fetchDetails(id))
+        when (val response = movieDetailsRepository.fetchDetails(id)) {
+            is Result.Success -> Result.Success(movieDetailsMapper.createUIMovieDetails(response.data))
+            else -> response.mapErrorOrException()
+        }
 
     override suspend fun fetchTrailersList(id: MovieId): Result<List<UITrailer>> =
-        movieDetailsMapper.createUITrailersList(movieDetailsRepository.fetchTrailersList(id))
+        when (val response = movieDetailsRepository.fetchTrailersList(id)) {
+            is Result.Success -> Result.Success(movieDetailsMapper.createUITrailersList(response.data))
+            else -> response.mapErrorOrException()
+        }
 
-    override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> {
-        val creditsResult = movieDetailsRepository.fetchMovieCredits(id)
-
-        return if (creditsResult is Result.Success) {
-            movieDetailsMapper.createUIEntertainmentCredits(
+    override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> =
+        when (val response = movieDetailsRepository.fetchMovieCredits(id)) {
+            is Result.Success -> {
                 Result.Success(
-                    NetworkEntertainmentCredits(
-                        cast = creditsResult.data.cast?.sortedByDescending { it.popularity },
-                        crew = creditsResult.data.crew
-                            ?.sortedByDescending { it.popularity }
-                            ?.distinctBy { it.name }
+                    movieDetailsMapper.createUIEntertainmentCredits(
+                        NetworkEntertainmentCredits(
+                            cast = response.data.cast?.sortedByDescending { it.popularity },
+                            crew = response.data.crew
+                                ?.sortedByDescending { it.popularity }
+                                ?.distinctBy { it.name }
+                        )
                     )
                 )
-            )
-        } else {
-            movieDetailsMapper.createUIEntertainmentCredits(creditsResult)
+            }
+
+            else -> response.mapErrorOrException()
         }
-    }
 
     override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
         movieListMapper.createMovieList(movieDetailsRepository.fetchSimilarMovies(id, page))

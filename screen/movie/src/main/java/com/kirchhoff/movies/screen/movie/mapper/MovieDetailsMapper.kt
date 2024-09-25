@@ -4,7 +4,6 @@ import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIImage
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.mapper.ICoreMapper
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.core.NetworkImagesResponse
 import com.kirchhoff.movies.networkdata.core.NetworkProductionCompany
@@ -18,61 +17,52 @@ import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 
 internal interface IMovieDetailsMapper {
-    fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieInfo>
-    fun createUIEntertainmentCredits(movieCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits>
-    fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<List<UITrailer>>
-    fun createUIImages(imagesResponseResult: Result<NetworkImagesResponse>): Result<List<UIImage>>
+    fun createUIMovieDetails(networkMovieDetails: NetworkMovieDetails): UIMovieInfo
+    fun createUIEntertainmentCredits(networkMovieCredits: NetworkEntertainmentCredits): UIEntertainmentCredits
+    fun createUITrailersList(networkTrailersList: NetworkTrailersList): List<UITrailer>
+    fun createUIImages(networkImagesResponse: NetworkImagesResponse): List<UIImage>
 }
 
 internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
-    override fun createUIMovieDetails(movieDetailsResult: Result<NetworkMovieDetails>): Result<UIMovieInfo> =
-        when (movieDetailsResult) {
-            is Result.Success -> Result.Success(createUIMovieDetails(movieDetailsResult.data))
-            else -> mapErrorOrException(movieDetailsResult)
-        }
 
-    override fun createUIEntertainmentCredits(movieCreditsResult: Result<NetworkEntertainmentCredits>): Result<UIEntertainmentCredits> =
-        when (movieCreditsResult) {
-            is Result.Success -> Result.Success(coreMapper.createUIEntertainmentCredits(movieCreditsResult.data))
-            else -> mapErrorOrException(movieCreditsResult)
-        }
+    override fun createUIMovieDetails(networkMovieDetails: NetworkMovieDetails): UIMovieInfo = networkMovieDetails.toUIMovie()
 
-    override fun createUITrailersList(trailersListResult: Result<NetworkTrailersList>): Result<List<UITrailer>> =
-        when (trailersListResult) {
-            is Result.Success -> Result.Success(createUITrailerList(trailersListResult.data))
-            else -> mapErrorOrException(trailersListResult)
-        }
+    override fun createUIEntertainmentCredits(networkMovieCredits: NetworkEntertainmentCredits): UIEntertainmentCredits =
+        coreMapper.createUIEntertainmentCredits(networkMovieCredits)
 
-    override fun createUIImages(imagesResponseResult: Result<NetworkImagesResponse>): Result<List<UIImage>> =
-        when (imagesResponseResult) {
-            is Result.Success -> Result.Success(imagesResponseResult.data.combinedImages().map { coreMapper.createUIImage(it) })
-            else -> mapErrorOrException(imagesResponseResult)
-        }
+    override fun createUITrailersList(networkTrailersList: NetworkTrailersList): List<UITrailer> =
+        networkTrailersList.toUITrailerList()
 
-    private fun createUIMovieDetails(movieDetails: NetworkMovieDetails) =
-        UIMovieInfo(
-            movieDetails.productionCountries.map { createUICountry(it) },
-            movieDetails.productionCompanies.map { createUIProductionCompany(it) },
-            movieDetails.runtime,
-            movieDetails.tagline,
-            movieDetails.overview,
-            movieDetails.releaseDate,
-            movieDetails.voteCount,
-            movieDetails.voteAverage,
-            movieDetails.genres.map { coreMapper.createUIGenre(it) }
-        )
+    override fun createUIImages(networkImagesResponse: NetworkImagesResponse): List<UIImage> =
+        networkImagesResponse.combinedImages().map { coreMapper.createUIImage(it) }
 
-    private fun createUITrailerList(trailer: NetworkTrailersList) =
-        trailer.results.map { createUITrailer(it) }
+    private fun NetworkMovieDetails.toUIMovie(): UIMovieInfo = UIMovieInfo(
+        productionCountries = productionCountries.map { it.toUICountry() },
+        productionCompanies = productionCompanies.map { it.toUIProductionCompany() },
+        runtime = runtime,
+        tagLine = tagline,
+        overview = overview,
+        releaseDate = releaseDate,
+        voteCount = voteCount,
+        voteAverage = voteAverage,
+        genres = genres.map { coreMapper.createUIGenre(it) }
+    )
 
-    private fun createUITrailer(trailer: NetworkTrailer) =
-        UITrailer(trailer.site, trailer.key)
+    private fun NetworkTrailersList.toUITrailerList(): List<UITrailer> = results.map { it.toUITrailer() }
 
-    private fun createUICountry(item: NetworkCountry) = UICountry(item.id, item.name)
+    private fun NetworkTrailer.toUITrailer(): UITrailer = UITrailer(
+        site = site,
+        key = key
+    )
 
-    private fun createUIProductionCompany(item: NetworkProductionCompany) = UIProductionCompany(
-        id = item.id,
-        logoPath = item.logoPath.orEmpty(),
-        name = item.name
+    private fun NetworkCountry.toUICountry(): UICountry = UICountry(
+        id = id,
+        name = name
+    )
+
+    private fun NetworkProductionCompany.toUIProductionCompany(): UIProductionCompany = UIProductionCompany(
+        id = id,
+        logoPath = logoPath.orEmpty(),
+        name = name
     )
 }

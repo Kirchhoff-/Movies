@@ -24,17 +24,15 @@ internal class MovieRepository(
         return if (localImages != null) {
             Result.Success(localImages)
         } else {
-            val result = movieDetailsMapper.createUIImages(
-                apiCall {
-                    movieService.fetchImages(id.value)
-                }
-            )
+            val result = apiCall { movieService.fetchImages(id.value) }
 
-            if (result is Result.Success) {
-                movieImagesStorage.updateImages(id, result.data)
+            return if (result is Result.Success) {
+                val uiImages = movieDetailsMapper.createUIImages(result.data)
+                movieImagesStorage.updateImages(id, uiImages)
+                Result.Success(uiImages)
+            } else {
+                result.mapErrorOrException()
             }
-
-            result
         }
     }
 }

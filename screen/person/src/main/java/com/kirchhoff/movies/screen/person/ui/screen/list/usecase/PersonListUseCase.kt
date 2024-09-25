@@ -7,7 +7,7 @@ import com.kirchhoff.movies.screen.person.ui.screen.list.mapper.IPersonListMappe
 import com.kirchhoff.movies.screen.person.ui.screen.list.repository.IPersonListRepository
 
 internal interface IPersonListUseCase {
-    suspend fun fetchPopularPersons(page: Int): Result<UIPaginated<UIPerson>>
+    suspend fun fetchPopularPersons(page: Int): kotlin.Result<UIPaginated<UIPerson>>
 }
 
 internal class PersonListUseCase(
@@ -15,9 +15,9 @@ internal class PersonListUseCase(
     private val personListMapper: IPersonListMapper
 ) : IPersonListUseCase {
 
-    override suspend fun fetchPopularPersons(page: Int): Result<UIPaginated<UIPerson>> =
+    override suspend fun fetchPopularPersons(page: Int): kotlin.Result<UIPaginated<UIPerson>> =
         when (val response = personListRepository.fetchPopularPersons(page)) {
-            is Result.Success -> Result.Success(personListMapper.createUIPersons(response.data))
-            else -> response.mapErrorOrException()
+            is Result.Success -> kotlin.Result.success(personListMapper.createUIPersons(response.data))
+            else -> kotlin.Result.failure(Exception("Can't fetch the popular persons"))
         }
 }

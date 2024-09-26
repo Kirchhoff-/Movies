@@ -64,7 +64,7 @@ internal class MovieListUseCase(
 
     private suspend fun fetchMovies(request: suspend () -> Result<NetworkPaginated<NetworkMovie>>): Result<UIPaginated<UIMovie>> =
         when (val response = request.invoke()) {
-            is Result.Success -> movieListMapper.createMovieList(response)
+            is Result.Success -> Result.Success(movieListMapper.createMovieList(response.data))
             else -> response.mapErrorOrException()
         }
 }

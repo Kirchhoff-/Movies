@@ -60,7 +60,10 @@ internal class MovieDetailsUseCase(
         }
 
     override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(movieDetailsRepository.fetchSimilarMovies(id, page))
+        when (val response = movieDetailsRepository.fetchSimilarMovies(id, page)) {
+            is Result.Success -> Result.Success(movieListMapper.createMovieList(response.data))
+            else -> response.mapErrorOrException()
+        }
 
     override suspend fun fetchImages(id: MovieId): Result<List<UIImage>> = movieRepository.fetchImages(id)
 }

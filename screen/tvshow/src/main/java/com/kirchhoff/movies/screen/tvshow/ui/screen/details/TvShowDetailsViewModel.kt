@@ -25,7 +25,12 @@ internal class TvShowDetailsViewModel(
     }
 
     fun loadDetails() {
-        screenState.value = screenState.value?.copy(isLoading = true)
+        screenState.value = screenState.value?.copy(
+            title = StringValue.SimpleText(tvShow.name),
+            backdropPath = tvShow.backdropPath,
+            posterPath = tvShow.posterPath,
+            isLoading = true
+        )
         viewModelScope.launch {
             val result = tvShowDetailsUseCase.fetchDetails(tvShow.id)
 

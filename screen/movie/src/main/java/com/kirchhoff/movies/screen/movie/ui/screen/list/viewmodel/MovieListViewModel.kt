@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIMovie
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
@@ -55,14 +54,14 @@ internal class MovieListViewModel(
                     paginationVisible = paginationVisible
                 )
 
-                when (val result = fetchMovieList()) {
-                    is Result.Success -> {
-                        totalPages = result.data.totalPages
-                        currentPage = result.data.page
+                fetchMovieList().fold(
+                    onSuccess = { result ->
+                        totalPages = result.totalPages
+                        currentPage = result.page
 
                         val movieList = mutableListOf<UIMovie>().apply {
                             screenState.value?.let { this.addAll(it.movieList) }
-                            addAll(result.data.results)
+                            addAll(result.results)
                         }
 
                         screenState.value = screenState.value?.copy(
@@ -71,13 +70,15 @@ internal class MovieListViewModel(
                             paginationVisible = false,
                             errorMessage = ""
                         )
+                    },
+                    onFailure = { exception ->
+                        screenState.value = screenState.value?.copy(
+                            loadingVisible = false,
+                            paginationVisible = false,
+                            errorMessage = exception.localizedMessage.orEmpty()
+                        )
                     }
-                    else -> screenState.value = screenState.value?.copy(
-                        loadingVisible = false,
-                        paginationVisible = false,
-                        errorMessage = result.toString()
-                    )
-                }
+                )
 
                 isLoading = false
             }

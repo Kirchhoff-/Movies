@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.UIMovie
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
@@ -37,67 +36,59 @@ internal class MovieDetailsViewModel(
             val result = movieDetailsUseCase.fetchDetails(movie.id)
 
             screenState.value = screenState.value?.copy(isLoading = false)
-            when (result) {
-                is Result.Success -> {
-                    screenState.value = screenState.value?.copy(info = result.data)
+            result.fold(
+                onSuccess = { data ->
+                    screenState.value = screenState.value?.copy(info = data)
                     awaitAll(
                         async { fetchTrailers() },
                         async { fetchMovieCredits() },
                         async { fetchSimilarMovies() },
                         async { fetchImages() }
                     )
+                },
+                onFailure = { exception ->
+                    screenState.value = screenState.value?.copy(errorMessage = StringValue.SimpleText(exception.localizedMessage.orEmpty()))
                 }
-
-                else -> {
-                    screenState.value = screenState.value?.copy(errorMessage = StringValue.SimpleText(result.toString()))
-                }
-            }
+            )
         }
     }
 
     private suspend fun fetchTrailers() {
-        when (val trailersResult = movieDetailsUseCase.fetchTrailersList(movie.id)) {
-            is Result.Success -> screenState.value = screenState.value?.copy(trailers = trailersResult.data)
-            else -> {}
+        movieDetailsUseCase.fetchTrailersList(movie.id).onSuccess {
+            screenState.value = screenState.value?.copy(trailers = it)
         }
     }
 
     private suspend fun fetchMovieCredits() {
-        when (val creditsResult = movieDetailsUseCase.fetchMovieCredits(movie.id)) {
-            is Result.Success -> {
-                val castCredits = creditsResult.data.cast?.take(DISPLAYING_DATA_AMOUNT) ?: emptyList()
-                val crewCredits = creditsResult.data.crew?.take(DISPLAYING_DATA_AMOUNT) ?: emptyList()
-                screenState.value = screenState.value?.copy(credits = UIEntertainmentCredits(castCredits, crewCredits))
-            }
-            else -> {}
+        movieDetailsUseCase.fetchMovieCredits(movie.id).onSuccess {
+            val castCredits = it.cast?.take(DISPLAYING_DATA_AMOUNT) ?: emptyList()
+            val crewCredits = it.crew?.take(DISPLAYING_DATA_AMOUNT) ?: emptyList()
+            screenState.value = screenState.value?.copy(credits = UIEntertainmentCredits(castCredits, crewCredits))
         }
     }
 
     private suspend fun fetchSimilarMovies() {
-        val similarMoviesResult = movieDetailsUseCase.fetchSimilarMovies(id = movie.id, 1)
-        val resultSimilarMoviesList = if (
-            similarMoviesResult is Result.Success &&
-            similarMoviesResult.data.results.isNotEmpty()
-        ) {
-            similarMoviesResult.data.results.take(DISPLAYING_DATA_AMOUNT)
-        } else {
-            emptyList()
-        }
+        movieDetailsUseCase.fetchSimilarMovies(id = movie.id, 1).onSuccess { similarMovies ->
+            val resultSimilarMovies = if (similarMovies.results.isNotEmpty()) {
+                similarMovies.results.take(DISPLAYING_DATA_AMOUNT)
+            } else {
+                emptyList()
+            }
 
-        screenState.value = screenState.value?.copy(similarMovies = resultSimilarMoviesList)
+            screenState.value = screenState.value?.copy(similarMovies = resultSimilarMovies)
+        }
     }
 
     private suspend fun fetchImages() {
-        val imagesResult = movieDetailsUseCase.fetchImages(movie.id)
-        val resultImages = if (
-            imagesResult is Result.Success &&
-            imagesResult.data.isNotEmpty()
-        ) {
-            imagesResult.data.take(DISPLAYING_DATA_AMOUNT)
-        } else {
-            emptyList()
+        movieDetailsUseCase.fetchImages(movie.id).onSuccess { images ->
+            val resultImages = if (images.isNotEmpty()) {
+                images.take(DISPLAYING_DATA_AMOUNT)
+            } else {
+                emptyList()
+            }
+
+            screenState.value = screenState.value?.copy(images = resultImages)
         }
-        screenState.value = screenState.value?.copy(images = resultImages)
     }
 
     private companion object {

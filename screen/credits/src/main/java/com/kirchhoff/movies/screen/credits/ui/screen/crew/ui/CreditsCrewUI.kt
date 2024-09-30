@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
+import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListPersonItem
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewScreenState
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.CreditsCrewItemUI
 
@@ -17,6 +18,7 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.CreditsCrewIt
 internal fun CreditsCrewUI(
     screenState: CreditsCrewScreenState,
     onItemClick: (String) -> Unit,
+    onPersonCreditsItemClick: (CreditsCrewListPersonItem) -> Unit,
     onBackPressed: () -> Unit
 ) {
     val context = LocalContext.current
@@ -31,7 +33,8 @@ internal fun CreditsCrewUI(
                 itemContent = {
                     CreditsCrewItemUI(
                         item = screenState.creators[it],
-                        onItemClick = onItemClick
+                        onItemClick = onItemClick,
+                        onPersonCreditsItemClick = onPersonCreditsItemClick
                     )
                     Divider(color = Colors.Black)
                 }
@@ -46,6 +49,7 @@ private fun CreditsCrewUIPreview() {
     CreditsCrewUI(
         screenState = CreditsCrewScreenState.Default,
         onItemClick = {},
+        onPersonCreditsItemClick = {},
         onBackPressed = {}
     )
 }

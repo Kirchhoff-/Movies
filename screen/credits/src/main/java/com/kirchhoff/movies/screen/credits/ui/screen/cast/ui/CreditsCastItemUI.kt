@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.cast.ui
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,7 +12,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -26,9 +30,17 @@ import com.kirchhoff.movies.core.ui.resources.Colors
 
 @SuppressWarnings("MagicNumber")
 @Composable
-internal fun CreditsCastItemUI(actor: UIEntertainmentPerson.Actor) {
+internal fun CreditsCastItemUI(
+    actor: UIEntertainmentPerson.Actor,
+    onPersonCreditsItemClick: (UIEntertainmentPerson) -> Unit
+) {
     Card(
-        modifier = Modifier.shadow(10.dp),
+        modifier = Modifier.shadow(10.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple(bounded = true),
+                onClick = { onPersonCreditsItemClick.invoke(actor) }
+            ),
         shape = RoundedCornerShape(8.dp)
     ) {
         Row(
@@ -66,5 +78,8 @@ internal fun CreditsCastItemUI(actor: UIEntertainmentPerson.Actor) {
 @Preview
 @Composable
 private fun CreditsCastItemUIPreview() {
-    CreditsCastItemUI(UIEntertainmentPerson.Actor.Default)
+    CreditsCastItemUI(
+        actor = UIEntertainmentPerson.Actor.Default,
+        onPersonCreditsItemClick = {}
+    )
 }

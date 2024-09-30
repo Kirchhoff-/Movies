@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.items.persons
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,7 +12,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -26,12 +30,18 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListP
 @SuppressWarnings("MagicNumber")
 @Composable
 internal fun CreditsCrewPersonItemUI(
-    person: CreditsCrewListPersonItem
+    person: CreditsCrewListPersonItem,
+    onPersonCreditsItemClick: (CreditsCrewListPersonItem) -> Unit
 ) {
     Card(
         modifier = Modifier
             .height(250.dp)
-            .width(150.dp),
+            .width(150.dp)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple(bounded = true),
+                onClick = { onPersonCreditsItemClick.invoke(person) }
+            ),
         elevation = 4.dp,
         shape = RoundedCornerShape(8.dp)
     ) {
@@ -63,8 +73,8 @@ internal fun CreditsCrewPersonItemUI(
 @Preview
 @Composable
 private fun CreditsCrewPersonItemUIPreview() {
-    CreditsCrewListPersonItem(
-        name = "Some name",
-        profilePath = null
+    CreditsCrewPersonItemUI(
+        person = CreditsCrewListPersonItem.Default,
+        onPersonCreditsItemClick = {}
     )
 }

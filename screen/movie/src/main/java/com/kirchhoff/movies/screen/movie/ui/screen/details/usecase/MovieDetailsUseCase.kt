@@ -15,11 +15,11 @@ import com.kirchhoff.movies.screen.movie.repository.IMovieDetailsRepository
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 
 internal interface IMovieDetailsUseCase {
-    suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo>
-    suspend fun fetchTrailersList(id: MovieId): Result<List<UITrailer>>
-    suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits>
-    suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>>
-    suspend fun fetchImages(id: MovieId): Result<List<UIImage>>
+    suspend fun fetchDetails(id: MovieId): kotlin.Result<UIMovieInfo>
+    suspend fun fetchTrailersList(id: MovieId): kotlin.Result<List<UITrailer>>
+    suspend fun fetchMovieCredits(id: MovieId): kotlin.Result<UIEntertainmentCredits>
+    suspend fun fetchSimilarMovies(id: MovieId, page: Int): kotlin.Result<UIPaginated<UIMovie>>
+    suspend fun fetchImages(id: MovieId): kotlin.Result<List<UIImage>>
 }
 
 internal class MovieDetailsUseCase(
@@ -29,33 +29,45 @@ internal class MovieDetailsUseCase(
     private val movieListMapper: IMovieListMapper
 ) : IMovieDetailsUseCase {
 
-    override suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo> =
-        movieDetailsMapper.createUIMovieDetails(movieDetailsRepository.fetchDetails(id))
+    override suspend fun fetchDetails(id: MovieId): kotlin.Result<UIMovieInfo> =
+        when (val response = movieDetailsRepository.fetchDetails(id)) {
+            is Result.Success -> kotlin.Result.success(movieDetailsMapper.createUIMovieDetails(response.data))
+            else -> kotlin.Result.failure(Exception("Can't fetch the details"))
+        }
 
-    override suspend fun fetchTrailersList(id: MovieId): Result<List<UITrailer>> =
-        movieDetailsMapper.createUITrailersList(movieDetailsRepository.fetchTrailersList(id))
+    override suspend fun fetchTrailersList(id: MovieId): kotlin.Result<List<UITrailer>> =
+        when (val response = movieDetailsRepository.fetchTrailersList(id)) {
+            is Result.Success -> kotlin.Result.success(movieDetailsMapper.createUITrailersList(response.data))
+            else -> kotlin.Result.failure(Exception("Can't fetch the trailers list"))
+        }
 
-    override suspend fun fetchMovieCredits(id: MovieId): Result<UIEntertainmentCredits> {
-        val creditsResult = movieDetailsRepository.fetchMovieCredits(id)
-
-        return if (creditsResult is Result.Success) {
-            movieDetailsMapper.createUIEntertainmentCredits(
-                Result.Success(
-                    NetworkEntertainmentCredits(
-                        cast = creditsResult.data.cast?.sortedByDescending { it.popularity },
-                        crew = creditsResult.data.crew
-                            ?.sortedByDescending { it.popularity }
-                            ?.distinctBy { it.name }
+    override suspend fun fetchMovieCredits(id: MovieId): kotlin.Result<UIEntertainmentCredits> =
+        when (val response = movieDetailsRepository.fetchMovieCredits(id)) {
+            is Result.Success -> {
+                kotlin.Result.success(
+                    movieDetailsMapper.createUIEntertainmentCredits(
+                        NetworkEntertainmentCredits(
+                            cast = response.data.cast?.sortedByDescending { it.popularity },
+                            crew = response.data.crew
+                                ?.sortedByDescending { it.popularity }
+                                ?.distinctBy { it.name }
+                        )
                     )
                 )
-            )
-        } else {
-            movieDetailsMapper.createUIEntertainmentCredits(creditsResult)
+            }
+
+            else -> kotlin.Result.failure(Exception("Can't fetch the movie credits"))
         }
-    }
 
-    override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<UIPaginated<UIMovie>> =
-        movieListMapper.createMovieList(movieDetailsRepository.fetchSimilarMovies(id, page))
+    override suspend fun fetchSimilarMovies(id: MovieId, page: Int): kotlin.Result<UIPaginated<UIMovie>> =
+        when (val response = movieDetailsRepository.fetchSimilarMovies(id, page)) {
+            is Result.Success -> kotlin.Result.success(movieListMapper.createMovieList(response.data))
+            else -> kotlin.Result.failure(Exception("Can't fetch the similar movies"))
+        }
 
-    override suspend fun fetchImages(id: MovieId): Result<List<UIImage>> = movieRepository.fetchImages(id)
+    override suspend fun fetchImages(id: MovieId): kotlin.Result<List<UIImage>> =
+        when (val response = movieRepository.fetchImages(id)) {
+            is Result.Success -> kotlin.Result.success(response.data)
+            else -> kotlin.Result.failure(Exception("Can't fetch the images"))
+        }
 }

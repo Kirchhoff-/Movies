@@ -10,7 +10,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.person.personModule
 import com.kirchhoff.movies.screen.person.ui.screen.list.ui.PersonListUI
 import com.kirchhoff.movies.screen.person.ui.screen.list.viewmodel.PersonListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

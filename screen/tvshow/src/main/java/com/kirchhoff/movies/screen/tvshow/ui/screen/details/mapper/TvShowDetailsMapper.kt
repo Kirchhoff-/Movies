@@ -8,11 +8,11 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.details.tv.NetworkTvDetails
 import com.kirchhoff.movies.networkdata.main.NetworkTv
-import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetails
 
 internal interface ITvShowDetailsMapper {
     fun createTvShowList(tvShowResponse: NetworkPaginated<NetworkTv>): UIPaginated<UITv>
-    fun createUITvDetails(tvDetails: NetworkTvDetails): TvShowDetailsInfo
+    fun createUITvDetails(tvDetails: NetworkTvDetails): TvShowDetails
 }
 
 internal class TvShowDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), ITvShowDetailsMapper {
@@ -23,7 +23,7 @@ internal class TvShowDetailsMapper(private val coreMapper: ICoreMapper) : BaseMa
         totalPages = tvShowResponse.totalPages
     )
 
-    override fun createUITvDetails(tvDetails: NetworkTvDetails): TvShowDetailsInfo = tvDetails.toTvShowDetailsInfo()
+    override fun createUITvDetails(tvDetails: NetworkTvDetails): TvShowDetails = tvDetails.toTvShowDetailsInfo()
 
     private fun NetworkTv.toUITv(): UITv = UITv(
         id = TvId(id),
@@ -33,7 +33,7 @@ internal class TvShowDetailsMapper(private val coreMapper: ICoreMapper) : BaseMa
         voteAverage = voteAverage
     )
 
-    private fun NetworkTvDetails.toTvShowDetailsInfo(): TvShowDetailsInfo = TvShowDetailsInfo(
+    private fun NetworkTvDetails.toTvShowDetailsInfo(): TvShowDetails = TvShowDetails(
         numberOfSeasons = numberOfSeasons,
         numberOfEpisodes = numberOfEpisodes,
         overview = overview,

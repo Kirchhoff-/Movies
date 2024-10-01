@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.kirchhoff.movies.core.data.UIEntertainmentPerson
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.model.CreditsCastScreenState
 
@@ -17,6 +18,7 @@ import com.kirchhoff.movies.screen.credits.ui.screen.cast.model.CreditsCastScree
 @Composable
 internal fun CreditsCastUI(
     screenState: CreditsCastScreenState,
+    onPersonCreditsItemClick: (UIEntertainmentPerson) -> Unit,
     onBackPressed: () -> Unit
 ) {
     val context = LocalContext.current
@@ -32,7 +34,10 @@ internal fun CreditsCastUI(
             items(
                 count = screenState.actors.size,
                 itemContent = {
-                    CreditsCastItemUI(screenState.actors[it])
+                    CreditsCastItemUI(
+                        actor = screenState.actors[it],
+                        onPersonCreditsItemClick = onPersonCreditsItemClick
+                    )
                 }
             )
         }
@@ -44,6 +49,7 @@ internal fun CreditsCastUI(
 private fun CreditsCastUIPreview() {
     CreditsCastUI(
         screenState = CreditsCastScreenState.Default,
+        onPersonCreditsItemClick = {},
         onBackPressed = {}
     )
 }

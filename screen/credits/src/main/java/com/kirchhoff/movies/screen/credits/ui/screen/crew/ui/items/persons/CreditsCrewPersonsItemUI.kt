@@ -20,7 +20,8 @@ import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListP
 @Composable
 internal fun CreditsCrewPersonsItemUI(
     persons: List<CreditsCrewListPersonItem>,
-    isExpanded: Boolean
+    isExpanded: Boolean,
+    onPersonCreditsItemClick: (CreditsCrewListPersonItem) -> Unit
 ) {
     val expandTransition = remember {
         expandVertically(
@@ -52,7 +53,10 @@ internal fun CreditsCrewPersonsItemUI(
             items(
                 count = persons.size,
                 itemContent = {
-                    CreditsCrewPersonItemUI(person = persons[it])
+                    CreditsCrewPersonItemUI(
+                        person = persons[it],
+                        onPersonCreditsItemClick = onPersonCreditsItemClick
+                    )
                 }
             )
         }
@@ -64,6 +68,7 @@ internal fun CreditsCrewPersonsItemUI(
 private fun CreditsCrewPersonsItemUIPreview() {
     CreditsCrewPersonsItemUI(
         persons = emptyList(),
-        isExpanded = false
+        isExpanded = false,
+        onPersonCreditsItemClick = {}
     )
 }

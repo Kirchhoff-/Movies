@@ -3,13 +3,13 @@ package com.kirchhoff.movies.networkdata.core
 import com.google.gson.annotations.SerializedName
 
 data class NetworkEntertainmentCredits(
-    val cast: List<NetworkEntertainmentPerson.Actor>?,
-    val crew: List<NetworkEntertainmentPerson.Creator>?
+    @SerializedName("cast") val cast: List<NetworkEntertainmentPerson.Actor>?,
+    @SerializedName("crew") val crew: List<NetworkEntertainmentPerson.Creator>?
 )
 
 sealed class NetworkEntertainmentPerson(
-    val id: Int,
-    val name: String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
     @SerializedName("profile_path") val profilePath: String?,
     @SerializedName("popularity") val popularity: Float
 ) {
@@ -18,7 +18,7 @@ sealed class NetworkEntertainmentPerson(
         name: String,
         profilePath: String?,
         popularity: Float,
-        val character: String?
+        @SerializedName("character") val character: String?
     ) : NetworkEntertainmentPerson(id, name, profilePath, popularity)
 
     class Creator(
@@ -26,6 +26,6 @@ sealed class NetworkEntertainmentPerson(
         name: String,
         profilePath: String?,
         popularity: Float,
-        val job: String?
+        @SerializedName("job") val job: String?
     ) : NetworkEntertainmentPerson(id, name, profilePath, popularity)
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIMovie
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.screen.movie.ui.screen.images.model.MovieImagesScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.images.usecase.IMovieImagesUseCase
 import kotlinx.coroutines.launch
@@ -23,10 +22,14 @@ internal class MovieImagesViewModel(
 
     fun loadImages() {
         viewModelScope.launch {
-            when (val result = movieImagesUseCase.fetchImages(movie.id)) {
-                is Result.Success -> screenState.value = screenState.value?.copy(image = result.data)
-                else -> Timber.e("Images error = $result")
-            }
+            movieImagesUseCase.fetchImages(movie.id).fold(
+                onSuccess = { data ->
+                    screenState.value = screenState.value?.copy(image = data)
+                },
+                onFailure = { exception ->
+                    Timber.e("Images error = ${exception.localizedMessage.orEmpty()}")
+                }
+            )
         }
     }
 }

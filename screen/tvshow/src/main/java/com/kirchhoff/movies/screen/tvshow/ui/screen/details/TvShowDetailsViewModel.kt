@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UITv
-import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.utils.StringValue
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase.ITvShowDetailsUseCase
 import kotlinx.coroutines.async
@@ -25,49 +25,58 @@ internal class TvShowDetailsViewModel(
     }
 
     fun loadDetails() {
-        screenState.value = screenState.value?.copy(isLoading = true)
+        screenState.value = screenState.value?.copy(
+            title = StringValue.SimpleText(tvShow.name),
+            backdropPath = tvShow.backdropPath,
+            posterPath = tvShow.posterPath,
+            isLoading = true
+        )
         viewModelScope.launch {
             val result = tvShowDetailsUseCase.fetchDetails(tvShow.id)
 
             screenState.value = screenState.value?.copy(isLoading = false)
-            when (result) {
-                is Result.Success -> {
-                    screenState.value = screenState.value?.copy(info = result.data)
+            result.fold(
+                onSuccess = { data ->
+                    screenState.value = screenState.value?.copy(
+                        overview = data.overview,
+                        genres = data.genres,
+                        detailsInfo = TvShowDetailsInfo(
+                            posterPath = tvShow.posterPath,
+                            numberOfSeasons = data.numberOfSeasons,
+                            numberOfEpisodes = data.numberOfEpisodes,
+                            status = data.status,
+                            firstAirDate = data.firstAirDate,
+                            voteCount = data.voteCount,
+                            voteAverage = data.voteAverage
+                        )
+                    )
                     awaitAll(
                         async { fetchCredits() },
                         async { fetchSimilarTvShows() }
                     )
-                }
-                else -> {
-                    screenState.value = screenState.value?.copy(
-                        errorMessage = StringValue.SimpleText(result.toString())
-                    )
-                }
-            }
+                },
+                onFailure = { screenState.value = screenState.value?.copy(errorMessage = StringValue.SimpleText(result.toString())) }
+            )
         }
     }
 
     private suspend fun fetchCredits() {
-        when (val creditsResult = tvShowDetailsUseCase.fetchCredits(tvShow.id)) {
-            is Result.Success -> screenState.value = screenState.value?.copy(
-                credits = creditsResult.data
-            )
-            else -> Timber.e((creditsResult.toString()))
-        }
+        tvShowDetailsUseCase.fetchCredits(tvShow.id).fold(
+            onSuccess = { screenState.value = screenState.value?.copy(credits = it) },
+            onFailure = { Timber.e(it.localizedMessage) }
+        )
     }
 
     private suspend fun fetchSimilarTvShows() {
-        val similarTvShows = tvShowDetailsUseCase.fetchSimilar(id = tvShow.id, page = 1)
-        val resultSimilarTvShowsList = if (
-            similarTvShows is Result.Success &&
-            similarTvShows.data.results.isNotEmpty()
-        ) {
-            similarTvShows.data.results.take(DISPLAYING_DATA_AMOUNT)
-        } else {
-            emptyList()
+        var resultSimilarTvShows: List<UITv> = emptyList()
+        tvShowDetailsUseCase.fetchSimilar(
+            id = tvShow.id,
+            page = 1
+        ).onSuccess {
+            if (it.results.isNotEmpty()) resultSimilarTvShows = it.results.take(DISPLAYING_DATA_AMOUNT)
         }
 
-        screenState.value = screenState.value?.copy(similarTvShows = resultSimilarTvShowsList)
+        screenState.value = screenState.value?.copy(similarTvShows = resultSimilarTvShows)
     }
 
     private companion object {

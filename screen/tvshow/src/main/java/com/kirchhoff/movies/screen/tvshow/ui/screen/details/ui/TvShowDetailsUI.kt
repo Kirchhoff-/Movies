@@ -138,16 +138,13 @@ private fun ShowUI(
             fontSize = 22.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
-        TvShowDetailsInfoUI(
-            info = screenState.info,
-            posterPath = screenState.posterPath
-        )
+        TvShowDetailsInfoUI(screenState.detailsInfo)
         Spacer(modifier = Modifier.height(8.dp))
-        TvShowDetailsKeywordsUI(keywords = screenState.info.genres.map { it.name })
+        TvShowDetailsKeywordsUI(keywords = screenState.genres.map { it.name })
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             modifier = Modifier.padding(horizontal = 16.dp),
-            text = screenState.info.overview,
+            text = screenState.overview,
             color = Colors.TextHint,
             fontSize = 14.sp
         )

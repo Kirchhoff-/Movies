@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kirchhoff.movies.core.data.MovieId
+import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.ui.CreditsCrewUI
@@ -39,11 +40,20 @@ internal class CreditsCrewFragment : BaseFragment() {
             ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner)
         )
         setContent {
-            val screenState by viewModel.screenState.observeAsState()
+            val screenState by viewModel.screenState.collectAsStateWithLifecycle()
 
             CreditsCrewUI(
-                screenState = screenState ?: error("Can't build UI without state"),
+                screenState = screenState,
                 onItemClick = { viewModel.onItemClicked(it) },
+                onPersonCreditsItemClick = { crewCredits ->
+                    router.openPersonDetailsScreen(
+                        UIPerson(
+                            id = crewCredits.id,
+                            name = crewCredits.name,
+                            profilePath = crewCredits.profilePath
+                        )
+                    )
+                },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }

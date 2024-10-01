@@ -10,8 +10,8 @@ data class NetworkPersonDetails(
 )
 
 data class NetworkPersonCredits(
-    val cast: List<NetworkPersonCastCredit>?,
-    val crew: List<NetworkPersonCrewCredit>?
+    @SerializedName("cast") val cast: List<NetworkPersonCastCredit>?,
+    @SerializedName("crew") val crew: List<NetworkPersonCrewCredit>?
 )
 
 data class NetworkPersonCastCredit(

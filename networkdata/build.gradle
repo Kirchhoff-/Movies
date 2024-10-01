@@ -6,4 +6,7 @@ android {
 
 dependencies {
     implementation libs.gson
+
+    testImplementation libs.bundles.tests
+    testImplementation libs.konsist
 }

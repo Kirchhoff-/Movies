@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.core.ui.compose
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -12,6 +13,7 @@ import com.kirchhoff.movies.core.ui.resources.Colors
 @Composable
 fun MoviesToolbar(
     title: String,
+    actions: @Composable RowScope.() -> Unit = {},
     onBackPressed: () -> Unit
 ) {
     TopAppBar(
@@ -30,6 +32,7 @@ fun MoviesToolbar(
                 )
             }
         },
+        actions = actions,
         backgroundColor = Colors.Primary
     )
 }

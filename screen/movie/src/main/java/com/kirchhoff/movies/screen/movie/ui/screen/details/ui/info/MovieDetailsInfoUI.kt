@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,6 +36,7 @@ import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.TextWithIcon
 import com.kirchhoff.movies.core.ui.resources.Colors
+import com.kirchhoff.movies.core.ui.resources.TextStyles
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UICountry
@@ -120,7 +120,7 @@ internal fun MovieDetailsInfoUI(
                                 onClick = { onProductionCountryClick.invoke(info.productionCountries.first()) }
                             )
                             .padding(8.dp),
-                        style = infoTextStyle,
+                        style = TextStyles.Info,
                         textAlign = TextAlign.Center,
                         text = info.productionCountries.first().name
                     )
@@ -154,11 +154,6 @@ internal fun MovieDetailsInfoUI(
         )
     }
 }
-
-private val infoTextStyle: TextStyle = TextStyle(
-    fontSize = 14.sp,
-    color = Colors.Black
-)
 
 private fun Int?.asMovieRuntime(): String = if (this != null) {
     val minuteFormat = SimpleDateFormat("mm", Locale.ENGLISH)

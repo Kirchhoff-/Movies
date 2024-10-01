@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class NetworkReviewAuthorDetails(
     @SerializedName("avatar_path") val avatar: String?,
-    val rating: Int?
+    @SerializedName("rating") val rating: Int?
 )

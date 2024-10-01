@@ -22,6 +22,7 @@ internal class ReviewListMapper : BaseMapper(), IReviewListMapper {
         author = author,
         content = content,
         authorAvatar = authorDetails.avatar,
-        rating = authorDetails.rating
+        rating = authorDetails.rating,
+        url = url
     )
 }

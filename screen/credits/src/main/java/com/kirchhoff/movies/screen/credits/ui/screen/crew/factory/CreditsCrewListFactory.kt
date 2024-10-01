@@ -25,6 +25,7 @@ internal class CreditsCrewListFactory : ICreditsCrewListFactory {
                             job = job,
                             persons = group.value.map { creator ->
                                 CreditsCrewListPersonItem(
+                                    id = creator.id,
                                     name = creator.name,
                                     profilePath = creator.profilePath
                                 )

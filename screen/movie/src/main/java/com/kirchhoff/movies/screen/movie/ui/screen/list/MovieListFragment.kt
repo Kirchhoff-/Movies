@@ -9,8 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIGenre
-import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.data.UICountry
@@ -77,7 +77,7 @@ internal class MovieListFragment : BaseFragment() {
 
         fun byCompany(company: UIProductionCompany): MovieListFragment = createFragment(MovieListType.Company(company))
 
-        fun similarWith(movie: UIMovie): MovieListFragment = createFragment(MovieListType.Similar(movie))
+        fun similarWith(movieId: MovieId): MovieListFragment = createFragment(MovieListType.Similar(movieId))
 
         fun nowPlaying(): MovieListFragment = createFragment(MovieListType.NowPlaying)
 

@@ -69,7 +69,7 @@ internal class MovieDetailsFragment : BaseFragment() {
                 onCastSeeAllClick = { router.openCastCreditsScreen(movie.id) },
                 onCrewSeeAllClick = { router.openCrewCreditsScreen(movie.id) },
                 onSimilarMovieClick = { router.openMovieDetailsScreen(it) },
-                onSimilarMovieSeeAllClick = { movieRouter.openSimilarMoviesScreen(movie) },
+                onSimilarMovieSeeAllClick = { movieRouter.openSimilarMoviesScreen(movie.id) },
                 onImageItemClick = { movieRouter.openImage(it.path) },
                 onImageSeeAllClick = { movieRouter.openImagesScreen(movie) },
                 onReviewsClick = { router.openReviewsListScreen(movie) },

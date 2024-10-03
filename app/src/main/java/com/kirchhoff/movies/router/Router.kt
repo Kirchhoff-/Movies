@@ -34,8 +34,8 @@ class Router(
         activity.replaceFragment(personFacade.personDetails(person))
     }
 
-    override fun openReviewsListScreen(movie: UIMovie) {
-        activity.replaceFragment(reviewFacade.movieReview(movie.id))
+    override fun openReviewsListScreen(movieId: MovieId) {
+        activity.replaceFragment(reviewFacade.movieReview(movieId))
     }
 
     override fun openReviewsListScreen(tv: UITv) {

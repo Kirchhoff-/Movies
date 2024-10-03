@@ -9,7 +9,7 @@ interface IRouter {
     fun openMovieDetailsScreen(movie: UIMovie)
     fun openTvDetailsScreen(tv: UITv)
     fun openPersonDetailsScreen(person: UIPerson)
-    fun openReviewsListScreen(movie: UIMovie)
+    fun openReviewsListScreen(movieId: MovieId)
     fun openReviewsListScreen(tv: UITv)
     fun openCastCreditsScreen(movieId: MovieId)
     fun openCrewCreditsScreen(movieId: MovieId)

@@ -2,7 +2,9 @@ package com.kirchhoff.movies.screen.movie.ui.screen.list
 
 import com.kirchhoff.movies.screen.movie.ui.screen.list.repository.IMovieListRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.list.repository.MovieListRepository
+import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListTitleUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListUseCase
+import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListTitleUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -24,10 +26,15 @@ internal val movieListModule = module {
         )
     }
 
+    single<IMovieListTitleUseCase> {
+        MovieListTitleUseCase(movieRepository = get())
+    }
+
     viewModel { (type: MovieListType) ->
         MovieListViewModel(
             type = type,
-            movieListUseCase = get()
+            movieListUseCase = get(),
+            movieListTitleUseCase = get()
         )
     }
 }

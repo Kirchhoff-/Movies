@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.screen.movie.router
 
 import androidx.appcompat.app.AppCompatActivity
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.extensions.replaceFragment
@@ -14,7 +15,7 @@ internal interface IMovieRouter {
     fun openMoviesByGenreScreen(genre: UIGenre)
     fun openMoviesByCountryScreen(country: UICountry)
     fun openCompanyMoviesScreen(company: UIProductionCompany)
-    fun openSimilarMoviesScreen(movie: UIMovie)
+    fun openSimilarMoviesScreen(movieId: MovieId)
     fun openImagesScreen(movie: UIMovie)
     fun openImage(imagePath: String)
     fun openNowPlayingScreen()
@@ -33,8 +34,8 @@ internal class MovieRouter(private val activity: AppCompatActivity) : IMovieRout
         activity.replaceFragment(MovieListFragment.byCountry(country))
     }
 
-    override fun openSimilarMoviesScreen(movie: UIMovie) {
-        activity.replaceFragment(MovieListFragment.similarWith(movie))
+    override fun openSimilarMoviesScreen(movieId: MovieId) {
+        activity.replaceFragment(MovieListFragment.similarWith(movieId))
     }
 
     override fun openCompanyMoviesScreen(company: UIProductionCompany) {

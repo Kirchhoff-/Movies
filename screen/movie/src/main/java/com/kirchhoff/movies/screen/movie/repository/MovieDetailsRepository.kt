@@ -37,8 +37,13 @@ internal class MovieDetailsRepository(
         return result
     }
 
-    override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>> =
-        apiCall {
-            movieService.fetchSimilarMovies(id.value, page)
+    override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>> {
+        val result = apiCall { movieService.fetchSimilarMovies(id.value, page) }
+
+        if (result is Result.Success) {
+            result.data.results.forEach { movie -> movieStorage.updateInfo(movie) }
         }
+
+        return result
+    }
 }

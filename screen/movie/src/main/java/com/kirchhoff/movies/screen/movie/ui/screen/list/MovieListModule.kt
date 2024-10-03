@@ -11,7 +11,10 @@ import org.koin.dsl.module
 internal val movieListModule = module {
 
     single<IMovieListRepository> {
-        MovieListRepository(movieService = get())
+        MovieListRepository(
+            movieService = get(),
+            movieStorage = get()
+        )
     }
 
     single<IMovieListUseCase> {

@@ -58,7 +58,7 @@ internal class MovieListFragment : BaseFragment() {
             MovieListUI(
                 screenState = screenState ?: error("Can't build UI without state"),
                 onLoadMore = { viewModel.loadMovieList() },
-                onMovieClick = { router.openMovieDetailsScreen(it) },
+                onMovieClick = { router.openMovieDetailsScreen(it.id) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }

@@ -46,7 +46,7 @@ internal class MovieDiscoverFragment : BaseFragment() {
 
             MovieDiscoverUI(
                 screenState = screenState ?: error("Can't build UI without state"),
-                onMovieClick = { router.openMovieDetailsScreen(it) },
+                onMovieClick = { router.openMovieDetailsScreen(it.id) },
                 onNowPlayingClick = { movieRouter.openNowPlayingScreen() },
                 onPopularClick = { movieRouter.openPopularScreen() },
                 onTopRatedClick = { movieRouter.openTopRatedScreen() },

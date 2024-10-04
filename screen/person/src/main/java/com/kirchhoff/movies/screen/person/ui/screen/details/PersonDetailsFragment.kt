@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.TvId
-import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
@@ -83,15 +82,7 @@ internal class PersonDetailsFragment : BaseFragment() {
 
     private fun onCreditItemClick(credit: UIPersonCredit) {
         if (credit.mediaType == UIMediaType.MOVIE) {
-            router.openMovieDetailsScreen(
-                UIMovie(
-                    MovieId(credit.id),
-                    credit.title,
-                    credit.posterPath,
-                    credit.backdropPath,
-                    null
-                )
-            )
+            router.openMovieDetailsScreen(MovieId(credit.id))
         } else if (credit.mediaType == UIMediaType.TV) {
             router.openTvDetailsScreen(
                 UITv(

@@ -15,6 +15,7 @@ import com.kirchhoff.movies.screen.movie.repository.IMovieDetailsRepository
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
 
 internal interface IMovieDetailsUseCase {
+    suspend fun fetchMovie(id: MovieId): kotlin.Result<UIMovie>
     suspend fun fetchDetails(id: MovieId): kotlin.Result<UIMovieInfo>
     suspend fun fetchTrailersList(id: MovieId): kotlin.Result<List<UITrailer>>
     suspend fun fetchMovieCredits(id: MovieId): kotlin.Result<UIEntertainmentCredits>
@@ -28,6 +29,12 @@ internal class MovieDetailsUseCase(
     private val movieDetailsMapper: IMovieDetailsMapper,
     private val movieListMapper: IMovieListMapper
 ) : IMovieDetailsUseCase {
+
+    override suspend fun fetchMovie(id: MovieId): kotlin.Result<UIMovie> =
+        when (val response = movieDetailsRepository.fetchInfo(id)) {
+            is Result.Success -> kotlin.Result.success(movieDetailsMapper.createUIMovie(response.data))
+            else -> kotlin.Result.failure(Exception("Can't fetch the movie info"))
+        }
 
     override suspend fun fetchDetails(id: MovieId): kotlin.Result<UIMovieInfo> =
         when (val response = movieDetailsRepository.fetchDetails(id)) {

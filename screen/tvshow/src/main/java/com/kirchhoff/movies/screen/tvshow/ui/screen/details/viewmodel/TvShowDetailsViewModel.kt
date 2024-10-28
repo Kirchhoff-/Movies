@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.tvshow.ui.screen.details
+package com.kirchhoff.movies.screen.tvshow.ui.screen.details.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

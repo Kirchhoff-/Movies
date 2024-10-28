@@ -113,4 +113,12 @@ class ArchitectureTests {
             .withAnnotationOf(Preview::class)
             .assert { it.hasPrivateModifier }
     }
+
+    @Test
+    fun `ViewModels classes should be located in the 'viewmodel' package`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .withNameEndingWith("ViewModel")
+            .assert { it.resideInPackage("..viewmodel") }
+    }
 }

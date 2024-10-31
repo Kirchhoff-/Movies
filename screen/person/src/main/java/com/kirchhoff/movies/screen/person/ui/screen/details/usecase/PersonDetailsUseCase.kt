@@ -1,11 +1,11 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details.usecase
 
 import com.kirchhoff.movies.core.repository.Result
-import com.kirchhoff.movies.screen.person.data.UIPersonCredits
-import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
 import com.kirchhoff.movies.screen.person.storage.IPersonImagesStorage
 import com.kirchhoff.movies.screen.person.ui.screen.details.mapper.IPersonDetailsMapper
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredits
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonDetails
 import com.kirchhoff.movies.screen.person.ui.screen.details.repository.IPersonDetailsRepository
 
 internal interface IPersonDetailsUseCase {

@@ -18,8 +18,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.person.data.UIPersonCredit
-import com.kirchhoff.movies.screen.person.data.UIPersonCredits
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredits
 
 @Composable
 internal fun PersonDetailsCreditsUI(

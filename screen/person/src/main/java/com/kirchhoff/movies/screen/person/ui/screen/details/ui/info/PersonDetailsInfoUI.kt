@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.ui.resources.TextStyles
 import com.kirchhoff.movies.screen.person.R
-import com.kirchhoff.movies.screen.person.data.UIPersonDetails
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonDetails
 
 @Composable
 internal fun PersonDetailsInfoUI(

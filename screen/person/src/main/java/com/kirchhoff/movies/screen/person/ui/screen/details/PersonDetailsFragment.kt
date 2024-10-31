@@ -19,9 +19,9 @@ import com.kirchhoff.movies.core.data.UIPerson
 import com.kirchhoff.movies.core.data.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.person.data.UIMediaType
-import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIMediaType
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
 import org.koin.android.ext.android.inject

@@ -48,6 +48,7 @@ import com.kirchhoff.movies.screen.movie.data.UITrailer
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.companies.MovieDetailsProductionCompaniesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.credits.MovieDetailsCreditsUI
+import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.genre.MovieDetailsGenresUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.images.MovieDetailsImagesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.MovieDetailsInfoUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers.MovieDetailsTrailersUI
@@ -171,8 +172,32 @@ private fun ShowUI(
         MovieDetailsInfoUI(
             info = screenState.info,
             posterPath = screenState.posterPath,
-            onProductionCountryClick = onProductionCountryClick,
+            onProductionCountryClick = onProductionCountryClick
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        MovieDetailsGenresUI(
+            genres = screenState.info.genres,
             onGenreClick = onGenreClick
+        )
+        Text(
+            modifier = Modifier.padding(
+                top = 8.dp,
+                start = 16.dp,
+                end = 16.dp
+            ),
+            text = screenState.info.tagLine.orEmpty(),
+            color = Colors.Black,
+            fontSize = 20.sp
+        )
+        Text(
+            modifier = Modifier.padding(
+                top = 8.dp,
+                start = 16.dp,
+                end = 16.dp
+            ),
+            text = screenState.info.overview,
+            fontSize = 14.sp,
+            color = Colors.Gray
         )
         if (trailersVisible) {
             Spacer(modifier = Modifier.height(8.dp))

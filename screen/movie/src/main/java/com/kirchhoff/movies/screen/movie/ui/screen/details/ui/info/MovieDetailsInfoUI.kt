@@ -30,9 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.data.UIGenre
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.TextWithIcon
 import com.kirchhoff.movies.core.ui.resources.Colors
@@ -41,7 +39,6 @@ import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
-import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.genre.MovieDetailsGenresUI
 import com.kirchhoff.movies.voteview.VoteViewComposable
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -53,8 +50,7 @@ import java.util.Locale
 internal fun MovieDetailsInfoUI(
     info: UIMovieInfo,
     posterPath: String?,
-    onProductionCountryClick: (UICountry) -> Unit,
-    onGenreClick: (UIGenre) -> Unit
+    onProductionCountryClick: (UICountry) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -127,31 +123,6 @@ internal fun MovieDetailsInfoUI(
                 }
             }
         }
-        Spacer(modifier = Modifier.height(8.dp))
-        MovieDetailsGenresUI(
-            genres = info.genres,
-            onGenreClick = onGenreClick
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            modifier = Modifier.padding(
-                start = 16.dp,
-                end = 16.dp
-            ),
-            text = info.tagLine.orEmpty(),
-            color = Colors.Black,
-            fontSize = 20.sp
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            modifier = Modifier.padding(
-                start = 16.dp,
-                end = 16.dp
-            ),
-            text = info.overview,
-            fontSize = 14.sp,
-            color = Colors.Gray
-        )
     }
 }
 
@@ -170,7 +141,6 @@ private fun MovieDetailsInfoUIPreview() {
     MovieDetailsInfoUI(
         info = UIMovieInfo.Default,
         posterPath = "",
-        onProductionCountryClick = {},
-        onGenreClick = {}
+        onProductionCountryClick = {}
     )
 }

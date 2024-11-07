@@ -1,6 +1,6 @@
 @file:SuppressWarnings("MagicNumber")
 
-package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.genre
+package com.kirchhoff.movies.screen.movie.ui.screen.details.ui.genre
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow

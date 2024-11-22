@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.person.data
+package com.kirchhoff.movies.screen.person.ui.screen.details.model
 
 internal data class UIPersonDetails(
     val birthday: String?,

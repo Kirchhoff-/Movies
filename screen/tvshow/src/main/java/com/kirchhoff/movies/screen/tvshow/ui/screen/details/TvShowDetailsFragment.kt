@@ -16,6 +16,7 @@ import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.TvShowDetailsUI
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.viewmodel.TvShowDetailsViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules

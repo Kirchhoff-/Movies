@@ -5,11 +5,11 @@ import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCredits
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonCrewCredit
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonDetails
 import com.kirchhoff.movies.networkdata.details.person.NetworkPersonImage
-import com.kirchhoff.movies.screen.person.data.UIMediaType
-import com.kirchhoff.movies.screen.person.data.UIPersonCredit
-import com.kirchhoff.movies.screen.person.data.UIPersonCredits
-import com.kirchhoff.movies.screen.person.data.UIPersonDetails
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIMediaType
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredits
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonDetails
 
 internal interface IPersonDetailsMapper {
     fun createPersonDetails(personDetails: NetworkPersonDetails): UIPersonDetails

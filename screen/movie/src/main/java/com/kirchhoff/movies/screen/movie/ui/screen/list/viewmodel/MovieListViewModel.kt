@@ -5,16 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListType
 import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState
+import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListTitleUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListUseCase
 import kotlinx.coroutines.launch
 
 internal class MovieListViewModel(
     private val type: MovieListType,
-    private val movieListUseCase: IMovieListUseCase
+    private val movieListUseCase: IMovieListUseCase,
+    private val movieListTitleUseCase: IMovieListTitleUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<MovieListScreenState> = MutableLiveData()
@@ -28,18 +28,9 @@ internal class MovieListViewModel(
     }
 
     fun updateTitle() {
-        val title = when (type) {
-            is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, type.genre.name)
-            is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, type.country.name)
-            is MovieListType.Similar -> StringValue.IdText(R.string.movie_similar_to_format, type.movie.title)
-            is MovieListType.Company -> StringValue.IdText(R.string.movie_movies_by_company_format, type.company.name)
-            is MovieListType.NowPlaying -> StringValue.IdText(R.string.movie_now_playing)
-            is MovieListType.Upcoming -> StringValue.IdText(R.string.movie_upcoming)
-            is MovieListType.Popular -> StringValue.IdText(R.string.movie_popular)
-            is MovieListType.TopRated -> StringValue.IdText(R.string.movie_top_rated)
+        viewModelScope.launch {
+            screenState.value = screenState.value?.copy(title = movieListTitleUseCase.title(type))
         }
-
-        screenState.value = screenState.value?.copy(title = title)
     }
 
     fun loadMovieList() {
@@ -88,7 +79,7 @@ internal class MovieListViewModel(
     private suspend fun fetchMovieList(): Result<UIPaginated<UIMovie>> = when (type) {
         is MovieListType.Genre -> movieListUseCase.fetchByGenre(type.genre.id, currentPage + 1)
         is MovieListType.Country -> movieListUseCase.fetchByCountry(type.country.id, currentPage + 1)
-        is MovieListType.Similar -> movieListUseCase.fetchSimilarMovies(type.movie.id, currentPage + 1)
+        is MovieListType.Similar -> movieListUseCase.fetchSimilarMovies(type.movieId, currentPage + 1)
         is MovieListType.Company -> movieListUseCase.fetchByCompany(type.company.id, currentPage + 1)
         is MovieListType.NowPlaying -> movieListUseCase.fetchNowPlaying(currentPage + 1)
         is MovieListType.Popular -> movieListUseCase.fetchPopular(currentPage + 1)

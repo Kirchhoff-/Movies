@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.list
 
 import android.os.Parcelable
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIGenre
-import com.kirchhoff.movies.core.data.UIMovie
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import kotlinx.parcelize.Parcelize
@@ -18,7 +18,7 @@ internal sealed interface MovieListType : Parcelable {
     data class Company(val company: UIProductionCompany) : MovieListType, Parcelable
 
     @Parcelize
-    data class Similar(val movie: UIMovie) : MovieListType, Parcelable
+    data class Similar(val movieId: MovieId) : MovieListType, Parcelable
 
     @Parcelize
     object NowPlaying : MovieListType, Parcelable

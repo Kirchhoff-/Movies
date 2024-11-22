@@ -12,9 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.UIPerson
-import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.MovieDetailsUI
@@ -27,14 +26,15 @@ import org.koin.core.parameter.parametersOf
 
 internal class MovieDetailsFragment : BaseFragment() {
 
-    private val movie: UIMovie by lazy {
-        requireArguments().getParcelableExtra(MOVIE_ARG)
-            ?: error("Should provide movie info in arguments")
+    private val movieId: MovieId by lazy {
+        val id = requireArguments().getInt(MOVIE_ID_ARG, MOVIE_ID_DEFAULT_VALUE)
+        if (id == MOVIE_ID_DEFAULT_VALUE) error("Should provide movie id in arguments")
+        MovieId(id)
     }
 
     private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
 
-    private val viewModel: MovieDetailsViewModel by viewModel { parametersOf(movie) }
+    private val viewModel: MovieDetailsViewModel by viewModel { parametersOf(movieId) }
 
     override fun onAttach(context: Context) {
         loadKoinModules(movieDetailsModule)
@@ -66,13 +66,13 @@ internal class MovieDetailsFragment : BaseFragment() {
                 onGenreClick = { movieRouter.openMoviesByGenreScreen(it) },
                 onTrailerClick = { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) },
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
-                onCastSeeAllClick = { router.openCastCreditsScreen(movie.id) },
-                onCrewSeeAllClick = { router.openCrewCreditsScreen(movie.id) },
-                onSimilarMovieClick = { router.openMovieDetailsScreen(it) },
-                onSimilarMovieSeeAllClick = { movieRouter.openSimilarMoviesScreen(movie) },
+                onCastSeeAllClick = { router.openCastCreditsScreen(movieId) },
+                onCrewSeeAllClick = { router.openCrewCreditsScreen(movieId) },
+                onSimilarMovieClick = { router.openMovieDetailsScreen(it.id) },
+                onSimilarMovieSeeAllClick = { movieRouter.openSimilarMoviesScreen(movieId) },
                 onImageItemClick = { movieRouter.openImage(it.path) },
-                onImageSeeAllClick = { movieRouter.openImagesScreen(movie) },
-                onReviewsClick = { router.openReviewsListScreen(movie) },
+                onImageSeeAllClick = { movieRouter.openImagesScreen(movieId) },
+                onReviewsClick = { router.openReviewsListScreen(movieId) },
                 onProductionCompanyClick = { movieRouter.openCompanyMoviesScreen(it) }
             )
         }
@@ -84,13 +84,14 @@ internal class MovieDetailsFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(movie: UIMovie): MovieDetailsFragment = MovieDetailsFragment().apply {
+        fun newInstance(movieId: MovieId): MovieDetailsFragment = MovieDetailsFragment().apply {
             arguments = Bundle().apply {
-                putParcelable(MOVIE_ARG, movie)
+                putInt(MOVIE_ID_ARG, movieId.value)
             }
         }
 
-        private const val MOVIE_ARG = "MOVIE_ARG"
+        private const val MOVIE_ID_ARG = "MOVIE_ARG"
         private const val YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v="
+        private const val MOVIE_ID_DEFAULT_VALUE = -1
     }
 }

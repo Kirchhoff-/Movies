@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.details
 
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.screen.movie.repository.IMovieDetailsRepository
 import com.kirchhoff.movies.screen.movie.repository.MovieDetailsRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.details.usecase.IMovieDetailsUseCase
@@ -27,9 +27,9 @@ internal val movieDetailsModule = module {
         )
     }
 
-    viewModel { (movie: UIMovie) ->
+    viewModel { (movieId: MovieId) ->
         MovieDetailsViewModel(
-            movie = movie,
+            movieId = movieId,
             movieDetailsUseCase = get()
         )
     }

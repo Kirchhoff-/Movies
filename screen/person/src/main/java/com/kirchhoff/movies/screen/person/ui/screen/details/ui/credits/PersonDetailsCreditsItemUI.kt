@@ -28,7 +28,7 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.person.data.UIPersonCredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
 
 @Composable
 internal fun PersonDetailsCreditsItemUI(

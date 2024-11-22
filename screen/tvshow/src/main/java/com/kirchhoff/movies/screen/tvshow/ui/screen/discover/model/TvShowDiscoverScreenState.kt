@@ -15,7 +15,7 @@ internal data class TvShowDiscoverScreenState(
             onTheAir = emptyList(),
             popular = emptyList(),
             topRated = emptyList(),
-            isLoading = false
+            isLoading = true
         )
     }
 }

@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.person.data.UIPersonCredit
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.credits.PersonDetailsCreditsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.images.PersonDetailsImagesUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.info.PersonDetailsInfoUI

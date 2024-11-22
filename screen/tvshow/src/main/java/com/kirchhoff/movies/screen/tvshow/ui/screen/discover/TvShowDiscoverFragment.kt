@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.ui.TvShowDiscoverUI
@@ -45,10 +45,10 @@ internal class TvShowDiscoverFragment : BaseFragment() {
         )
 
         setContent {
-            val screenState by viewModel.screenState.observeAsState()
+            val screenState by viewModel.screenState.collectAsStateWithLifecycle()
 
             TvShowDiscoverUI(
-                screenState = screenState ?: error("Can't build UI without state"),
+                screenState = screenState,
                 onTvShowClick = { router.openTvDetailsScreen(it) },
                 onAiringTodayClick = { tvShowRouter.openAiringTodayScreen() },
                 onTheAirClick = { tvShowRouter.openOnTheAirScreen() },

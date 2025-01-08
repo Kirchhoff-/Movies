@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.screen.movie.mapper
 
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIEntertainmentCredits
-import com.kirchhoff.movies.core.data.UIImage
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.ui.UIImage
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.mapper.ICoreMapper
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits

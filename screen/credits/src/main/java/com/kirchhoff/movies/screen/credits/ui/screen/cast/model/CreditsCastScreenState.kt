@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.cast.model
 
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentPerson
 import com.kirchhoff.movies.core.utils.StringValue
 
 internal data class CreditsCastScreenState(

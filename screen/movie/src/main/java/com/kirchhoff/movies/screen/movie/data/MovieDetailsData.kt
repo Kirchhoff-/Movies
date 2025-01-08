@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.movie.data
 
 import android.os.Parcelable
-import com.kirchhoff.movies.core.data.UIGenre
+import com.kirchhoff.movies.core.data.ui.UIGenre
 import kotlinx.parcelize.Parcelize
 
 internal data class UIMovieInfo(

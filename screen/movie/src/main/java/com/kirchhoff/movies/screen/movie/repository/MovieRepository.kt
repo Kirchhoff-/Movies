@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.movie.repository
 
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIImage
+import com.kirchhoff.movies.core.data.ui.UIImage
 import com.kirchhoff.movies.core.repository.BaseRepository
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.networkdata.main.NetworkMovie

@@ -3,7 +3,7 @@ package com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.core.data.UIPerson
+import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
 import com.kirchhoff.movies.screen.person.ui.screen.details.usecase.IPersonDetailsUseCase
 import kotlinx.coroutines.async

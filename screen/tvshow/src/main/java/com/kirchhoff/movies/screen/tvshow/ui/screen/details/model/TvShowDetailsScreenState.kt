@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details.model
 
-import com.kirchhoff.movies.core.data.UIEntertainmentCredits
-import com.kirchhoff.movies.core.data.UIGenre
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.ui.UIGenre
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.utils.StringValue
 
 internal data class TvShowDetailsScreenState(

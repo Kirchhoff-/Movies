@@ -3,7 +3,7 @@ package com.kirchhoff.movies.screen.tvshow.ui.screen.list.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.model.TvShowListScreenState
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.usecase.ITvShowListUseCase
 import kotlinx.coroutines.launch

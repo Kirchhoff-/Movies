@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.images.model
 
-import com.kirchhoff.movies.core.data.UIImage
+import com.kirchhoff.movies.core.data.ui.UIImage
 
 internal data class MovieImagesScreenState(
     val title: String,

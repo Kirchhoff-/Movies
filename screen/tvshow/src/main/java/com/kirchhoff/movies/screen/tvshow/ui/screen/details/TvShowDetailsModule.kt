@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details
 
 import androidx.appcompat.app.AppCompatActivity
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
 import com.kirchhoff.movies.screen.tvshow.router.TvShowRouter
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.mapper.ITvShowDetailsMapper

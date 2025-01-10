@@ -27,7 +27,9 @@ import org.koin.core.parameter.parametersOf
 
 internal class ReviewsListFragment : BaseFragment() {
 
-    private val args: ReviewsListArgs by lazy { requireArguments().getParcelableExtra(REVIEW_ARGS)!! }
+    private val args: ReviewsListArgs by lazy {
+        requireArguments().getParcelableExtra(REVIEW_ARGS) ?: error("Review argument is not provided")
+    }
 
     private val reviewRouter: IReviewRouter by inject { parametersOf(requireActivity()) }
 

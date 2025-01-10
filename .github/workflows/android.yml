@@ -20,8 +20,10 @@ jobs:
       run: chmod +x gradlew
     - name: Run ktlint
       run: ./gradlew ktlintCheck
-    - name: Run detekt
-      run: ./gradlew detekt
+    - name: Run detektDebug
+      run: ./gradlew detektDebug
+    - name: Run detektRelease
+      run: ./gradlew detektRelease
     - name: Run test
       run: ./gradlew test
     - name: Build with Gradle

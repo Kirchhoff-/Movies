@@ -70,8 +70,8 @@ internal class MovieDetailsViewModel(
 
     private suspend fun fetchMovieCredits() {
         movieDetailsUseCase.fetchMovieCredits(movieId).onSuccess {
-            val castCredits = it.cast?.take(DISPLAYING_DATA_AMOUNT) ?: emptyList()
-            val crewCredits = it.crew?.take(DISPLAYING_DATA_AMOUNT) ?: emptyList()
+            val castCredits = it.cast?.take(DISPLAYING_DATA_AMOUNT).orEmpty()
+            val crewCredits = it.crew?.take(DISPLAYING_DATA_AMOUNT).orEmpty()
             screenState.value = screenState.value?.copy(credits = UIEntertainmentCredits(castCredits, crewCredits))
         }
     }

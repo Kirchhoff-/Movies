@@ -16,7 +16,7 @@ internal class CreditsCrewViewModel(
 
     val screenState: MutableStateFlow<CreditsCrewScreenState> = MutableStateFlow(CreditsCrewScreenState.Default)
 
-    private var expandableItems: MutableSet<String> = mutableSetOf()
+    private val expandableItems: MutableSet<String> = mutableSetOf()
 
     init {
         screenState.update {

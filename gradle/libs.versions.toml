@@ -45,13 +45,13 @@ leakCanary = "2.10"
 junit = "4.13"
 
 ktlint = "11.6.1"
-detekt = "1.12.0"
+detekt = "1.23.7"
 konsist = "0.12.1"
 
 [libraries]
 plugin-buildTools = { module = "com.android.tools.build:gradle", version.ref = "buildToolsPlugin" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+plugin-detekt = { module = "io.gitlab.arturbosch.detekt:io.gitlab.arturbosch.detekt.gradle.plugin", version.ref = "detekt" }
 plugin-ktlint = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }

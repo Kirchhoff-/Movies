@@ -8,7 +8,7 @@ sealed class Result<out T> {
         val data: T
 
         constructor(response: Response<T>) {
-            data = response.body()!!
+            data = response.body() ?: error("Body is empty for response = $response")
         }
 
         constructor(data: T) {

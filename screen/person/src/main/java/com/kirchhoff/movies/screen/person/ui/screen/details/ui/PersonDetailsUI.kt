@@ -5,7 +5,6 @@ package com.kirchhoff.movies.screen.person.ui.screen.details.ui
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -35,7 +34,6 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.ui.images.PersonDeta
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.info.PersonDetailsInfoUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDetailsKeywordsUI
 
-@ExperimentalLayoutApi
 @Composable
 internal fun PersonDetailsUI(
     screenState: PersonDetailsScreenState,
@@ -86,7 +84,6 @@ private fun ShowError(screenState: PersonDetailsScreenState) {
     }
 }
 
-@ExperimentalLayoutApi
 @Composable
 private fun ShowUI(
     screenState: PersonDetailsScreenState,
@@ -131,7 +128,6 @@ private fun ShowUI(
     }
 }
 
-@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun PersonDetailsUIPreview() {

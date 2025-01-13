@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
@@ -52,7 +51,6 @@ internal class PersonDetailsFragment : BaseFragment() {
         viewModel.loadDetails()
     }
 
-    @OptIn(ExperimentalLayoutApi::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

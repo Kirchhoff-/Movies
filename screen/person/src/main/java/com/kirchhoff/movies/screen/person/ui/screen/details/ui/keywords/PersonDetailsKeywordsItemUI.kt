@@ -4,7 +4,6 @@ package com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -15,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
 
-@ExperimentalLayoutApi
 @Composable
 internal fun PersonDetailsKeywordsItemUI(text: String) {
     Text(
@@ -34,7 +32,6 @@ internal fun PersonDetailsKeywordsItemUI(text: String) {
     )
 }
 
-@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun PersonDetailsKeywordsItemUIPreview() {

@@ -7,7 +7,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,7 +44,6 @@ import java.util.Date
 import java.util.Locale
 
 @SuppressWarnings("LongMethod")
-@ExperimentalLayoutApi
 @Composable
 internal fun MovieDetailsInfoUI(
     info: UIMovieInfo,
@@ -134,7 +132,6 @@ private fun Int?.asMovieRuntime(): String = if (this != null) {
     ""
 }
 
-@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun MovieDetailsInfoUIPreview() {

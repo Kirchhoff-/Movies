@@ -10,22 +10,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.keywordsview.RatingText
@@ -36,39 +36,40 @@ internal fun MovieListItemUI(
     movie: UIMovie,
     onMovieClick: (UIMovie) -> Unit
 ) {
-    val cornerRadius = 8.dp
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                top = 16.dp,
-                start = 8.dp,
-                end = 8.dp
-            )
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple(bounded = true),
-                onClick = { onMovieClick.invoke(movie) }
-            ),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Box {
-            AsyncImage(
-                modifier = Modifier
-                    .height(200.dp)
-                    .fillMaxWidth()
-                    .shadow(10.dp)
-                    .clip(shape = RoundedCornerShape(cornerRadius)),
-                model = BASE_POSTER_PATH + movie.posterPath,
-                contentScale = ContentScale.Crop,
-                contentDescription = ""
-            )
-            RatingText(
-                modifier = Modifier
-                    .align(Alignment.TopEnd),
-                voteAverage = movie.voteAverage
-            )
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = 16.dp,
+                    start = 8.dp,
+                    end = 8.dp
+                )
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(bounded = true),
+                    onClick = { onMovieClick.invoke(movie) }
+                ),
+            elevation = 10.dp,
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Box {
+                AsyncImage(
+                    modifier = Modifier
+                        .height(200.dp)
+                        .fillMaxWidth(),
+                    model = BASE_POSTER_PATH + movie.posterPath,
+                    placeholder = painterResource(com.kirchhoff.movies.core.R.drawable.ic_no_image),
+                    error = painterResource(com.kirchhoff.movies.core.R.drawable.ic_no_image),
+                    contentScale = ContentScale.Crop,
+                    contentDescription = ""
+                )
+                RatingText(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd),
+                    voteAverage = movie.voteAverage
+                )
+            }
         }
         Spacer(modifier = Modifier.height(4.dp))
         Text(

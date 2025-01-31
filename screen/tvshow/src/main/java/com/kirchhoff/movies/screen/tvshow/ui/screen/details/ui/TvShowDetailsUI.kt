@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,8 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
@@ -48,7 +47,6 @@ import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.keywords.TvShowDe
 import com.kirchhoff.movies.screen.tvshow.ui.view.section.TvShowSectionUI
 
 @SuppressWarnings("LongParameterList")
-@ExperimentalLayoutApi
 @Composable
 internal fun TvShowDetailsUI(
     screenState: TvShowDetailsScreenState,
@@ -103,7 +101,6 @@ private fun ShowError(screenState: TvShowDetailsScreenState) {
     }
 }
 
-@ExperimentalLayoutApi
 @SuppressWarnings("LongMethod")
 @Composable
 private fun ShowUI(
@@ -184,7 +181,6 @@ private fun ShowUI(
     }
 }
 
-@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun TvShowDetailsUIPreview() {

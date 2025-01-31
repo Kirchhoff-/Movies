@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.cast.usecase
 
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentPerson
 import com.kirchhoff.movies.core.mapper.ICoreMapper
 import com.kirchhoff.movies.storage.movie.IStorageMovie
 

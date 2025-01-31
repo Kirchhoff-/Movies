@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,10 +33,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
-import com.kirchhoff.movies.core.data.UIGenre
-import com.kirchhoff.movies.core.data.UIImage
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.ui.UIGenre
+import com.kirchhoff.movies.core.data.ui.UIImage
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
@@ -55,7 +54,6 @@ import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.info.trailers.Movi
 import com.kirchhoff.movies.screen.movie.ui.view.section.MovieSectionUI
 
 @SuppressWarnings("LongParameterList")
-@ExperimentalLayoutApi
 @Composable
 internal fun MovieDetailsUI(
     screenState: MovieDetailsScreenState,
@@ -127,7 +125,6 @@ private fun ShowError(screenState: MovieDetailsScreenState) {
 }
 
 @SuppressWarnings("LongParameterList", "LongMethod")
-@ExperimentalLayoutApi
 @Composable
 private fun ShowUI(
     screenState: MovieDetailsScreenState,
@@ -259,7 +256,6 @@ private fun ShowUI(
     }
 }
 
-@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun MovieDetailsUIPreview() {

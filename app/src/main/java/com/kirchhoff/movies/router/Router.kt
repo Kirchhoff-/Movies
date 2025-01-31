@@ -2,8 +2,8 @@ package com.kirchhoff.movies.router
 
 import androidx.appcompat.app.AppCompatActivity
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIPerson
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UIPerson
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.extensions.replaceFragment
 import com.kirchhoff.movies.core.router.IRouter
 import com.kirchhoff.movies.screen.credits.ICreditsFacade

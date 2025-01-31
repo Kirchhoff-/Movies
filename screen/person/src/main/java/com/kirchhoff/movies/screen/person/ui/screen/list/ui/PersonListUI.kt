@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.kirchhoff.movies.core.data.UIPerson
+import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.core.ui.compose.LazyStaggeredGridScrollHandler
 import com.kirchhoff.movies.screen.person.ui.screen.list.model.PersonListScreenState
 

@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.list.usecase
 
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.utils.StringValue

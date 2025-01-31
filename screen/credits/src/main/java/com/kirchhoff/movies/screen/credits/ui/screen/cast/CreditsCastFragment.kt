@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIPerson
+import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.ui.CreditsCastUI

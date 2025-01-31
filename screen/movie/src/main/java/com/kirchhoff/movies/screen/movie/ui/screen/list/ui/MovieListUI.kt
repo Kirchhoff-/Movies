@@ -21,7 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.ui.compose.LazyStaggeredGridScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState

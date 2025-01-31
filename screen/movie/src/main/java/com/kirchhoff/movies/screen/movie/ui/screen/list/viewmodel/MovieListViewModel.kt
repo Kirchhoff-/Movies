@@ -3,7 +3,7 @@ package com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListType
 import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState

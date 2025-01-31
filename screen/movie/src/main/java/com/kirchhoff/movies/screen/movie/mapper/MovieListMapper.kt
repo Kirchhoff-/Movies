@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.movie.mapper
 
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated

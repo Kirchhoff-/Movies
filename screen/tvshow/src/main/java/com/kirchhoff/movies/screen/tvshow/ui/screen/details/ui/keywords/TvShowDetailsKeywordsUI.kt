@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@ExperimentalLayoutApi
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun TvShowDetailsKeywordsUI(keywords: List<String>) {
     FlowRow(modifier = Modifier.padding(start = 12.dp)) {
@@ -20,7 +20,6 @@ internal fun TvShowDetailsKeywordsUI(keywords: List<String>) {
     }
 }
 
-@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun TvShowDetailsKeywordsUIPreview() {

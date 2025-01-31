@@ -2,7 +2,7 @@ package com.kirchhoff.movies.screen.movie.ui.screen.list
 
 import android.os.Parcelable
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIGenre
+import com.kirchhoff.movies.core.data.ui.UIGenre
 import com.kirchhoff.movies.screen.movie.data.UICountry
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import kotlinx.parcelize.Parcelize

@@ -13,7 +13,9 @@ import com.kirchhoff.movies.screen.review.data.UIReview
 
 internal class ReviewDetailsFragment : BaseFragment() {
 
-    private val review by lazy { requireArguments().getParcelableExtra<UIReview>(REVIEW_ARG)!! }
+    private val review by lazy {
+        requireArguments().getParcelableExtra<UIReview>(REVIEW_ARG) ?: error("review argument is not provided")
+    }
     private val title by lazy { requireArguments().getString(TITLE_ARG).orEmpty() }
 
     override fun onCreateView(

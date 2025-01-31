@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.core.router
 
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIPerson
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UIPerson
+import com.kirchhoff.movies.core.data.ui.UITv
 
 interface IRouter {
     fun openMovieDetailsScreen(movieId: MovieId)

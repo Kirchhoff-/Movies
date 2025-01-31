@@ -1,9 +1,9 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.details.usecase
 
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.UIEntertainmentCredits
-import com.kirchhoff.movies.core.data.UIImage
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.ui.UIImage
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits

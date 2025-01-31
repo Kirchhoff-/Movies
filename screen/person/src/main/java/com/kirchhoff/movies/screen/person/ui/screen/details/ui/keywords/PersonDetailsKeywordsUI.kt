@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.kirchhoff.movies.core.ui.resources.Colors
 
-@ExperimentalLayoutApi
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun PersonDetailsKeywordsUI(keywords: List<String>) {
     Card(
@@ -35,7 +35,6 @@ internal fun PersonDetailsKeywordsUI(keywords: List<String>) {
     }
 }
 
-@ExperimentalLayoutApi
 @Preview
 @Composable
 private fun PersonDetailsKeywordsUIPreview() {

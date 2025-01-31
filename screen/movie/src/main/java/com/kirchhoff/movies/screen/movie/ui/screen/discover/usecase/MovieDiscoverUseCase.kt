@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.discover.usecase
 
-import com.kirchhoff.movies.core.data.UIMovie
+import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkMovie

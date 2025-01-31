@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.credits.ui.screen.crew.factory
 
-import com.kirchhoff.movies.core.data.UIEntertainmentPerson
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentPerson
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListItem
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewListPersonItem
 

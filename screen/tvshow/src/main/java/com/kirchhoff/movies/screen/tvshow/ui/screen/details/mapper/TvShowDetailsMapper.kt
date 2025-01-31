@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details.mapper
 
 import com.kirchhoff.movies.core.data.TvId
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.mapper.BaseMapper
 import com.kirchhoff.movies.core.mapper.ICoreMapper
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated

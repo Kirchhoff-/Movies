@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
-import com.kirchhoff.movies.core.data.UIImage
+import com.kirchhoff.movies.core.data.ui.UIImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.extensions.pxToDp
 

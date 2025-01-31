@@ -1,8 +1,8 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase
 
 import com.kirchhoff.movies.core.data.TvId
-import com.kirchhoff.movies.core.data.UIEntertainmentCredits
-import com.kirchhoff.movies.core.data.UITv
+import com.kirchhoff.movies.core.data.ui.UIEntertainmentCredits
+import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.mapper.ICoreMapper
 import com.kirchhoff.movies.core.repository.Result
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated

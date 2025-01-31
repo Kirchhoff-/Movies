@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.person.ui.screen.list.model
 
-import com.kirchhoff.movies.core.data.UIPerson
+import com.kirchhoff.movies.core.data.ui.UIPerson
 
 internal data class PersonListScreenState(
     val personList: List<UIPerson>,

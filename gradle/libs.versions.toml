@@ -18,7 +18,7 @@ composeFoundation = "1.5.2"
 appCompat = "1.6.1"
 activityCompose = "1.7.2"
 composeLiveData = '1.5.2'
-composeLifeCycle = "1.5.2"
+composeLifeCycle = "2.8.7"
 
 kotlin = "1.9.10"
 coroutines = "1.6.4"

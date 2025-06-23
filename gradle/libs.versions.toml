@@ -1,8 +1,8 @@
 [versions]
-buildToolsPlugin = "8.1.1"
+buildToolsPlugin = "8.10.1"
 minSdk = "21"
-targetSdk = "34"
-compileSdk = "34"
+targetSdk = "36"
+compileSdk = "36"
 buildTools = "33.0.2"
 versionName = "1.24.0"
 versionCode = "24"
@@ -18,7 +18,7 @@ composeFoundation = "1.5.2"
 appCompat = "1.6.1"
 activityCompose = "1.7.2"
 composeLiveData = '1.5.2'
-composeLifeCycle = "1.5.2"
+composeLifeCycle = "2.8.7"
 
 kotlin = "1.9.10"
 coroutines = "1.6.4"

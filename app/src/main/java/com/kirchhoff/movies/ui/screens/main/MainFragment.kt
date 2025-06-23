@@ -2,6 +2,7 @@ package com.kirchhoff.movies.ui.screens.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import com.kirchhoff.movies.R
 import com.kirchhoff.movies.core.ui.BaseFragment
@@ -29,7 +30,7 @@ internal class MainFragment : BaseFragment(R.layout.fragment_main) {
                 offscreenPageLimit = PAGE_COUNT
                 addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
                     override fun onPageSelected(position: Int) {
-                        navigationView.menu.getItem(position).isChecked = true
+                        navigationView.menu[position].isChecked = true
                     }
                 })
             }

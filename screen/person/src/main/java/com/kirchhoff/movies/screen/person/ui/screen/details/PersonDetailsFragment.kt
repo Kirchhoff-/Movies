@@ -3,7 +3,6 @@ package com.kirchhoff.movies.screen.person.ui.screen.details
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.core.net.toUri
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.ui.UIPerson
@@ -104,7 +104,7 @@ internal class PersonDetailsFragment : BaseFragment() {
     private fun onLocationClick() {
         try {
             val birthplace = viewModel.screenState.value?.details?.placeOfBirth ?: error("Can't open location without place of birth")
-            val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$birthplace"))
+            val mapIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$birthplace".toUri())
             startActivity(mapIntent)
         } catch (e: ActivityNotFoundException) {
             Timber.e("Can't find map application")

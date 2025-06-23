@@ -2,7 +2,6 @@ package com.kirchhoff.movies.screen.movie.ui.screen.details
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.core.net.toUri
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.core.ui.BaseFragment
@@ -62,7 +62,7 @@ internal class MovieDetailsFragment : BaseFragment() {
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() },
                 onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it) },
                 onGenreClick = { movieRouter.openMoviesByGenreScreen(it) },
-                onTrailerClick = { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(YOUTUBE_VIDEO_URL + it.key))) },
+                onTrailerClick = { startActivity(Intent(Intent.ACTION_VIEW, (YOUTUBE_VIDEO_URL + it.key).toUri())) },
                 onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
                 onCastSeeAllClick = { router.openCastCreditsScreen(movieId) },
                 onCrewSeeAllClick = { router.openCrewCreditsScreen(movieId) },

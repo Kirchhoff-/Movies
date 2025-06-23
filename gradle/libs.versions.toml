@@ -1,8 +1,8 @@
 [versions]
-buildToolsPlugin = "8.1.1"
+buildToolsPlugin = "8.10.1"
 minSdk = "21"
-targetSdk = "34"
-compileSdk = "34"
+targetSdk = "35"
+compileSdk = "35"
 buildTools = "33.0.2"
 versionName = "1.24.0"
 versionCode = "24"

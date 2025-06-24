@@ -9,7 +9,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
@@ -57,7 +56,7 @@ internal class TvShowDetailsFragment : BaseFragment() {
 
             TvShowDetailsUI(
                 screenState = screenState ?: error("Can't build UI without state"),
-                onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
+                onCreditItemClick = { router.openPersonDetailsScreen(it.id) },
                 onReviewsClick = { router.openReviewsListScreen(tvShow) },
                 onSimilarItemClick = { router.openTvDetailsScreen(it) },
                 onSimilarSeeAllClick = { tvShowRouter.openSimilarTvShowScreen(tvShow.id) },

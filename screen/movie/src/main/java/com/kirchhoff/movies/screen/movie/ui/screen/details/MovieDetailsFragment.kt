@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.net.toUri
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.MovieDetailsUI
@@ -63,7 +62,7 @@ internal class MovieDetailsFragment : BaseFragment() {
                 onProductionCountryClick = { movieRouter.openMoviesByCountryScreen(it) },
                 onGenreClick = { movieRouter.openMoviesByGenreScreen(it) },
                 onTrailerClick = { startActivity(Intent(Intent.ACTION_VIEW, (YOUTUBE_VIDEO_URL + it.key).toUri())) },
-                onCreditItemClick = { router.openPersonDetailsScreen(UIPerson(it)) },
+                onCreditItemClick = { router.openPersonDetailsScreen(it.id) },
                 onCastSeeAllClick = { router.openCastCreditsScreen(movieId) },
                 onCrewSeeAllClick = { router.openCrewCreditsScreen(movieId) },
                 onSimilarMovieClick = { router.openMovieDetailsScreen(it.id) },

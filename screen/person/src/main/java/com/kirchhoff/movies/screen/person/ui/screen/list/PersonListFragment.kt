@@ -44,7 +44,7 @@ internal class PersonListFragment : BaseFragment() {
             PersonListUI(
                 screenState = screenState ?: error("Can't build UI without state"),
                 onLoadMore = { viewModel.loadPersonList() },
-                onPersonClick = { router.openPersonDetailsScreen(it) }
+                onPersonClick = { person -> router.openPersonDetailsScreen(person.id) }
             )
         }
     }

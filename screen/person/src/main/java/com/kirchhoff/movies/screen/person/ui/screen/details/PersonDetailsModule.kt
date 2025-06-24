@@ -1,6 +1,5 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details
 
-import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.screen.person.ui.screen.details.mapper.IPersonDetailsMapper
 import com.kirchhoff.movies.screen.person.ui.screen.details.mapper.PersonDetailsMapper
 import com.kirchhoff.movies.screen.person.ui.screen.details.network.PersonDetailsService
@@ -32,9 +31,9 @@ internal val personDetailsModule = module {
         )
     }
 
-    viewModel { (person: UIPerson) ->
+    viewModel { (personId: Int) ->
         PersonDetailsViewModel(
-            person = person,
+            personId = personId,
             personDetailsUseCase = get()
         )
     }

@@ -2,7 +2,6 @@ package com.kirchhoff.movies.router
 
 import androidx.appcompat.app.AppCompatActivity
 import com.kirchhoff.movies.core.data.MovieId
-import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.extensions.replaceFragment
 import com.kirchhoff.movies.core.router.IRouter
@@ -29,8 +28,8 @@ class Router(
         activity.replaceFragment(tvShowFacade.tvShowDetails(tv))
     }
 
-    override fun openPersonDetailsScreen(person: UIPerson) {
-        activity.replaceFragment(personFacade.personDetails(person))
+    override fun openPersonDetailsScreen(personId: Int) {
+        activity.replaceFragment(personFacade.personDetails(personId))
     }
 
     override fun openReviewsListScreen(movieId: MovieId) {

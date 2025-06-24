@@ -14,9 +14,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.net.toUri
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.TvId
-import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.core.data.ui.UITv
-import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIMediaType
@@ -32,14 +30,9 @@ import timber.log.Timber
 
 internal class PersonDetailsFragment : BaseFragment() {
 
-    private val person: UIPerson by lazy {
-        requireArguments().getParcelableExtra(PERSON_ARG)
-            ?: error("Should provide person info in arguments")
-    }
-
     private val personRouter: IPersonRouter by inject { parametersOf(requireActivity()) }
 
-    private val viewModel: PersonDetailsViewModel by viewModel { parametersOf(person) }
+    private val viewModel: PersonDetailsViewModel by viewModel { parametersOf(requireArguments().getInt(PERSON_ARG_ID)) }
 
     override fun onAttach(context: Context) {
         loadKoinModules(personDetailsModule)
@@ -96,7 +89,7 @@ internal class PersonDetailsFragment : BaseFragment() {
 
     private fun onImageClick(position: Int) {
         personRouter.openImagesScreen(
-            personId = person.id,
+            personId = requireArguments().getInt(PERSON_ARG_ID),
             currentPosition = position
         )
     }
@@ -112,12 +105,12 @@ internal class PersonDetailsFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(person: UIPerson): PersonDetailsFragment = PersonDetailsFragment().apply {
+        fun newInstance(personId: Int): PersonDetailsFragment = PersonDetailsFragment().apply {
             arguments = Bundle().apply {
-                putParcelable(PERSON_ARG, person)
+                putInt(PERSON_ARG_ID, personId)
             }
         }
 
-        private const val PERSON_ARG = "PERSON_ARG"
+        private const val PERSON_ARG_ID = "PERSON_ARG_ID"
     }
 }

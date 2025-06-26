@@ -121,4 +121,19 @@ class ArchitectureTests {
             .withNameEndingWith("ViewModel")
             .assert { it.resideInPackage("..viewmodel") }
     }
+
+    @Test
+    fun `data classes should not have constructor parameters with default values`() {
+        Konsist.scopeFromProject()
+            .classes()
+            .filter { it.hasDataModifier }
+            .forEach { dataClass ->
+                dataClass.primaryConstructor?.parameters?.forEach { param ->
+                    assert(
+                        value = !param.hasDefaultValue(),
+                        lazyMessage = { "Data class '${dataClass.name}' constructor parameter '${param.name}' has a default value" }
+                    )
+                }
+            }
+    }
 }

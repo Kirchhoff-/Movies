@@ -8,13 +8,13 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface ReviewService {
-    @GET("/3/movie/{movie_id}/reviews")
+    @GET("movie/{movie_id}/reviews")
     suspend fun movieReviews(
         @Path("movie_id") id: Int,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkReview>>
 
-    @GET("/3/tv/{tv_id}/reviews")
+    @GET("tv/{tv_id}/reviews")
     suspend fun tvReviews(
         @Path("tv_id") id: Int,
         @Query("page") page: Int

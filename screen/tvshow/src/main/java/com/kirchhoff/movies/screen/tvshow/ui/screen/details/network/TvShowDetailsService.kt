@@ -11,15 +11,15 @@ import retrofit2.http.Query
 
 internal interface TvShowDetailsService {
 
-    @GET("/3/tv/{tv_id}/similar")
+    @GET("tv/{tv_id}/similar")
     suspend fun fetchSimilarTvShows(
         @Path("tv_id") id: Int,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkTv>>
 
-    @GET("/3/tv/{tv_id}")
+    @GET("tv/{tv_id}")
     suspend fun fetchDetails(@Path("tv_id") id: Int): Response<NetworkTvDetails>
 
-    @GET("/3/tv/{tv_id}/credits")
+    @GET("tv/{tv_id}/credits")
     suspend fun fetchCredits(@Path("tv_id") id: Int): Response<NetworkEntertainmentCredits>
 }

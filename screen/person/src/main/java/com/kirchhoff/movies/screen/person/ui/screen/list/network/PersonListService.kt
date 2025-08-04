@@ -7,6 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 internal interface PersonListService {
-    @GET("/3/person/popular?language=en")
+    @GET("person/popular?language=en")
     suspend fun fetchPopularPerson(@Query("page") page: Int): Response<NetworkPaginated<NetworkPerson>>
 }

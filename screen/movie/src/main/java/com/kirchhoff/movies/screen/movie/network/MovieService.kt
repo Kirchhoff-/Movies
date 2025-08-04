@@ -12,51 +12,51 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface MovieService {
-    @GET("/3/movie/{movie_id}")
+    @GET("movie/{movie_id}")
     suspend fun fetchDetails(@Path("movie_id") id: Int): Response<NetworkMovieDetails>
 
-    @GET("/3/movie/{movie_id}/similar")
+    @GET("movie/{movie_id}/similar")
     suspend fun fetchSimilarMovies(
         @Path("movie_id") id: Int,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
+    @GET("discover/movie?language=en&sort_by=popularity.desc")
     suspend fun fetchByCountry(
         @Query("with_origin_country") countryId: String,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
+    @GET("discover/movie?language=en&sort_by=popularity.desc")
     suspend fun fetchByCompany(
         @Query("with_companies") companyId: String,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/movie/{movie_id}/videos")
+    @GET("movie/{movie_id}/videos")
     suspend fun fetchTrailersList(@Path("movie_id") id: Int): Response<NetworkTrailersList>
 
-    @GET("/3/movie/{movie_id}/credits")
+    @GET("movie/{movie_id}/credits")
     suspend fun fetchMovieCredits(@Path("movie_id") id: Int): Response<NetworkEntertainmentCredits>
 
-    @GET("/3/discover/movie?language=en&sort_by=popularity.desc")
+    @GET("discover/movie?language=en&sort_by=popularity.desc")
     suspend fun fetchByGenre(
         @Query("with_genres") genre: String,
         @Query("page") page: Int
     ): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/movie/now_playing")
+    @GET("movie/now_playing")
     suspend fun fetchNowPlaying(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/movie/upcoming")
+    @GET("movie/upcoming")
     suspend fun fetchUpcoming(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/movie/popular")
+    @GET("movie/popular")
     suspend fun fetchPopular(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/movie/top_rated")
+    @GET("movie/top_rated")
     suspend fun fetchTopRated(@Query("page") page: Int): Response<NetworkPaginated<NetworkMovie>>
 
-    @GET("/3/movie/{movie_id}/images?language=en")
+    @GET("movie/{movie_id}/images?language=en")
     suspend fun fetchImages(@Path("movie_id") id: Int): Response<NetworkImagesResponse>
 }

@@ -15,7 +15,7 @@ android {
         versionName libs.versions.versionName.get()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/\""
+        buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/3/\""
         buildConfigField "String", "API_KEY", "${getLocalProperty("api_key")}"
     }
 

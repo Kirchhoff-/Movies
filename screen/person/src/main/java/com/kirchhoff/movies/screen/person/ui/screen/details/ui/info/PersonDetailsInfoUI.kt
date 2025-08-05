@@ -31,7 +31,7 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonDetail
 @Composable
 internal fun PersonDetailsInfoUI(
     details: UIPersonDetails,
-    onLocationClick: () -> Unit
+    onLocationClick: (String) -> Unit
 ) {
     val isBornVisible = !details.birthday.isNullOrEmpty()
     val isPlaceOfBirthVisible = !details.placeOfBirth.isNullOrEmpty()
@@ -68,7 +68,7 @@ internal fun PersonDetailsInfoUI(
                         modifier = Modifier.clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = rememberRipple(bounded = true),
-                            onClick = { onLocationClick.invoke() }
+                            onClick = { onLocationClick.invoke(details.placeOfBirth ?: error("empty placeOfBirth")) }
                         ),
                         style = supportTextStyle,
                         textDecoration = TextDecoration.Underline,

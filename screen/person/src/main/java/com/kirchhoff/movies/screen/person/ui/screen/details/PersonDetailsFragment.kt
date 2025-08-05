@@ -60,7 +60,7 @@ internal class PersonDetailsFragment : BaseFragment() {
                 screenState = screenState ?: error("Can't build UI without state"),
                 onCreditItemClick = { onCreditItemClick(it) },
                 onImageClick = { onImageClick(it) },
-                onLocationClick = { onLocationClick() },
+                onLocationClick = { onLocationClick(it) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
@@ -94,12 +94,11 @@ internal class PersonDetailsFragment : BaseFragment() {
         )
     }
 
-    private fun onLocationClick() {
+    private fun onLocationClick(birthplace: String) {
         try {
-            val birthplace = viewModel.screenState.value?.details?.placeOfBirth ?: error("Can't open location without place of birth")
             val mapIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$birthplace".toUri())
             startActivity(mapIntent)
-        } catch (e: ActivityNotFoundException) {
+        } catch (_: ActivityNotFoundException) {
             Timber.e("Can't find map application")
         }
     }

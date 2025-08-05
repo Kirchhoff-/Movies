@@ -39,7 +39,7 @@ internal fun PersonDetailsUI(
     screenState: PersonDetailsScreenState,
     onCreditItemClick: (UIPersonCredit) -> Unit,
     onImageClick: (Int) -> Unit,
-    onLocationClick: () -> Unit,
+    onLocationClick: (String) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Column {
@@ -89,7 +89,7 @@ private fun ShowUI(
     screenState: PersonDetailsScreenState,
     onCreditItemClick: (UIPersonCredit) -> Unit,
     onImageClick: (Int) -> Unit,
-    onLocationClick: () -> Unit
+    onLocationClick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier

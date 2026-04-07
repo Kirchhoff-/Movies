@@ -12,7 +12,11 @@ val networkModule = module {
     single {
         OkHttpClient.Builder()
             .addInterceptor(ApiKeyInterceptor())
-            .addInterceptor(HttpLoggingInterceptor().setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE))
+            .addInterceptor(
+                HttpLoggingInterceptor().setLevel(
+                    if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+                )
+            )
             .build()
     }
 

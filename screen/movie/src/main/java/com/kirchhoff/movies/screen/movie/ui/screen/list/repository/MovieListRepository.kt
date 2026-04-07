@@ -10,14 +10,14 @@ import com.kirchhoff.movies.storage.movie.IStorageMovie
 import retrofit2.Response
 
 internal interface IMovieListRepository {
-    suspend fun fetchByGenre(genre: String, page: Int): Result<NetworkPaginated<NetworkMovie>>
-    suspend fun fetchByCountry(countryId: String, page: Int): Result<NetworkPaginated<NetworkMovie>>
-    suspend fun fetchSimilar(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>>
-    suspend fun fetchByCompany(companyId: String, page: Int): Result<NetworkPaginated<NetworkMovie>>
-    suspend fun fetchNowPlaying(page: Int): Result<NetworkPaginated<NetworkMovie>>
-    suspend fun fetchPopular(page: Int): Result<NetworkPaginated<NetworkMovie>>
-    suspend fun fetchTopRated(page: Int): Result<NetworkPaginated<NetworkMovie>>
-    suspend fun fetchUpcoming(page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun byGenre(genre: String, page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun byCountry(countryId: String, page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun similar(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun byCompany(companyId: String, page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun nowPlaying(page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun popular(page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun topRated(page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun upcoming(page: Int): Result<NetworkPaginated<NetworkMovie>>
 }
 
 internal class MovieListRepository(
@@ -25,47 +25,47 @@ internal class MovieListRepository(
     private val movieStorage: IStorageMovie
 ) : BaseRepository(), IMovieListRepository {
 
-    override suspend fun fetchByGenre(genre: String, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun byGenre(genre: String, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchByGenre(
             genre = genre,
             page = page
         )
     }
 
-    override suspend fun fetchByCountry(countryId: String, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun byCountry(countryId: String, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchByCountry(
             countryId = countryId,
             page = page
         )
     }
 
-    override suspend fun fetchSimilar(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun similar(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchSimilarMovies(
             id = id.value,
             page = page
         )
     }
 
-    override suspend fun fetchByCompany(companyId: String, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun byCompany(companyId: String, page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchByCompany(
             companyId = companyId,
             page = page
         )
     }
 
-    override suspend fun fetchNowPlaying(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun nowPlaying(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchNowPlaying(page)
     }
 
-    override suspend fun fetchPopular(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun popular(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchPopular(page)
     }
 
-    override suspend fun fetchTopRated(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun topRated(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchTopRated(page)
     }
 
-    override suspend fun fetchUpcoming(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
+    override suspend fun upcoming(page: Int): Result<NetworkPaginated<NetworkMovie>> = fetchMovies {
         movieService.fetchUpcoming(page)
     }
 

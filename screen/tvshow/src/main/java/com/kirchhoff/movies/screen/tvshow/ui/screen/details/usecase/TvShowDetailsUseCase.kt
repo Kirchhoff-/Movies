@@ -23,19 +23,19 @@ internal class TvShowDetailsUseCase(
 ) : ITvShowDetailsUseCase {
 
     override suspend fun fetchDetails(id: TvId): kotlin.Result<TvShowDetails> =
-        when (val response = tvShowDetailsRepository.fetchDetails(id)) {
+        when (val response = tvShowDetailsRepository.details(id)) {
             is Result.Success -> kotlin.Result.success(tvShowDetailsMapper.createUITvDetails(response.data))
             else -> kotlin.Result.failure(Exception("Can't fetch the details"))
         }
 
     override suspend fun fetchCredits(id: TvId): kotlin.Result<UIEntertainmentCredits> =
-        when (val response = tvShowDetailsRepository.fetchCredits(id)) {
+        when (val response = tvShowDetailsRepository.credits(id)) {
             is Result.Success -> kotlin.Result.success(coreMapper.createUIEntertainmentCredits(response.data))
             else -> kotlin.Result.failure(Exception("Can't fetch the credits"))
         }
 
     override suspend fun fetchSimilar(id: TvId, page: Int): kotlin.Result<UIPaginated<UITv>> =
-        when (val response = tvShowDetailsRepository.fetchSimilar(id, page)) {
+        when (val response = tvShowDetailsRepository.similar(id, page)) {
             is Result.Success -> kotlin.Result.success(tvShowDetailsMapper.createTvShowList(response.data))
             else -> kotlin.Result.failure(Exception("Can't fetch the similar tv shows"))
         }

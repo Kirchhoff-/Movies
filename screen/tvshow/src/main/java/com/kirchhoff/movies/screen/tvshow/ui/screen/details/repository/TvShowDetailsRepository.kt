@@ -10,21 +10,21 @@ import com.kirchhoff.movies.networkdata.main.NetworkTv
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.network.TvShowDetailsService
 
 internal interface ITvShowDetailsRepository {
-    suspend fun fetchSimilar(id: TvId, page: Int): Result<NetworkPaginated<NetworkTv>>
-    suspend fun fetchDetails(id: TvId): Result<NetworkTvDetails>
-    suspend fun fetchCredits(id: TvId): Result<NetworkEntertainmentCredits>
+    suspend fun details(id: TvId): Result<NetworkTvDetails>
+    suspend fun similar(id: TvId, page: Int): Result<NetworkPaginated<NetworkTv>>
+    suspend fun credits(id: TvId): Result<NetworkEntertainmentCredits>
 }
 
 internal class TvShowDetailsRepository(
     private val tvShowDetailsService: TvShowDetailsService
 ) : BaseRepository(), ITvShowDetailsRepository {
 
-    override suspend fun fetchSimilar(id: TvId, page: Int): Result<NetworkPaginated<NetworkTv>> = apiCall {
+    override suspend fun similar(id: TvId, page: Int): Result<NetworkPaginated<NetworkTv>> = apiCall {
         tvShowDetailsService.fetchSimilarTvShows(id.value, page)
     }
 
-    override suspend fun fetchDetails(id: TvId): Result<NetworkTvDetails> = apiCall { tvShowDetailsService.fetchDetails(id.value) }
+    override suspend fun details(id: TvId): Result<NetworkTvDetails> = apiCall { tvShowDetailsService.fetchDetails(id.value) }
 
-    override suspend fun fetchCredits(id: TvId): Result<NetworkEntertainmentCredits> =
+    override suspend fun credits(id: TvId): Result<NetworkEntertainmentCredits> =
         apiCall { tvShowDetailsService.fetchCredits(id.value) }
 }

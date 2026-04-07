@@ -15,7 +15,7 @@ internal class MovieListTitleUseCase(private val movieRepository: IMovieReposito
     override suspend fun title(movieListType: MovieListType): StringValue = when (movieListType) {
         is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, movieListType.genre.name)
         is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, movieListType.country.name)
-        is MovieListType.Similar -> when (val movieResult = movieRepository.fetchMovie(movieListType.movieId)) {
+        is MovieListType.Similar -> when (val movieResult = movieRepository.info(movieListType.movieId)) {
             is Result.Success -> StringValue.IdText(
                 R.string.movie_similar_to_format,
                 movieResult.data.title

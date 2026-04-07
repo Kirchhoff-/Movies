@@ -23,13 +23,13 @@ internal class ReviewUseCase(
 ) : IReviewUseCase {
 
     override suspend fun fetchMovieReviews(movieId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>> =
-        when (val movieReviews = reviewRepository.fetchMovieReviews(movieId, page)) {
+        when (val movieReviews = reviewRepository.movieReviews(movieId, page)) {
             is Result.Success -> kotlin.Result.success(reviewMapper.createUIReviewList(movieReviews.data))
             else -> kotlin.Result.failure(Exception("Can't get info"))
         }
 
     override suspend fun fetchTvReviews(tvId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>> =
-        when (val movieReviews = reviewRepository.fetchTvReviews(tvId, page)) {
+        when (val movieReviews = reviewRepository.rvReviews(tvId, page)) {
             is Result.Success -> kotlin.Result.success(reviewMapper.createUIReviewList(movieReviews.data))
             else -> kotlin.Result.failure(Exception("Can't get info"))
         }

@@ -12,11 +12,11 @@ import com.kirchhoff.movies.screen.movie.network.MovieService
 import com.kirchhoff.movies.storage.movie.IStorageMovie
 
 internal interface IMovieDetailsRepository {
-    suspend fun fetchInfo(id: MovieId): Result<NetworkMovie>
-    suspend fun fetchDetails(id: MovieId): Result<NetworkMovieDetails>
-    suspend fun fetchTrailersList(id: MovieId): Result<NetworkTrailersList>
-    suspend fun fetchMovieCredits(id: MovieId): Result<NetworkEntertainmentCredits>
-    suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>>
+    suspend fun info(id: MovieId): Result<NetworkMovie>
+    suspend fun details(id: MovieId): Result<NetworkMovieDetails>
+    suspend fun trailersList(id: MovieId): Result<NetworkTrailersList>
+    suspend fun movieCredits(id: MovieId): Result<NetworkEntertainmentCredits>
+    suspend fun similarMovies(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>>
 }
 
 internal class MovieDetailsRepository(
@@ -24,7 +24,7 @@ internal class MovieDetailsRepository(
     private val movieStorage: IStorageMovie
 ) : BaseRepository(), IMovieDetailsRepository {
 
-    override suspend fun fetchInfo(id: MovieId): Result<NetworkMovie> {
+    override suspend fun info(id: MovieId): Result<NetworkMovie> {
         val movieInfo = movieStorage.info(id.value)
 
         return if (movieInfo != null) {
@@ -34,11 +34,11 @@ internal class MovieDetailsRepository(
         }
     }
 
-    override suspend fun fetchDetails(id: MovieId): Result<NetworkMovieDetails> = apiCall { movieService.fetchDetails(id.value) }
+    override suspend fun details(id: MovieId): Result<NetworkMovieDetails> = apiCall { movieService.fetchDetails(id.value) }
 
-    override suspend fun fetchTrailersList(id: MovieId): Result<NetworkTrailersList> = apiCall { movieService.fetchTrailersList(id.value) }
+    override suspend fun trailersList(id: MovieId): Result<NetworkTrailersList> = apiCall { movieService.fetchTrailersList(id.value) }
 
-    override suspend fun fetchMovieCredits(id: MovieId): Result<NetworkEntertainmentCredits> {
+    override suspend fun movieCredits(id: MovieId): Result<NetworkEntertainmentCredits> {
         val result = apiCall { movieService.fetchMovieCredits(id.value) }
 
         if (result is Result.Success) {
@@ -48,7 +48,7 @@ internal class MovieDetailsRepository(
         return result
     }
 
-    override suspend fun fetchSimilarMovies(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>> {
+    override suspend fun similarMovies(id: MovieId, page: Int): Result<NetworkPaginated<NetworkMovie>> {
         val result = apiCall { movieService.fetchSimilarMovies(id.value, page) }
 
         if (result is Result.Success) {

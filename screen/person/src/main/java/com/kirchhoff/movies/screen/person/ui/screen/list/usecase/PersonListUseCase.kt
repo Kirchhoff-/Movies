@@ -16,7 +16,7 @@ internal class PersonListUseCase(
 ) : IPersonListUseCase {
 
     override suspend fun fetchPopularPersons(page: Int): kotlin.Result<UIPaginated<UIPerson>> =
-        when (val response = personListRepository.fetchPopularPersons(page)) {
+        when (val response = personListRepository.popularPersons(page)) {
             is Result.Success -> kotlin.Result.success(personListMapper.createUIPersons(response.data))
             else -> kotlin.Result.failure(Exception("Can't fetch the popular persons"))
         }

@@ -11,7 +11,7 @@ internal interface IMovieImagesUseCase {
 
 internal class MovieImagesUseCase(private val movieRepository: IMovieRepository) : IMovieImagesUseCase {
     override suspend fun fetchImages(id: MovieId): kotlin.Result<List<UIImage>> =
-        when (val response = movieRepository.fetchImages(id)) {
+        when (val response = movieRepository.images(id)) {
             is Result.Success -> kotlin.Result.success(response.data)
             else -> kotlin.Result.failure(Exception("Can't fetch the images"))
         }

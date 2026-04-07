@@ -136,4 +136,15 @@ class ArchitectureTests {
                 }
             }
     }
+
+    @Test
+    fun `Repository public methods should not use fetch prefix`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .filter { klass -> klass.hasNameEndingWith("Repository") }
+            .flatMap { klass -> klass.functions() }
+            .filterNot { functions -> functions.hasPrivateModifier }
+            .assert { function -> !function.hasNameStartingWith("fetch") }
+    }
 }

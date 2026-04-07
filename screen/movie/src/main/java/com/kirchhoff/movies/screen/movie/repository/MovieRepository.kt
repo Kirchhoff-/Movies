@@ -11,8 +11,8 @@ import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
 import com.kirchhoff.movies.storage.movie.IStorageMovie
 
 internal interface IMovieRepository {
-    suspend fun fetchMovie(movieId: MovieId): Result<NetworkMovie>
-    suspend fun fetchImages(id: MovieId): Result<List<UIImage>>
+    suspend fun info(movieId: MovieId): Result<NetworkMovie>
+    suspend fun images(id: MovieId): Result<List<UIImage>>
 }
 
 internal class MovieRepository(
@@ -22,7 +22,7 @@ internal class MovieRepository(
     private val movieDetailsMapper: IMovieDetailsMapper
 ) : BaseRepository(), IMovieRepository {
 
-    override suspend fun fetchMovie(movieId: MovieId): Result<NetworkMovie> {
+    override suspend fun info(movieId: MovieId): Result<NetworkMovie> {
         val movie = movieStorage.info(movieId.value)
 
         return if (movie != null) {
@@ -32,7 +32,7 @@ internal class MovieRepository(
         }
     }
 
-    override suspend fun fetchImages(id: MovieId): Result<List<UIImage>> {
+    override suspend fun images(id: MovieId): Result<List<UIImage>> {
         val localImages = movieImagesStorage.fetchImages(id)
 
         return if (localImages != null) {

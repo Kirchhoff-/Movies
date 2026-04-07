@@ -26,44 +26,44 @@ internal class MovieListUseCase(
 ) : IMovieListUseCase {
 
     override suspend fun fetchByGenre(genre: String, page: Int): kotlin.Result<UIPaginated<UIMovie>> = fetchMovies {
-        movieListRepository.fetchByGenre(
+        movieListRepository.byGenre(
             genre = genre,
             page = page
         )
     }
 
     override suspend fun fetchByCountry(countryId: String, page: Int): kotlin.Result<UIPaginated<UIMovie>> = fetchMovies {
-        movieListRepository.fetchByCountry(
+        movieListRepository.byCountry(
             countryId = countryId,
             page = page
         )
     }
 
     override suspend fun fetchSimilarMovies(id: MovieId, page: Int): kotlin.Result<UIPaginated<UIMovie>> = fetchMovies {
-        movieListRepository.fetchSimilar(
+        movieListRepository.similar(
             id = id,
             page = page
         )
     }
 
     override suspend fun fetchByCompany(companyId: String, page: Int): kotlin.Result<UIPaginated<UIMovie>> = fetchMovies {
-        movieListRepository.fetchByCompany(
+        movieListRepository.byCompany(
             companyId = companyId,
             page = page
         )
     }
 
     override suspend fun fetchNowPlaying(page: Int): kotlin.Result<UIPaginated<UIMovie>> =
-        fetchMovies { movieListRepository.fetchNowPlaying(page) }
+        fetchMovies { movieListRepository.nowPlaying(page) }
 
     override suspend fun fetchPopular(page: Int): kotlin.Result<UIPaginated<UIMovie>> =
-        fetchMovies { movieListRepository.fetchPopular(page) }
+        fetchMovies { movieListRepository.popular(page) }
 
     override suspend fun fetchTopRated(page: Int): kotlin.Result<UIPaginated<UIMovie>> =
-        fetchMovies { movieListRepository.fetchTopRated(page) }
+        fetchMovies { movieListRepository.topRated(page) }
 
     override suspend fun fetchUpcoming(page: Int): kotlin.Result<UIPaginated<UIMovie>> =
-        fetchMovies { movieListRepository.fetchUpcoming(page) }
+        fetchMovies { movieListRepository.upcoming(page) }
 
     private suspend fun fetchMovies(request: suspend () -> Result<NetworkPaginated<NetworkMovie>>): kotlin.Result<UIPaginated<UIMovie>> =
         when (val response = request.invoke()) {

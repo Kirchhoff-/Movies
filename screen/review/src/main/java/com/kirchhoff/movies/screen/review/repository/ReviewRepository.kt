@@ -7,21 +7,21 @@ import com.kirchhoff.movies.networkdata.details.review.NetworkReview
 import com.kirchhoff.movies.screen.review.network.ReviewService
 
 internal interface IReviewRepository {
-    suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<NetworkPaginated<NetworkReview>>
-    suspend fun fetchTvReviews(tvId: Int, page: Int): Result<NetworkPaginated<NetworkReview>>
+    suspend fun movieReviews(movieId: Int, page: Int): Result<NetworkPaginated<NetworkReview>>
+    suspend fun rvReviews(tvId: Int, page: Int): Result<NetworkPaginated<NetworkReview>>
 }
 
 internal class ReviewRepository(
     private val reviewService: ReviewService
 ) : BaseRepository(), IReviewRepository {
 
-    override suspend fun fetchMovieReviews(
+    override suspend fun movieReviews(
         movieId: Int,
         page: Int
     ): Result<NetworkPaginated<NetworkReview>> =
         apiCall { reviewService.movieReviews(movieId, page) }
 
-    override suspend fun fetchTvReviews(
+    override suspend fun rvReviews(
         tvId: Int,
         page: Int
     ): Result<NetworkPaginated<NetworkReview>> =

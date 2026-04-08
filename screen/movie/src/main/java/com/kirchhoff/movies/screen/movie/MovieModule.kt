@@ -12,6 +12,8 @@ import com.kirchhoff.movies.screen.movie.router.IMovieRouter
 import com.kirchhoff.movies.screen.movie.router.MovieRouter
 import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
 import com.kirchhoff.movies.screen.movie.storage.MovieImagesStorage
+import com.kirchhoff.movies.screen.movie.usecase.IMovieUseCase
+import com.kirchhoff.movies.screen.movie.usecase.MovieUseCase
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -35,5 +37,9 @@ internal val movieModule = module {
             movieImagesStorage = get(),
             movieDetailsMapper = get()
         )
+    }
+
+    single<IMovieUseCase> {
+        MovieUseCase(movieRepository = get())
     }
 }

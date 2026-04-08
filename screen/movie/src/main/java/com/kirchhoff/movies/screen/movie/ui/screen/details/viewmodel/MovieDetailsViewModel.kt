@@ -9,13 +9,15 @@ import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.usecase.IMovieDetailsUseCase
+import com.kirchhoff.movies.screen.movie.usecase.IMovieUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 internal class MovieDetailsViewModel(
     private val movieId: MovieId,
-    private val movieDetailsUseCase: IMovieDetailsUseCase
+    private val movieDetailsUseCase: IMovieDetailsUseCase,
+    private val movieUseCase: IMovieUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<MovieDetailsScreenState> = MutableLiveData()
@@ -89,7 +91,7 @@ internal class MovieDetailsViewModel(
     }
 
     private suspend fun fetchImages() {
-        movieDetailsUseCase.fetchImages(movieId).onSuccess { images ->
+        movieUseCase.fetchImages(movieId).onSuccess { images ->
             val resultImages = if (images.isNotEmpty()) {
                 images.take(DISPLAYING_DATA_AMOUNT)
             } else {

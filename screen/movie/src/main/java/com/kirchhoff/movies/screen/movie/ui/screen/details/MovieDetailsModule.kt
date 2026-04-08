@@ -20,7 +20,6 @@ internal val movieDetailsModule = module {
 
     single<IMovieDetailsUseCase> {
         MovieDetailsUseCase(
-            movieRepository = get(),
             movieDetailsRepository = get(),
             movieDetailsMapper = get(),
             movieListMapper = get()
@@ -30,7 +29,8 @@ internal val movieDetailsModule = module {
     viewModel { (movieId: MovieId) ->
         MovieDetailsViewModel(
             movieId = movieId,
-            movieDetailsUseCase = get()
+            movieDetailsUseCase = get(),
+            movieUseCase = get()
         )
     }
 }

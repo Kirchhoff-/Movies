@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.screen.movie.ui.screen.images.model.MovieImagesScreenState
-import com.kirchhoff.movies.screen.movie.ui.screen.images.usecase.IMovieImagesUseCase
+import com.kirchhoff.movies.screen.movie.usecase.IMovieUseCase
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 internal class MovieImagesViewModel(
     private val movieId: MovieId,
-    private val movieImagesUseCase: IMovieImagesUseCase
+    private val movieUseCase: IMovieUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<MovieImagesScreenState> = MutableLiveData()
@@ -22,7 +22,7 @@ internal class MovieImagesViewModel(
 
     fun loadImages() {
         viewModelScope.launch {
-            movieImagesUseCase.fetchImages(movieId).fold(
+            movieUseCase.fetchImages(movieId).fold(
                 onSuccess = { data ->
                     screenState.value = screenState.value?.copy(image = data)
                 },

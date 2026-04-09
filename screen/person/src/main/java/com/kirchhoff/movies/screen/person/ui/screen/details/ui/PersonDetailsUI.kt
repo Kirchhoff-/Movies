@@ -40,6 +40,7 @@ internal fun PersonDetailsUI(
     onCreditItemClick: (UIPersonCredit) -> Unit,
     onImageClick: (Int) -> Unit,
     onLocationClick: (String) -> Unit,
+    onHomepageClick: (String) -> Unit,
     onBackPressed: () -> Unit
 ) {
     Column {
@@ -54,7 +55,8 @@ internal fun PersonDetailsUI(
                 screenState = screenState,
                 onCreditItemClick = onCreditItemClick,
                 onImageClick = onImageClick,
-                onLocationClick = onLocationClick
+                onLocationClick = onLocationClick,
+                onHomepageClick = onHomepageClick
             )
         }
     }
@@ -89,7 +91,8 @@ private fun ShowUI(
     screenState: PersonDetailsScreenState,
     onCreditItemClick: (UIPersonCredit) -> Unit,
     onImageClick: (Int) -> Unit,
-    onLocationClick: (String) -> Unit
+    onLocationClick: (String) -> Unit,
+    onHomepageClick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -109,7 +112,8 @@ private fun ShowUI(
         Spacer(modifier = Modifier.height(16.dp))
         PersonDetailsInfoUI(
             details = screenState.details,
-            onLocationClick = onLocationClick
+            onLocationClick = onLocationClick,
+            onHomepageClick = onHomepageClick
         )
         if (screenState.details.alsoKnownAs?.isEmpty() == false) {
             Spacer(modifier = Modifier.height(16.dp))
@@ -136,6 +140,7 @@ private fun PersonDetailsUIPreview() {
         onCreditItemClick = {},
         onImageClick = {},
         onLocationClick = {},
+        onHomepageClick = {},
         onBackPressed = {}
     )
 }

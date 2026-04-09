@@ -61,6 +61,7 @@ internal class PersonDetailsFragment : BaseFragment() {
                 onCreditItemClick = { onCreditItemClick(it) },
                 onImageClick = { onImageClick(it) },
                 onLocationClick = { onLocationClick(it) },
+                onHomepageClick = { onHomepageClick(it) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
@@ -100,6 +101,15 @@ internal class PersonDetailsFragment : BaseFragment() {
             startActivity(mapIntent)
         } catch (_: ActivityNotFoundException) {
             Timber.e("Can't find map application")
+        }
+    }
+
+    private fun onHomepageClick(homepage: String) {
+        try {
+            val mapIntent = Intent(Intent.ACTION_VIEW, homepage.toUri())
+            startActivity(mapIntent)
+        } catch (_: ActivityNotFoundException) {
+            Timber.e("Can't find browser application")
         }
     }
 

@@ -31,10 +31,12 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonDetail
 @Composable
 internal fun PersonDetailsInfoUI(
     details: UIPersonDetails,
-    onLocationClick: (String) -> Unit
+    onLocationClick: (String) -> Unit,
+    onHomepageClick: (String) -> Unit
 ) {
     val isBornVisible = !details.birthday.isNullOrEmpty()
     val isPlaceOfBirthVisible = !details.placeOfBirth.isNullOrEmpty()
+    val isHomepageVisible = !details.homepage.isNullOrEmpty()
     val isBiographyVisible = details.biography.isNotEmpty()
 
     if (isBornVisible || isPlaceOfBirthVisible || isBiographyVisible) {
@@ -76,6 +78,23 @@ internal fun PersonDetailsInfoUI(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
+                if (isHomepageVisible) {
+                    Text(
+                        style = TextStyles.Info,
+                        text = stringResource(R.string.person_homepage)
+                    )
+                    Text(
+                        modifier = Modifier.clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(bounded = true),
+                            onClick = { onHomepageClick.invoke(details.homepage ?: error("empty placeOfBirth")) }
+                        ),
+                        style = supportTextStyle,
+                        textDecoration = TextDecoration.Underline,
+                        text = details.homepage.orEmpty()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
                 if (isBiographyVisible) {
                     Text(
                         style = TextStyles.Info,
@@ -101,6 +120,7 @@ private val supportTextStyle: TextStyle = TextStyle(
 private fun PersonDetailsInfoUIPreview() {
     PersonDetailsInfoUI(
         details = UIPersonDetails.Default,
-        onLocationClick = {}
+        onLocationClick = {},
+        onHomepageClick = {}
     )
 }

@@ -6,7 +6,8 @@ data class NetworkPersonDetails(
     @SerializedName("birthday") val birthday: String?,
     @SerializedName("place_of_birth") val placeOfBirth: String?,
     @SerializedName("biography") val biography: String,
-    @SerializedName("also_known_as") val alsoKnownAs: List<String>?
+    @SerializedName("also_known_as") val alsoKnownAs: List<String>?,
+    @SerializedName("homepage") val homepage: String?
 )
 
 data class NetworkPersonCredits(

@@ -4,14 +4,16 @@ internal data class UIPersonDetails(
     val birthday: String?,
     val placeOfBirth: String?,
     val biography: String,
-    val alsoKnownAs: List<String>?
+    val alsoKnownAs: List<String>?,
+    val homepage: String?
 ) {
     companion object {
         val Default = UIPersonDetails(
             birthday = "",
             placeOfBirth = "",
             biography = "",
-            alsoKnownAs = emptyList()
+            alsoKnownAs = emptyList(),
+            homepage = null
         )
     }
 }

@@ -69,7 +69,7 @@ internal class PersonDetailsFragment : BaseFragment() {
         super.onDestroy()
     }
 
-    private inner class ClickListener: PersonDetailsClickListener {
+    private inner class ClickListener : PersonDetailsClickListener {
         override fun onCreditItemClick(credit: UIPersonCredit) {
             if (credit.mediaType == UIMediaType.MOVIE) {
                 router.openMovieDetailsScreen(MovieId(credit.id))

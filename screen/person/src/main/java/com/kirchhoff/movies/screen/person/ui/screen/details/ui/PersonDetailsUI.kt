@@ -145,5 +145,6 @@ private fun PersonDetailsUIPreview() {
             override fun onHomepageClick(url: String) = Unit
 
             override fun onBackPressed() = Unit
-        })
+        }
+    )
 }

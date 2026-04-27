@@ -51,63 +51,95 @@ internal fun PersonDetailsInfoUI(
                 modifier = Modifier.padding(8.dp)
             ) {
                 if (isBornVisible) {
-                    Text(
-                        style = TextStyles.Info,
-                        text = stringResource(R.string.person_born)
-                    )
-                    Text(
-                        style = supportTextStyle,
-                        text = details.birthday.orEmpty()
-                    )
+                    PlaceOfBorn(details.birthday.orEmpty())
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 if (isPlaceOfBirthVisible) {
-                    Text(
-                        style = TextStyles.Info,
-                        text = stringResource(R.string.person_birthplace)
-                    )
-                    Text(
-                        modifier = Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = true),
-                            onClick = { onLocationClick.invoke(details.placeOfBirth ?: error("empty placeOfBirth")) }
-                        ),
-                        style = supportTextStyle,
-                        textDecoration = TextDecoration.Underline,
-                        text = details.placeOfBirth.orEmpty()
+                    PlaceOfBirth(
+                        placeOfBirth = details.placeOfBirth.orEmpty(),
+                        onLocationClick = onLocationClick
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 if (isHomepageVisible) {
-                    Text(
-                        style = TextStyles.Info,
-                        text = stringResource(R.string.person_homepage)
-                    )
-                    Text(
-                        modifier = Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = true),
-                            onClick = { onHomepageClick.invoke(details.homepage ?: error("empty placeOfBirth")) }
-                        ),
-                        style = supportTextStyle,
-                        textDecoration = TextDecoration.Underline,
-                        text = details.homepage.orEmpty()
+                    Homepage(
+                        homepage = details.homepage.orEmpty(),
+                        onHomepageClick = onHomepageClick
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 if (isBiographyVisible) {
-                    Text(
-                        style = TextStyles.Info,
-                        text = stringResource(R.string.person_bio)
-                    )
-                    Text(
-                        style = supportTextStyle,
-                        text = details.biography
-                    )
+                    Biography(details.biography)
                 }
             }
         }
     }
+}
+
+@Composable
+private fun PlaceOfBorn(birthday: String) {
+    Text(
+        style = TextStyles.Info,
+        text = stringResource(R.string.person_born)
+    )
+    Text(
+        style = supportTextStyle,
+        text = birthday
+    )
+}
+
+@Composable
+private fun PlaceOfBirth(
+    placeOfBirth: String,
+    onLocationClick: (String) -> Unit
+) {
+    Text(
+        style = TextStyles.Info,
+        text = stringResource(R.string.person_birthplace)
+    )
+    Text(
+        modifier = Modifier.clickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = rememberRipple(bounded = true),
+            onClick = { onLocationClick.invoke(placeOfBirth) }
+        ),
+        style = supportTextStyle,
+        textDecoration = TextDecoration.Underline,
+        text = placeOfBirth
+    )
+}
+
+@Composable
+private fun Homepage(
+    homepage: String,
+    onHomepageClick: (String) -> Unit
+) {
+    Text(
+        style = TextStyles.Info,
+        text = stringResource(R.string.person_homepage)
+    )
+    Text(
+        modifier = Modifier.clickable(
+            interactionSource = remember { MutableInteractionSource() },
+            indication = rememberRipple(bounded = true),
+            onClick = { onHomepageClick.invoke(homepage) }
+        ),
+        style = supportTextStyle,
+        textDecoration = TextDecoration.Underline,
+        text = homepage
+    )
+}
+
+@Composable
+private fun Biography(biography: String) {
+    Text(
+        style = TextStyles.Info,
+        text = stringResource(R.string.person_bio)
+    )
+    Text(
+        style = supportTextStyle,
+        text = biography
+    )
 }
 
 private val supportTextStyle: TextStyle = TextStyle(

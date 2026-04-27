@@ -37,15 +37,11 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.ui.keywords.PersonDe
 @Composable
 internal fun PersonDetailsUI(
     screenState: PersonDetailsScreenState,
-    onCreditItemClick: (UIPersonCredit) -> Unit,
-    onImageClick: (Int) -> Unit,
-    onLocationClick: (String) -> Unit,
-    onHomepageClick: (String) -> Unit,
-    onBackPressed: () -> Unit
+    clickListener: PersonDetailsClickListener
 ) {
     Column {
         MoviesToolbar(title = screenState.title) {
-            onBackPressed.invoke()
+            clickListener.onBackPressed()
         }
 
         when {
@@ -53,13 +49,18 @@ internal fun PersonDetailsUI(
             screenState.errorMessage.isNotEmpty() -> ShowError(screenState = screenState)
             else -> ShowUI(
                 screenState = screenState,
-                onCreditItemClick = onCreditItemClick,
-                onImageClick = onImageClick,
-                onLocationClick = onLocationClick,
-                onHomepageClick = onHomepageClick
+                clickListener = clickListener
             )
         }
     }
+}
+
+internal interface PersonDetailsClickListener {
+    fun onCreditItemClick(credit: UIPersonCredit)
+    fun onImageClick(position: Int)
+    fun onLocationClick(location: String)
+    fun onHomepageClick(url: String)
+    fun onBackPressed()
 }
 
 @Composable
@@ -89,10 +90,7 @@ private fun ShowError(screenState: PersonDetailsScreenState) {
 @Composable
 private fun ShowUI(
     screenState: PersonDetailsScreenState,
-    onCreditItemClick: (UIPersonCredit) -> Unit,
-    onImageClick: (Int) -> Unit,
-    onLocationClick: (String) -> Unit,
-    onHomepageClick: (String) -> Unit
+    clickListener: PersonDetailsClickListener
 ) {
     Column(
         modifier = Modifier
@@ -100,7 +98,7 @@ private fun ShowUI(
     ) {
         PersonDetailsImagesUI(
             images = screenState.images,
-            onItemClick = onImageClick
+            onItemClick = { clickListener.onImageClick(it) }
         )
         Text(
             modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -112,8 +110,8 @@ private fun ShowUI(
         Spacer(modifier = Modifier.height(16.dp))
         PersonDetailsInfoUI(
             details = screenState.details,
-            onLocationClick = onLocationClick,
-            onHomepageClick = onHomepageClick
+            onLocationClick = { clickListener.onLocationClick(it) },
+            onHomepageClick = { clickListener.onHomepageClick(it) }
         )
         if (screenState.details.alsoKnownAs?.isEmpty() == false) {
             Spacer(modifier = Modifier.height(16.dp))
@@ -126,7 +124,7 @@ private fun ShowUI(
             Spacer(modifier = Modifier.height(16.dp))
             PersonDetailsCreditsUI(
                 credits = screenState.credits,
-                onItemClick = onCreditItemClick
+                onItemClick = { clickListener.onCreditItemClick(it) }
             )
         }
     }
@@ -137,10 +135,15 @@ private fun ShowUI(
 private fun PersonDetailsUIPreview() {
     PersonDetailsUI(
         screenState = PersonDetailsScreenState.Default,
-        onCreditItemClick = {},
-        onImageClick = {},
-        onLocationClick = {},
-        onHomepageClick = {},
-        onBackPressed = {}
-    )
+        object : PersonDetailsClickListener {
+            override fun onCreditItemClick(credit: UIPersonCredit) = Unit
+
+            override fun onImageClick(position: Int) = Unit
+
+            override fun onLocationClick(location: String) = Unit
+
+            override fun onHomepageClick(url: String) = Unit
+
+            override fun onBackPressed() = Unit
+        })
 }

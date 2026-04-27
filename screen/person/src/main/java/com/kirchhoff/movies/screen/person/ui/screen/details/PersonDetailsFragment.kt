@@ -19,6 +19,7 @@ import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.person.router.IPersonRouter
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIMediaType
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsClickListener
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
 import org.koin.android.ext.android.inject
@@ -58,10 +59,7 @@ internal class PersonDetailsFragment : BaseFragment() {
 
             PersonDetailsUI(
                 screenState = screenState ?: error("Can't build UI without state"),
-                onCreditItemClick = { onCreditItemClick(it) },
-                onImageClick = { onImageClick(it) },
-                onLocationClick = { onLocationClick(it) },
-                onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
+                clickListener = ClickListener()
             )
         }
     }
@@ -71,35 +69,50 @@ internal class PersonDetailsFragment : BaseFragment() {
         super.onDestroy()
     }
 
-    private fun onCreditItemClick(credit: UIPersonCredit) {
-        if (credit.mediaType == UIMediaType.MOVIE) {
-            router.openMovieDetailsScreen(MovieId(credit.id))
-        } else if (credit.mediaType == UIMediaType.TV) {
-            router.openTvDetailsScreen(
-                UITv(
-                    TvId(credit.id),
-                    credit.title,
-                    credit.posterPath,
-                    credit.backdropPath,
-                    null
+    private inner class ClickListener : PersonDetailsClickListener {
+        override fun onCreditItemClick(credit: UIPersonCredit) {
+            if (credit.mediaType == UIMediaType.MOVIE) {
+                router.openMovieDetailsScreen(MovieId(credit.id))
+            } else if (credit.mediaType == UIMediaType.TV) {
+                router.openTvDetailsScreen(
+                    UITv(
+                        TvId(credit.id),
+                        credit.title,
+                        credit.posterPath,
+                        credit.backdropPath,
+                        null
+                    )
                 )
+            }
+        }
+
+        override fun onImageClick(position: Int) {
+            personRouter.openImagesScreen(
+                personId = requireArguments().getInt(PERSON_ARG_ID),
+                currentPosition = position
             )
         }
-    }
 
-    private fun onImageClick(position: Int) {
-        personRouter.openImagesScreen(
-            personId = requireArguments().getInt(PERSON_ARG_ID),
-            currentPosition = position
-        )
-    }
+        override fun onLocationClick(location: String) {
+            try {
+                val mapIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$location".toUri())
+                startActivity(mapIntent)
+            } catch (_: ActivityNotFoundException) {
+                Timber.e("Can't find map application")
+            }
+        }
 
-    private fun onLocationClick(birthplace: String) {
-        try {
-            val mapIntent = Intent(Intent.ACTION_VIEW, "geo:0,0?q=$birthplace".toUri())
-            startActivity(mapIntent)
-        } catch (_: ActivityNotFoundException) {
-            Timber.e("Can't find map application")
+        override fun onHomepageClick(url: String) {
+            try {
+                val mapIntent = Intent(Intent.ACTION_VIEW, url.toUri())
+                startActivity(mapIntent)
+            } catch (_: ActivityNotFoundException) {
+                Timber.e("Can't find browser application")
+            }
+        }
+
+        override fun onBackPressed() {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 

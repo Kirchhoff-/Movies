@@ -23,7 +23,8 @@ internal class PersonDetailsMapper : IPersonDetailsMapper {
         birthday = personDetails.birthday,
         placeOfBirth = personDetails.placeOfBirth,
         biography = personDetails.biography,
-        alsoKnownAs = personDetails.alsoKnownAs
+        alsoKnownAs = personDetails.alsoKnownAs,
+        homepage = personDetails.homepage
     )
 
     override fun createCredits(credits: NetworkPersonCredits): UIPersonCredits = UIPersonCredits(

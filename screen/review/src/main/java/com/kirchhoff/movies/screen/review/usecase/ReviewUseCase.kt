@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.review.usecase
 
-import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.mapper.IReviewListMapper
@@ -9,8 +9,8 @@ import com.kirchhoff.movies.storage.movie.IStorageMovie
 import com.kirchhoff.movies.storage.tvshow.IStorageTvShow
 
 internal interface IReviewUseCase {
-    suspend fun fetchMovieReviews(movieId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>>
-    suspend fun fetchTvReviews(tvId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>>
+    suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>>
+    suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>>
     fun movieTitle(movieId: Int): String
     fun tvShowTitle(tvShowId: Int): String
 }
@@ -22,16 +22,16 @@ internal class ReviewUseCase(
     private val tvShowStorage: IStorageTvShow
 ) : IReviewUseCase {
 
-    override suspend fun fetchMovieReviews(movieId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>> =
+    override suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>> =
         when (val movieReviews = reviewRepository.movieReviews(movieId, page)) {
-            is Result.Success -> kotlin.Result.success(reviewMapper.createUIReviewList(movieReviews.data))
-            else -> kotlin.Result.failure(Exception("Can't get info"))
+            is RepositoryResult.Success -> Result.success(reviewMapper.createUIReviewList(movieReviews.data))
+            else -> Result.failure(Exception("Can't get info"))
         }
 
-    override suspend fun fetchTvReviews(tvId: Int, page: Int): kotlin.Result<UIPaginated<UIReview>> =
+    override suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>> =
         when (val movieReviews = reviewRepository.rvReviews(tvId, page)) {
-            is Result.Success -> kotlin.Result.success(reviewMapper.createUIReviewList(movieReviews.data))
-            else -> kotlin.Result.failure(Exception("Can't get info"))
+            is RepositoryResult.Success -> Result.success(reviewMapper.createUIReviewList(movieReviews.data))
+            else -> Result.failure(Exception("Can't get info"))
         }
 
     override fun movieTitle(movieId: Int): String =

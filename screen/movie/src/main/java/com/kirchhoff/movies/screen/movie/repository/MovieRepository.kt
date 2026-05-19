@@ -3,7 +3,7 @@ package com.kirchhoff.movies.screen.movie.repository
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.ui.UIImage
 import com.kirchhoff.movies.core.repository.BaseRepository
-import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
 import com.kirchhoff.movies.screen.movie.mapper.IMovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.network.MovieService
@@ -11,8 +11,8 @@ import com.kirchhoff.movies.screen.movie.storage.IMovieImagesStorage
 import com.kirchhoff.movies.storage.movie.IStorageMovie
 
 internal interface IMovieRepository {
-    suspend fun info(movieId: MovieId): Result<NetworkMovie>
-    suspend fun images(id: MovieId): Result<List<UIImage>>
+    suspend fun info(movieId: MovieId): RepositoryResult<NetworkMovie>
+    suspend fun images(id: MovieId): RepositoryResult<List<UIImage>>
 }
 
 internal class MovieRepository(
@@ -22,28 +22,28 @@ internal class MovieRepository(
     private val movieDetailsMapper: IMovieDetailsMapper
 ) : BaseRepository(), IMovieRepository {
 
-    override suspend fun info(movieId: MovieId): Result<NetworkMovie> {
+    override suspend fun info(movieId: MovieId): RepositoryResult<NetworkMovie> {
         val movie = movieStorage.info(movieId.value)
 
         return if (movie != null) {
-            Result.Success(movie)
+            RepositoryResult.Success(movie)
         } else {
-            Result.Exception("There is no movie with id = $movieId in the storage")
+            RepositoryResult.Exception("There is no movie with id = $movieId in the storage")
         }
     }
 
-    override suspend fun images(id: MovieId): Result<List<UIImage>> {
+    override suspend fun images(id: MovieId): RepositoryResult<List<UIImage>> {
         val localImages = movieImagesStorage.fetchImages(id)
 
         return if (localImages != null) {
-            Result.Success(localImages)
+            RepositoryResult.Success(localImages)
         } else {
             val result = apiCall { movieService.fetchImages(id.value) }
 
-            return if (result is Result.Success) {
+            return if (result is RepositoryResult.Success) {
                 val uiImages = movieDetailsMapper.createUIImages(result.data)
                 movieImagesStorage.updateImages(id, uiImages)
-                Result.Success(uiImages)
+                RepositoryResult.Success(uiImages)
             } else {
                 result.mapErrorOrException()
             }

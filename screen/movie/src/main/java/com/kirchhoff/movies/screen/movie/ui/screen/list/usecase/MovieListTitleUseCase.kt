@@ -1,6 +1,6 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.list.usecase
 
-import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
 import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
@@ -16,7 +16,7 @@ internal class MovieListTitleUseCase(private val movieRepository: IMovieReposito
         is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, movieListType.genre.name)
         is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, movieListType.country.name)
         is MovieListType.Similar -> when (val movieResult = movieRepository.info(movieListType.movieId)) {
-            is Result.Success -> StringValue.IdText(
+            is RepositoryResult.Success -> StringValue.IdText(
                 R.string.movie_similar_to_format,
                 movieResult.data.title
             )

@@ -68,13 +68,13 @@ class ArchitectureTests {
     }
 
     @Test
-    fun `functions in 'Repository' classes should return only the instance of the 'Result' class`() {
+    fun `functions in 'Repository' classes should return only the instance of the 'RepositoryResult' class`() {
         Konsist.scopeFromProject()
             .interfaces()
             .withNameEndingWith("Repository")
             .assert { interfaceDeclaration ->
-                interfaceDeclaration.containingFile.hasImportWithName("com.kirchhoff.movies.core.repository.Result") &&
-                    interfaceDeclaration.functions().all { it.returnType?.hasNameStartingWith("Result") == true }
+                interfaceDeclaration.containingFile.hasImportWithName("com.kirchhoff.movies.core.repository.RepositoryResult") &&
+                    interfaceDeclaration.functions().all { it.returnType?.hasNameStartingWith("RepositoryResult") == true }
             }
     }
 

@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.discover.usecase
 
 import com.kirchhoff.movies.core.data.ui.UIMovie
-import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
 import com.kirchhoff.movies.screen.movie.ui.screen.discover.mapper.IMovieDiscoverMapper
@@ -46,8 +46,8 @@ internal class MovieDiscoverUseCase(
         )
     }
 
-    private fun Result<NetworkPaginated<NetworkMovie>>.toListOrEmpty(): List<UIMovie> = when (this) {
-        is Result.Success -> movieDiscoverMapper.mapMovieList(this.data)
+    private fun RepositoryResult<NetworkPaginated<NetworkMovie>>.toListOrEmpty(): List<UIMovie> = when (this) {
+        is RepositoryResult.Success -> movieDiscoverMapper.mapMovieList(this.data)
         else -> emptyList()
     }
 }

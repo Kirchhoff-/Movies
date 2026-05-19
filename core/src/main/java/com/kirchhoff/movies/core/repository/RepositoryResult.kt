@@ -3,8 +3,8 @@ package com.kirchhoff.movies.core.repository
 import okhttp3.ResponseBody
 import retrofit2.Response
 
-sealed class Result<out T> {
-    class Success<T> : Result<T> {
+sealed class RepositoryResult<out T> {
+    class Success<T> : RepositoryResult<T> {
         val data: T
 
         constructor(response: Response<T>) {
@@ -16,7 +16,7 @@ sealed class Result<out T> {
         }
     }
 
-    class Error<out T> : Result<T> {
+    class Error<out T> : RepositoryResult<T> {
         val responseBody: ResponseBody?
         val code: Int
 
@@ -33,7 +33,7 @@ sealed class Result<out T> {
         override fun toString(): String = "[ApiResponse.Failure $code]: $responseBody"
     }
 
-    class Exception<out T> : Result<T> {
+    class Exception<out T> : RepositoryResult<T> {
         val message: String?
 
         constructor(exception: Throwable) {
@@ -47,7 +47,7 @@ sealed class Result<out T> {
         override fun toString(): String = "[ApiResponse.Failure]: $message"
     }
 
-    fun <T> mapErrorOrException(): Result<T> = when (this) {
+    fun <T> mapErrorOrException(): RepositoryResult<T> = when (this) {
         is Success -> error("Can't map success result")
         is Error -> Error(this.responseBody, this.code)
         is Exception -> Exception(this.message)

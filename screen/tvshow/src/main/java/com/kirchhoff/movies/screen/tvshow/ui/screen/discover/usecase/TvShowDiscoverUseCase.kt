@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.tvshow.ui.screen.discover.usecase
 
 import com.kirchhoff.movies.core.data.ui.UITv
-import com.kirchhoff.movies.core.repository.Result
+import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkTv
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.mapper.ITvShowDiscoverMapper
@@ -46,8 +46,8 @@ internal class TvShowDiscoverUseCase(
         )
     }
 
-    private fun Result<NetworkPaginated<NetworkTv>>.toListOrEmpty(): List<UITv> = when (this) {
-        is Result.Success -> tvShowDiscoverMapper.mapTvShowList(this.data)
+    private fun RepositoryResult<NetworkPaginated<NetworkTv>>.toListOrEmpty(): List<UITv> = when (this) {
+        is RepositoryResult.Success -> tvShowDiscoverMapper.mapTvShowList(this.data)
         else -> emptyList()
     }
 }

@@ -20,11 +20,15 @@ internal class TvShowListRepository(private val tvShowListService: TvShowListSer
     override suspend fun similar(id: TvId, page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> =
         apiCall { tvShowListService.fetchSimilarTvShows(id.value, page) }
 
-    override suspend fun airingToday(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> = apiCall { tvShowListService.fetchAiringToday(page) }
+    override suspend fun airingToday(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> =
+        apiCall { tvShowListService.fetchAiringToday(page) }
 
-    override suspend fun onTheAir(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> = apiCall { tvShowListService.fetchOnTheAir(page) }
+    override suspend fun onTheAir(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> =
+        apiCall { tvShowListService.fetchOnTheAir(page) }
 
-    override suspend fun popular(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> = apiCall { tvShowListService.fetchPopular(page) }
+    override suspend fun popular(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> =
+        apiCall { tvShowListService.fetchPopular(page) }
 
-    override suspend fun topRated(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> = apiCall { tvShowListService.fetchTopRated(page) }
+    override suspend fun topRated(page: Int): RepositoryResult<NetworkPaginated<NetworkTv>> =
+        apiCall { tvShowListService.fetchTopRated(page) }
 }

@@ -32,7 +32,9 @@ internal class TvShowDiscoverRepository(
     override suspend fun topRated(): RepositoryResult<NetworkPaginated<NetworkTv>> =
         fetchTvShows { tvShowDiscoverService.fetchTopRated() }
 
-    private suspend fun fetchTvShows(call: suspend () -> Response<NetworkPaginated<NetworkTv>>): RepositoryResult<NetworkPaginated<NetworkTv>> {
+    private suspend fun fetchTvShows(
+        call: suspend () -> Response<NetworkPaginated<NetworkTv>>
+    ): RepositoryResult<NetworkPaginated<NetworkTv>> {
         val result = apiCall { call.invoke() }
 
         if (result is RepositoryResult.Success) {

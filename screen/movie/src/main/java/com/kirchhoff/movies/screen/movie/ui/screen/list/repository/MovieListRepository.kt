@@ -69,7 +69,9 @@ internal class MovieListRepository(
         movieService.fetchUpcoming(page)
     }
 
-    private suspend fun fetchMovies(call: suspend () -> Response<NetworkPaginated<NetworkMovie>>): RepositoryResult<NetworkPaginated<NetworkMovie>> {
+    private suspend fun fetchMovies(
+        call: suspend () -> Response<NetworkPaginated<NetworkMovie>>
+    ): RepositoryResult<NetworkPaginated<NetworkMovie>> {
         val result = apiCall { call.invoke() }
 
         if (result is RepositoryResult.Success) {

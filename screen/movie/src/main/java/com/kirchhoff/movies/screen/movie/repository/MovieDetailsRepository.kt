@@ -36,7 +36,8 @@ internal class MovieDetailsRepository(
 
     override suspend fun details(id: MovieId): RepositoryResult<NetworkMovieDetails> = apiCall { movieService.fetchDetails(id.value) }
 
-    override suspend fun trailersList(id: MovieId): RepositoryResult<NetworkTrailersList> = apiCall { movieService.fetchTrailersList(id.value) }
+    override suspend fun trailersList(id: MovieId): RepositoryResult<NetworkTrailersList> =
+        apiCall { movieService.fetchTrailersList(id.value) }
 
     override suspend fun movieCredits(id: MovieId): RepositoryResult<NetworkEntertainmentCredits> {
         val result = apiCall { movieService.fetchMovieCredits(id.value) }

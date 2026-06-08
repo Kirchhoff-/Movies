@@ -1,14 +1,10 @@
 package com.kirchhoff.movies.screen.person.ui.screen.images.usecase
 
 import com.kirchhoff.movies.screen.person.data.UIPersonImage
-import com.kirchhoff.movies.screen.person.storage.IPersonImagesStorage
+import com.kirchhoff.movies.screen.person.storage.PersonImagesStorage
 
-internal interface IPersonImagesUseCase {
-    fun fetchImages(personId: Int): List<UIPersonImage>
-}
-
-internal class PersonImagesUseCase(private val personImagesStorage: IPersonImagesStorage) : IPersonImagesUseCase {
-    override fun fetchImages(personId: Int): List<UIPersonImage> = personImagesStorage.fetchImages(personId) ?: error(
+internal class PersonImagesUseCase(private val personImagesStorage: PersonImagesStorage) {
+    fun fetchImages(personId: Int): List<UIPersonImage> = personImagesStorage.fetchImages(personId) ?: error(
         "There are no images for person with id = $personId"
     )
 }

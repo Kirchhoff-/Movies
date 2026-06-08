@@ -5,14 +5,9 @@ import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.TvShowDetailsFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.TvShowDiscoverFragment
 
-interface ITvShowFacade {
-    fun tvShowList(): Fragment
-    fun tvShowDetails(tv: UITv): Fragment
-}
+class TvShowFacade {
 
-class TvShowFacade : ITvShowFacade {
+    fun tvShowList(): Fragment = TvShowDiscoverFragment.newInstance()
 
-    override fun tvShowList(): Fragment = TvShowDiscoverFragment.newInstance()
-
-    override fun tvShowDetails(tv: UITv): Fragment = TvShowDetailsFragment.newInstance(tv)
+    fun tvShowDetails(tv: UITv): Fragment = TvShowDetailsFragment.newInstance(tv)
 }

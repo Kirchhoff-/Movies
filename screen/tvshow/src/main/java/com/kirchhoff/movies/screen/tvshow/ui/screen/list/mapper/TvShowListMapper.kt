@@ -6,13 +6,9 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkTv
 
-internal interface ITvShowListMapper {
-    fun createTvShowList(tvShowList: NetworkPaginated<NetworkTv>): UIPaginated<UITv>
-}
+internal class TvShowListMapper {
 
-internal class TvShowListMapper : ITvShowListMapper {
-
-    override fun createTvShowList(tvShowList: NetworkPaginated<NetworkTv>): UIPaginated<UITv> = UIPaginated(
+    fun createTvShowList(tvShowList: NetworkPaginated<NetworkTv>): UIPaginated<UITv> = UIPaginated(
         page = tvShowList.page,
         results = tvShowList.results.map { it.toUITv() },
         totalPages = tvShowList.totalPages

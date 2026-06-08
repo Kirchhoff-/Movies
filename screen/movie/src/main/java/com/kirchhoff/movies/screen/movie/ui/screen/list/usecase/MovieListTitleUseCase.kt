@@ -3,16 +3,12 @@ package com.kirchhoff.movies.screen.movie.ui.screen.list.usecase
 import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.repository.IMovieRepository
+import com.kirchhoff.movies.screen.movie.repository.MovieRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListType
 
-internal interface IMovieListTitleUseCase {
-    suspend fun title(movieListType: MovieListType): StringValue
-}
+internal class MovieListTitleUseCase(private val movieRepository: MovieRepository) {
 
-internal class MovieListTitleUseCase(private val movieRepository: IMovieRepository) : IMovieListTitleUseCase {
-
-    override suspend fun title(movieListType: MovieListType): StringValue = when (movieListType) {
+    fun title(movieListType: MovieListType): StringValue = when (movieListType) {
         is MovieListType.Genre -> StringValue.IdText(R.string.movie_movies_with_genre_format, movieListType.genre.name)
         is MovieListType.Country -> StringValue.IdText(R.string.movie_movies_from_country_format, movieListType.country.name)
         is MovieListType.Similar -> when (val movieResult = movieRepository.info(movieListType.movieId)) {

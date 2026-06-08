@@ -4,10 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.screen.movie.ui.screen.discover.model.MovieDiscoverScreenState
-import com.kirchhoff.movies.screen.movie.ui.screen.discover.usecase.IMovieDiscoverUseCase
+import com.kirchhoff.movies.screen.movie.ui.screen.discover.usecase.MovieDiscoverUseCase
 import kotlinx.coroutines.launch
 
-internal class MovieDiscoverViewModel(private val movieDiscoverUseCase: IMovieDiscoverUseCase) : ViewModel() {
+internal class MovieDiscoverViewModel(private val movieDiscoverUseCase: MovieDiscoverUseCase) : ViewModel() {
 
     val screenState: MutableLiveData<MovieDiscoverScreenState> = MutableLiveData()
 

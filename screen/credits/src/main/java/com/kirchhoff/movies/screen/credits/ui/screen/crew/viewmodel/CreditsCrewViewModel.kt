@@ -5,13 +5,13 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.credits.R
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.model.CreditsCrewScreenState
-import com.kirchhoff.movies.screen.credits.ui.screen.crew.usecase.ICreditsCrewUseCase
+import com.kirchhoff.movies.screen.credits.ui.screen.crew.usecase.CreditsCrewUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 internal class CreditsCrewViewModel(
     private val movieId: MovieId,
-    private val creditsCrewUseCase: ICreditsCrewUseCase
+    private val creditsCrewUseCase: CreditsCrewUseCase
 ) : ViewModel() {
 
     val screenState: MutableStateFlow<CreditsCrewScreenState> = MutableStateFlow(CreditsCrewScreenState.Default)

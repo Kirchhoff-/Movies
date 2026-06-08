@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
+import com.kirchhoff.movies.screen.tvshow.router.TvShowRouter
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.ui.TvShowDiscoverUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.viewmodel.TvShowDiscoverViewModel
 import org.koin.android.ext.android.inject
@@ -21,7 +21,7 @@ import org.koin.core.parameter.parametersOf
 
 internal class TvShowDiscoverFragment : BaseFragment() {
 
-    private val tvShowRouter: ITvShowRouter by inject { parametersOf(requireActivity()) }
+    private val tvShowRouter: TvShowRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: TvShowDiscoverViewModel by viewModel()
 

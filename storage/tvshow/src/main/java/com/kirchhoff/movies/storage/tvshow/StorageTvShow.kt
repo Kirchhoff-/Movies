@@ -2,17 +2,12 @@ package com.kirchhoff.movies.storage.tvshow
 
 import com.kirchhoff.movies.networkdata.main.NetworkTv
 
-interface IStorageTvShow {
-    fun updateInfo(tvShow: NetworkTv)
-    fun info(tvShowId: Int): NetworkTv?
-}
-
-internal class StorageTvShow : IStorageTvShow {
+class StorageTvShow {
     private val tvShowCache: MutableMap<Int, NetworkTv> = HashMap()
 
-    override fun updateInfo(tvShow: NetworkTv) {
+    fun updateInfo(tvShow: NetworkTv) {
         tvShowCache[tvShow.id] = tvShow
     }
 
-    override fun info(tvShowId: Int): NetworkTv? = tvShowCache[tvShowId]
+    fun info(tvShowId: Int): NetworkTv? = tvShowCache[tvShowId]
 }

@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.net.toUri
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.movie.router.IMovieRouter
+import com.kirchhoff.movies.screen.movie.router.MovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.MovieDetailsUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.viewmodel.MovieDetailsViewModel
 import org.koin.android.ext.android.inject
@@ -30,7 +30,7 @@ internal class MovieDetailsFragment : BaseFragment() {
         MovieId(id)
     }
 
-    private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
+    private val movieRouter: MovieRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: MovieDetailsViewModel by viewModel { parametersOf(movieId) }
 

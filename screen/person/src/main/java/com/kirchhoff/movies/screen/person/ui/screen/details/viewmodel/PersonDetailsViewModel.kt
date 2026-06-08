@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
-import com.kirchhoff.movies.screen.person.ui.screen.details.usecase.IPersonDetailsUseCase
+import com.kirchhoff.movies.screen.person.ui.screen.details.usecase.PersonDetailsUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -12,7 +12,7 @@ import timber.log.Timber
 
 internal class PersonDetailsViewModel(
     private val personId: Int,
-    private val personDetailsUseCase: IPersonDetailsUseCase
+    private val personDetailsUseCase: PersonDetailsUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<PersonDetailsScreenState> = MutableLiveData()

@@ -5,33 +5,25 @@ import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.extensions.replaceFragment
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.TvShowListFragment
 
-internal interface ITvShowRouter {
-    fun openSimilarTvShowScreen(tvId: TvId)
-    fun openAiringTodayScreen()
-    fun openOnTheAirScreen()
-    fun openPopularScreen()
-    fun openTopRatedScreen()
-}
+internal class TvShowRouter(private val activity: AppCompatActivity) {
 
-internal class TvShowRouter(private val activity: AppCompatActivity) : ITvShowRouter {
-
-    override fun openSimilarTvShowScreen(tvId: TvId) {
+    fun openSimilarTvShowScreen(tvId: TvId) {
         activity.replaceFragment(TvShowListFragment.similar(tvId))
     }
 
-    override fun openAiringTodayScreen() {
+    fun openAiringTodayScreen() {
         activity.replaceFragment(TvShowListFragment.airingToday())
     }
 
-    override fun openOnTheAirScreen() {
+    fun openOnTheAirScreen() {
         activity.replaceFragment(TvShowListFragment.onTheAir())
     }
 
-    override fun openPopularScreen() {
+    fun openPopularScreen() {
         activity.replaceFragment(TvShowListFragment.popular())
     }
 
-    override fun openTopRatedScreen() {
+    fun openTopRatedScreen() {
         activity.replaceFragment(TvShowListFragment.topRated())
     }
 }

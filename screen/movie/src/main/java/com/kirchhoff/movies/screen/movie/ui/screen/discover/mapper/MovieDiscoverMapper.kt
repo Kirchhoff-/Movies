@@ -5,12 +5,8 @@ import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
 
-internal interface IMovieDiscoverMapper {
-    fun mapMovieList(movieList: NetworkPaginated<NetworkMovie>): List<UIMovie>
-}
-
-internal class MovieDiscoverMapper : IMovieDiscoverMapper {
-    override fun mapMovieList(movieList: NetworkPaginated<NetworkMovie>): List<UIMovie> = movieList.results.map { it.toUIMovie() }
+internal class MovieDiscoverMapper {
+    fun mapMovieList(movieList: NetworkPaginated<NetworkMovie>): List<UIMovie> = movieList.results.map { it.toUIMovie() }
 
     private fun NetworkMovie.toUIMovie(): UIMovie = UIMovie(
         id = MovieId(id),

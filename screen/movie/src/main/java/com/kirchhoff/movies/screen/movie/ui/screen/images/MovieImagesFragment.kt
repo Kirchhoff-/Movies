@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.movie.router.IMovieRouter
+import com.kirchhoff.movies.screen.movie.router.MovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.images.ui.MovieImagesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.images.viewmodel.MovieImagesViewModel
 import org.koin.android.ext.android.inject
@@ -27,7 +27,7 @@ internal class MovieImagesFragment : BaseFragment() {
         if (id == MOVIE_ID_DEFAULT_VALUE) error("Should provide movie id in arguments")
         MovieId(id)
     }
-    private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
+    private val movieRouter: MovieRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: MovieImagesViewModel by viewModel {
         parametersOf(movieId)

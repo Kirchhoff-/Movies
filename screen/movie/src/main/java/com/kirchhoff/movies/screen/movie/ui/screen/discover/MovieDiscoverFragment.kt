@@ -11,7 +11,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.movie.movieModule
-import com.kirchhoff.movies.screen.movie.router.IMovieRouter
+import com.kirchhoff.movies.screen.movie.router.MovieRouter
 import com.kirchhoff.movies.screen.movie.ui.screen.discover.ui.MovieDiscoverUI
 import com.kirchhoff.movies.screen.movie.ui.screen.discover.viewmodel.MovieDiscoverViewModel
 import org.koin.android.ext.android.inject
@@ -22,7 +22,7 @@ import org.koin.core.parameter.parametersOf
 
 internal class MovieDiscoverFragment : BaseFragment() {
 
-    private val movieRouter: IMovieRouter by inject { parametersOf(requireActivity()) }
+    private val movieRouter: MovieRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: MovieDiscoverViewModel by viewModel()
 

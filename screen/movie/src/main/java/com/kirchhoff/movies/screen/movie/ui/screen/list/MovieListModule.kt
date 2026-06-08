@@ -1,9 +1,6 @@
 package com.kirchhoff.movies.screen.movie.ui.screen.list
 
-import com.kirchhoff.movies.screen.movie.ui.screen.list.repository.IMovieListRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.list.repository.MovieListRepository
-import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListTitleUseCase
-import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListTitleUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
@@ -12,21 +9,21 @@ import org.koin.dsl.module
 
 internal val movieListModule = module {
 
-    single<IMovieListRepository> {
+    single<MovieListRepository> {
         MovieListRepository(
             movieService = get(),
             movieStorage = get()
         )
     }
 
-    single<IMovieListUseCase> {
+    single<MovieListUseCase> {
         MovieListUseCase(
             movieListRepository = get(),
             movieListMapper = get()
         )
     }
 
-    single<IMovieListTitleUseCase> {
+    single<MovieListTitleUseCase> {
         MovieListTitleUseCase(movieRepository = get())
     }
 

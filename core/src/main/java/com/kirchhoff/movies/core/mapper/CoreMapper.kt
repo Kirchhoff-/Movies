@@ -9,30 +9,22 @@ import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentPerson
 import com.kirchhoff.movies.networkdata.core.NetworkObjectWithName
 import com.kirchhoff.movies.networkdata.main.NetworkImage
 
-interface ICoreMapper {
-    fun createUIEntertainmentCredits(credits: NetworkEntertainmentCredits): UIEntertainmentCredits
-    fun createUIEntertainmentActors(actors: List<NetworkEntertainmentPerson.Actor>): List<UIEntertainmentPerson.Actor>
-    fun createUIEntertainmentCreators(creators: List<NetworkEntertainmentPerson.Creator>): List<UIEntertainmentPerson.Creator>
-    fun createUIGenre(item: NetworkObjectWithName): UIGenre
-    fun createUIImage(item: NetworkImage): UIImage
-}
+class CoreMapper : BaseMapper() {
 
-class CoreMapper : BaseMapper(), ICoreMapper {
+    fun createUIEntertainmentCredits(credits: NetworkEntertainmentCredits): UIEntertainmentCredits = credits.toUICredits()
 
-    override fun createUIEntertainmentCredits(credits: NetworkEntertainmentCredits): UIEntertainmentCredits = credits.toUICredits()
+    fun createUIGenre(item: NetworkObjectWithName): UIGenre = UIGenre(item.id, item.name)
 
-    override fun createUIGenre(item: NetworkObjectWithName): UIGenre = UIGenre(item.id, item.name)
-
-    override fun createUIImage(item: NetworkImage): UIImage = UIImage(
+    fun createUIImage(item: NetworkImage): UIImage = UIImage(
         path = item.path,
         height = item.height / IMAGE_SIZE_KF,
         width = item.width / IMAGE_SIZE_KF
     )
 
-    override fun createUIEntertainmentActors(actors: List<NetworkEntertainmentPerson.Actor>): List<UIEntertainmentPerson.Actor> =
+    fun createUIEntertainmentActors(actors: List<NetworkEntertainmentPerson.Actor>): List<UIEntertainmentPerson.Actor> =
         actors.map { it.toUIActor() }
 
-    override fun createUIEntertainmentCreators(creators: List<NetworkEntertainmentPerson.Creator>): List<UIEntertainmentPerson.Creator> =
+    fun createUIEntertainmentCreators(creators: List<NetworkEntertainmentPerson.Creator>): List<UIEntertainmentPerson.Creator> =
         creators.map { it.toUICreator() }
 
     private fun NetworkEntertainmentCredits.toUICredits(): UIEntertainmentCredits = UIEntertainmentCredits(

@@ -4,28 +4,17 @@ import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
-import com.kirchhoff.movies.screen.movie.ui.screen.discover.mapper.IMovieDiscoverMapper
-import com.kirchhoff.movies.screen.movie.ui.screen.discover.repository.IMovieDiscoverRepository
+import com.kirchhoff.movies.screen.movie.ui.screen.discover.mapper.MovieDiscoverMapper
+import com.kirchhoff.movies.screen.movie.ui.screen.discover.repository.MovieDiscoverRepository
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
-internal interface IMovieDiscoverUseCase {
-    suspend fun discoverMovies(): Result
-
-    data class Result(
-        val nowPlaying: List<UIMovie>,
-        val popular: List<UIMovie>,
-        val topRated: List<UIMovie>,
-        val upcoming: List<UIMovie>
-    )
-}
-
 internal class MovieDiscoverUseCase(
-    private val movieDiscoverRepository: IMovieDiscoverRepository,
-    private val movieDiscoverMapper: IMovieDiscoverMapper
-) : IMovieDiscoverUseCase {
+    private val movieDiscoverRepository: MovieDiscoverRepository,
+    private val movieDiscoverMapper: MovieDiscoverMapper
+) {
 
-    override suspend fun discoverMovies(): IMovieDiscoverUseCase.Result {
+    suspend fun discoverMovies(): Result {
         var nowPlaying = emptyList<UIMovie>()
         var popular = emptyList<UIMovie>()
         var topRated = emptyList<UIMovie>()
@@ -38,7 +27,7 @@ internal class MovieDiscoverUseCase(
             launch { upcoming = movieDiscoverRepository.upcoming().toListOrEmpty() }
         }
 
-        return IMovieDiscoverUseCase.Result(
+        return Result(
             nowPlaying = nowPlaying,
             popular = popular,
             topRated = topRated,
@@ -50,4 +39,11 @@ internal class MovieDiscoverUseCase(
         is RepositoryResult.Success -> movieDiscoverMapper.mapMovieList(this.data)
         else -> emptyList()
     }
+
+    data class Result(
+        val nowPlaying: List<UIMovie>,
+        val popular: List<UIMovie>,
+        val topRated: List<UIMovie>,
+        val upcoming: List<UIMovie>
+    )
 }

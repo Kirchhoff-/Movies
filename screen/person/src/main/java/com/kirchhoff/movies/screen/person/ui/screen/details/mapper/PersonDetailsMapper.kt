@@ -11,15 +11,9 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredits
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonDetails
 
-internal interface IPersonDetailsMapper {
-    fun createPersonDetails(personDetails: NetworkPersonDetails): UIPersonDetails
-    fun createCredits(credits: NetworkPersonCredits): UIPersonCredits
-    fun createPersonImage(image: NetworkPersonImage): UIPersonImage
-}
+internal class PersonDetailsMapper {
 
-internal class PersonDetailsMapper : IPersonDetailsMapper {
-
-    override fun createPersonDetails(personDetails: NetworkPersonDetails): UIPersonDetails = UIPersonDetails(
+    fun createPersonDetails(personDetails: NetworkPersonDetails): UIPersonDetails = UIPersonDetails(
         birthday = personDetails.birthday,
         placeOfBirth = personDetails.placeOfBirth,
         biography = personDetails.biography,
@@ -27,12 +21,12 @@ internal class PersonDetailsMapper : IPersonDetailsMapper {
         homepage = personDetails.homepage
     )
 
-    override fun createCredits(credits: NetworkPersonCredits): UIPersonCredits = UIPersonCredits(
+    fun createCredits(credits: NetworkPersonCredits): UIPersonCredits = UIPersonCredits(
         cast = credits.cast?.map { it.toUIPersonCreditActor() },
         crew = credits.crew?.map { it.toUIPersonCreator() }
     )
 
-    override fun createPersonImage(image: NetworkPersonImage): UIPersonImage = UIPersonImage(image.filePath.orEmpty())
+    fun createPersonImage(image: NetworkPersonImage): UIPersonImage = UIPersonImage(image.filePath.orEmpty())
 
     private fun NetworkPersonCastCredit.toUIPersonCreditActor(): UIPersonCredit.Actor = UIPersonCredit.Actor(
         id = id,

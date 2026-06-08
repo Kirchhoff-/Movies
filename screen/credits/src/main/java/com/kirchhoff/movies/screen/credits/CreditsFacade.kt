@@ -5,14 +5,8 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.screen.credits.ui.screen.cast.CreditsCastFragment
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.CreditsCrewFragment
 
-interface ICreditsFacade {
-    fun castCredits(movieId: MovieId): Fragment
-    fun crewCredits(movieId: MovieId): Fragment
-}
+class CreditsFacade {
+    fun castCredits(movieId: MovieId): Fragment = CreditsCastFragment.newInstance(movieId)
 
-class CreditsFacade : ICreditsFacade {
-
-    override fun castCredits(movieId: MovieId): Fragment = CreditsCastFragment.newInstance(movieId)
-
-    override fun crewCredits(movieId: MovieId): Fragment = CreditsCrewFragment.newInstance(movieId)
+    fun crewCredits(movieId: MovieId): Fragment = CreditsCrewFragment.newInstance(movieId)
 }

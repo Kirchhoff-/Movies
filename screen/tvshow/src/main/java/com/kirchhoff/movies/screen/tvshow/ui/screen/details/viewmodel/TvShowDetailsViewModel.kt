@@ -7,7 +7,7 @@ import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsInfo
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.model.TvShowDetailsScreenState
-import com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase.ITvShowDetailsUseCase
+import com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase.TvShowDetailsUseCase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import timber.log.Timber
 
 internal class TvShowDetailsViewModel(
     private val tvShow: UITv,
-    private val tvShowDetailsUseCase: ITvShowDetailsUseCase
+    private val tvShowDetailsUseCase: TvShowDetailsUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<TvShowDetailsScreenState> = MutableLiveData()

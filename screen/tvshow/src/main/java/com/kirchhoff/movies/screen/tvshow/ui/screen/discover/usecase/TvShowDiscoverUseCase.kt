@@ -4,28 +4,17 @@ import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkTv
-import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.mapper.ITvShowDiscoverMapper
-import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.repository.ITvShowDiscoverRepository
+import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.mapper.TvShowDiscoverMapper
+import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.repository.TvShowDiscoverRepository
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
-internal interface ITvShowDiscoverUseCase {
-    suspend fun discoverTvShows(): Result
-
-    data class Result(
-        val airingToday: List<UITv>,
-        val onTheAir: List<UITv>,
-        val popular: List<UITv>,
-        val topRated: List<UITv>
-    )
-}
-
 internal class TvShowDiscoverUseCase(
-    private val tvShowDiscoverRepository: ITvShowDiscoverRepository,
-    private val tvShowDiscoverMapper: ITvShowDiscoverMapper
-) : ITvShowDiscoverUseCase {
+    private val tvShowDiscoverRepository: TvShowDiscoverRepository,
+    private val tvShowDiscoverMapper: TvShowDiscoverMapper
+) {
 
-    override suspend fun discoverTvShows(): ITvShowDiscoverUseCase.Result {
+    suspend fun discoverTvShows(): Result {
         var airingToday = emptyList<UITv>()
         var onTheAir = emptyList<UITv>()
         var popular = emptyList<UITv>()
@@ -38,7 +27,7 @@ internal class TvShowDiscoverUseCase(
             launch { topRated = tvShowDiscoverRepository.topRated().toListOrEmpty() }
         }
 
-        return ITvShowDiscoverUseCase.Result(
+        return Result(
             airingToday = airingToday,
             onTheAir = onTheAir,
             popular = popular,
@@ -50,4 +39,11 @@ internal class TvShowDiscoverUseCase(
         is RepositoryResult.Success -> tvShowDiscoverMapper.mapTvShowList(this.data)
         else -> emptyList()
     }
+
+    data class Result(
+        val airingToday: List<UITv>,
+        val onTheAir: List<UITv>,
+        val popular: List<UITv>,
+        val topRated: List<UITv>
+    )
 }

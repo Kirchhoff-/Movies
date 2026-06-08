@@ -6,21 +6,16 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.tvshow.R
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.TvShowListType
-import com.kirchhoff.movies.screen.tvshow.ui.screen.list.mapper.ITvShowListMapper
-import com.kirchhoff.movies.screen.tvshow.ui.screen.list.repository.ITvShowListRepository
-
-internal interface ITvShowListUseCase {
-    suspend fun load(page: Int): Result<UIPaginated<UITv>>
-    fun title(): StringValue
-}
+import com.kirchhoff.movies.screen.tvshow.ui.screen.list.mapper.TvShowListMapper
+import com.kirchhoff.movies.screen.tvshow.ui.screen.list.repository.TvShowListRepository
 
 internal class TvShowListUseCase(
     private val tvShowListType: TvShowListType,
-    private val tvShowListRepository: ITvShowListRepository,
-    private val tvShowListMapper: ITvShowListMapper
-) : ITvShowListUseCase {
+    private val tvShowListRepository: TvShowListRepository,
+    private val tvShowListMapper: TvShowListMapper
+) {
 
-    override suspend fun load(page: Int): Result<UIPaginated<UITv>> {
+    suspend fun load(page: Int): Result<UIPaginated<UITv>> {
         val result = when (tvShowListType) {
             is TvShowListType.Similar -> tvShowListRepository.similar(tvShowListType.id, page)
             is TvShowListType.AiringToday -> tvShowListRepository.airingToday(page)
@@ -36,7 +31,7 @@ internal class TvShowListUseCase(
         }
     }
 
-    override fun title(): StringValue = when (tvShowListType) {
+    fun title(): StringValue = when (tvShowListType) {
         is TvShowListType.Similar -> StringValue.IdText(R.string.similar_tv_shows)
         is TvShowListType.AiringToday -> StringValue.IdText(R.string.tv_show_airing_today)
         is TvShowListType.OnTheAir -> StringValue.IdText(R.string.tv_show_on_the_air)

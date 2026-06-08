@@ -5,19 +5,19 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.extensions.replaceFragment
 import com.kirchhoff.movies.core.router.IRouter
-import com.kirchhoff.movies.screen.credits.ICreditsFacade
-import com.kirchhoff.movies.screen.movie.IMovieFacade
-import com.kirchhoff.movies.screen.person.IPersonFacade
-import com.kirchhoff.movies.screen.review.IReviewFacade
-import com.kirchhoff.movies.screen.tvshow.ITvShowFacade
+import com.kirchhoff.movies.screen.credits.CreditsFacade
+import com.kirchhoff.movies.screen.movie.MovieFacade
+import com.kirchhoff.movies.screen.person.PersonFacade
+import com.kirchhoff.movies.screen.review.ReviewFacade
+import com.kirchhoff.movies.screen.tvshow.TvShowFacade
 
 class Router(
     private val activity: AppCompatActivity,
-    private val movieFacade: IMovieFacade,
-    private val tvShowFacade: ITvShowFacade,
-    private val personFacade: IPersonFacade,
-    private val reviewFacade: IReviewFacade,
-    private val creditsFacade: ICreditsFacade
+    private val movieFacade: MovieFacade,
+    private val tvShowFacade: TvShowFacade,
+    private val personFacade: PersonFacade,
+    private val reviewFacade: ReviewFacade,
+    private val creditsFacade: CreditsFacade
 ) : IRouter {
 
     override fun openMovieDetailsScreen(movieId: MovieId) {

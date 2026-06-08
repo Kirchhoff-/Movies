@@ -16,7 +16,7 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.person.router.IPersonRouter
+import com.kirchhoff.movies.screen.person.router.PersonRouter
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIMediaType
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsClickListener
@@ -31,7 +31,7 @@ import timber.log.Timber
 
 internal class PersonDetailsFragment : BaseFragment() {
 
-    private val personRouter: IPersonRouter by inject { parametersOf(requireActivity()) }
+    private val personRouter: PersonRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: PersonDetailsViewModel by viewModel { parametersOf(requireArguments().getInt(PERSON_ARG_ID)) }
 

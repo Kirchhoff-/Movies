@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.screen.tvshow.ui.screen.list.model.TvShowListScreenState
-import com.kirchhoff.movies.screen.tvshow.ui.screen.list.usecase.ITvShowListUseCase
+import com.kirchhoff.movies.screen.tvshow.ui.screen.list.usecase.TvShowListUseCase
 import kotlinx.coroutines.launch
 
-internal class TvShowListViewModel(private val tvShowListUseCase: ITvShowListUseCase) : ViewModel() {
+internal class TvShowListViewModel(private val tvShowListUseCase: TvShowListUseCase) : ViewModel() {
 
     val screenState: MutableLiveData<TvShowListScreenState> = MutableLiveData()
 

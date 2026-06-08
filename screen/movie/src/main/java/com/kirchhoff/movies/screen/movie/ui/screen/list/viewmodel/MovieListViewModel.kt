@@ -7,14 +7,14 @@ import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListType
 import com.kirchhoff.movies.screen.movie.ui.screen.list.model.MovieListScreenState
-import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListTitleUseCase
-import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.IMovieListUseCase
+import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListTitleUseCase
+import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListUseCase
 import kotlinx.coroutines.launch
 
 internal class MovieListViewModel(
     private val type: MovieListType,
-    private val movieListUseCase: IMovieListUseCase,
-    private val movieListTitleUseCase: IMovieListTitleUseCase
+    private val movieListUseCase: MovieListUseCase,
+    private val movieListTitleUseCase: MovieListTitleUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<MovieListScreenState> = MutableLiveData()

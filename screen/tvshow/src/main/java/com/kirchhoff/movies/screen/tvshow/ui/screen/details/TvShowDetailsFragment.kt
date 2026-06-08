@@ -12,7 +12,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.tvshow.router.ITvShowRouter
+import com.kirchhoff.movies.screen.tvshow.router.TvShowRouter
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.ui.TvShowDetailsUI
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.viewmodel.TvShowDetailsViewModel
 import org.koin.android.ext.android.inject
@@ -28,7 +28,7 @@ internal class TvShowDetailsFragment : BaseFragment() {
             ?: error("Should provide tv show info in arguments")
     }
 
-    private val tvShowRouter: ITvShowRouter by inject { parametersOf(requireActivity()) }
+    private val tvShowRouter: TvShowRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: TvShowDetailsViewModel by viewModel { parametersOf(tvShow) }
 

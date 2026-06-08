@@ -3,7 +3,6 @@ package com.kirchhoff.movies
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.ext.list.modifierprovider.withoutSealedModifier
 import com.lemonappdev.konsist.api.ext.list.withAllParentsOf
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
@@ -29,16 +28,6 @@ class ArchitectureTests {
     }
 
     @Test
-    fun `interfaces (not service and listener) should start with 'I'`() {
-        Konsist.scopeFromProject()
-            .interfaces()
-            .withoutSealedModifier()
-            .filterNot { it.hasNameEndingWith("Service") }
-            .filterNot { it.hasNameEndingWith("Listener") }
-            .assert { it.hasNameStartingWith("I") }
-    }
-
-    @Test
     fun `'Service' interfaces shouldn't have parent`() {
         Konsist.scopeFromProject()
             .interfaces()
@@ -47,15 +36,14 @@ class ArchitectureTests {
     }
 
     @Test
-    fun `'Repository' classes should have a corresponding base class and an interface`() {
+    fun `'Repository' classes should have a corresponding base class`() {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("Repository")
             .filterNot { it.name == "BaseRepository" }
             .assert {
-                it.numParents == 2 &&
-                    it.hasParentWithName("BaseRepository") &&
-                    it.parents.any { parent -> parent.hasNameStartingWith("I") }
+                it.numParents == 1 &&
+                    it.hasParentWithName("BaseRepository")
             }
     }
 
@@ -70,8 +58,9 @@ class ArchitectureTests {
     @Test
     fun `functions in 'Repository' classes should return only the instance of the 'RepositoryResult' class`() {
         Konsist.scopeFromProject()
-            .interfaces()
+            .classes()
             .withNameEndingWith("Repository")
+            .filterNot { klass -> klass.name == "BaseRepository" }
             .assert { interfaceDeclaration ->
                 interfaceDeclaration.containingFile.hasImportWithName("com.kirchhoff.movies.core.repository.RepositoryResult") &&
                     interfaceDeclaration.functions().all { it.returnType?.hasNameStartingWith("RepositoryResult") == true }

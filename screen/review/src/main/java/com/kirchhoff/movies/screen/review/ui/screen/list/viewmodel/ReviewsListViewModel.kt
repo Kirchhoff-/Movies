@@ -7,12 +7,12 @@ import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
-import com.kirchhoff.movies.screen.review.usecase.IReviewUseCase
+import com.kirchhoff.movies.screen.review.usecase.ReviewUseCase
 import kotlinx.coroutines.launch
 
 internal class ReviewsListViewModel(
     private val args: ReviewsListArgs,
-    private val useCase: IReviewUseCase
+    private val useCase: ReviewUseCase
 ) : ViewModel() {
 
     val screenState: MutableLiveData<ReviewsListScreenState> = MutableLiveData()

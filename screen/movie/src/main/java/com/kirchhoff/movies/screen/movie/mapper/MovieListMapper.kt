@@ -7,14 +7,9 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
 
-internal interface IMovieListMapper {
-    fun createMovieList(moviesResponse: NetworkPaginated<NetworkMovie>): UIPaginated<UIMovie>
-}
+internal class MovieListMapper : BaseMapper() {
 
-internal class MovieListMapper : BaseMapper(), IMovieListMapper {
-
-    override fun createMovieList(moviesResponse: NetworkPaginated<NetworkMovie>): UIPaginated<UIMovie> =
-        moviesResponse.toUIPaginated()
+    fun createMovieList(moviesResponse: NetworkPaginated<NetworkMovie>): UIPaginated<UIMovie> = moviesResponse.toUIPaginated()
 
     private fun NetworkPaginated<NetworkMovie>.toUIPaginated(): UIPaginated<UIMovie> = UIPaginated(
         page = page,

@@ -14,7 +14,7 @@ import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.review.data.UIReview
 import com.kirchhoff.movies.screen.review.reviewModule
-import com.kirchhoff.movies.screen.review.router.IReviewRouter
+import com.kirchhoff.movies.screen.review.router.ReviewRouter
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.ReviewListUI
@@ -31,7 +31,7 @@ internal class ReviewsListFragment : BaseFragment() {
         requireArguments().getParcelableExtra(REVIEW_ARGS) ?: error("Review argument is not provided")
     }
 
-    private val reviewRouter: IReviewRouter by inject { parametersOf(requireActivity()) }
+    private val reviewRouter: ReviewRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: ReviewsListViewModel by viewModel {
         parametersOf(args)

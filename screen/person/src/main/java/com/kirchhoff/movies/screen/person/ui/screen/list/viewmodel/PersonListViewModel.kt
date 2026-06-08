@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirchhoff.movies.core.data.ui.UIPerson
 import com.kirchhoff.movies.screen.person.ui.screen.list.model.PersonListScreenState
-import com.kirchhoff.movies.screen.person.ui.screen.list.usecase.IPersonListUseCase
+import com.kirchhoff.movies.screen.person.ui.screen.list.usecase.PersonListUseCase
 import kotlinx.coroutines.launch
 
-internal class PersonListViewModel(private val personListUseCase: IPersonListUseCase) : ViewModel() {
+internal class PersonListViewModel(private val personListUseCase: PersonListUseCase) : ViewModel() {
 
     val screenState: MutableLiveData<PersonListScreenState> = MutableLiveData()
 

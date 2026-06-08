@@ -6,13 +6,9 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkPerson
 
-internal interface IPersonListMapper {
-    fun createUIPersons(personList: NetworkPaginated<NetworkPerson>): UIPaginated<UIPerson>
-}
+internal class PersonListMapper : BaseMapper() {
 
-internal class PersonListMapper : BaseMapper(), IPersonListMapper {
-
-    override fun createUIPersons(personList: NetworkPaginated<NetworkPerson>): UIPaginated<UIPerson> = personList.toUIPaginated()
+    fun createUIPersons(personList: NetworkPaginated<NetworkPerson>): UIPaginated<UIPerson> = personList.toUIPaginated()
 
     private fun NetworkPaginated<NetworkPerson>.toUIPaginated(): UIPaginated<UIPerson> = UIPaginated(
         page = page,

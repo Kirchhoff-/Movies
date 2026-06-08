@@ -1,11 +1,8 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details
 
-import com.kirchhoff.movies.screen.person.ui.screen.details.mapper.IPersonDetailsMapper
 import com.kirchhoff.movies.screen.person.ui.screen.details.mapper.PersonDetailsMapper
 import com.kirchhoff.movies.screen.person.ui.screen.details.network.PersonDetailsService
-import com.kirchhoff.movies.screen.person.ui.screen.details.repository.IPersonDetailsRepository
 import com.kirchhoff.movies.screen.person.ui.screen.details.repository.PersonDetailsRepository
-import com.kirchhoff.movies.screen.person.ui.screen.details.usecase.IPersonDetailsUseCase
 import com.kirchhoff.movies.screen.person.ui.screen.details.usecase.PersonDetailsUseCase
 import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,15 +12,15 @@ import retrofit2.Retrofit
 internal val personDetailsModule = module {
     single { get<Retrofit>().create(PersonDetailsService::class.java) }
 
-    single<IPersonDetailsRepository> {
+    single<PersonDetailsRepository> {
         PersonDetailsRepository(personDetailsService = get())
     }
 
-    single<IPersonDetailsMapper> {
+    single<PersonDetailsMapper> {
         PersonDetailsMapper()
     }
 
-    single<IPersonDetailsUseCase> {
+    single<PersonDetailsUseCase> {
         PersonDetailsUseCase(
             personDetailsRepository = get(),
             personImageStorage = get(),

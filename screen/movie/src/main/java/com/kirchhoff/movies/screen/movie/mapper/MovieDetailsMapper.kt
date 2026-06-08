@@ -5,7 +5,7 @@ import com.kirchhoff.movies.core.data.ui.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.ui.UIImage
 import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.mapper.BaseMapper
-import com.kirchhoff.movies.core.mapper.ICoreMapper
+import com.kirchhoff.movies.core.mapper.CoreMapper
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
 import com.kirchhoff.movies.networkdata.core.NetworkImagesResponse
 import com.kirchhoff.movies.networkdata.core.NetworkProductionCompany
@@ -19,27 +19,19 @@ import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
 import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
 import com.kirchhoff.movies.screen.movie.data.UITrailer
 
-internal interface IMovieDetailsMapper {
-    fun createUIMovie(networkMovie: NetworkMovie): UIMovie
-    fun createUIMovieDetails(networkMovieDetails: NetworkMovieDetails): UIMovieInfo
-    fun createUIEntertainmentCredits(networkMovieCredits: NetworkEntertainmentCredits): UIEntertainmentCredits
-    fun createUITrailersList(networkTrailersList: NetworkTrailersList): List<UITrailer>
-    fun createUIImages(networkImagesResponse: NetworkImagesResponse): List<UIImage>
-}
+internal class MovieDetailsMapper(private val coreMapper: CoreMapper) : BaseMapper() {
 
-internal class MovieDetailsMapper(private val coreMapper: ICoreMapper) : BaseMapper(), IMovieDetailsMapper {
+    fun createUIMovie(networkMovie: NetworkMovie): UIMovie = networkMovie.toUIMovie()
 
-    override fun createUIMovie(networkMovie: NetworkMovie): UIMovie = networkMovie.toUIMovie()
+    fun createUIMovieDetails(networkMovieDetails: NetworkMovieDetails): UIMovieInfo = networkMovieDetails.toUIMovie()
 
-    override fun createUIMovieDetails(networkMovieDetails: NetworkMovieDetails): UIMovieInfo = networkMovieDetails.toUIMovie()
-
-    override fun createUIEntertainmentCredits(networkMovieCredits: NetworkEntertainmentCredits): UIEntertainmentCredits =
+    fun createUIEntertainmentCredits(networkMovieCredits: NetworkEntertainmentCredits): UIEntertainmentCredits =
         coreMapper.createUIEntertainmentCredits(networkMovieCredits)
 
-    override fun createUITrailersList(networkTrailersList: NetworkTrailersList): List<UITrailer> =
+    fun createUITrailersList(networkTrailersList: NetworkTrailersList): List<UITrailer> =
         networkTrailersList.toUITrailerList()
 
-    override fun createUIImages(networkImagesResponse: NetworkImagesResponse): List<UIImage> =
+    fun createUIImages(networkImagesResponse: NetworkImagesResponse): List<UIImage> =
         networkImagesResponse.combinedImages().map { coreMapper.createUIImage(it) }
 
     private fun NetworkMovie.toUIMovie(): UIMovie = UIMovie(

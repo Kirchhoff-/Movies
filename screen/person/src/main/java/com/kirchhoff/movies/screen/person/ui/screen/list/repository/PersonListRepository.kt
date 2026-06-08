@@ -6,13 +6,8 @@ import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.main.NetworkPerson
 import com.kirchhoff.movies.screen.person.ui.screen.list.network.PersonListService
 
-internal interface IPersonListRepository {
-    suspend fun popularPersons(page: Int): RepositoryResult<NetworkPaginated<NetworkPerson>>
-}
-
-internal class PersonListRepository(private val personListService: PersonListService) : BaseRepository(), IPersonListRepository {
-
-    override suspend fun popularPersons(page: Int): RepositoryResult<NetworkPaginated<NetworkPerson>> = apiCall {
+internal class PersonListRepository(private val personListService: PersonListService) : BaseRepository() {
+    suspend fun popularPersons(page: Int): RepositoryResult<NetworkPaginated<NetworkPerson>> = apiCall {
         personListService.fetchPopularPerson(page)
     }
 }

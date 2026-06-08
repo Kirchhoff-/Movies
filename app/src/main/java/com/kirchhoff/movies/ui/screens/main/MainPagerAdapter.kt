@@ -3,11 +3,11 @@ package com.kirchhoff.movies.ui.screens.main
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.kirchhoff.movies.ui.screens.main.router.IDashboardRouter
+import com.kirchhoff.movies.ui.screens.main.router.DashboardRouter
 
 internal class MainPagerAdapter(
     fm: FragmentManager,
-    private val dashboardRouter: IDashboardRouter
+    private val dashboardRouter: DashboardRouter
 ) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int): Fragment =

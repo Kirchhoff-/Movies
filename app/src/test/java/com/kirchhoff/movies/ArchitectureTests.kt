@@ -143,8 +143,9 @@ class ArchitectureTests {
             .scopeFromProduction()
             .classes()
             .filter { klass -> klass.hasDataModifier }
-            .assert { klass -> klass.properties().all {
-                    property -> property.hasValModifier
+            .assert { klass ->
+                klass.properties().all { property ->
+                    property.hasValModifier
                 }
             }
     }

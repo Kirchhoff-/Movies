@@ -136,4 +136,16 @@ class ArchitectureTests {
             .filterNot { functions -> functions.hasPrivateModifier }
             .assert { function -> !function.hasNameStartingWith("fetch") }
     }
+
+    @Test
+    fun `data classes should have only val properties`() {
+        Konsist
+            .scopeFromProduction()
+            .classes()
+            .filter { klass -> klass.hasDataModifier }
+            .assert { klass -> klass.properties().all {
+                    property -> property.hasValModifier
+                }
+            }
+    }
 }

@@ -18,4 +18,7 @@ dependencies {
 
     implementation libs.constraintLayout
     implementation libs.coilCompose
+
+    testImplementation libs.bundles.tests
+    testImplementation libs.konsist
 }

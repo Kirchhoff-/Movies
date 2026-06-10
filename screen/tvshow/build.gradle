@@ -16,4 +16,7 @@ dependencies {
 
     implementation libs.timber
     implementation libs.coilCompose
+
+    testImplementation libs.bundles.tests
+    testImplementation libs.konsist
 }

@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.ui.UIGenre
 import com.kirchhoff.movies.core.extensions.replaceFragment
-import com.kirchhoff.movies.screen.movie.data.UICountry
-import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
+import com.kirchhoff.movies.screen.movie.data.MovieUICountry
+import com.kirchhoff.movies.screen.movie.data.MovieUIProductionCompany
 import com.kirchhoff.movies.screen.movie.ui.screen.image.MovieImageFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.images.MovieImagesFragment
 import com.kirchhoff.movies.screen.movie.ui.screen.list.MovieListFragment
@@ -16,7 +16,7 @@ internal class MovieRouter(private val activity: AppCompatActivity) {
         activity.replaceFragment(MovieListFragment.byGenre(genre))
     }
 
-    fun openMoviesByCountryScreen(country: UICountry) {
+    fun openMoviesByCountryScreen(country: MovieUICountry) {
         activity.replaceFragment(MovieListFragment.byCountry(country))
     }
 
@@ -24,7 +24,7 @@ internal class MovieRouter(private val activity: AppCompatActivity) {
         activity.replaceFragment(MovieListFragment.similarWith(movieId))
     }
 
-    fun openCompanyMoviesScreen(company: UIProductionCompany) {
+    fun openCompanyMoviesScreen(company: MovieUIProductionCompany) {
         activity.replaceFragment(MovieListFragment.byCompany(company))
     }
 

@@ -28,16 +28,16 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonUICredit
 
 @Composable
 internal fun PersonDetailsCreditsItemUI(
-    credit: UIPersonCredit,
-    onItemClick: (UIPersonCredit) -> Unit
+    credit: PersonUICredit,
+    onItemClick: (PersonUICredit) -> Unit
 ) {
     val description = when (credit) {
-        is UIPersonCredit.Actor -> credit.character.orEmpty()
-        is UIPersonCredit.Creator -> credit.job
+        is PersonUICredit.Actor -> credit.character.orEmpty()
+        is PersonUICredit.Creator -> credit.job
     }
 
     Card(
@@ -90,7 +90,7 @@ internal fun PersonDetailsCreditsItemUI(
 @Composable
 private fun PersonDetailsCreditsItemUIPreview() {
     PersonDetailsCreditsItemUI(
-        credit = UIPersonCredit.Actor.Default,
+        credit = PersonUICredit.Actor.Default,
         onItemClick = {}
     )
 }

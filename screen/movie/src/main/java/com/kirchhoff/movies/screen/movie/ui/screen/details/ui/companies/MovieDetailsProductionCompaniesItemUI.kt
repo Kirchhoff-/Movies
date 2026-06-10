@@ -28,12 +28,12 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
+import com.kirchhoff.movies.screen.movie.data.MovieUIProductionCompany
 
 @Composable
 internal fun MovieDetailsProductionCompaniesItemUI(
-    company: UIProductionCompany,
-    onItemClick: (UIProductionCompany) -> Unit
+    company: MovieUIProductionCompany,
+    onItemClick: (MovieUIProductionCompany) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -75,7 +75,7 @@ internal fun MovieDetailsProductionCompaniesItemUI(
 @Composable
 private fun MovieDetailsProductionCompaniesItemUIPreview() {
     MovieDetailsProductionCompaniesItemUI(
-        company = UIProductionCompany.Default,
+        company = MovieUIProductionCompany.Default,
         onItemClick = {}
     )
 }

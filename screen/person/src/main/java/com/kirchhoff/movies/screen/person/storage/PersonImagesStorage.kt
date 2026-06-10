@@ -1,14 +1,14 @@
 package com.kirchhoff.movies.screen.person.storage
 
-import com.kirchhoff.movies.screen.person.data.UIPersonImage
+import com.kirchhoff.movies.screen.person.data.PersonUIImage
 
 internal class PersonImagesStorage {
 
-    private val imagesMap: MutableMap<Int, List<UIPersonImage>> = mutableMapOf()
+    private val imagesMap: MutableMap<Int, List<PersonUIImage>> = mutableMapOf()
 
-    fun fetchImages(id: Int): List<UIPersonImage>? = imagesMap[id]
+    fun fetchImages(id: Int): List<PersonUIImage>? = imagesMap[id]
 
-    fun updateImages(id: Int, images: List<UIPersonImage>) {
+    fun updateImages(id: Int, images: List<PersonUIImage>) {
         if (imagesMap.size > MAX_STORAGE_SIZE) {
             imagesMap.remove(imagesMap.keys.first())
         }

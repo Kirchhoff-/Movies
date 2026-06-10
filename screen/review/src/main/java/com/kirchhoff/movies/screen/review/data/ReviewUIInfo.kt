@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-internal data class UIReview(
+internal data class ReviewUIInfo(
     val author: String,
     val content: String,
     val authorAvatar: String?,
@@ -12,7 +12,7 @@ internal data class UIReview(
     val url: String
 ) : Parcelable {
     companion object {
-        val Default = UIReview(
+        val Default = ReviewUIInfo(
             author = "",
             content = "",
             authorAvatar = "",

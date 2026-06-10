@@ -14,4 +14,15 @@ class ArchitectureTests {
             .properties()
             .assert { property -> property.annotations.any { annotation -> annotation.name == "SerializedName" } }
     }
+
+    @Test
+    fun `all classes in the network module should start with 'Network' prefix`() {
+        Konsist
+            .scopeFromProduction("networkdata")
+            .classes(
+                includeNested = false,
+                includeLocal = false
+            )
+            .assert { klass -> klass.name.startsWith("Network") }
+    }
 }

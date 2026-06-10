@@ -41,9 +41,9 @@ import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.movie.data.UICountry
-import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
-import com.kirchhoff.movies.screen.movie.data.UITrailer
+import com.kirchhoff.movies.screen.movie.data.MovieUICountry
+import com.kirchhoff.movies.screen.movie.data.MovieUIProductionCompany
+import com.kirchhoff.movies.screen.movie.data.MovieUITrailer
 import com.kirchhoff.movies.screen.movie.ui.screen.details.model.MovieDetailsScreenState
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.companies.MovieDetailsProductionCompaniesUI
 import com.kirchhoff.movies.screen.movie.ui.screen.details.ui.credits.MovieDetailsCreditsUI
@@ -58,9 +58,9 @@ import com.kirchhoff.movies.screen.movie.ui.view.section.MovieSectionUI
 internal fun MovieDetailsUI(
     screenState: MovieDetailsScreenState,
     onBackPressed: () -> Unit,
-    onProductionCountryClick: (UICountry) -> Unit,
+    onProductionCountryClick: (MovieUICountry) -> Unit,
     onGenreClick: (UIGenre) -> Unit,
-    onTrailerClick: (UITrailer) -> Unit,
+    onTrailerClick: (MovieUITrailer) -> Unit,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
     onCastSeeAllClick: () -> Unit,
     onCrewSeeAllClick: () -> Unit,
@@ -69,7 +69,7 @@ internal fun MovieDetailsUI(
     onImageItemClick: (UIImage) -> Unit,
     onImageSeeAllClick: () -> Unit,
     onReviewsClick: () -> Unit,
-    onProductionCompanyClick: (UIProductionCompany) -> Unit
+    onProductionCompanyClick: (MovieUIProductionCompany) -> Unit
 ) {
     Column {
         MoviesToolbar(
@@ -128,9 +128,9 @@ private fun ShowError(screenState: MovieDetailsScreenState) {
 @Composable
 private fun ShowUI(
     screenState: MovieDetailsScreenState,
-    onProductionCountryClick: (UICountry) -> Unit,
+    onProductionCountryClick: (MovieUICountry) -> Unit,
     onGenreClick: (UIGenre) -> Unit,
-    onTrailerClick: (UITrailer) -> Unit,
+    onTrailerClick: (MovieUITrailer) -> Unit,
     onCreditItemClick: (UIEntertainmentPerson) -> Unit,
     onCastSeeAllClick: () -> Unit,
     onCrewSeeAllClick: () -> Unit,
@@ -139,7 +139,7 @@ private fun ShowUI(
     onImageItemClick: (UIImage) -> Unit,
     onImageSeeAllClick: () -> Unit,
     onReviewsClick: () -> Unit,
-    onProductionCompanyClick: (UIProductionCompany) -> Unit
+    onProductionCompanyClick: (MovieUIProductionCompany) -> Unit
 ) {
     val creditsVisible = screenState.credits.cast?.isNotEmpty() == true || screenState.credits.crew?.isNotEmpty() == true
     val similarMoviesVisible = screenState.similarMovies.isNotEmpty()

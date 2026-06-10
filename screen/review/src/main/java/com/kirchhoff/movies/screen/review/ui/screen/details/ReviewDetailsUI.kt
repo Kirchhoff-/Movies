@@ -18,13 +18,13 @@ import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.linkifytext.LinkifyText
 import com.kirchhoff.movies.screen.review.R
-import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 
 @SuppressWarnings("MagicNumber")
 @Composable
 internal fun ReviewDetailsUI(
     title: String,
-    review: UIReview,
+    review: ReviewUIInfo,
     onOpenInBrowserClick: (String) -> Unit,
     onBackPressed: () -> Unit
 ) {

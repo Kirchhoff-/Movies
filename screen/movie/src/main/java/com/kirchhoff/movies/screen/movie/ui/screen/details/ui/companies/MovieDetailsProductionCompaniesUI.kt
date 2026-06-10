@@ -17,12 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
+import com.kirchhoff.movies.screen.movie.data.MovieUIProductionCompany
 
 @Composable
 internal fun MovieDetailsProductionCompaniesUI(
-    companies: List<UIProductionCompany>,
-    onItemClick: (UIProductionCompany) -> Unit
+    companies: List<MovieUIProductionCompany>,
+    onItemClick: (MovieUIProductionCompany) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(

@@ -13,8 +13,8 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.ui.UIGenre
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.movie.data.UICountry
-import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
+import com.kirchhoff.movies.screen.movie.data.MovieUICountry
+import com.kirchhoff.movies.screen.movie.data.MovieUIProductionCompany
 import com.kirchhoff.movies.screen.movie.ui.screen.list.ui.MovieListUI
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,9 +73,9 @@ internal class MovieListFragment : BaseFragment() {
 
         fun byGenre(genre: UIGenre): MovieListFragment = createFragment(MovieListType.Genre(genre))
 
-        fun byCountry(country: UICountry): MovieListFragment = createFragment(MovieListType.Country(country))
+        fun byCountry(country: MovieUICountry): MovieListFragment = createFragment(MovieListType.Country(country))
 
-        fun byCompany(company: UIProductionCompany): MovieListFragment = createFragment(MovieListType.Company(company))
+        fun byCompany(company: MovieUIProductionCompany): MovieListFragment = createFragment(MovieListType.Company(company))
 
         fun similarWith(movieId: MovieId): MovieListFragment = createFragment(MovieListType.Similar(movieId))
 

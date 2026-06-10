@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonDetailsScreenState
-import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonUICredit
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.credits.PersonDetailsCreditsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.images.PersonDetailsImagesUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.info.PersonDetailsInfoUI
@@ -56,7 +56,7 @@ internal fun PersonDetailsUI(
 }
 
 internal interface PersonDetailsClickListener {
-    fun onCreditItemClick(credit: UIPersonCredit)
+    fun onCreditItemClick(credit: PersonUICredit)
     fun onImageClick(position: Int)
     fun onLocationClick(location: String)
     fun onHomepageClick(url: String)
@@ -136,7 +136,7 @@ private fun PersonDetailsUIPreview() {
     PersonDetailsUI(
         screenState = PersonDetailsScreenState.Default,
         object : PersonDetailsClickListener {
-            override fun onCreditItemClick(credit: UIPersonCredit) = Unit
+            override fun onCreditItemClick(credit: PersonUICredit) = Unit
 
             override fun onImageClick(position: Int) = Unit
 

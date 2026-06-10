@@ -26,11 +26,11 @@ import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.ui.resources.TextStyles
 import com.kirchhoff.movies.screen.person.R
-import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonDetails
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonUIDetails
 
 @Composable
 internal fun PersonDetailsInfoUI(
-    details: UIPersonDetails,
+    details: PersonUIDetails,
     onLocationClick: (String) -> Unit,
     onHomepageClick: (String) -> Unit
 ) {
@@ -151,7 +151,7 @@ private val supportTextStyle: TextStyle = TextStyle(
 @Composable
 private fun PersonDetailsInfoUIPreview() {
     PersonDetailsInfoUI(
-        details = UIPersonDetails.Default,
+        details = PersonUIDetails.Default,
         onLocationClick = {},
         onHomepageClick = {}
     )

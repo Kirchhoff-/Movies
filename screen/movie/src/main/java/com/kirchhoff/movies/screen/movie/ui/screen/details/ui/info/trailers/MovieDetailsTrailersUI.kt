@@ -17,12 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.data.UITrailer
+import com.kirchhoff.movies.screen.movie.data.MovieUITrailer
 
 @Composable
 internal fun MovieDetailsTrailersUI(
-    trailers: List<UITrailer>,
-    onTrailerClick: (UITrailer) -> Unit
+    trailers: List<MovieUITrailer>,
+    onTrailerClick: (MovieUITrailer) -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(

@@ -17,8 +17,8 @@ import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.data.ui.UITv
 import com.kirchhoff.movies.core.ui.BaseFragment
 import com.kirchhoff.movies.screen.person.router.PersonRouter
-import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIMediaType
-import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonUICredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonUIMediaType
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsClickListener
 import com.kirchhoff.movies.screen.person.ui.screen.details.ui.PersonDetailsUI
 import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
@@ -70,10 +70,10 @@ internal class PersonDetailsFragment : BaseFragment() {
     }
 
     private inner class ClickListener : PersonDetailsClickListener {
-        override fun onCreditItemClick(credit: UIPersonCredit) {
-            if (credit.mediaType == UIMediaType.MOVIE) {
+        override fun onCreditItemClick(credit: PersonUICredit) {
+            if (credit.mediaType == PersonUIMediaType.MOVIE) {
                 router.openMovieDetailsScreen(MovieId(credit.id))
-            } else if (credit.mediaType == UIMediaType.TV) {
+            } else if (credit.mediaType == PersonUIMediaType.TV) {
                 router.openTvDetailsScreen(
                     UITv(
                         TvId(credit.id),

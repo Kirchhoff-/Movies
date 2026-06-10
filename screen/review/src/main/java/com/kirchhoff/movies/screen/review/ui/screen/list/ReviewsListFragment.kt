@@ -12,7 +12,7 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.reviewModule
 import com.kirchhoff.movies.screen.review.router.ReviewRouter
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
@@ -69,7 +69,7 @@ internal class ReviewsListFragment : BaseFragment() {
         super.onDestroy()
     }
 
-    private fun onReviewClick(review: UIReview, title: String) {
+    private fun onReviewClick(review: ReviewUIInfo, title: String) {
         reviewRouter.openDetailsScreen(review, title)
     }
 

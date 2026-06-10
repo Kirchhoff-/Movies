@@ -11,4 +11,7 @@ dependencies {
 
   implementation libs.bundles.di
   implementation libs.coilCompose
+
+  testImplementation libs.bundles.tests
+  testImplementation libs.konsist
 }

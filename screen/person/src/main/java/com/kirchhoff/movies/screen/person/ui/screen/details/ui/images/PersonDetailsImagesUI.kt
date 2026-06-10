@@ -30,12 +30,12 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.person.data.UIPersonImage
+import com.kirchhoff.movies.screen.person.data.PersonUIImage
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun PersonDetailsImagesUI(
-    images: List<UIPersonImage>,
+    images: List<PersonUIImage>,
     onItemClick: (Int) -> Unit
 ) {
     val pagerState = rememberPagerState(

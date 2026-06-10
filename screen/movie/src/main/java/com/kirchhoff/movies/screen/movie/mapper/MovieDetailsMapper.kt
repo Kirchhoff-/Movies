@@ -14,22 +14,22 @@ import com.kirchhoff.movies.networkdata.details.movie.NetworkMovieDetails
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailer
 import com.kirchhoff.movies.networkdata.details.movie.NetworkTrailersList
 import com.kirchhoff.movies.networkdata.main.NetworkMovie
-import com.kirchhoff.movies.screen.movie.data.UICountry
-import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
-import com.kirchhoff.movies.screen.movie.data.UIProductionCompany
-import com.kirchhoff.movies.screen.movie.data.UITrailer
+import com.kirchhoff.movies.screen.movie.data.MovieUICountry
+import com.kirchhoff.movies.screen.movie.data.MovieUIInfo
+import com.kirchhoff.movies.screen.movie.data.MovieUIProductionCompany
+import com.kirchhoff.movies.screen.movie.data.MovieUITrailer
 
 internal class MovieDetailsMapper(private val coreMapper: CoreMapper) : BaseMapper() {
 
     fun createUIMovie(networkMovie: NetworkMovie): UIMovie = networkMovie.toUIMovie()
 
-    fun createUIMovieDetails(networkMovieDetails: NetworkMovieDetails): UIMovieInfo = networkMovieDetails.toUIMovie()
+    fun createUIMovieDetails(networkMovieDetails: NetworkMovieDetails): MovieUIInfo = networkMovieDetails.toUIMovie()
 
     fun createUIEntertainmentCredits(networkMovieCredits: NetworkEntertainmentCredits): UIEntertainmentCredits =
         coreMapper.createUIEntertainmentCredits(networkMovieCredits)
 
-    fun createUITrailersList(networkTrailersList: NetworkTrailersList): List<UITrailer> =
-        networkTrailersList.toUITrailerList()
+    fun createMovieTrailersList(networkTrailersList: NetworkTrailersList): List<MovieUITrailer> =
+        networkTrailersList.toMovieTrailerList()
 
     fun createUIImages(networkImagesResponse: NetworkImagesResponse): List<UIImage> =
         networkImagesResponse.combinedImages().map { coreMapper.createUIImage(it) }
@@ -42,9 +42,9 @@ internal class MovieDetailsMapper(private val coreMapper: CoreMapper) : BaseMapp
         voteAverage = voteAverage
     )
 
-    private fun NetworkMovieDetails.toUIMovie(): UIMovieInfo = UIMovieInfo(
-        productionCountries = productionCountries.map { it.toUICountry() },
-        productionCompanies = productionCompanies.map { it.toUIProductionCompany() },
+    private fun NetworkMovieDetails.toUIMovie(): MovieUIInfo = MovieUIInfo(
+        productionCountries = productionCountries.map { it.toMovieCountry() },
+        productionCompanies = productionCompanies.map { it.toMovieProductionCompany() },
         runtime = runtime,
         tagLine = tagline,
         overview = overview,
@@ -54,19 +54,19 @@ internal class MovieDetailsMapper(private val coreMapper: CoreMapper) : BaseMapp
         genres = genres.map { coreMapper.createUIGenre(it) }
     )
 
-    private fun NetworkTrailersList.toUITrailerList(): List<UITrailer> = results.map { it.toUITrailer() }
+    private fun NetworkTrailersList.toMovieTrailerList(): List<MovieUITrailer> = results.map { it.toMovieTrailer() }
 
-    private fun NetworkTrailer.toUITrailer(): UITrailer = UITrailer(
+    private fun NetworkTrailer.toMovieTrailer(): MovieUITrailer = MovieUITrailer(
         site = site,
         key = key
     )
 
-    private fun NetworkCountry.toUICountry(): UICountry = UICountry(
+    private fun NetworkCountry.toMovieCountry(): MovieUICountry = MovieUICountry(
         id = id,
         name = name
     )
 
-    private fun NetworkProductionCompany.toUIProductionCompany(): UIProductionCompany = UIProductionCompany(
+    private fun NetworkProductionCompany.toMovieProductionCompany(): MovieUIProductionCompany = MovieUIProductionCompany(
         id = id,
         logoPath = logoPath.orEmpty(),
         name = name

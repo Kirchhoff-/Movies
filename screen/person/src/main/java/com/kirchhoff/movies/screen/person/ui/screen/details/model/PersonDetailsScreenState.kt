@@ -1,13 +1,13 @@
 package com.kirchhoff.movies.screen.person.ui.screen.details.model
 
-import com.kirchhoff.movies.screen.person.data.UIPersonImage
+import com.kirchhoff.movies.screen.person.data.PersonUIImage
 
 internal data class PersonDetailsScreenState(
     val name: String,
     val title: String,
-    val details: UIPersonDetails,
-    val credits: UIPersonCredits,
-    val images: List<UIPersonImage>,
+    val details: PersonUIDetails,
+    val credits: PersonUICredits,
+    val images: List<PersonUIImage>,
     val isLoading: Boolean,
     val errorMessage: String
 ) {
@@ -15,8 +15,8 @@ internal data class PersonDetailsScreenState(
         val Default = PersonDetailsScreenState(
             name = "",
             title = "",
-            details = UIPersonDetails.Default,
-            credits = UIPersonCredits.Default,
+            details = PersonUIDetails.Default,
+            credits = PersonUICredits.Default,
             images = emptyList(),
             isLoading = false,
             errorMessage = ""

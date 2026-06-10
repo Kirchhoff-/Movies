@@ -3,7 +3,7 @@ package com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
@@ -54,7 +54,7 @@ internal class ReviewsListViewModel(
                         totalPages = result.totalPages
                         currentPage = result.page
 
-                        val resultReviewsList = mutableListOf<UIReview>().apply {
+                        val resultReviewsList = mutableListOf<ReviewUIInfo>().apply {
                             screenState.value?.let { this.addAll(it.reviewsList) }
                             addAll(result.results)
                         }

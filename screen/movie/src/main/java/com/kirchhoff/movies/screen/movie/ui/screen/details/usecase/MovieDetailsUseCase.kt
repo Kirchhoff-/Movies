@@ -6,8 +6,8 @@ import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkEntertainmentCredits
-import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
-import com.kirchhoff.movies.screen.movie.data.UITrailer
+import com.kirchhoff.movies.screen.movie.data.MovieUIInfo
+import com.kirchhoff.movies.screen.movie.data.MovieUITrailer
 import com.kirchhoff.movies.screen.movie.mapper.MovieDetailsMapper
 import com.kirchhoff.movies.screen.movie.mapper.MovieListMapper
 import com.kirchhoff.movies.screen.movie.repository.MovieDetailsRepository
@@ -24,15 +24,15 @@ internal class MovieDetailsUseCase(
             else -> Result.failure(Exception("Can't fetch the movie info"))
         }
 
-    suspend fun fetchDetails(id: MovieId): Result<UIMovieInfo> =
+    suspend fun fetchDetails(id: MovieId): Result<MovieUIInfo> =
         when (val response = movieDetailsRepository.details(id)) {
             is RepositoryResult.Success -> Result.success(movieDetailsMapper.createUIMovieDetails(response.data))
             else -> Result.failure(Exception("Can't fetch the details"))
         }
 
-    suspend fun fetchTrailersList(id: MovieId): Result<List<UITrailer>> =
+    suspend fun fetchTrailersList(id: MovieId): Result<List<MovieUITrailer>> =
         when (val response = movieDetailsRepository.trailersList(id)) {
-            is RepositoryResult.Success -> Result.success(movieDetailsMapper.createUITrailersList(response.data))
+            is RepositoryResult.Success -> Result.success(movieDetailsMapper.createMovieTrailersList(response.data))
             else -> Result.failure(Exception("Can't fetch the trailers list"))
         }
 

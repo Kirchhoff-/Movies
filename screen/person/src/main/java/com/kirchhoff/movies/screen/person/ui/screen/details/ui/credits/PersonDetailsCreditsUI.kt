@@ -18,13 +18,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredit
-import com.kirchhoff.movies.screen.person.ui.screen.details.model.UIPersonCredits
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonUICredit
+import com.kirchhoff.movies.screen.person.ui.screen.details.model.PersonUICredits
 
 @Composable
 internal fun PersonDetailsCreditsUI(
-    credits: UIPersonCredits,
-    onItemClick: (UIPersonCredit) -> Unit
+    credits: PersonUICredits,
+    onItemClick: (PersonUICredit) -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -82,7 +82,7 @@ internal fun PersonDetailsCreditsUI(
 @Composable
 private fun PersonDetailsCreditsUIPreview() {
     PersonDetailsCreditsUI(
-        credits = UIPersonCredits.Default,
+        credits = PersonUICredits.Default,
         onItemClick = {}
     )
 }

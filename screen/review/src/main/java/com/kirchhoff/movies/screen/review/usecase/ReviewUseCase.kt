@@ -2,7 +2,7 @@ package com.kirchhoff.movies.screen.review.usecase
 
 import com.kirchhoff.movies.core.repository.RepositoryResult
 import com.kirchhoff.movies.core.ui.paginated.UIPaginated
-import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.mapper.ReviewListMapper
 import com.kirchhoff.movies.screen.review.repository.ReviewRepository
 import com.kirchhoff.movies.storage.movie.StorageMovie
@@ -15,13 +15,13 @@ internal class ReviewUseCase(
     private val tvShowStorage: StorageTvShow
 ) {
 
-    suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<UIReview>> =
+    suspend fun fetchMovieReviews(movieId: Int, page: Int): Result<UIPaginated<ReviewUIInfo>> =
         when (val movieReviews = reviewRepository.movieReviews(movieId, page)) {
             is RepositoryResult.Success -> Result.success(reviewMapper.createUIReviewList(movieReviews.data))
             else -> Result.failure(Exception("Can't get info"))
         }
 
-    suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<UIReview>> =
+    suspend fun fetchTvReviews(tvId: Int, page: Int): Result<UIPaginated<ReviewUIInfo>> =
         when (val movieReviews = reviewRepository.rvReviews(tvId, page)) {
             is RepositoryResult.Success -> Result.success(reviewMapper.createUIReviewList(movieReviews.data))
             else -> Result.failure(Exception("Can't get info"))

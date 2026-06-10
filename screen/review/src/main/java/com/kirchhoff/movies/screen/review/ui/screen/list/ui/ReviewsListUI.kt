@@ -26,14 +26,14 @@ import com.kirchhoff.movies.core.ui.compose.ListScrollHandler
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
-import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
 
 @Composable
 internal fun ReviewListUI(
     screenState: ReviewsListScreenState,
     onLoadMore: () -> Unit,
-    onReviewClick: (UIReview, String) -> Unit,
+    onReviewClick: (ReviewUIInfo, String) -> Unit,
     onBackPressed: () -> Unit
 ) {
     val context = LocalContext.current

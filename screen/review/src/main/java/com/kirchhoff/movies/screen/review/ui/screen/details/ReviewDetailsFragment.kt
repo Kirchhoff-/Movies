@@ -9,12 +9,12 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.core.net.toUri
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 
 internal class ReviewDetailsFragment : BaseFragment() {
 
     private val review by lazy {
-        requireArguments().getParcelableExtra<UIReview>(REVIEW_ARG) ?: error("review argument is not provided")
+        requireArguments().getParcelableExtra<ReviewUIInfo>(REVIEW_ARG) ?: error("review argument is not provided")
     }
     private val title by lazy { requireArguments().getString(TITLE_ARG).orEmpty() }
 
@@ -35,7 +35,7 @@ internal class ReviewDetailsFragment : BaseFragment() {
 
     companion object {
         fun newInstance(
-            review: UIReview,
+            review: ReviewUIInfo,
             title: String
         ): ReviewDetailsFragment = ReviewDetailsFragment().apply {
             arguments = Bundle().apply {

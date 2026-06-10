@@ -4,15 +4,15 @@ import com.kirchhoff.movies.core.data.ui.UIEntertainmentCredits
 import com.kirchhoff.movies.core.data.ui.UIImage
 import com.kirchhoff.movies.core.data.ui.UIMovie
 import com.kirchhoff.movies.core.utils.StringValue
-import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
-import com.kirchhoff.movies.screen.movie.data.UITrailer
+import com.kirchhoff.movies.screen.movie.data.MovieUIInfo
+import com.kirchhoff.movies.screen.movie.data.MovieUITrailer
 
 internal data class MovieDetailsScreenState(
     val title: StringValue,
     val backdropPath: String?,
     val posterPath: String?,
-    val info: UIMovieInfo,
-    val trailers: List<UITrailer>,
+    val info: MovieUIInfo,
+    val trailers: List<MovieUITrailer>,
     val credits: UIEntertainmentCredits,
     val similarMoviesTitle: StringValue,
     val similarMovies: List<UIMovie>,
@@ -25,7 +25,7 @@ internal data class MovieDetailsScreenState(
             title = StringValue.Empty,
             backdropPath = "",
             posterPath = "",
-            info = UIMovieInfo.Default,
+            info = MovieUIInfo.Default,
             trailers = emptyList(),
             credits = UIEntertainmentCredits.Default,
             similarMoviesTitle = StringValue.Empty,

@@ -30,13 +30,13 @@ import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
-import com.kirchhoff.movies.screen.review.data.UIReview
+import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 
 @SuppressWarnings("MagicNumber", "LongMethod")
 @Composable
 internal fun ReviewItem(
-    review: UIReview,
-    onReviewClick: (UIReview) -> Unit
+    review: ReviewUIInfo,
+    onReviewClick: (ReviewUIInfo) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -107,7 +107,7 @@ internal fun ReviewItem(
 @Composable
 private fun ReviewItemPreview() {
     ReviewItem(
-        review = UIReview.Default,
+        review = ReviewUIInfo.Default,
         onReviewClick = {}
     )
 }

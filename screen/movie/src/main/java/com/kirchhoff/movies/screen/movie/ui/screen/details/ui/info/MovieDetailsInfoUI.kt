@@ -36,8 +36,8 @@ import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.core.ui.resources.TextStyles
 import com.kirchhoff.movies.core.utils.StringValue
 import com.kirchhoff.movies.screen.movie.R
-import com.kirchhoff.movies.screen.movie.data.UICountry
-import com.kirchhoff.movies.screen.movie.data.UIMovieInfo
+import com.kirchhoff.movies.screen.movie.data.MovieUICountry
+import com.kirchhoff.movies.screen.movie.data.MovieUIInfo
 import com.kirchhoff.movies.voteview.VoteViewComposable
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -46,9 +46,9 @@ import java.util.Locale
 @SuppressWarnings("LongMethod")
 @Composable
 internal fun MovieDetailsInfoUI(
-    info: UIMovieInfo,
+    info: MovieUIInfo,
     posterPath: String?,
-    onProductionCountryClick: (UICountry) -> Unit
+    onProductionCountryClick: (MovieUICountry) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -136,7 +136,7 @@ private fun Int?.asMovieRuntime(): String = if (this != null) {
 @Composable
 private fun MovieDetailsInfoUIPreview() {
     MovieDetailsInfoUI(
-        info = UIMovieInfo.Default,
+        info = MovieUIInfo.Default,
         posterPath = "",
         onProductionCountryClick = {}
     )

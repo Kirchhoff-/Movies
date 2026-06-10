@@ -22,12 +22,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.kirchhoff.movies.core.R
-import com.kirchhoff.movies.screen.movie.data.UITrailer
+import com.kirchhoff.movies.screen.movie.data.MovieUITrailer
 
 @Composable
 internal fun MovieDetailsTrailersItemUI(
-    trailer: UITrailer,
-    onTrailerClick: (UITrailer) -> Unit
+    trailer: MovieUITrailer,
+    onTrailerClick: (MovieUITrailer) -> Unit
 ) {
     val resultImage = if (trailer.site.equals(YOUTUBE, true)) R.drawable.ic_youtube else R.drawable.ic_play_arrow
 
@@ -69,7 +69,7 @@ private const val YOUTUBE_POSTER_PATH = "https://img.youtube.com/vi/%s/0.jpg"
 @Composable
 private fun MovieDetailsTrailersItemUIPreview() {
     MovieDetailsTrailersItemUI(
-        trailer = UITrailer.Default,
+        trailer = MovieUITrailer.Default,
         onTrailerClick = {}
     )
 }

@@ -8,7 +8,7 @@ import com.kirchhoff.movies.screen.review.router.ReviewRouter
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
 import com.kirchhoff.movies.screen.review.usecase.ReviewUseCase
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

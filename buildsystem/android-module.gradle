@@ -1,24 +1,20 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 
 android {
-    compileSdkVersion libs.versions.compileSdk.get().toInteger()
+    compileSdk = libs.versions.compileSdk.get().toInteger()
 
     namespace "com.kirchhoff.movies"
 
     defaultConfig {
-        minSdkVersion libs.versions.minSdk.get()
-        targetSdkVersion libs.versions.targetSdk.get()
+        minSdk = libs.versions.minSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -27,13 +23,11 @@ android {
         buildConfig true
     }
 
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.composeCompiler.get()
-    }
-
-    lintOptions {
-        disable 'Typos', 'ContentDescription', 'GradleDependency', 'AndroidGradlePluginVersion'
-        warningsAsErrors true
+    lint {
+        disable += ['Typos', 'ContentDescription', 'GradleDependency', 'AndroidGradlePluginVersion']
+        // ui-tooling brings Material 3 at runtime for previews; app UI uses Material 2 only.
+        disable += ['UsingMaterialAndMaterial3Libraries']
+        warningsAsErrors = true
     }
 }
 
@@ -42,7 +36,11 @@ dependencies {
     implementation libs.coreKtx
     implementation libs.material
 
+    implementation platform(libs.composeBom)
     implementation libs.bundles.compose
 
+    debugImplementation libs.composeUITooling
     debugImplementation libs.leakCanary
 }
+
+apply from: rootProject.file('buildsystem/detekt-android.gradle')

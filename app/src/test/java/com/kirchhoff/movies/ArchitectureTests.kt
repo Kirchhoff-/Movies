@@ -6,7 +6,7 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.withAllParentsOf
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.ext.list.withNameEndingWith
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.Test
 
 class ArchitectureTests {
@@ -16,7 +16,7 @@ class ArchitectureTests {
         Konsist.scopeFromProject()
             .classes()
             .withAllParentsOf(ViewModel::class)
-            .assert { it.name.endsWith("ViewModel") }
+            .assertTrue { it.name.endsWith("ViewModel") }
     }
 
     @Test
@@ -24,7 +24,7 @@ class ArchitectureTests {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("ScreenState")
-            .assert { it.resideInPackage("..model") }
+            .assertTrue { it.resideInPackage("..model") }
     }
 
     @Test
@@ -32,7 +32,7 @@ class ArchitectureTests {
         Konsist.scopeFromProject()
             .interfaces()
             .filter { it.hasNameEndingWith("Service") }
-            .assert { !it.hasParents() }
+            .assertTrue { !it.hasParents() }
     }
 
     @Test
@@ -41,8 +41,8 @@ class ArchitectureTests {
             .classes()
             .withNameEndingWith("Repository")
             .filterNot { it.name == "BaseRepository" }
-            .assert {
-                it.numParents == 1 &&
+            .assertTrue {
+                it.numParents() == 1 &&
                     it.hasParentWithName("BaseRepository")
             }
     }
@@ -52,7 +52,7 @@ class ArchitectureTests {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("Repository")
-            .assert { it.resideInPackage("..repository") }
+            .assertTrue { it.resideInPackage("..repository") }
     }
 
     @Test
@@ -61,7 +61,7 @@ class ArchitectureTests {
             .classes()
             .withNameEndingWith("Repository")
             .filterNot { klass -> klass.name == "BaseRepository" }
-            .assert { interfaceDeclaration ->
+            .assertTrue { interfaceDeclaration ->
                 interfaceDeclaration.containingFile.hasImportWithName("com.kirchhoff.movies.core.repository.RepositoryResult") &&
                     interfaceDeclaration.functions().all { it.returnType?.hasNameStartingWith("RepositoryResult") == true }
             }
@@ -72,7 +72,7 @@ class ArchitectureTests {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("Router")
-            .assert { it.resideInPackage("..router") }
+            .assertTrue { it.resideInPackage("..router") }
     }
 
     @Test
@@ -80,7 +80,7 @@ class ArchitectureTests {
         Konsist.scopeFromProject()
             .interfaces()
             .withNameEndingWith("Service")
-            .assert { interfaceDeclaration ->
+            .assertTrue { interfaceDeclaration ->
                 interfaceDeclaration.functions().all { it.annotations.isNotEmpty() }
             }
     }
@@ -91,7 +91,7 @@ class ArchitectureTests {
             .classes()
             .withNameEndingWith("Fragment")
             .filterNot { it.name == "BaseFragment" }
-            .assert { it.hasParentWithName("BaseFragment") || it.hasParentWithName("PaginatedScreenFragment") }
+            .assertTrue { it.hasParentWithName("BaseFragment") || it.hasParentWithName("PaginatedScreenFragment") }
     }
 
     @Test
@@ -100,7 +100,7 @@ class ArchitectureTests {
             .files
             .flatMap { it.functions() }
             .withAnnotationOf(Preview::class)
-            .assert { it.hasPrivateModifier }
+            .assertTrue { it.hasPrivateModifier }
     }
 
     @Test
@@ -108,7 +108,7 @@ class ArchitectureTests {
         Konsist.scopeFromProject()
             .classes()
             .withNameEndingWith("ViewModel")
-            .assert { it.resideInPackage("..viewmodel") }
+            .assertTrue { it.resideInPackage("..viewmodel") }
     }
 
     @Test
@@ -134,7 +134,7 @@ class ArchitectureTests {
             .filter { klass -> klass.hasNameEndingWith("Repository") }
             .flatMap { klass -> klass.functions() }
             .filterNot { functions -> functions.hasPrivateModifier }
-            .assert { function -> !function.hasNameStartingWith("fetch") }
+            .assertTrue { function -> !function.hasNameStartingWith("fetch") }
     }
 
     @Test
@@ -143,7 +143,7 @@ class ArchitectureTests {
             .scopeFromProduction()
             .classes()
             .filter { klass -> klass.hasDataModifier }
-            .assert { klass ->
+            .assertTrue { klass ->
                 klass.properties().all { property ->
                     property.hasValModifier
                 }

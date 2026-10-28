@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath libs.plugin.buildTools
         classpath libs.plugin.kotlin
+        classpath libs.plugin.composeCompiler
         classpath libs.plugin.detekt
         classpath libs.plugin.ktlint
         // NOTE: Do not place your application dependencies here; they belong
@@ -22,10 +23,9 @@ allprojects {
   repositories {
         google()
         mavenCentral()
-        maven { url "https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven" }
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register("clean", Delete) {
+    delete rootProject.layout.buildDirectory
 }

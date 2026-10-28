@@ -1,0 +1,36 @@
+// Detekt 1.x only auto-registers Android tasks for the removed kotlin-android plugin.
+// Use the public variant API until a stable Detekt release supports built-in Kotlin.
+def detektClass = rootProject.buildscript.classLoader.loadClass('io.gitlab.arturbosch.detekt.Detekt')
+
+// The Gradle runtime JDK is independent of the application's bytecode target.
+tasks.withType(detektClass).configureEach {
+    jvmTarget = '17'
+}
+
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        def variantName = variant.name.capitalize()
+        def kotlinCompile = providers.provider { tasks.named("compile${variantName}Kotlin").get() }
+        def detektTask = tasks.register("detekt${variantName}", detektClass) {
+            group = 'verification'
+            description = "Run detekt for ${variant.name} with type resolution"
+            dependsOn "compile${variantName}Kotlin"
+            source variant.sources.java.all
+            source variant.sources.kotlin.all
+            include '**/*.kt'
+            config.setFrom(rootProject.file('config/detekt/detekt.yml'))
+            classpath.from(kotlinCompile.map { it.libraries })
+            classpath.from(kotlinCompile.flatMap { it.destinationDirectory })
+            classpath.from(androidComponents.sdkComponents.bootClasspath)
+            jvmTarget = '17'
+            reports {
+                html.outputLocation.set(layout.buildDirectory.file("reports/detekt/${name}.html"))
+                xml.outputLocation.set(layout.buildDirectory.file("reports/detekt/${name}.xml"))
+                sarif.outputLocation.set(layout.buildDirectory.file("reports/detekt/${name}.sarif"))
+            }
+        }
+        tasks.named('check').configure {
+            dependsOn detektTask
+        }
+    }
+}

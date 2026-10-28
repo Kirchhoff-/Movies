@@ -5,7 +5,7 @@ import com.kirchhoff.movies.screen.person.ui.screen.details.network.PersonDetail
 import com.kirchhoff.movies.screen.person.ui.screen.details.repository.PersonDetailsRepository
 import com.kirchhoff.movies.screen.person.ui.screen.details.usecase.PersonDetailsUseCase
 import com.kirchhoff.movies.screen.person.ui.screen.details.viewmodel.PersonDetailsViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -51,19 +51,19 @@ internal fun PersonDetailsInfoUI(
                 modifier = Modifier.padding(8.dp)
             ) {
                 if (isBornVisible) {
-                    PlaceOfBorn(details.birthday.orEmpty())
+                    PlaceOfBorn(details.birthday)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 if (isPlaceOfBirthVisible) {
                     PlaceOfBirth(
-                        placeOfBirth = details.placeOfBirth.orEmpty(),
+                        placeOfBirth = details.placeOfBirth,
                         onLocationClick = onLocationClick
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                 }
                 if (isHomepageVisible) {
                     Homepage(
-                        homepage = details.homepage.orEmpty(),
+                        homepage = details.homepage,
                         onHomepageClick = onHomepageClick
                     )
                     Spacer(modifier = Modifier.height(8.dp))
@@ -100,7 +100,7 @@ private fun PlaceOfBirth(
     Text(
         modifier = Modifier.clickable(
             interactionSource = remember { MutableInteractionSource() },
-            indication = rememberRipple(bounded = true),
+            indication = ripple(bounded = true),
             onClick = { onLocationClick.invoke(placeOfBirth) }
         ),
         style = supportTextStyle,
@@ -121,7 +121,7 @@ private fun Homepage(
     Text(
         modifier = Modifier.clickable(
             interactionSource = remember { MutableInteractionSource() },
-            indication = rememberRipple(bounded = true),
+            indication = ripple(bounded = true),
             onClick = { onHomepageClick.invoke(homepage) }
         ),
         style = supportTextStyle,

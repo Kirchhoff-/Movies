@@ -7,7 +7,7 @@ import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.network.TvShowDisco
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.repository.TvShowDiscoverRepository
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.usecase.TvShowDiscoverUseCase
 import com.kirchhoff.movies.screen.tvshow.ui.screen.discover.viewmodel.TvShowDiscoverViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

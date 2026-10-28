@@ -4,7 +4,7 @@ import com.kirchhoff.movies.screen.movie.ui.screen.list.repository.MovieListRepo
 import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListTitleUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.usecase.MovieListUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.list.viewmodel.MovieListViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 internal val movieListModule = module {

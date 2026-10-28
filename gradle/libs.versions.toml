@@ -1,71 +1,65 @@
 [versions]
-buildToolsPlugin = "8.10.1"
-minSdk = "21"
-targetSdk = "36"
-compileSdk = "36"
-buildTools = "33.0.2"
+buildToolsPlugin = "9.4.1"
+minSdk = "23"
+targetSdk = "37"
+compileSdk = "37"
 versionName = "1.24.0"
 versionCode = "24"
 
-material = "1.9.0"
-constraintLayout = "2.1.4"
-flexbox = "3.0.0"
-coreKtx = "1.12.0"
+material = "1.14.0"
+constraintLayout = "2.2.2"
+coreKtx = "1.19.1"
 
-composeCompiler = "1.5.3"
-compose = "1.5.2"
-composeFoundation = "1.5.2"
-appCompat = "1.6.1"
-activityCompose = "1.7.2"
-composeLiveData = '1.5.2'
-composeLifeCycle = "2.8.7"
+composeBom = "2026.09.00"
 
-kotlin = "1.9.10"
-coroutines = "1.6.4"
+appCompat = "1.8.0"
+activityCompose = "1.13.0"
 
-lifecycle = "2.2.0"
-liveData = "2.6.2"
-viewModel = "2.6.1"
+kotlin = "2.4.21"
+coroutines = "1.11.0"
 
-retrofit = "2.9.0"
-okhttp = "4.10.0"
-gson = "2.13.1"
+lifecycle = "2.11.0"
 
-koin = "3.5.0"
+retrofit = "3.0.0"
+okhttp = "5.5.1"
+gson = "2.15.0"
 
-coil = "2.3.0"
-coilCompose = "2.3.0"
+koin = "4.2.2"
 
-pagerIndicator = "1.2.4"
+coil = "3.6.3"
+
+pagerIndicator = "1.2.5"
 
 timber = "5.0.1"
 
-leakCanary = "2.10"
+leakCanary = "2.14"
 
-junit = "4.13"
+junit = "4.13.2"
 
-ktlint = "11.6.1"
-detekt = "1.23.7"
-konsist = "0.12.1"
+ktlint = "14.2.0"
+detekt = "1.23.8"
+konsist = "0.18.1"
 
 [libraries]
 plugin-buildTools = { module = "com.android.tools.build:gradle", version.ref = "buildToolsPlugin" }
+plugin-composeCompiler = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:io.gitlab.arturbosch.detekt.gradle.plugin", version.ref = "detekt" }
 plugin-ktlint = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
+activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
-flexbox = { module = "com.google.android.flexbox:flexbox", version.ref = "flexbox" }
 coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 
-kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
-lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle" }
-liveData = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "liveData" }
-viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "viewModel" }
+lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+liveData = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+viewModel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+composeLifeCycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 
 koin = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
@@ -74,8 +68,9 @@ retrofitConverter = { module = "com.squareup.retrofit2:converter-gson", version.
 okHttpInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 
-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
-coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coilNetwork = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coil" }
+coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 
 pagerIndicator = { module = "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator", version.ref = "pagerIndicator" }
 
@@ -87,17 +82,22 @@ junit = { module = "junit:junit", version.ref = "junit" }
 
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 
-composeMaterial = { module = "androidx.compose.material:material", version.ref = "compose" }
-activityCompose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
-composeUI = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-composeUITooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-composeFoundation = { module = "androidx.compose.foundation:foundation", version.ref = "composeFoundation" }
-composeLiveData = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeLiveData" }
-composeLifeCycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "composeLifeCycle" }
+composeBom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+
+# Versions of the following Compose libraries are managed by composeBom.
+composeAnimation = { module = "androidx.compose.animation:animation" }
+composeIcons = { module = "androidx.compose.material:material-icons-core" }
+composeMaterial = { module = "androidx.compose.material:material" }
+composeUI = { module = "androidx.compose.ui:ui" }
+composeUIPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
+composeUITooling = { module = "androidx.compose.ui:ui-tooling" }
+composeFoundation = { module = "androidx.compose.foundation:foundation" }
+composeLiveData = { module = "androidx.compose.runtime:runtime-livedata" }
 
 [bundles]
 architectureComponents = ["lifecycle", "liveData", "viewModel"]
 internet = ["retrofit", "retrofitConverter", "okHttpInterceptor"]
 di = ["koin"]
 tests = ["junit"]
-compose = ["composeMaterial", "activityCompose", "composeUI", "composeUITooling", "composeFoundation", "composeLiveData", "composeLifeCycle"]
+compose = ["composeIcons", "composeAnimation", "composeMaterial", "activityCompose", "composeUI", "composeUIPreview", "composeFoundation", "composeLiveData", "composeLifeCycle"]
+imageLoading = ["coil", "coilCompose", "coilNetwork"]

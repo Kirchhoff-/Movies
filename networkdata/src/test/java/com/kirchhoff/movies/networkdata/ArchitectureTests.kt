@@ -2,7 +2,7 @@ package com.kirchhoff.movies.networkdata
 
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.properties
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.Test
 
 class ArchitectureTests {
@@ -12,7 +12,7 @@ class ArchitectureTests {
         Konsist.scopeFromModule("networkdata")
             .classes()
             .properties()
-            .assert { property -> property.annotations.any { annotation -> annotation.name == "SerializedName" } }
+            .assertTrue { property -> property.annotations.any { annotation -> annotation.name == "SerializedName" } }
     }
 
     @Test
@@ -23,6 +23,6 @@ class ArchitectureTests {
                 includeNested = false,
                 includeLocal = false
             )
-            .assert { klass -> klass.name.startsWith("Network") }
+            .assertTrue { klass -> klass.name.startsWith("Network") }
     }
 }

@@ -10,4 +10,13 @@ I am also trying to show the correct, in my opinion, approach to organizing work
 
 I work on the project in my free time, so there may be long breaks between commits.
 
-Any help is welcome! I hope you find something useful/interesting for yourself. 
+Any help is welcome! I hope you find something useful/interesting for yourself.
+
+## Build environment
+
+Use JDK 21 to run Gradle locally and in CI. In Android Studio, select JDK 21
+under Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JDK.
+For command-line builds, point `JAVA_HOME` to a JDK 21 installation.
+
+Java and Kotlin bytecode target JVM 17. Detekt 1.23.8 is incompatible with
+running on JDK 25, so use JDK 21 for the project build.

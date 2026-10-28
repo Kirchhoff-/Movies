@@ -8,7 +8,7 @@ import com.kirchhoff.movies.screen.tvshow.ui.screen.details.network.TvShowDetail
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.repository.TvShowDetailsRepository
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.usecase.TvShowDetailsUseCase
 import com.kirchhoff.movies.screen.tvshow.ui.screen.details.viewmodel.TvShowDetailsViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

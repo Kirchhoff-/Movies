@@ -1,16 +1,14 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
-apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion libs.versions.compileSdk.get().toInteger()
+    compileSdk = libs.versions.compileSdk.get().toInteger()
     namespace "com.kirchhoff.movies"
 
     defaultConfig {
         applicationId "com.kirchhoff.movies"
-        minSdkVersion libs.versions.minSdk.get()
-        targetSdkVersion libs.versions.targetSdk.get()
+        minSdk = libs.versions.minSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
         versionCode libs.versions.versionCode.get().toInteger()
         versionName libs.versions.versionName.get()
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,18 +22,14 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
         viewBinding true
         buildConfig true
     }
 
-    lintOptions {
-        disable 'ContentDescription', 'GradleDependency', 'AndroidGradlePluginVersion'
-        warningsAsErrors true
+    lint {
+        disable += ['ContentDescription', 'GradleDependency', 'AndroidGradlePluginVersion']
+        warningsAsErrors = true
     }
 
     buildTypes {
@@ -62,11 +56,13 @@ dependencies {
     implementation libs.bundles.internet
     implementation libs.gson
 
+    implementation libs.bundles.imageLoading
+
     implementation libs.timber
 
     debugImplementation libs.leakCanary
 
-    testImplementation libs.bundles.compose
+    testImplementation libs.composeUIPreview
     testImplementation libs.bundles.tests
     testImplementation libs.konsist
 
@@ -97,3 +93,5 @@ def getLocalProperty(String propName) {
         print("local.properties does not exist!")
     }
 }
+
+apply from: rootProject.file('buildsystem/detekt-android.gradle')

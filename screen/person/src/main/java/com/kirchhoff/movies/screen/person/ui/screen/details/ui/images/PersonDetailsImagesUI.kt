@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -27,7 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil3.compose.AsyncImage
 import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.person.data.PersonUIImage
@@ -48,14 +48,14 @@ internal fun PersonDetailsImagesUI(
             modifier = Modifier
                 .height(300.dp)
                 .fillMaxWidth(),
-            beyondBoundsPageCount = 2,
+            beyondViewportPageCount = 2,
             state = pagerState
         ) { page ->
             AsyncImage(
                 modifier = Modifier.fillMaxSize()
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
-                        indication = rememberRipple(bounded = true),
+                        indication = ripple(bounded = true),
                         onClick = { onItemClick.invoke(page) }
                     ),
                 model = BASE_POSTER_PATH + images[page].url,

@@ -8,7 +8,7 @@ import com.kirchhoff.movies.screen.person.ui.screen.list.network.PersonListServi
 import com.kirchhoff.movies.screen.person.ui.screen.list.repository.PersonListRepository
 import com.kirchhoff.movies.screen.person.ui.screen.list.usecase.PersonListUseCase
 import com.kirchhoff.movies.screen.person.ui.screen.list.viewmodel.PersonListViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

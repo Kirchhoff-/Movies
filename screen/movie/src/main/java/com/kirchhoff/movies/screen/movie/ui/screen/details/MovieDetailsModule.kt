@@ -4,7 +4,7 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.screen.movie.repository.MovieDetailsRepository
 import com.kirchhoff.movies.screen.movie.ui.screen.details.usecase.MovieDetailsUseCase
 import com.kirchhoff.movies.screen.movie.ui.screen.details.viewmodel.MovieDetailsViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 internal val movieDetailsModule = module {

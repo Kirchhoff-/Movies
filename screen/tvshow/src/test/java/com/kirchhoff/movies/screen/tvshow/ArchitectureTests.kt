@@ -1,7 +1,7 @@
 package com.kirchhoff.movies.screen.tvshow
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.verify.assert
+import com.lemonappdev.konsist.api.verify.assertTrue
 import org.junit.Test
 
 class ArchitectureTests {
@@ -14,6 +14,6 @@ class ArchitectureTests {
                 includeNested = false,
                 includeLocal = false
             )
-            .assert { klass -> klass.name.startsWith("TvShow") }
+            .assertTrue { klass -> klass.name.startsWith("TvShow") }
     }
 }

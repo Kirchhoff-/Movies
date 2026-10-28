@@ -53,8 +53,7 @@ internal fun ReviewListUI(
                         itemContent = {
                             ReviewItem(
                                 review = screenState.reviewsList[it],
-                                onReviewClick = {
-                                        review ->
+                                onReviewClick = { review ->
                                     onReviewClick.invoke(review, screenState.title)
                                 }
                             )

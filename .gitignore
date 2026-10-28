@@ -12,3 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# Kotlin Gradle plugin local state
+.kotlin/

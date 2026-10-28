@@ -1,14 +1,13 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion libs.versions.compileSdk.get().toInteger()
+    compileSdk = libs.versions.compileSdk.get().toInteger()
 
     namespace "com.kirchhoff.movies"
 
     defaultConfig {
-        minSdkVersion libs.versions.minSdk.get()
-        targetSdkVersion libs.versions.targetSdk.get()
+        minSdk = libs.versions.minSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInteger()
     }
 
     compileOptions {
@@ -16,16 +15,14 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
-    lintOptions {
-        disable 'Typos', 'ContentDescription', 'GradleDependency', 'AndroidGradlePluginVersion'
-        warningsAsErrors true
+    lint {
+        disable += ['Typos', 'ContentDescription', 'GradleDependency', 'AndroidGradlePluginVersion']
+        warningsAsErrors = true
     }
 }
 
 dependencies {
     implementation libs.kotlin
 }
+
+apply from: rootProject.file('buildsystem/detekt-android.gradle')

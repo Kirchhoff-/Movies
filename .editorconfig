@@ -23,3 +23,18 @@ ktlint_standard = enabled
 # Experimental rules run by default run on the ktlint code base itself. Experimental rules should not be released if
 # we are not pleased ourselves with the results on the ktlint code base.
 ktlint_experimental = enabled
+
+# Preserve the existing layout conventions when upgrading to ktlint 1.x.
+ij_kotlin_allow_trailing_comma = false
+ij_kotlin_allow_trailing_comma_on_call_site = false
+ktlint_function_naming_ignore_when_annotated_with = Composable
+ktlint_standard_class-signature = disabled
+ktlint_standard_function-signature = disabled
+ktlint_standard_multiline-expression-wrapping = disabled
+ktlint_standard_chain-method-continuation = disabled
+ktlint_standard_no-empty-first-line-in-class-body = disabled
+ktlint_standard_parameter-list-wrapping = disabled
+ktlint_standard_blank-line-between-when-conditions = disabled
+ktlint_standard_blank-line-before-declaration = disabled
+ktlint_standard_enum-wrapping = disabled
+ktlint_standard_when-entry-bracing = disabled

@@ -1,7 +1,7 @@
 package com.kirchhoff.movies
 
 import com.lemonappdev.konsist.api.Konsist
-import com.lemonappdev.konsist.api.verify.assertNot
+import com.lemonappdev.konsist.api.verify.assertFalse
 import org.junit.Test
 
 class ResourcesTests {
@@ -16,9 +16,9 @@ class ResourcesTests {
 
         Konsist.scopeFromProject()
             .files
-            .filterNot { it.containsObject { objectName -> objectName.name == "Colors" } }
+            .filterNot { it.hasObject { objectName -> objectName.name == "Colors" } }
             .filterNot { temporaryDisabled.contains(it.name) }
-            .assertNot { fileDeclaration ->
+            .assertFalse { fileDeclaration ->
                 fileDeclaration.hasImportWithName("androidx.compose.ui.graphics.Color")
             }
     }
@@ -27,7 +27,7 @@ class ResourcesTests {
     fun `should not use colorResources method`() {
         Konsist.scopeFromProject()
             .files
-            .assertNot { fileDeclaration ->
+            .assertFalse { fileDeclaration ->
                 fileDeclaration.hasImportWithName("androidx.compose.ui.res.colorResource")
             }
     }

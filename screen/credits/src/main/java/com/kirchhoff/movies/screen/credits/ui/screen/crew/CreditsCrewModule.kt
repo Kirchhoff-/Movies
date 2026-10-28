@@ -4,7 +4,7 @@ import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.factory.CreditsCrewListFactory
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.usecase.CreditsCrewUseCase
 import com.kirchhoff.movies.screen.credits.ui.screen.crew.viewmodel.CreditsCrewViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 internal val creditsCrewModule = module {

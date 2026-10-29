@@ -1,8 +1,10 @@
-package com.kirchhoff.movies.screen.review.ui.screen.details
+package com.kirchhoff.movies.screen.review.ui.screen.list.ui.details
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -22,9 +24,10 @@ import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 
 @SuppressWarnings("MagicNumber")
 @Composable
-internal fun ReviewDetailsUI(
+internal fun ReviewsDetailsUI(
     title: String,
     review: ReviewUIInfo,
+    modifier: Modifier,
     onOpenInBrowserClick: (String) -> Unit,
     onBackPressed: () -> Unit
 ) {
@@ -50,19 +53,23 @@ internal fun ReviewDetailsUI(
             },
             onBackPressed = { onBackPressed.invoke() }
         )
-        LinkifyText(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Colors.White)
+                .verticalScroll(scroll)
                 .padding(
                     top = textPadding,
                     start = textPadding,
                     end = textPadding
                 )
-                .verticalScroll(scroll),
-            text = review.content,
-            color = Colors.TextHint,
-            fontSize = textSize
-        )
+        ) {
+            LinkifyText(
+                modifier = modifier.fillMaxWidth(),
+                text = review.content,
+                color = Colors.TextHint,
+                fontSize = textSize
+            )
+        }
     }
 }

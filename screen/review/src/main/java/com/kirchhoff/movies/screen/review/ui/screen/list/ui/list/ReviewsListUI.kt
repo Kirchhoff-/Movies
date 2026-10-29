@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.review.ui.screen.list.ui
+package com.kirchhoff.movies.screen.review.ui.screen.list.ui.list
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.LinearProgressIndicator
@@ -29,15 +30,17 @@ import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
 
+@SuppressWarnings("LongParameterList")
 @Composable
 internal fun ReviewListUI(
     screenState: ReviewsListScreenState,
+    listState: LazyListState,
+    reviewContentModifier: @Composable (ReviewUIInfo) -> Modifier,
     onLoadMore: () -> Unit,
     onReviewClick: (ReviewUIInfo, String) -> Unit,
     onBackPressed: () -> Unit
 ) {
     val context = LocalContext.current
-    val listState = rememberLazyListState()
     var errorMessage by rememberSaveable { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -53,6 +56,7 @@ internal fun ReviewListUI(
                         itemContent = {
                             ReviewItem(
                                 review = screenState.reviewsList[it],
+                                modifier = reviewContentModifier(screenState.reviewsList[it]),
                                 onReviewClick = { review ->
                                     onReviewClick.invoke(review, screenState.title)
                                 }
@@ -100,6 +104,8 @@ internal fun ReviewListUI(
 private fun ReviewListPreview() {
     ReviewListUI(
         screenState = ReviewsListScreenState.Default,
+        listState = rememberLazyListState(),
+        reviewContentModifier = { Modifier },
         onLoadMore = {},
         onReviewClick = { _, _ -> },
         onBackPressed = {}

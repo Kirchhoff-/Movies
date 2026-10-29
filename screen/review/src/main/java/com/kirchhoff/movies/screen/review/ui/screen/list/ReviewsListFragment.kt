@@ -1,6 +1,7 @@
 package com.kirchhoff.movies.screen.review.ui.screen.list
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,17 @@ import android.view.ViewGroup
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.core.net.toUri
 import com.kirchhoff.movies.core.data.MovieId
 import com.kirchhoff.movies.core.data.TvId
 import com.kirchhoff.movies.core.extensions.getParcelableExtra
 import com.kirchhoff.movies.core.ui.BaseFragment
-import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.reviewModule
-import com.kirchhoff.movies.screen.review.router.ReviewRouter
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
-import com.kirchhoff.movies.screen.review.ui.screen.list.ui.ReviewListUI
+import com.kirchhoff.movies.screen.review.ui.screen.list.ui.ReviewsUI
 import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -30,8 +30,6 @@ internal class ReviewsListFragment : BaseFragment() {
     private val args: ReviewsListArgs by lazy {
         requireArguments().getParcelableExtra(REVIEW_ARGS) ?: error("Review argument is not provided")
     }
-
-    private val reviewRouter: ReviewRouter by inject { parametersOf(requireActivity()) }
 
     private val viewModel: ReviewsListViewModel by viewModel {
         parametersOf(args)
@@ -52,13 +50,15 @@ internal class ReviewsListFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = ComposeView(requireContext()).apply {
+        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+
         setContent {
             val screenState by viewModel.screenState.observeAsState()
 
-            ReviewListUI(
+            ReviewsUI(
                 screenState ?: error("Can't build UI without state"),
                 onLoadMore = { viewModel.loadReviews() },
-                onReviewClick = { review, title -> onReviewClick(review, title) },
+                onOpenInBrowserClick = { url -> startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
@@ -67,10 +67,6 @@ internal class ReviewsListFragment : BaseFragment() {
     override fun onDestroy() {
         unloadKoinModules(reviewModule)
         super.onDestroy()
-    }
-
-    private fun onReviewClick(review: ReviewUIInfo, title: String) {
-        reviewRouter.openDetailsScreen(review, title)
     }
 
     companion object {

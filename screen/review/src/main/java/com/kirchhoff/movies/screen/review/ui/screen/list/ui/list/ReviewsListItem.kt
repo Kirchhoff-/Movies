@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.review.ui.screen.list.ui
+package com.kirchhoff.movies.screen.review.ui.screen.list.ui.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -36,6 +36,7 @@ import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 @Composable
 internal fun ReviewItem(
     review: ReviewUIInfo,
+    modifier: Modifier,
     onReviewClick: (ReviewUIInfo) -> Unit
 ) {
     Card(
@@ -84,6 +85,7 @@ internal fun ReviewItem(
             }
             Spacer(Modifier.height(8.dp))
             Text(
+                modifier = modifier,
                 text = review.content,
                 color = Colors.TextHint,
                 fontSize = 14.sp,
@@ -108,6 +110,7 @@ internal fun ReviewItem(
 private fun ReviewItemPreview() {
     ReviewItem(
         review = ReviewUIInfo.Default,
+        modifier = Modifier,
         onReviewClick = {}
     )
 }

@@ -40,6 +40,7 @@ internal fun ReviewListUI(
     transition: ReviewsTransitionScope,
     onLoadMore: () -> Unit,
     onReviewClick: (ReviewUIInfo, String) -> Unit,
+    onAuthorClick: (ReviewUIInfo.Author) -> Unit,
     onBackPressed: () -> Unit
 ) {
     val context = LocalContext.current
@@ -63,6 +64,7 @@ internal fun ReviewListUI(
                                     animatedVisibilityScope = transition.animatedVisibilityScope,
                                     reviewKey = screenState.reviewsList[it].url
                                 ),
+                                onAuthorClick = onAuthorClick,
                                 onReviewClick = { review ->
                                     onReviewClick.invoke(review, screenState.title)
                                 }
@@ -120,6 +122,7 @@ private fun ReviewListPreview() {
                 ),
                 onLoadMore = {},
                 onReviewClick = { _, _ -> },
+                onAuthorClick = {},
                 onBackPressed = {}
             )
         }

@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.review.ui.screen.list.ui.details
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,10 +31,11 @@ import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 @Composable
 internal fun ReviewAuthorUI(
     author: ReviewUIInfo.Author,
-    transition: ReviewsTransitionScope
+    transition: ReviewsTransitionScope,
+    onAuthorClick: () -> Unit
 ) {
-    val authorName: String = author.displayName ?: stringResource(R.string.review_author)
-    val hasUsername: Boolean = author.username != null
+    val authorName: String = author.getName() ?: stringResource(R.string.review_author)
+    val showUsernameBelowName: Boolean = author.displayName != null && author.username != null
     val rating: Int? = author.rating
     val hasRating: Boolean = rating != null
 
@@ -47,15 +49,20 @@ internal fun ReviewAuthorUI(
             model = author.avatar,
             modifier = transition.avatarModifier()
                 .size(48.dp)
-                .clip(CircleShape),
+                .clip(CircleShape)
+                .clickable(onClick = onAuthorClick),
             placeholder = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
             error = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
             fallback = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
             contentScale = ContentScale.Crop,
-            contentDescription = null
+            contentDescription = authorName
         )
         Spacer(Modifier.width(12.dp))
-        Column(modifier = Modifier.weight(1f)) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .clickable(onClick = onAuthorClick)
+        ) {
             Text(
                 modifier = transition.authorModifier(),
                 text = authorName,
@@ -66,7 +73,7 @@ internal fun ReviewAuthorUI(
                 overflow = TextOverflow.Ellipsis
             )
 
-            if (hasUsername) {
+            if (showUsernameBelowName) {
                 Text(
                     text = stringResource(R.string.review_author_username_format, author.username),
                     color = Colors.TextHint,

@@ -7,4 +7,5 @@
     <string name="review_author_username_format">\@%s</string>
     <string name="review_author_rating_format">%d/10</string>
     <string name="empty_reviews">There are no reviews</string>
+    <string name="review_author_open_profile">Open profile on TMDB</string>
 </resources>

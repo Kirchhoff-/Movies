@@ -18,32 +18,27 @@ internal class ReviewListMapper : BaseMapper() {
     private fun NetworkReview.toUIReview(): ReviewUIInfo {
         val name = authorDetails.name?.trim()
         val username = authorDetails.username?.trim()
-        val displayName = when {
-            !name.isNullOrBlank() -> name
-            !username.isNullOrBlank() -> username
-            else -> null
-        }
-        val displayUsername = if (
-            !name.isNullOrBlank() &&
-            !username.isNullOrBlank() &&
-            !name.equals(username, ignoreCase = true)
-        ) {
-            username
-        } else {
-            null
-        }
 
         return ReviewUIInfo(
             author = ReviewUIInfo.Author(
                 label = author,
                 avatar = authorDetails.avatar.toAvatarUrl(),
                 rating = authorDetails.rating,
-                displayName = displayName,
-                username = displayUsername
+                displayName = if (name.isNullOrBlank()) null else name,
+                username = if (username.isNullOrBlank()) null else username,
+                profileUrl = username.toProfileUrl()
             ),
             content = content,
             url = url
         )
+    }
+
+    private fun String?.toProfileUrl(): String? {
+        if (isNullOrBlank()) {
+            return null
+        }
+
+        return "https://www.themoviedb.org/u/$this"
     }
 
     private fun String?.toAvatarUrl(): String? {

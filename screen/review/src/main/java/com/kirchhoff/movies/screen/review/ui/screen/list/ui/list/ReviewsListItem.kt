@@ -1,5 +1,7 @@
 package com.kirchhoff.movies.screen.review.ui.screen.list.ui.list
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -27,16 +29,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
-import com.kirchhoff.movies.core.extensions.BASE_POSTER_PATH
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
+import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
 @SuppressWarnings("MagicNumber", "LongMethod")
 @Composable
 internal fun ReviewItem(
     review: ReviewUIInfo,
-    modifier: Modifier,
+    transition: ReviewsTransitionScope,
     onReviewClick: (ReviewUIInfo) -> Unit
 ) {
     Card(
@@ -65,18 +67,19 @@ internal fun ReviewItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AsyncImage(
-                    modifier = Modifier
+                    modifier = transition.avatarModifier()
                         .height(32.dp)
                         .width(32.dp)
                         .clip(CircleShape),
-                    model = BASE_POSTER_PATH + review.authorAvatar,
+                    model = review.author.avatar,
                     placeholder = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
                     error = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
                     contentDescription = ""
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
-                    text = review.author,
+                    modifier = transition.authorModifier(),
+                    text = review.author.label,
                     color = Colors.TextMain,
                     fontSize = 16.sp,
                     maxLines = 1,
@@ -85,7 +88,7 @@ internal fun ReviewItem(
             }
             Spacer(Modifier.height(8.dp))
             Text(
-                modifier = modifier,
+                modifier = transition.contentModifier(),
                 text = review.content,
                 color = Colors.TextHint,
                 fontSize = 14.sp,
@@ -93,12 +96,13 @@ internal fun ReviewItem(
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(Modifier.height(8.dp))
-            if (review.rating != null) {
+            if (review.author.rating != null) {
                 Text(
                     stringResource(
                         R.string.review_rating_format,
-                        review.rating
-                    )
+                        review.author.rating
+                    ),
+                    modifier = transition.ratingModifier()
                 )
             }
         }
@@ -108,9 +112,17 @@ internal fun ReviewItem(
 @Preview
 @Composable
 private fun ReviewItemPreview() {
-    ReviewItem(
-        review = ReviewUIInfo.Default,
-        modifier = Modifier,
-        onReviewClick = {}
-    )
+    SharedTransitionLayout {
+        AnimatedVisibility(visible = true) {
+            ReviewItem(
+                review = ReviewUIInfo.Default,
+                transition = ReviewsTransitionScope(
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this@AnimatedVisibility,
+                    reviewKey = ReviewUIInfo.Default.url
+                ),
+                onReviewClick = {}
+            )
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.kirchhoff.movies.screen.review.ui.screen.list.ui.list
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,13 +30,14 @@ import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
+import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
 @SuppressWarnings("LongParameterList")
 @Composable
 internal fun ReviewListUI(
     screenState: ReviewsListScreenState,
     listState: LazyListState,
-    reviewContentModifier: @Composable (ReviewUIInfo) -> Modifier,
+    transition: ReviewsTransitionScope,
     onLoadMore: () -> Unit,
     onReviewClick: (ReviewUIInfo, String) -> Unit,
     onBackPressed: () -> Unit
@@ -56,7 +58,11 @@ internal fun ReviewListUI(
                         itemContent = {
                             ReviewItem(
                                 review = screenState.reviewsList[it],
-                                modifier = reviewContentModifier(screenState.reviewsList[it]),
+                                transition = ReviewsTransitionScope(
+                                    sharedTransitionScope = transition.sharedTransitionScope,
+                                    animatedVisibilityScope = transition.animatedVisibilityScope,
+                                    reviewKey = screenState.reviewsList[it].url
+                                ),
                                 onReviewClick = { review ->
                                     onReviewClick.invoke(review, screenState.title)
                                 }
@@ -102,12 +108,20 @@ internal fun ReviewListUI(
 @Preview
 @Composable
 private fun ReviewListPreview() {
-    ReviewListUI(
-        screenState = ReviewsListScreenState.Default,
-        listState = rememberLazyListState(),
-        reviewContentModifier = { Modifier },
-        onLoadMore = {},
-        onReviewClick = { _, _ -> },
-        onBackPressed = {}
-    )
+    SharedTransitionLayout {
+        AnimatedVisibility(visible = true) {
+            ReviewListUI(
+                screenState = ReviewsListScreenState.Default,
+                listState = rememberLazyListState(),
+                transition = ReviewsTransitionScope(
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedVisibilityScope = this@AnimatedVisibility,
+                    reviewKey = ReviewUIInfo.Default.url
+                ),
+                onLoadMore = {},
+                onReviewClick = { _, _ -> },
+                onBackPressed = {}
+            )
+        }
+    }
 }

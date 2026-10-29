@@ -3,10 +3,6 @@ package com.kirchhoff.movies.screen.review.ui.screen.list.ui
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.SharedTransitionLayout
-import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -21,6 +17,7 @@ import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.details.ReviewsDetailsUI
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.list.ReviewListUI
+import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
 @Composable
 internal fun ReviewsUI(
@@ -41,24 +38,21 @@ internal fun ReviewsUI(
         AnimatedContent(
             targetState = selectedReview,
             modifier = Modifier.fillMaxSize(),
-            transitionSpec = { fadeIn() togetherWith fadeOut() },
+            transitionSpec = { ReviewsTransitionScope.contentTransform },
             contentAlignment = Alignment.TopStart,
             label = "Review details transition"
         ) { review ->
+            val transition = ReviewsTransitionScope(
+                sharedTransitionScope = this@SharedTransitionLayout,
+                animatedVisibilityScope = this@AnimatedContent,
+                reviewKey = review?.url.orEmpty()
+            )
             stateHolder.SaveableStateProvider(key = review?.url ?: "reviews-list") {
                 if (review == null) {
                     ReviewListUI(
                         screenState = screenState,
                         listState = listState,
-                        reviewContentModifier = { item ->
-                            Modifier.sharedBounds(
-                                sharedContentState = rememberSharedContentState(key = item.url),
-                                animatedVisibilityScope = this@AnimatedContent,
-                                resizeMode = SharedTransitionScope.ResizeMode.scaleToBounds(
-                                    alignment = Alignment.TopStart
-                                )
-                            )
-                        },
+                        transition = transition,
                         onLoadMore = onLoadMore,
                         onReviewClick = { selected, _ -> selectedReview = selected },
                         onBackPressed = onBackPressed
@@ -67,13 +61,7 @@ internal fun ReviewsUI(
                     ReviewsDetailsUI(
                         title = screenState.title,
                         review = review,
-                        modifier = Modifier.sharedBounds(
-                            sharedContentState = rememberSharedContentState(key = review.url),
-                            animatedVisibilityScope = this@AnimatedContent,
-                            resizeMode = SharedTransitionScope.ResizeMode.scaleToBounds(
-                                alignment = Alignment.TopStart
-                            )
-                        ),
+                        transition = transition,
                         onOpenInBrowserClick = onOpenInBrowserClick,
                         onBackPressed = { selectedReview = null }
                     )

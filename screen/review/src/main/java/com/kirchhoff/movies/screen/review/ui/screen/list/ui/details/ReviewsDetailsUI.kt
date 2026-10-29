@@ -1,7 +1,6 @@
 package com.kirchhoff.movies.screen.review.ui.screen.list.ui.details
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,13 +20,14 @@ import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.linkifytext.LinkifyText
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
+import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
 @SuppressWarnings("MagicNumber")
 @Composable
 internal fun ReviewsDetailsUI(
     title: String,
     review: ReviewUIInfo,
-    modifier: Modifier,
+    transition: ReviewsTransitionScope,
     onOpenInBrowserClick: (String) -> Unit,
     onBackPressed: () -> Unit
 ) {
@@ -39,7 +39,6 @@ internal fun ReviewsDetailsUI(
         MoviesToolbar(
             title = stringResource(
                 id = R.string.review_details_title_format,
-                review.author,
                 title
             ),
             actions = {
@@ -53,7 +52,7 @@ internal fun ReviewsDetailsUI(
             },
             onBackPressed = { onBackPressed.invoke() }
         )
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Colors.White)
@@ -64,8 +63,12 @@ internal fun ReviewsDetailsUI(
                     end = textPadding
                 )
         ) {
+            ReviewAuthorUI(
+                author = review.author,
+                transition = transition
+            )
             LinkifyText(
-                modifier = modifier.fillMaxWidth(),
+                modifier = transition.contentModifier().fillMaxWidth(),
                 text = review.content,
                 color = Colors.TextHint,
                 fontSize = textSize

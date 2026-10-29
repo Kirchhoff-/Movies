@@ -10,6 +10,8 @@ data class NetworkReview(
 ) {
     data class AuthorDetails(
         @SerializedName("avatar_path") val avatar: String?,
-        @SerializedName("rating") val rating: Int?
+        @SerializedName("rating") val rating: Int?,
+        @SerializedName("name") val name: String?,
+        @SerializedName("username") val username: String?
     )
 }

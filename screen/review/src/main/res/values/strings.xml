@@ -2,6 +2,9 @@
 <resources>
     <string name="review_list_title_format">%s reviews</string>
     <string name="review_rating_format">%d / 10</string>
-    <string name="review_details_title_format">%1$s %2$s review</string>
+    <string name="review_details_title_format">%1$s review</string>
+    <string name="review_author">Review author</string>
+    <string name="review_author_username_format">\@%s</string>
+    <string name="review_author_rating_format">%d/10</string>
     <string name="empty_reviews">There are no reviews</string>
 </resources>

@@ -39,8 +39,11 @@ import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 internal fun ReviewItem(
     review: ReviewUIInfo,
     transition: ReviewsTransitionScope,
+    onAuthorClick: (ReviewUIInfo.Author) -> Unit,
     onReviewClick: (ReviewUIInfo) -> Unit
 ) {
+    val authorName = review.author.getName() ?: stringResource(R.string.review_author)
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -70,11 +73,13 @@ internal fun ReviewItem(
                     modifier = transition.avatarModifier()
                         .height(32.dp)
                         .width(32.dp)
-                        .clip(CircleShape),
+                        .clip(CircleShape)
+                        .clickable { onAuthorClick(review.author) },
                     model = review.author.avatar,
                     placeholder = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
                     error = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
-                    contentDescription = ""
+                    fallback = painterResource(com.kirchhoff.movies.core.R.drawable.ic_account_circle),
+                    contentDescription = authorName
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
@@ -121,6 +126,7 @@ private fun ReviewItemPreview() {
                     animatedVisibilityScope = this@AnimatedVisibility,
                     reviewKey = ReviewUIInfo.Default.url
                 ),
+                onAuthorClick = {},
                 onReviewClick = {}
             )
         }

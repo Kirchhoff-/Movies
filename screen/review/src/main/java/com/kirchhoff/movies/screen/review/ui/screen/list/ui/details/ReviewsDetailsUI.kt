@@ -22,13 +22,14 @@ import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
-@SuppressWarnings("MagicNumber")
+@SuppressWarnings("MagicNumber", "LongParameterList")
 @Composable
 internal fun ReviewsDetailsUI(
     title: String,
     review: ReviewUIInfo,
     transition: ReviewsTransitionScope,
     onOpenInBrowserClick: (String) -> Unit,
+    onAuthorClick: () -> Unit,
     onBackPressed: () -> Unit
 ) {
     val textPadding = 16.dp
@@ -65,7 +66,8 @@ internal fun ReviewsDetailsUI(
         ) {
             ReviewAuthorUI(
                 author = review.author,
-                transition = transition
+                transition = transition,
+                onAuthorClick = onAuthorClick
             )
             LinkifyText(
                 modifier = transition.contentModifier().fillMaxWidth(),

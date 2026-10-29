@@ -16,15 +16,19 @@ internal data class ReviewUIInfo(
         val avatar: String?,
         val rating: Int?,
         val displayName: String?,
-        val username: String?
+        val username: String?,
+        val profileUrl: String?
     ) : Parcelable {
+        fun getName(): String? = displayName ?: username
+
         companion object {
             val Default = Author(
                 label = "",
                 avatar = "",
                 rating = 0,
                 displayName = null,
-                username = null
+                username = null,
+                profileUrl = null
             )
         }
     }

@@ -4,7 +4,7 @@ import com.kirchhoff.movies.screen.review.mapper.ReviewListMapper
 import com.kirchhoff.movies.screen.review.network.ReviewService
 import com.kirchhoff.movies.screen.review.repository.ReviewRepository
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
-import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
+import com.kirchhoff.movies.screen.review.ui.screen.viewmodel.ReviewViewModel
 import com.kirchhoff.movies.screen.review.usecase.ReviewUseCase
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -29,7 +29,7 @@ internal val reviewModule = module {
     }
 
     viewModel { (args: ReviewsListArgs) ->
-        ReviewsListViewModel(
+        ReviewViewModel(
             args = args,
             useCase = get()
         )

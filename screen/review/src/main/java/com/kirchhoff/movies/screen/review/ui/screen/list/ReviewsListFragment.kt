@@ -19,7 +19,7 @@ import com.kirchhoff.movies.screen.review.reviewModule
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.ReviewsUI
-import com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel.ReviewsListViewModel
+import com.kirchhoff.movies.screen.review.ui.screen.viewmodel.ReviewViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -31,7 +31,7 @@ internal class ReviewsListFragment : BaseFragment() {
         requireArguments().getParcelableExtra(REVIEW_ARGS) ?: error("Review argument is not provided")
     }
 
-    private val viewModel: ReviewsListViewModel by viewModel {
+    private val viewModel: ReviewViewModel by viewModel {
         parametersOf(args)
     }
 
@@ -56,8 +56,10 @@ internal class ReviewsListFragment : BaseFragment() {
             val screenState by viewModel.screenState.observeAsState()
 
             ReviewsUI(
-                screenState ?: error("Can't build UI without state"),
+                screenState = screenState ?: error("Can't build UI without state"),
                 onLoadMore = { viewModel.loadReviews() },
+                onReviewClick = { review -> viewModel.onReviewClick(review) },
+                onCloseDetails = { viewModel.onCloseDetails() },
                 onOpenInBrowserClick = { url -> startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )

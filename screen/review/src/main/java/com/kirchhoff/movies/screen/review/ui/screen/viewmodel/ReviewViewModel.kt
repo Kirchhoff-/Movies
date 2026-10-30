@@ -1,39 +1,54 @@
-package com.kirchhoff.movies.screen.review.ui.screen.list.viewmodel
+package com.kirchhoff.movies.screen.review.ui.screen.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kirchhoff.movies.core.utils.StringValue
+import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.screen.ReviewType
 import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListArgs
-import com.kirchhoff.movies.screen.review.ui.screen.list.model.ReviewsListScreenState
+import com.kirchhoff.movies.screen.review.ui.screen.model.ReviewScreenState
 import com.kirchhoff.movies.screen.review.usecase.ReviewUseCase
 import kotlinx.coroutines.launch
 
-internal class ReviewsListViewModel(
+internal class ReviewViewModel(
     private val args: ReviewsListArgs,
     private val useCase: ReviewUseCase
 ) : ViewModel() {
 
-    val screenState: MutableLiveData<ReviewsListScreenState> = MutableLiveData()
+    val screenState: MutableLiveData<ReviewScreenState> = MutableLiveData()
+
+    private val reviewTitle: String
 
     private var currentPage: Int = 0
     private var totalPages: Int = Int.MAX_VALUE
     private var isLoading: Boolean = false
 
     init {
-        screenState.value = ReviewsListScreenState.Default
+        reviewTitle = if (args.reviewType == ReviewType.MOVIE) {
+            useCase.movieTitle(args.id)
+        } else {
+            useCase.tvShowTitle(args.id)
+        }
+        screenState.value = ReviewScreenState.Default.copy(title = StringValue.IdText(R.string.review_list_title_format, reviewTitle))
+    }
+
+    fun onReviewClick(review: ReviewUIInfo) {
+        screenState.value = screenState.value?.copy(
+            title = StringValue.IdText(R.string.review_details_title_format, reviewTitle),
+            contentState = ReviewScreenState.ContentState.Details(review)
+        )
+    }
+
+    fun onCloseDetails() {
+        screenState.value = screenState.value?.copy(
+            title = StringValue.IdText(R.string.review_list_title_format, reviewTitle),
+            contentState = ReviewScreenState.ContentState.List
+        )
     }
 
     fun loadReviews() {
-        screenState.value = screenState.value?.copy(
-            title = if (args.reviewType == ReviewType.MOVIE) {
-                useCase.movieTitle(args.id)
-            } else {
-                useCase.tvShowTitle(args.id)
-            }
-        )
-
         viewModelScope.launch {
             if (currentPage < totalPages && !isLoading && screenState.value?.errorMessage?.isEmpty() == true) {
                 isLoading = true

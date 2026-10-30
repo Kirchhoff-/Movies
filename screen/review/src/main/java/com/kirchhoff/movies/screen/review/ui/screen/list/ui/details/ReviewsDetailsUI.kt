@@ -7,74 +7,47 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.linkifytext.LinkifyText
-import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
-@SuppressWarnings("MagicNumber", "LongParameterList")
+@SuppressWarnings("MagicNumber")
 @Composable
 internal fun ReviewsDetailsUI(
-    title: String,
     review: ReviewUIInfo,
     transition: ReviewsTransitionScope,
-    onOpenInBrowserClick: (String) -> Unit,
-    onAuthorClick: () -> Unit,
-    onBackPressed: () -> Unit
+    onAuthorClick: () -> Unit
 ) {
     val textPadding = 16.dp
     val textSize = 14.sp
     val scroll = rememberScrollState(0)
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        MoviesToolbar(
-            title = stringResource(
-                id = R.string.review_details_title_format,
-                title
-            ),
-            actions = {
-                IconButton(onClick = { onOpenInBrowserClick.invoke(review.url) }) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_open_in_browser),
-                        tint = Colors.White,
-                        contentDescription = ""
-                    )
-                }
-            },
-            onBackPressed = { onBackPressed.invoke() }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Colors.White)
+            .verticalScroll(scroll)
+            .padding(
+                top = textPadding,
+                start = textPadding,
+                end = textPadding
+            )
+    ) {
+        ReviewAuthorUI(
+            author = review.author,
+            transition = transition,
+            onAuthorClick = onAuthorClick
         )
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Colors.White)
-                .verticalScroll(scroll)
-                .padding(
-                    top = textPadding,
-                    start = textPadding,
-                    end = textPadding
-                )
-        ) {
-            ReviewAuthorUI(
-                author = review.author,
-                transition = transition,
-                onAuthorClick = onAuthorClick
-            )
-            LinkifyText(
-                modifier = transition.contentModifier().fillMaxWidth(),
-                text = review.content,
-                color = Colors.TextHint,
-                fontSize = textSize
-            )
-        }
+        LinkifyText(
+            modifier = transition.contentModifier().fillMaxWidth(),
+            text = review.content,
+            color = Colors.TextHint,
+            fontSize = textSize
+        )
     }
 }

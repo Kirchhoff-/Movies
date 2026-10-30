@@ -25,6 +25,7 @@ import coil3.compose.AsyncImage
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
+import com.kirchhoff.movies.screen.review.ui.screen.list.ui.view.ReviewsRatingView
 import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
 @SuppressWarnings("MagicNumber", "LongMethod")

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="review_list_title_format">%s reviews</string>
-    <string name="review_rating_format">%d / 10</string>
+    <string name="review_read_more">Read more</string>
     <string name="review_details_title_format">%1$s review</string>
     <string name="review_author">Review author</string>
     <string name="review_author_username_format">\@%s</string>

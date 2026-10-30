@@ -1,4 +1,4 @@
-package com.kirchhoff.movies.screen.review.ui.screen.list.ui.details
+package com.kirchhoff.movies.screen.review.ui.screen.list.ui.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row

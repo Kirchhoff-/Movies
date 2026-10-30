@@ -18,7 +18,10 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +35,7 @@ import coil3.compose.AsyncImage
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
+import com.kirchhoff.movies.screen.review.ui.screen.list.ui.view.ReviewsRatingView
 import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
 @SuppressWarnings("MagicNumber", "LongMethod")
@@ -43,6 +47,10 @@ internal fun ReviewItem(
     onReviewClick: (ReviewUIInfo) -> Unit
 ) {
     val authorName = review.author.getName() ?: stringResource(R.string.review_author)
+    var showReadMore by remember(review.url, review.content) { mutableStateOf(false) }
+    val rating = review.author.rating
+    val showRating = rating != null
+    val showBottomRow = showRating || showReadMore
 
     Card(
         modifier = Modifier
@@ -98,17 +106,33 @@ internal fun ReviewItem(
                 color = Colors.TextHint,
                 fontSize = 14.sp,
                 maxLines = 5,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
+                onTextLayout = { showReadMore = it.hasVisualOverflow }
             )
-            Spacer(Modifier.height(8.dp))
-            if (review.author.rating != null) {
-                Text(
-                    stringResource(
-                        R.string.review_rating_format,
-                        review.author.rating
-                    ),
-                    modifier = transition.ratingModifier()
-                )
+            if (showBottomRow) {
+                Spacer(Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (showRating) {
+                        ReviewsRatingView(
+                            rating = rating,
+                            modifier = transition.ratingModifier()
+                        )
+                    }
+                    Spacer(Modifier.weight(1f))
+                    if (showReadMore) {
+                        Text(
+                            text = stringResource(R.string.review_read_more),
+                            modifier = Modifier
+                                .clickable { onReviewClick(review) }
+                                .padding(8.dp),
+                            color = Colors.Primary,
+                            fontSize = 14.sp
+                        )
+                    }
+                }
             }
         }
     }

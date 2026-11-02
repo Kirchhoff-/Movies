@@ -90,14 +90,22 @@ internal fun ReviewItem(
                     contentDescription = authorName
                 )
                 Spacer(Modifier.width(8.dp))
-                Text(
-                    modifier = transition.authorModifier(),
-                    text = review.author.label,
-                    color = Colors.TextMain,
-                    fontSize = 16.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        modifier = transition.authorModifier(),
+                        text = review.author.label,
+                        color = Colors.TextMain,
+                        fontSize = 16.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                    Text(
+                        modifier = transition.publicationDateModifier(),
+                        text = review.publicationDate,
+                        color = Colors.TextHint,
+                        fontSize = 12.sp
+                    )
+                }
             }
             Spacer(Modifier.height(8.dp))
             Text(

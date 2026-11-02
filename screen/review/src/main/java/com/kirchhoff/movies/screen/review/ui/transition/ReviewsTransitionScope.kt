@@ -39,6 +39,12 @@ internal class ReviewsTransitionScope(
     )
 
     @Composable
+    fun publicationDateModifier(): Modifier = sharedTransitionScope.createBoundsModifier(
+        visibilityScope = animatedVisibilityScope,
+        elementKey = "publicationDate"
+    )
+
+    @Composable
     fun ratingModifier(): Modifier = sharedTransitionScope.createBoundsModifier(
         visibilityScope = animatedVisibilityScope,
         elementKey = "rating"

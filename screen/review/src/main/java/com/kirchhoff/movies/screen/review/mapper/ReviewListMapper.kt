@@ -6,16 +6,23 @@ import com.kirchhoff.movies.core.ui.paginated.UIPaginated
 import com.kirchhoff.movies.networkdata.core.NetworkPaginated
 import com.kirchhoff.movies.networkdata.details.review.NetworkReview
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 internal class ReviewListMapper : BaseMapper() {
 
     fun createUIReviewList(reviewsListResponse: NetworkPaginated<NetworkReview>): UIPaginated<ReviewUIInfo> = UIPaginated(
         page = reviewsListResponse.page,
-        results = reviewsListResponse.results.map { it.toUIReview() },
+        results = reviewsListResponse.results.mapNotNull { it.toUIReview() },
         totalPages = reviewsListResponse.totalPages
     )
 
-    private fun NetworkReview.toUIReview(): ReviewUIInfo {
+    private fun NetworkReview.toUIReview(): ReviewUIInfo? {
+        val publicationDate = parsePublicationDate(createdAt) ?: return null
         val name = authorDetails.name?.trim()
         val username = authorDetails.username?.trim()
 
@@ -29,8 +36,29 @@ internal class ReviewListMapper : BaseMapper() {
                 profileUrl = username.toProfileUrl()
             ),
             content = content,
-            url = url
+            url = url,
+            publicationDate = formatPublicationDate(publicationDate)
         )
+    }
+
+    private fun parsePublicationDate(createdAt: String): Date? {
+        val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ROOT)
+        parser.isLenient = false
+        parser.timeZone = TimeZone.getTimeZone("UTC")
+
+        return try {
+            val date = parser.parse(createdAt)
+            if (date != null && parser.format(date) == createdAt) date else null
+        } catch (_: ParseException) {
+            null
+        }
+    }
+
+    private fun formatPublicationDate(date: Date): String {
+        val formatter = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+
+        return formatter.format(date)
     }
 
     private fun String?.toProfileUrl(): String? {

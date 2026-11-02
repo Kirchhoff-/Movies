@@ -7,7 +7,8 @@ import kotlinx.parcelize.Parcelize
 internal data class ReviewUIInfo(
     val author: Author,
     val content: String,
-    val url: String
+    val url: String,
+    val publicationDate: String
 ) : Parcelable {
 
     @Parcelize
@@ -37,7 +38,8 @@ internal data class ReviewUIInfo(
         val Default = ReviewUIInfo(
             author = Author.Default,
             content = "",
-            url = ""
+            url = "",
+            publicationDate = ""
         )
     }
 }

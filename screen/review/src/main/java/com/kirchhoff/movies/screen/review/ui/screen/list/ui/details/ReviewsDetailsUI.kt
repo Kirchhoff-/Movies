@@ -40,6 +40,7 @@ internal fun ReviewsDetailsUI(
     ) {
         ReviewAuthorUI(
             author = review.author,
+            publicationDate = review.publicationDate,
             transition = transition,
             onAuthorClick = onAuthorClick
         )

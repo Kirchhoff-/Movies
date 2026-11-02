@@ -6,7 +6,8 @@ data class NetworkReview(
     @SerializedName("author") val author: String,
     @SerializedName("content") val content: String,
     @SerializedName("author_details") val authorDetails: AuthorDetails,
-    @SerializedName("url") val url: String
+    @SerializedName("url") val url: String,
+    @SerializedName("created_at") val createdAt: String
 ) {
     data class AuthorDetails(
         @SerializedName("avatar_path") val avatar: String?,

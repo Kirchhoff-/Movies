@@ -9,9 +9,11 @@
 
 ## Kotlin
 
+- Keep each function focused on one responsibility. Separate distinct operations into separate functions.
 - Keep calls with a single argument on one line; do not put the argument and closing parenthesis on separate lines.
 - Do not add functions that merely wrap constructor calls. Call the constructor directly.
 - Prefer ordinary statements and operators over scope functions.
+- Access object properties directly instead of introducing local aliases. Keep local variables for computed values and named display conditions.
 - Use explicit lambdas instead of callable references when passing callbacks, for example `onCloseDetails = { viewModel.onCloseDetails() }` instead of `onCloseDetails = viewModel::onCloseDetails`.
 - Do not use default parameter values.
 - Do not add extension functions to project-owned classes. Put the behavior in the class itself.
@@ -24,6 +26,7 @@
 
 ## Compose
 
+- Preserve component responsibilities. Reconsider composition instead of widening input models to accommodate unrelated data.
 - Use explicit `if` statements for conditional UI. Do not use scope functions such as `let` to emit UI.
 - Calculate display values and visibility conditions before UI calls. Keep composable arguments simple.
 - Name booleans after the actual display condition, for example `showUsernameBelowName`, rather than `hasUsername` when multiple fields determine visibility.

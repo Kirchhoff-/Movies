@@ -32,6 +32,7 @@ import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 @Composable
 internal fun ReviewAuthorUI(
     author: ReviewUIInfo.Author,
+    publicationDate: String,
     transition: ReviewsTransitionScope,
     onAuthorClick: () -> Unit
 ) {
@@ -83,6 +84,12 @@ internal fun ReviewAuthorUI(
                     overflow = TextOverflow.Ellipsis
                 )
             }
+            Text(
+                modifier = transition.publicationDateModifier(),
+                text = publicationDate,
+                color = Colors.TextHint,
+                fontSize = 12.sp
+            )
         }
 
         if (hasRating) {

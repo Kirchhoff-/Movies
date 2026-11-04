@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -73,6 +74,16 @@ internal class ReviewsTransitionScope(
     }
 
     companion object {
+        val toolbarActionsTransform: ContentTransform
+            get() = ContentTransform(
+                targetContentEnter = fadeIn(tween(REVIEW_TRANSITION_DURATION_MILLIS)),
+                initialContentExit = fadeOut(tween(REVIEW_TRANSITION_DURATION_MILLIS)),
+                sizeTransform = SizeTransform(
+                    clip = false,
+                    sizeAnimationSpec = { _, _ -> tween(REVIEW_TRANSITION_DURATION_MILLIS) }
+                )
+            )
+
         val contentTransform: ContentTransform
             get() = fadeIn(tween(REVIEW_TRANSITION_DURATION_MILLIS)) togetherWith
                 fadeOut(tween(REVIEW_TRANSITION_DURATION_MILLIS))

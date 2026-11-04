@@ -8,4 +8,7 @@
     <string name="review_author_rating_format">%d/10</string>
     <string name="empty_reviews">There are no reviews</string>
     <string name="review_author_open_profile">Open profile on TMDB</string>
+    <string name="review_share">Share review</string>
+    <string name="review_open_original">Open original</string>
+    <string name="review_share_text_format">%1$s\nReview by %2$s\n%3$s</string>
 </resources>

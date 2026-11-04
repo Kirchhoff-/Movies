@@ -37,7 +37,15 @@ internal class ReviewViewModel(
     fun onReviewClick(review: ReviewUIInfo) {
         screenState.value = screenState.value?.copy(
             title = StringValue.IdText(R.string.review_details_title_format, reviewTitle),
-            contentState = ReviewScreenState.ContentState.Details(review)
+            contentState = ReviewScreenState.ContentState.Details(
+                review = review,
+                shareText = StringValue.IdText(
+                    R.string.review_share_text_format,
+                    reviewTitle,
+                    review.author.label,
+                    review.url
+                )
+            )
         )
     }
 

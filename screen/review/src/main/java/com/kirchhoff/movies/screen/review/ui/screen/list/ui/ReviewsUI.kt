@@ -4,6 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Icon
@@ -18,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
 import com.kirchhoff.movies.core.ui.resources.Colors
 import com.kirchhoff.movies.screen.review.R
@@ -36,12 +38,14 @@ internal fun ReviewsUI(
     onReviewClick: (ReviewUIInfo) -> Unit,
     onCloseDetails: () -> Unit,
     onOpenInBrowserClick: (String) -> Unit,
+    onShareReviewClick: (String) -> Unit,
     onBackPressed: () -> Unit
 ) {
     var selectedAuthor by rememberSaveable { mutableStateOf<ReviewUIInfo.Author?>(null) }
     val listState = rememberLazyListState()
     val stateHolder = rememberSaveableStateHolder()
-    val selectedReview = (screenState.contentState as? ReviewScreenState.ContentState.Details)?.review
+    val details = screenState.contentState as? ReviewScreenState.ContentState.Details
+    val selectedReview = details?.review
     val showDetails = selectedReview != null
     val handleDetailsBack = showDetails && selectedAuthor == null
     val toolbarTitle = screenState.title.asString(LocalContext.current)
@@ -61,13 +65,31 @@ internal fun ReviewsUI(
             MoviesToolbar(
                 title = toolbarTitle,
                 actions = {
-                    if (selectedReview != null) {
-                        IconButton(onClick = { onOpenInBrowserClick(selectedReview.url) }) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_open_in_browser),
-                                tint = Colors.White,
-                                contentDescription = ""
-                            )
+                    AnimatedContent(
+                        targetState = details,
+                        transitionSpec = { ReviewsTransitionScope.toolbarActionsTransform },
+                        contentAlignment = Alignment.CenterEnd,
+                        contentKey = { it != null },
+                        label = "Review toolbar actions transition"
+                    ) { reviewDetails ->
+                        Row {
+                            if (reviewDetails != null) {
+                                val shareText = reviewDetails.shareText.asString(LocalContext.current)
+                                IconButton(onClick = { onShareReviewClick(shareText) }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_share),
+                                        tint = Colors.White,
+                                        contentDescription = stringResource(R.string.review_share)
+                                    )
+                                }
+                                IconButton(onClick = { onOpenInBrowserClick(reviewDetails.review.url) }) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_open_in_new),
+                                        tint = Colors.White,
+                                        contentDescription = stringResource(R.string.review_open_original)
+                                    )
+                                }
+                            }
                         }
                     }
                 },

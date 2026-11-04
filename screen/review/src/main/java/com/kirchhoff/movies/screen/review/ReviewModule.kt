@@ -1,5 +1,6 @@
 package com.kirchhoff.movies.screen.review
 
+import com.kirchhoff.movies.screen.review.factory.ReviewDateFactory
 import com.kirchhoff.movies.screen.review.mapper.ReviewListMapper
 import com.kirchhoff.movies.screen.review.network.ReviewService
 import com.kirchhoff.movies.screen.review.repository.ReviewRepository
@@ -13,7 +14,9 @@ import retrofit2.Retrofit
 internal val reviewModule = module {
     single { get<Retrofit>().create(ReviewService::class.java) }
 
-    single<ReviewListMapper> { ReviewListMapper() }
+    single<ReviewDateFactory> { ReviewDateFactory() }
+
+    single<ReviewListMapper> { ReviewListMapper(reviewDateFactory = get()) }
 
     single<ReviewRepository> {
         ReviewRepository(reviewService = get())

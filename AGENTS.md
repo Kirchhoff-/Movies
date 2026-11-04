@@ -3,8 +3,10 @@
 ## Workflow
 
 - Prefer the smallest change that satisfies the task. Reuse the existing data flow and UI structure; avoid intermediate representations that are immediately converted back.
+- Check implementation choices and defaults against the user's stated goal. A configurable solution must fulfill that goal in its default behavior, without requiring extra setup.
 - Before implementing, search for the behavior being changed across the project, including other modules. Inspect a comparable implementation and its data-to-UI flow; do not assume the affected file establishes the project convention.
 - After feedback, reconsider the affected data-to-UI flow rather than only rewriting the flagged expression.
+- Evaluate proposals against the user's established goals and explain coverage limits. When challenged, reassess using concrete reasoning; do not reverse a conclusion solely to agree with the user.
 - Review the complete diff for consistency, including function signatures and call sites, before reporting completion.
 
 ## Kotlin
@@ -22,6 +24,7 @@
 
 - Prepare state-dependent text in the ViewModel using `StringValue`. Update it together with the related screen state. Composables should only resolve it with `asString`, without choosing string resources or formatting arguments.
 - Normalize API data and construct derived URLs in mappers. UI models should receive prepared values.
+- Do not add defensive checks for hypothetical invalid input, including in tests and configuration. Base validation on explicit requirements or observed failures. When uncertain about an API contract, consult its official documentation.
 - Put shared model logic in model methods instead of duplicating it in UI or adding UI-layer extensions.
 
 ## Compose

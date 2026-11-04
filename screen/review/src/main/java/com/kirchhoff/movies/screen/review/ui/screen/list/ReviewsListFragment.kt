@@ -61,9 +61,17 @@ internal class ReviewsListFragment : BaseFragment() {
                 onReviewClick = { review -> viewModel.onReviewClick(review) },
                 onCloseDetails = { viewModel.onCloseDetails() },
                 onOpenInBrowserClick = { url -> startActivity(Intent(Intent.ACTION_VIEW, url.toUri())) },
+                onShareReviewClick = { text -> shareReview(text) },
                 onBackPressed = { requireActivity().onBackPressedDispatcher.onBackPressed() }
             )
         }
+    }
+
+    private fun shareReview(text: String) {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, text)
+        startActivity(Intent.createChooser(intent, null))
     }
 
     override fun onDestroy() {

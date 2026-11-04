@@ -16,7 +16,10 @@ internal data class ReviewScreenState(
     sealed interface ContentState {
         data object List : ContentState
 
-        data class Details(val review: ReviewUIInfo) : ContentState
+        data class Details(
+            val review: ReviewUIInfo,
+            val shareText: StringValue
+        ) : ContentState
     }
 
     companion object {

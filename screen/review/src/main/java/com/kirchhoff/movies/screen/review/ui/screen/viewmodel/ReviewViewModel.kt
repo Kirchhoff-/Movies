@@ -31,7 +31,7 @@ internal class ReviewViewModel(
         } else {
             useCase.tvShowTitle(args.id)
         }
-        screenState.value = ReviewScreenState.Default.copy(title = StringValue.IdText(R.string.review_list_title_format, reviewTitle))
+        screenState.value = ReviewScreenState.Default.copy(title = StringValue.SimpleText(reviewTitle))
     }
 
     fun onReviewClick(review: ReviewUIInfo) {
@@ -51,7 +51,7 @@ internal class ReviewViewModel(
 
     fun onCloseDetails() {
         screenState.value = screenState.value?.copy(
-            title = StringValue.IdText(R.string.review_list_title_format, reviewTitle),
+            title = StringValue.SimpleText(reviewTitle),
             contentState = ReviewScreenState.ContentState.List
         )
     }
@@ -87,7 +87,12 @@ internal class ReviewViewModel(
                             loadingVisible = false,
                             paginationVisible = false,
                             reviewsVisible = resultReviewsList.isNotEmpty(),
-                            emptyTextVisible = resultReviewsList.isEmpty()
+                            emptyTextVisible = resultReviewsList.isEmpty(),
+                            reviewCountText = StringValue.PluralText(
+                                R.plurals.review_count,
+                                result.totalResults,
+                                result.totalResults
+                            )
                         )
                     },
                     onFailure = {

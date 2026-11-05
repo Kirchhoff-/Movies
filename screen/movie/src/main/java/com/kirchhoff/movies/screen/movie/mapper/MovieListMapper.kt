@@ -14,7 +14,8 @@ internal class MovieListMapper : BaseMapper() {
     private fun NetworkPaginated<NetworkMovie>.toUIPaginated(): UIPaginated<UIMovie> = UIPaginated(
         page = page,
         results = results.map { it.toUIMovie() },
-        totalPages = totalPages
+        totalPages = totalPages,
+        totalResults = totalResults
     )
 
     private fun NetworkMovie.toUIMovie(): UIMovie = UIMovie(

@@ -11,7 +11,8 @@ internal class TvShowListMapper {
     fun createTvShowList(tvShowList: NetworkPaginated<NetworkTv>): UIPaginated<UITv> = UIPaginated(
         page = tvShowList.page,
         results = tvShowList.results.map { it.toUITv() },
-        totalPages = tvShowList.totalPages
+        totalPages = tvShowList.totalPages,
+        totalResults = tvShowList.totalResults
     )
 
     private fun NetworkTv.toUITv(): UITv = UITv(

@@ -3,11 +3,15 @@ package com.kirchhoff.movies.screen.review.ui.transition
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ContentTransform
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -74,6 +78,20 @@ internal class ReviewsTransitionScope(
     }
 
     companion object {
+        val toolbarSubtitleEnter: EnterTransition
+            get() = fadeIn(tween(REVIEW_TRANSITION_DURATION_MILLIS)) +
+                expandVertically(
+                    animationSpec = tween(REVIEW_TRANSITION_DURATION_MILLIS),
+                    expandFrom = Alignment.Top
+                )
+
+        val toolbarSubtitleExit: ExitTransition
+            get() = fadeOut(tween(REVIEW_TRANSITION_DURATION_MILLIS)) +
+                shrinkVertically(
+                    animationSpec = tween(REVIEW_TRANSITION_DURATION_MILLIS),
+                    shrinkTowards = Alignment.Top
+                )
+
         val toolbarActionsTransform: ContentTransform
             get() = ContentTransform(
                 targetContentEnter = fadeIn(tween(REVIEW_TRANSITION_DURATION_MILLIS)),

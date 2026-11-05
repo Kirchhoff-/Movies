@@ -17,7 +17,8 @@ internal class ReviewListMapper(private val reviewDateFactory: ReviewDateFactory
     fun createUIReviewList(reviewsListResponse: NetworkPaginated<NetworkReview>): UIPaginated<ReviewUIInfo> = UIPaginated(
         page = reviewsListResponse.page,
         results = reviewsListResponse.results.mapNotNull { it.toUIReview() },
-        totalPages = reviewsListResponse.totalPages
+        totalPages = reviewsListResponse.totalPages,
+        totalResults = reviewsListResponse.totalResults
     )
 
     private fun NetworkReview.toUIReview(): ReviewUIInfo? {

@@ -2,6 +2,7 @@
 
 ## Workflow
 
+- Add conditions only for concrete scenarios required by the task or observed in practice; first check whether the data already guarantees the desired behavior.
 - Prefer the smallest change that satisfies the task. Reuse the existing data flow and UI structure; avoid intermediate representations that are immediately converted back.
 - Check implementation choices and defaults against the user's stated goal. A configurable solution must fulfill that goal in its default behavior, without requiring extra setup.
 - Before implementing, search for the behavior being changed across the project, including other modules. Inspect a comparable implementation and its data-to-UI flow; do not assume the affected file establishes the project convention.

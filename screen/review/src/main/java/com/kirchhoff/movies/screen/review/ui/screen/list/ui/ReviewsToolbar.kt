@@ -22,6 +22,7 @@ import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.ui.screen.model.ReviewScreenState
 import com.kirchhoff.movies.screen.review.ui.transition.ReviewsTransitionScope
 
+@SuppressWarnings("LongParameterList")
 @Composable
 internal fun ReviewsToolbar(
     title: String,

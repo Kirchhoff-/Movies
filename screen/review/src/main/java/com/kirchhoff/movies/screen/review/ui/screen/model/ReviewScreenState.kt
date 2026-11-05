@@ -5,6 +5,7 @@ import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 
 internal data class ReviewScreenState(
     val title: StringValue,
+    val reviewCountText: StringValue,
     val contentState: ContentState,
     val reviewsList: List<ReviewUIInfo>,
     val errorMessage: String,
@@ -25,6 +26,7 @@ internal data class ReviewScreenState(
     companion object {
         val Default = ReviewScreenState(
             title = StringValue.Empty,
+            reviewCountText = StringValue.Empty,
             contentState = ContentState.List,
             reviewsList = emptyList(),
             errorMessage = "",

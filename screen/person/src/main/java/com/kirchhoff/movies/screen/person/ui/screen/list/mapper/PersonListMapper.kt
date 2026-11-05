@@ -13,7 +13,8 @@ internal class PersonListMapper : BaseMapper() {
     private fun NetworkPaginated<NetworkPerson>.toUIPaginated(): UIPaginated<UIPerson> = UIPaginated(
         page = page,
         results = results.map { it.toUIPerson() },
-        totalPages = totalPages
+        totalPages = totalPages,
+        totalResults = totalResults
     )
 
     private fun NetworkPerson.toUIPerson(): UIPerson = UIPerson(

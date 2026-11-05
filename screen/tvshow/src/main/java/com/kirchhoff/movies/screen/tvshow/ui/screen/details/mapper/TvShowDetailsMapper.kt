@@ -15,7 +15,8 @@ internal class TvShowDetailsMapper(private val coreMapper: CoreMapper) : BaseMap
     fun createTvShowList(tvShowResponse: NetworkPaginated<NetworkTv>): UIPaginated<UITv> = UIPaginated(
         page = tvShowResponse.page,
         results = tvShowResponse.results.map { it.toUITv() },
-        totalPages = tvShowResponse.totalPages
+        totalPages = tvShowResponse.totalPages,
+        totalResults = tvShowResponse.totalResults
     )
 
     fun createUITvDetails(tvDetails: NetworkTvDetails): TvShowDetails = tvDetails.toTvShowDetailsInfo()

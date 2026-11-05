@@ -4,11 +4,8 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,11 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import com.kirchhoff.movies.core.ui.compose.MoviesToolbar
-import com.kirchhoff.movies.core.ui.resources.Colors
-import com.kirchhoff.movies.screen.review.R
 import com.kirchhoff.movies.screen.review.data.ReviewUIInfo
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.details.ReviewsAuthorBottomSheet
 import com.kirchhoff.movies.screen.review.ui.screen.list.ui.details.ReviewsDetailsUI
@@ -49,6 +41,7 @@ internal fun ReviewsUI(
     val showDetails = selectedReview != null
     val handleDetailsBack = showDetails && selectedAuthor == null
     val toolbarTitle = screenState.title.asString(LocalContext.current)
+    val toolbarSubtitle = screenState.reviewCountText.asString(LocalContext.current)
     val onNavigateBack = if (showDetails) onCloseDetails else onBackPressed
 
     BackHandler(
@@ -62,37 +55,12 @@ internal fun ReviewsUI(
         onOpenProfileClick = onOpenInBrowserClick
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            MoviesToolbar(
+            ReviewsToolbar(
                 title = toolbarTitle,
-                actions = {
-                    AnimatedContent(
-                        targetState = details,
-                        transitionSpec = { ReviewsTransitionScope.toolbarActionsTransform },
-                        contentAlignment = Alignment.CenterEnd,
-                        contentKey = { it != null },
-                        label = "Review toolbar actions transition"
-                    ) { reviewDetails ->
-                        Row {
-                            if (reviewDetails != null) {
-                                val shareText = reviewDetails.shareText.asString(LocalContext.current)
-                                IconButton(onClick = { onShareReviewClick(shareText) }) {
-                                    Icon(
-                                        painter = painterResource(R.drawable.ic_share),
-                                        tint = Colors.White,
-                                        contentDescription = stringResource(R.string.review_share)
-                                    )
-                                }
-                                IconButton(onClick = { onOpenInBrowserClick(reviewDetails.review.url) }) {
-                                    Icon(
-                                        painter = painterResource(R.drawable.ic_open_in_new),
-                                        tint = Colors.White,
-                                        contentDescription = stringResource(R.string.review_open_original)
-                                    )
-                                }
-                            }
-                        }
-                    }
-                },
+                subtitle = toolbarSubtitle,
+                details = details,
+                onOpenInBrowserClick = onOpenInBrowserClick,
+                onShareReviewClick = onShareReviewClick,
                 onBackPressed = onNavigateBack
             )
             SharedTransitionLayout(modifier = Modifier.weight(1f)) {
